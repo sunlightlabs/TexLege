@@ -95,9 +95,6 @@ CGFloat quartzRowHeight = 73.f;
 	
 	self.clearsSelectionOnViewWillAppear = NO;
 	
-	UIImage *sealImage = [UIImage imageNamed:@"seal.png"];
-	UIColor *sealColor = [[UIColor colorWithPatternImage:sealImage] colorWithAlphaComponent:0.5f];	
-	self.tableView.tableHeaderView.backgroundColor = sealColor;	
 }
 
 - (void)viewDidUnload {

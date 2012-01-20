@@ -104,10 +104,6 @@ enum _billSections {
 
 	voteDS = nil;
 	
-	UIImage *sealImage = [UIImage imageNamed:@"seal.png"];
-	UIColor *sealColor = [[UIColor colorWithPatternImage:sealImage] colorWithAlphaComponent:0.5f];	
-	self.headerView.backgroundColor = sealColor;
-	self.actionHeader.backgroundColor = sealColor;
 	
 	//self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	self.clearsSelectionOnViewWillAppear = NO;

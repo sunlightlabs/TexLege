@@ -97,11 +97,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(resetTableData:) name:kPartisanIndexNotifyLoaded object:nil];
 	
-	UIImage *sealImage = [UIImage imageNamed:@"seal.png"];
-	UIColor *sealColor = [[UIColor colorWithPatternImage:sealImage] colorWithAlphaComponent:0.5f];	
-	self.miniBackgroundView.backgroundColor = sealColor;
-	//self.headerView.backgroundColor = sealColor;
-	
 	self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	self.clearsSelectionOnViewWillAppear = NO;
 				

@@ -32,7 +32,7 @@ BOOL IsEmpty(id thing) {
 	
 	NSData *asciiData = [self dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
 	
-	return [[NSString alloc] initWithData:asciiData encoding:NSASCIIStringEncoding];
+	return [[[NSString alloc] initWithData:asciiData encoding:NSASCIIStringEncoding] autorelease];
 }
 
 - (NSString *)flattenHTML {

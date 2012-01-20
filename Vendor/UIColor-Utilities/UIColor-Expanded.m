@@ -435,7 +435,7 @@ static NSLock *crayolaNameCacheLock;
 	
 	// bestPos now points to the # following the best name seen
 	// Backup to the start of the name and return it
-	const char* name;
+	const char* name = nil;
 	for (name = bestPos-1; *name != ','; --name)
 		;
 	++name;

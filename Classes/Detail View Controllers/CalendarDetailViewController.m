@@ -52,11 +52,6 @@
 
 	self.selectedRowRect = CGRectZero;
 	
-	if ([UtilityMethods isIPadDevice]) {
-		UIImage *sealImage = [UIImage imageNamed:@"seal.png"];
-		UIColor *sealColor = [UIColor colorWithPatternImage:sealImage];		
-		self.calendarView.backgroundColor = sealColor;
-	}
 	
 	//self.navigationItem.title = @"Upcoming Committee Meetings";
 
