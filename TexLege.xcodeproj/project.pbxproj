@@ -81,8 +81,6 @@
 		37413B1712114D09003CA7E8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37413B1612114D09003CA7E8 /* MessageUI.framework */; };
 		3742D6EF122E18D100698483 /* DistrictMapSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3742D6EE122E18D100698483 /* DistrictMapSearchOperation.m */; };
 		3742D723122E1FDF00698483 /* NSInvocation+CWVariableArguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 3742D722122E1FDF00698483 /* NSInvocation+CWVariableArguments.m */; };
-		3747BFA811E6890600A6D8C6 /* seal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3747BFA611E6890600A6D8C6 /* seal@2x.png */; };
-		3747BFA911E6890600A6D8C6 /* seal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3747BFA711E6890600A6D8C6 /* seal.png */; };
 		3747C25D11E7B15300A6D8C6 /* PartisanIndexStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747C25C11E7B15300A6D8C6 /* PartisanIndexStats.m */; };
 		374C36BA1215E55F006B6ADA /* CalendarMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C36B91215E55F006B6ADA /* CalendarMasterViewController.m */; };
 		374C36E61215E8DA006B6ADA /* CapitolMapsMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C36E51215E8DA006B6ADA /* CapitolMapsMasterViewController.m */; };
@@ -530,8 +528,6 @@
 		377359891323104A0033F343 /* Icon_512.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730B43211DD4B4D00BA10D0 /* Icon_512.png */; };
 		3773598A1323104A0033F343 /* LegislatorMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B820511E378CD00A81142 /* LegislatorMasterViewController.xib */; };
 		3773598B1323104A0033F343 /* CapitolMapsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3786786211E442800003690F /* CapitolMapsDetailViewController.xib */; };
-		3773598C1323104A0033F343 /* seal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3747BFA611E6890600A6D8C6 /* seal@2x.png */; };
-		3773598D1323104A0033F343 /* seal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3747BFA711E6890600A6D8C6 /* seal.png */; };
 		3773598E1323104A0033F343 /* Slider_Question_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3778E80D11EDC19800278273 /* Slider_Question_big.png */; };
 		3773598F1323104A0033F343 /* Slider_Question_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3778E80E11EDC19800278273 /* Slider_Question_big@2x.png */; };
 		377359901323104A0033F343 /* Month Calendar Shadow Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4CE12026FE300507757 /* Month Calendar Shadow Down.png */; };
@@ -1497,8 +1493,6 @@
 		3742D6EE122E18D100698483 /* DistrictMapSearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictMapSearchOperation.m; sourceTree = "<group>"; };
 		3742D721122E1FDF00698483 /* NSInvocation+CWVariableArguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+CWVariableArguments.h"; path = "Classes/Utility Classes/NSInvocation+CWVariableArguments.h"; sourceTree = SOURCE_ROOT; };
 		3742D722122E1FDF00698483 /* NSInvocation+CWVariableArguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+CWVariableArguments.m"; path = "Classes/Utility Classes/NSInvocation+CWVariableArguments.m"; sourceTree = SOURCE_ROOT; };
-		3747BFA611E6890600A6D8C6 /* seal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "seal@2x.png"; path = "../seal@2x.png"; sourceTree = "<group>"; };
-		3747BFA711E6890600A6D8C6 /* seal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seal.png; path = ../seal.png; sourceTree = "<group>"; };
 		3747C25B11E7B15300A6D8C6 /* PartisanIndexStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartisanIndexStats.h; path = "Classes/Data Sources/PartisanIndexStats.h"; sourceTree = SOURCE_ROOT; };
 		3747C25C11E7B15300A6D8C6 /* PartisanIndexStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PartisanIndexStats.m; path = "Classes/Data Sources/PartisanIndexStats.m"; sourceTree = SOURCE_ROOT; };
 		374C36B81215E55F006B6ADA /* CalendarMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMasterViewController.h; path = "Classes/Master View Controllers/CalendarMasterViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -2723,8 +2717,6 @@
 		376DFE9113492C1400360BF4 /* Common UI Elements */ = {
 			isa = PBXGroup;
 			children = (
-				3747BFA711E6890600A6D8C6 /* seal.png */,
-				3747BFA611E6890600A6D8C6 /* seal@2x.png */,
 				3726FC94120AABE10043D6B9 /* disclosure.png */,
 				3726FC95120AABE10043D6B9 /* disclosure@2x.png */,
 				376DFE9213492C1400360BF4 /* error.png */,
@@ -3961,8 +3953,6 @@
 				3730B43311DD4B4D00BA10D0 /* Icon_512.png in Resources */,
 				373B820611E378CD00A81142 /* LegislatorMasterViewController.xib in Resources */,
 				3786786311E442800003690F /* CapitolMapsDetailViewController.xib in Resources */,
-				3747BFA811E6890600A6D8C6 /* seal@2x.png in Resources */,
-				3747BFA911E6890600A6D8C6 /* seal.png in Resources */,
 				3778E81111EDC19800278273 /* Slider_Question_big.png in Resources */,
 				3778E81211EDC19800278273 /* Slider_Question_big@2x.png in Resources */,
 				37D1C4D212026FE300507757 /* Month Calendar Shadow Down.png in Resources */,
@@ -4455,8 +4445,6 @@
 				377359891323104A0033F343 /* Icon_512.png in Resources */,
 				3773598A1323104A0033F343 /* LegislatorMasterViewController.xib in Resources */,
 				3773598B1323104A0033F343 /* CapitolMapsDetailViewController.xib in Resources */,
-				3773598C1323104A0033F343 /* seal@2x.png in Resources */,
-				3773598D1323104A0033F343 /* seal.png in Resources */,
 				3773598E1323104A0033F343 /* Slider_Question_big.png in Resources */,
 				3773598F1323104A0033F343 /* Slider_Question_big@2x.png in Resources */,
 				377359901323104A0033F343 /* Month Calendar Shadow Down.png in Resources */,
