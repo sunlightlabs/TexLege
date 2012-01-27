@@ -1172,6 +1172,12 @@
 		37C63DC811D9B52200352CF3 /* Icon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C63DC311D9B52200352CF3 /* Icon@2x~iphone.png */; };
 		37C63DC911D9B52200352CF3 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C63DC411D9B52200352CF3 /* Icon~ipad.png */; };
 		37C63E1B11D9BCE800352CF3 /* Icon_80@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C63E1A11D9BCE800352CF3 /* Icon_80@2x.png */; };
+		37C7845914D30444006BBEDE /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C7845814D30444006BBEDE /* LocalyticsDatabase.m */; };
+		37C7845A14D30444006BBEDE /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C7845814D30444006BBEDE /* LocalyticsDatabase.m */; };
+		37C7845C14D304B2006BBEDE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C7845B14D304B2006BBEDE /* libsqlite3.dylib */; };
+		37C7845D14D304DF006BBEDE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C7845B14D304B2006BBEDE /* libsqlite3.dylib */; };
+		37C7845F14D30A98006BBEDE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C7845E14D30A97006BBEDE /* libz.dylib */; };
+		37C7846014D30AA3006BBEDE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C7845E14D30A97006BBEDE /* libz.dylib */; };
 		37C945DB1237DDC000D2D582 /* PinHeadBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C945D91237DDC000D2D582 /* PinHeadBlue.png */; };
 		37C945DC1237DDC000D2D582 /* PinHeadBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C945DA1237DDC000D2D582 /* PinHeadBlue@2x.png */; };
 		37C94A2712387ABA00D2D582 /* DistrictMapMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C94A2612387ABA00D2D582 /* DistrictMapMasterViewController.m */; };
@@ -1360,6 +1366,13 @@
 			remoteInfo = UISpec;
 		};
 		37C3517614C93D6E00B6F118 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3775C7C8131C44C600638ED4 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 255B7588133BABBF00ED76AD;
+			remoteInfo = RestKit;
+		};
+		37C7845514D302DF006BBEDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3775C7C8131C44C600638ED4 /* RestKit.xcodeproj */;
 			proxyType = 1;
@@ -2041,6 +2054,10 @@
 		37C63DC311D9B52200352CF3 /* Icon@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~iphone.png"; sourceTree = "<group>"; };
 		37C63DC411D9B52200352CF3 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
 		37C63E1A11D9BCE800352CF3 /* Icon_80@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_80@2x.png"; sourceTree = "<group>"; };
+		37C7845714D30444006BBEDE /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatabase.h; sourceTree = "<group>"; };
+		37C7845814D30444006BBEDE /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatabase.m; sourceTree = "<group>"; };
+		37C7845B14D304B2006BBEDE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		37C7845E14D30A97006BBEDE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		37C945D91237DDC000D2D582 /* PinHeadBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinHeadBlue.png; sourceTree = "<group>"; };
 		37C945DA1237DDC000D2D582 /* PinHeadBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PinHeadBlue@2x.png"; sourceTree = "<group>"; };
 		37C94A2512387ABA00D2D582 /* DistrictMapMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistrictMapMasterViewController.h; path = "Classes/Master View Controllers/DistrictMapMasterViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -2293,6 +2310,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C7845F14D30A98006BBEDE /* libz.dylib in Frameworks */,
+				3709AF0D101FBF5100C1061B /* SystemConfiguration.framework in Frameworks */,
+				37C7845C14D304B2006BBEDE /* libsqlite3.dylib in Frameworks */,
 				37C3517814C93D8000B6F118 /* libRestKitCoreData.a in Frameworks */,
 				37C3517914C93D8000B6F118 /* libRestKitJSONParserJSONKit.a in Frameworks */,
 				37C3517A14C93D8000B6F118 /* libRestKitNetwork.a in Frameworks */,
@@ -2302,7 +2322,6 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				1D3623EC0D0F72F000981E51 /* CoreGraphics.framework in Frameworks */,
 				3729EC2910077F83000AD804 /* CoreData.framework in Frameworks */,
-				3709AF0D101FBF5100C1061B /* SystemConfiguration.framework in Frameworks */,
 				370298CE11F97C7A00D65FCB /* MapKit.framework in Frameworks */,
 				37413B1712114D09003CA7E8 /* MessageUI.framework in Frameworks */,
 				378B58FB1219BB9C00F7ED0B /* CoreLocation.framework in Frameworks */,
@@ -2321,11 +2340,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C7846014D30AA3006BBEDE /* libz.dylib in Frameworks */,
+				37C7845D14D304DF006BBEDE /* libsqlite3.dylib in Frameworks */,
+				37735BFA1323104A0033F343 /* SystemConfiguration.framework in Frameworks */,
 				37735BF61323104A0033F343 /* Foundation.framework in Frameworks */,
 				37735BF71323104A0033F343 /* UIKit.framework in Frameworks */,
 				37735BF81323104A0033F343 /* CoreGraphics.framework in Frameworks */,
 				37735BF91323104A0033F343 /* CoreData.framework in Frameworks */,
-				37735BFA1323104A0033F343 /* SystemConfiguration.framework in Frameworks */,
 				37735BFB1323104A0033F343 /* MapKit.framework in Frameworks */,
 				37735BFC1323104A0033F343 /* MessageUI.framework in Frameworks */,
 				37735BFD1323104A0033F343 /* CoreLocation.framework in Frameworks */,
@@ -2408,6 +2429,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37C7845B14D304B2006BBEDE /* libsqlite3.dylib */,
+				37C7845E14D30A97006BBEDE /* libz.dylib */,
 				3775C7FB131C459900638ED4 /* CFNetwork.framework */,
 				3775C7FD131C459900638ED4 /* MobileCoreServices.framework */,
 				3709AF0C101FBF5100C1061B /* SystemConfiguration.framework */,
@@ -2915,6 +2938,8 @@
 		37A4E5BA1223830800BCE44D /* Localytics */ = {
 			isa = PBXGroup;
 			children = (
+				37C7845714D30444006BBEDE /* LocalyticsDatabase.h */,
+				37C7845814D30444006BBEDE /* LocalyticsDatabase.m */,
 				37FE1CD813CB75FD00655550 /* LocalyticsSession.h */,
 				37FE1CD913CB75FD00655550 /* LocalyticsSession.m */,
 				37FE1CDA13CB75FD00655550 /* UploaderThread.h */,
@@ -3787,6 +3812,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				37C7845614D302DF006BBEDE /* PBXTargetDependency */,
 				371D54711365F68E00A61BD4 /* PBXTargetDependency */,
 			);
 			name = "TexLege (Seeding DB)";
@@ -5077,6 +5103,7 @@
 				37FE1CDE13CB75FD00655550 /* UploaderThread.m in Sources */,
 				37FE1E0C13CB8E3300655550 /* AppendingFlowView.m in Sources */,
 				37FE1F1513CB8EFE00655550 /* IntelligentSplitViewController.m in Sources */,
+				37C7845914D30444006BBEDE /* LocalyticsDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5201,6 +5228,7 @@
 				37FE1CE013CB75FD00655550 /* UploaderThread.m in Sources */,
 				37FE1E5613CB8E3300655550 /* AppendingFlowView.m in Sources */,
 				37FE1F3E13CB8EFE00655550 /* IntelligentSplitViewController.m in Sources */,
+				37C7845A14D30444006BBEDE /* LocalyticsDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5221,6 +5249,11 @@
 			isa = PBXTargetDependency;
 			name = RestKit;
 			targetProxy = 37C3517614C93D6E00B6F118 /* PBXContainerItemProxy */;
+		};
+		37C7845614D302DF006BBEDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 37C7845514D302DF006BBEDE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5366,12 +5399,18 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv6,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 2.5;
+				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5430,13 +5469,19 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv6,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CODE_SIGN_ENTITLEMENTS = Data/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gregory Combs";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gregory Combs";
-				CURRENT_PROJECT_VERSION = 2.5;
+				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5497,16 +5542,22 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv7,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.5;
+				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
@@ -5549,12 +5600,18 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				"ARCHS[sdk=iphoneos*]" = (
+					armv7,
+					armv6,
+				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.5;
+				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
