@@ -21,7 +21,7 @@
 }
 
 @property (nonatomic,retain) IBOutlet id<TableDataSource> dataSource;
-@property (nonatomic,retain) IBOutlet id detailViewController;
+@property (nonatomic,retain) IBOutlet UIViewController *detailViewController;
 @property (nonatomic,retain)		  id selectObjectOnAppear;
 @property (nonatomic,retain) NSNumber *controllerEnabled;
 

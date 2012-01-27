@@ -185,42 +185,33 @@
 #pragma mark -
 #pragma mark Indexing / Sections
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {	
-	NSInteger count = [[fetchedResultsController sections] count];		
-	if (count > 1 /*&! self.hasFilter*/)  {
-		return count; 
-	}
-	return 1;	
+	return [[self.fetchedResultsController sections] count];		
 }
 
-// This is for the little index along the right side of the table ... use nil if you don't want it.
+    // This is for the little index along the right side of the table ... use nil if you don't want it.
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-	return  hideTableIndex ? nil : [fetchedResultsController sectionIndexTitles] ;
-	//return  nil ;
+	return  hideTableIndex ? nil : [self.fetchedResultsController sectionIndexTitles] ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
 	return index; // index ..........
 }
 
-- (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section {
-	// eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
-	NSInteger count = [[fetchedResultsController sections] count];		
-	if (count > 1) {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
-		count = [sectionInfo numberOfObjects];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+        // eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
+	NSInteger count = [tableView numberOfSections];		
+	if (count > 0) {
+		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        if (sectionInfo)
+            count = [sectionInfo numberOfObjects];
 	}
 	return count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	// this table has multiple sections. One for each unique character that an element begins with
-	// [A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,R,S,T,U,V,X,Y,Z]
-	// return the letter that represents the requested section
-	
-	NSInteger count = [[fetchedResultsController sections] count];		
-	if (count > 1 /*&! self.hasFilter*/)  {
+	NSInteger count = [tableView numberOfSections];		
+	if (count > 0)  {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
 		return [sectionInfo indexTitle]; // or [sectionInfo name];
 	}

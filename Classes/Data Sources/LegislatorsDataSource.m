@@ -164,11 +164,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {	
-	NSInteger count = [[self.fetchedResultsController sections] count];		
-	if (count > 1 /*&! self.hasFilter*/)  {
-		return count; 
-	}
-	return 0;	
+	return [[self.fetchedResultsController sections] count];		
 }
 
 // This is for the little index along the right side of the table ... use nil if you don't want it.
@@ -180,12 +176,13 @@
 	return index; // index ..........
 }
 
-- (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	// eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
-	NSInteger count = [[self.fetchedResultsController sections] count];		
-	if (count > 1) {
+	NSInteger count = [tableView numberOfSections];		
+	if (count > 0) {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-		count = [sectionInfo numberOfObjects];
+        if (sectionInfo)
+            count = [sectionInfo numberOfObjects];
 	}
 	return count;
 }
@@ -196,12 +193,14 @@
 	// return the letter that represents the requested section
 	
 	NSString *headerTitle = nil;
-	NSInteger count = [[self.fetchedResultsController sections] count];		
-	if (count > 1 /*&! self.hasFilter*/)  {
+	NSInteger count = [tableView numberOfSections];		
+	if (count > 0)  {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-		headerTitle = [sectionInfo indexTitle];
-		if (!headerTitle)
-			headerTitle = [sectionInfo name];
+        if (sectionInfo) {
+            headerTitle = [sectionInfo indexTitle];
+            if (!headerTitle)
+                headerTitle = [sectionInfo name];
+        }
 	}
 	if (!headerTitle)
 		headerTitle = @"";
@@ -213,7 +212,7 @@
 #pragma mark Filtering Functions
 
 // do we want to do a proper whichFilter sort of thing?
-- (BOOL) hasFilter {
+- (BOOL)hasFilter {
 	return (self.filterString.length > 0 || self.filterChamber > 0);
 }
 
@@ -233,7 +232,7 @@
 // You cannot necessarily translate “arbitrary” SQL queries into predicates.
 //*
 
-- (void) updateFilterPredicate {
+- (void)updateFilterPredicate {
 	NSMutableString * predString = [NSMutableString stringWithString:@""];
 
 	if (self.filterChamber > 0)	// do some chamber filtering
@@ -260,7 +259,7 @@
 }
 
 // probably unnecessary, but we might as well validate the new info with our expectations...
-- (void) setFilterByString:(NSString *)filter {
+- (void)setFilterByString:(NSString *)filter {
 	if (!filter) filter = @"";
 	
 	self.filterString = [NSMutableString stringWithString:filter];
@@ -269,7 +268,7 @@
 	[self updateFilterPredicate];	
 }
 
-- (void) removeFilter {
+- (void)removeFilter {
 	// do we want to tell it to clear out our chamber selection too? Not really, the ViewController sets it for us.
 	// self.filterChamber = 0;
 	[self setFilterByString:@""]; // we updateFilterPredicate automatically

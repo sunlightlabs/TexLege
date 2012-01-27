@@ -221,7 +221,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {	
 	//debug_NSLog(@"%@", [self.fetchedResultsController.fetchRequest description]);
 	NSInteger count = [[self.fetchedResultsController sections] count];		
-	if (count > 1 && !self.hasFilter && !self.byDistrict)  {
+	if (count > 0 && !self.hasFilter && !self.byDistrict)  {
 		return count; 
 	}
 	return 1;	
@@ -230,7 +230,7 @@
 // This is for the little index along the right side of the table ... use nil if you don't want it.
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
 	//return  hideTableIndex ? nil : [self.fetchedResultsController sectionIndexTitles] ;
-	return  nil ;
+	return nil ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
@@ -239,8 +239,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section {
 	// eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
-	NSInteger count = [[self.fetchedResultsController sections] count];		
-	if (count >= 1) {
+	NSInteger count = [tableView numberOfSections];		
+	if (count > 0) {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
 		count = [sectionInfo numberOfObjects];
 	}
@@ -252,8 +252,8 @@
 	// [A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,R,S,T,U,V,X,Y,Z]
 	// return the letter that represents the requested section
 	
-	NSInteger count = [[self.fetchedResultsController sections] count];		
-	if (count > 1 && !self.hasFilter && !self.byDistrict)  {
+	NSInteger count = [tableView numberOfSections];		
+	if (count > 0 && !self.hasFilter && !self.byDistrict)  {
 		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
 		return [sectionInfo indexTitle]; // or [sectionInfo name];
 	}

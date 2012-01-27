@@ -147,7 +147,7 @@
 	return [self.sectionList count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {		
 	return [[self.sectionList objectAtIndex:section] count];
 }

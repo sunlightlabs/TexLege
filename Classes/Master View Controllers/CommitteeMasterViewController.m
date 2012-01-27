@@ -134,7 +134,7 @@
 	
 	CommitteeObj *committee = dataObject;
 	if (committee) {
-		[self.detailViewController setCommittee:committee];
+		[(CommitteeDetailViewController*)self.detailViewController setCommittee:committee];
 		if (aTableView == self.searchDisplayController.searchResultsTableView) { // we've clicked in a search table
 			[self searchBarCancelButtonClicked:nil];
 		}
@@ -187,7 +187,7 @@
 	
 }
 
-- (IBAction) filterChamber:(id)sender {
+- (IBAction)filterChamber:(id)sender {
 	if (sender == chamberControl) {
 		[self filterContentForSearchText:self.searchDisplayController.searchBar.text 
 								   scope:self.chamberControl.selectedSegmentIndex];
