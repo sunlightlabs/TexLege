@@ -109,15 +109,15 @@
 	if (link) {
 		NSString *supportEmail = [[NSUserDefaults standardUserDefaults] stringForKey:kSupportEmailKey];
 		if ([link.url hasSuffix:supportEmail]) {
-			NSString *appVer = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-
 			NSMutableString *body = [NSMutableString string];
-			[body appendFormat:NSLocalizedStringFromTable(@"TexLege Version: %@\n", @"StandardUI", @"Text to be included in TexLege support emails."), appVer];
-			[body appendFormat:NSLocalizedStringFromTable(@"iOS Version: %@\n", @"StandardUI", @"Text to be included in TexLege support emails."), [[UIDevice currentDevice] systemVersion]];
-			[body appendFormat:NSLocalizedStringFromTable(@"iOS Device: %@\n", @"StandardUI", @"Text to be included in TexLege support emails."), [[UIDevice currentDevice] model]];
-			[body appendString:NSLocalizedStringFromTable(@"\nDescription of Problem, Concern, or Question:\n", @"StandardUI", @"Text to be included in TexLege support emails.")];
+            NSString *appVer = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            NSString *buildVer = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+            [body appendFormat:NSLocalizedString(@"TexLege App Version: %@ (Build %@)\n", @""), appVer, buildVer];
+            [body appendFormat:NSLocalizedString(@"iOS Version: %@\n", @""), [[UIDevice currentDevice] systemVersion]];
+            [body appendFormat:NSLocalizedString(@"iOS Device: %@\n", @""), [[UIDevice currentDevice] model]];
+            [body appendString:NSLocalizedString(@"\nDescription of Problem, Concern, or Question:\n", @"")];
 			[[TexLegeEmailComposer sharedTexLegeEmailComposer] presentMailComposerTo:supportEmail 
-																			 subject:NSLocalizedStringFromTable(@"TexLege Support Question / Concern", @"StandardUI", @"Subject to be included in TexLege support emails.") 
+																			 subject:NSLocalizedString(@"TexLege App Support",@"") 
 																				body:body commander:self];
 			return;
 		}

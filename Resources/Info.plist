@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBuildNumber</key>
-	<string>0</string>
+	<string>7</string>
 	<key>CFBuildVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -33,10 +33,12 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>GIT_VERSION</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>${CURRENT_PROJECT_VERSION}.0</string>
+	<string>GIT_COMMIT_COUNT</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIInterfaceOrientation~ipad</key>

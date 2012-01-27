@@ -1922,7 +1922,6 @@
 		3771333B12523025000D7207 /* TVOutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVOutManager.h; sourceTree = "<group>"; };
 		3771333C12523025000D7207 /* TVOutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVOutManager.m; sourceTree = "<group>"; };
 		37735C101323104A0033F343 /* TexLege.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TexLege.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		37735C121323104A0033F343 /* Info (Seed).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info (Seed).plist"; sourceTree = "<group>"; };
 		37735C23132310E90033F343 /* CommitteeObj.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommitteeObj.json; sourceTree = "<group>"; };
 		37735C24132310E90033F343 /* CommitteePositionObj.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommitteePositionObj.json; sourceTree = "<group>"; };
 		37735C25132310E90033F343 /* DistrictMapObj.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DistrictMapObj.json; sourceTree = "<group>"; };
@@ -2296,7 +2295,7 @@
 		37FE1D9A13CB8E3300655550 /* AppendingFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppendingFlowView.m; sourceTree = "<group>"; };
 		37FE1ED713CB8EFE00655550 /* IntelligentSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntelligentSplitViewController.h; sourceTree = "<group>"; };
 		37FE1ED813CB8EFE00655550 /* IntelligentSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntelligentSplitViewController.m; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2402,7 +2401,6 @@
 				374036D91186AE2F0047E70A /* Resources-iPad */,
 				378678F511E452EF0003690F /* Resources-iPhone */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				37735C121323104A0033F343 /* Info (Seed).plist */,
 				37B2D28A10224B2800B493C8 /* Entitlements.plist */,
 				37B2C1FA130BCEFC00140212 /* BillsMasterViewController.xib */,
 				373B820511E378CD00A81142 /* LegislatorMasterViewController.xib */,
@@ -3776,10 +3774,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "TexLege" */;
 			buildPhases = (
+				37C6FECE1243A13E00B158D8 /* ShellScript */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				37C6FECE1243A13E00B158D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3796,10 +3794,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37735C0B1323104A0033F343 /* Build configuration list for PBXNativeTarget "TexLege (Seeding DB)" */;
 			buildPhases = (
+				37735C0A1323104A0033F343 /* ShellScript */,
 				377359741323104A0033F343 /* Resources */,
 				37735B561323104A0033F343 /* Sources */,
 				37735BF51323104A0033F343 /* Frameworks */,
-				37735C0A1323104A0033F343 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -4953,7 +4951,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n# Auto Increment Version Script\nbuildPlist=\"Info.plist\"\nbuildVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBuildVersion\" $buildPlist)\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBuildNumber\" $buildPlist)\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBuildNumber $buildNumber\" $buildPlist\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildVersion.$buildNumber\" $buildPlist\n";
+			shellScript = "#!/bin/sh\n#\ngit=`sh /etc/profile; which git`\n## For the App Store, instead use: git describe –abbrev=0 –tags\nversion=`$git describe --tags --always`\ncount=`$git rev-list --all |wc -l`\necho -e \"#define GIT_VERSION $version\\n#define GIT_COMMIT_COUNT $count\" > Resources/InfoPlist.h";
 		};
 		37C6FECE1243A13E00B158D8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4967,7 +4965,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n# Auto Increment Version Script\nbuildPlist=\"Info.plist\"\nbuildVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBuildVersion\" $buildPlist)\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBuildNumber\" $buildPlist)\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBuildNumber $buildNumber\" $buildPlist\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildVersion.$buildNumber\" $buildPlist\n";
+			shellScript = "#!/bin/sh\n#\ngit=`sh /etc/profile; which git`\n## For the App Store, instead use: git describe –abbrev=0 –tags\nversion=`$git describe --tags --always`\ncount=`$git rev-list --all |wc -l`\necho -e \"#define GIT_VERSION $version\\n#define GIT_COMMIT_COUNT $count\" > Resources/InfoPlist.h";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -5289,10 +5287,8 @@
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = TexLege;
 			};
 			name = Debug;
 		};
@@ -5304,10 +5300,8 @@
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = TexLege;
 			};
 			name = Release;
 		};
@@ -5325,10 +5319,8 @@
 					"RESTKIT_GENERATE_SEED_DB=1",
 					"DEBUG=1",
 				);
-				INFOPLIST_FILE = "Info (Seed).plist";
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = TexLege;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5342,10 +5334,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				INFOPLIST_FILE = "Info (Seed).plist";
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = TexLege;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -5358,10 +5348,8 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
-				INFOPLIST_FILE = "Info (Seed).plist";
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = TexLege;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "AdHoc Distribution";
@@ -5374,7 +5362,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
-				INFOPLIST_FILE = "Info (Seed).plist";
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5413,6 +5400,9 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -5443,7 +5433,6 @@
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 			};
@@ -5482,6 +5471,9 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LLVM_LTO = NO;
@@ -5513,10 +5505,8 @@
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = TexLege;
 			};
 			name = "AdHoc Distribution";
 		};
@@ -5554,6 +5544,9 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -5609,6 +5602,9 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
