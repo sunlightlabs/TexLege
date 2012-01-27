@@ -29,11 +29,9 @@
 	[super viewDidLoad];
 	self.hidesBottomBarWhenPushed = YES;
 	
-	UIImage *sealImage = [UIImage imageNamed:@"seal.png"];
-	UIColor *sealColor = [UIColor colorWithPatternImage:sealImage];		
-	[self.webView setBackgroundColor:[UIColor clearColor]];
-	[self.webView setOpaque:NO];
-	self.view.backgroundColor = sealColor;
+	[self.webView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+	[self.webView setOpaque:YES];
+	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 	
 	if (self.map) {
 		self.navigationItem.title = self.map.name;

@@ -157,7 +157,7 @@
 			[webViewController release];			
 		}
 		else if (self.detailViewController) {
-			SVWebViewController *webViewController = self.detailViewController;
+			SVWebViewController *webViewController = (SVWebViewController*)self.detailViewController;
 			webViewController.address = urlString;
 		}
 	}

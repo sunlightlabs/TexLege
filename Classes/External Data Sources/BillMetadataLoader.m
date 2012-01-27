@@ -90,7 +90,7 @@
 	
 	// We had trouble loading the metadata online, so pull it up from the one in the documents folder (or the app bundle)
 	NSError *newError = nil;
-	NSString *localPath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kBillMetadataFile];
+	NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kBillMetadataFile];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:localPath]) {
 		NSString *defaultPath = [[NSBundle mainBundle] pathForResource:kBillMetadataPath ofType:@"json"];
@@ -124,7 +124,7 @@
 			nice_release(updated);
 			updated = [[NSDate date] retain];
 			
-			NSString *localPath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kBillMetadataFile];
+			NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kBillMetadataFile];
 			if (![[_metadata JSONData] writeToFile:localPath atomically:YES])
 				NSLog(@"BillMetadataLoader: error writing cache to file: %@", localPath);
 			isFresh = YES;

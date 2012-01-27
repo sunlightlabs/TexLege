@@ -161,7 +161,7 @@
 	
 	LegislatorObj *legislator = dataObject;
 	if (legislator) {
-		[self.detailViewController setLegislator:legislator];
+		[(LegislatorDetailViewController*) self.detailViewController setLegislator:legislator];
 		if (aTableView == self.searchDisplayController.searchResultsTableView) { // we've clicked in a search table
 			[self searchBarCancelButtonClicked:nil];
 		}

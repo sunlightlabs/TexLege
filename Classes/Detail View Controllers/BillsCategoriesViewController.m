@@ -311,11 +311,9 @@
 	
 	// We had trouble loading the events online, so pull up the cache from the one in the documents folder, if possible
 	NSString *thePath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kBillCategoriesCacheFile];
-	//NSString *thePath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kCalendarEventsCacheFile];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if ([fileManager fileExistsAtPath:thePath]) {
 		debug_NSLog(@"BillCategories: using cached categories in the documents folder.");
-		//categories_ = [[NSMutableDictionary dictionaryWithContentsOfFile:thePath] retain];
 		NSData *json = [NSData dataWithContentsOfFile:thePath];
 		if (json)
 			categories_ = [[json mutableObjectFromJSONData] retain];

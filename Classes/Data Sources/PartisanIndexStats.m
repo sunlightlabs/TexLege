@@ -309,7 +309,7 @@
 - (void)loadPartisanIndexFromCache:(id)sender {
 	// We had trouble loading the metadata online, so pull it up from the one in the documents folder (or the app bundle)
 	NSError *newError = nil;
-	NSString *localPath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kPartisanIndexFile];
+	NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kPartisanIndexFile];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:localPath]) {
 		NSString *defaultPath = [[NSBundle mainBundle] pathForResource:kPartisanIndexPath ofType:@"json"];
@@ -371,7 +371,7 @@
 			if (updated)
 				[updated release];
 			updated = [[NSDate date] retain];
-			NSString *localPath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kPartisanIndexFile];
+			NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kPartisanIndexFile];
 			if (![[m_rawPartisanIndexAggregates JSONData] writeToFile:localPath atomically:YES])
 				NSLog(@"PartisanIndex: error writing cache to file: %@", localPath);
 			isFresh = YES;

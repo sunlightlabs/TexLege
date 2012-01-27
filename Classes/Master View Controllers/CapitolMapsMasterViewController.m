@@ -96,7 +96,7 @@
 	
 	CapitolMap *capitolMap = dataObject;
 	if (capitolMap) {
-		[self.detailViewController setMap:capitolMap];
+		[(CapitolMapsDetailViewController*) self.detailViewController setMap:capitolMap];
 		if (isSplitViewDetail == NO) {
 			// push the detail view controller onto the navigation stack to display it				
 			[self.navigationController pushViewController:self.detailViewController animated:YES];

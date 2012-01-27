@@ -104,7 +104,7 @@
 	
 	nice_release(_metadata);
 	
-	NSString *localPath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kStateMetaFile];
+	NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kStateMetaFile];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if ([fileManager fileExistsAtPath:localPath]) {
 		NSData *jsonFile = [NSData dataWithContentsOfFile:localPath];
@@ -252,7 +252,7 @@
 				[_loadingStates removeObject:gotStateID];
 			}
 			
-			NSString *localPath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kStateMetaFile];
+			NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kStateMetaFile];
 			if (![[_metadata JSONData] writeToFile:localPath atomically:YES])
 				NSLog(@"StateMetadataLoader: error writing cache to file: %@", localPath);
 			isFresh = YES;
