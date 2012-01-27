@@ -13,6 +13,7 @@
 #import "TexLegeReachability.h"
 #import "UtilityMethods.h"
 #import "OpenLegislativeAPIs.h"
+#import "Reachability.h"
 
 #define ALLOW_SLOW_DNS_LOOKUPS	0
 
