@@ -69,10 +69,27 @@
 	return dataSource;
 }
 
+- (BOOL)shouldPreselectRowOnAppear {
+    if ([UtilityMethods isIPadDevice] && self.detailViewController) {
+        SEL popoverSelector = @selector(masterPopover);
+        if ([self.detailViewController respondsToSelector:popoverSelector]) {
+            UIPopoverController *masterPopover = [self.detailViewController performSelector:popoverSelector withObject:nil];
+            if (masterPopover)
+                return NO;
+        }
+        else if (![UtilityMethods isLandscapeOrientation])
+            return NO;
+    }
+    return YES;
+}
+
 - (void)configure {	
 		
 	[self dataSource];
 	
+    if (![self shouldPreselectRowOnAppear])
+        return;
+    
 	if ([self.dataSource usesCoreData]) {
 		id objectID = [[TexLegeAppDelegate appDelegate] savedTableSelectionForKey:NSStringFromClass([self class])];
 		if (objectID && [objectID isKindOfClass:[NSNumber class]]) {
@@ -233,7 +250,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	if (self.selectObjectOnAppear)  {	
+	if ([self shouldPreselectRowOnAppear] && self.selectObjectOnAppear)  {	
 		NSIndexPath *selectedPath = nil;
 		
 		//if (![self.dataSource.name isEqualToString:@"Resources"])
