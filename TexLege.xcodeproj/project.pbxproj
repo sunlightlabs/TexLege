@@ -1219,7 +1219,6 @@
 		37D46DCA123BFA9800C2C403 /* CommitteeDetailViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46DC9123BFA9800C2C403 /* CommitteeDetailViewController~ipad.xib */; };
 		37D6E82810175F0800D4D7C2 /* UtilityMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D6E82710175F0800D4D7C2 /* UtilityMethods.m */; };
 		37D6E8C51017772B00D4D7C2 /* Map.SamHoustonLoc.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37D6E8C41017772B00D4D7C2 /* Map.SamHoustonLoc.pdf */; };
-		37DEFF141363F7C9002D4956 /* libKal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6A9701362909A0095D9AE /* libKal.a */; };
 		37E2068412204D5000103D76 /* DistrictOfficeObj+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2068112204D5000103D76 /* DistrictOfficeObj+MapKit.m */; };
 		37E2068512204D5000103D76 /* DistrictMapObj+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2068312204D5000103D76 /* DistrictMapObj+MapKit.m */; };
 		37E207C71220779B00103D76 /* bluestar.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E207C31220779B00103D76 /* bluestar.png */; };
@@ -1261,6 +1260,28 @@
 		37F4926F1311C556005D5DE1 /* BillsDetailViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F4926E1311C556005D5DE1 /* BillsDetailViewController~iphone.xib */; };
 		37F492761311C640005D5DE1 /* BillsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F492751311C640005D5DE1 /* BillsDetailViewController.m */; };
 		37F510AA0FF1ADEF0020A13B /* Icon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F510A90FF1ADEF0020A13B /* Icon_80.png */; };
+		37F7C05814D32775000853D5 /* KalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04314D32775000853D5 /* KalDataSource.m */; };
+		37F7C05914D32775000853D5 /* KalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04314D32775000853D5 /* KalDataSource.m */; };
+		37F7C05A14D32775000853D5 /* KalDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04514D32775000853D5 /* KalDate.m */; };
+		37F7C05B14D32775000853D5 /* KalDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04514D32775000853D5 /* KalDate.m */; };
+		37F7C05C14D32775000853D5 /* KalGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04714D32775000853D5 /* KalGridView.m */; };
+		37F7C05D14D32775000853D5 /* KalGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04714D32775000853D5 /* KalGridView.m */; };
+		37F7C05E14D32775000853D5 /* KalLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04914D32775000853D5 /* KalLogic.m */; };
+		37F7C05F14D32775000853D5 /* KalLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04914D32775000853D5 /* KalLogic.m */; };
+		37F7C06014D32775000853D5 /* KalMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04B14D32775000853D5 /* KalMonthView.m */; };
+		37F7C06114D32775000853D5 /* KalMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04B14D32775000853D5 /* KalMonthView.m */; };
+		37F7C06214D32775000853D5 /* KalPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04D14D32775000853D5 /* KalPrivate.m */; };
+		37F7C06314D32775000853D5 /* KalPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04D14D32775000853D5 /* KalPrivate.m */; };
+		37F7C06414D32775000853D5 /* KalTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04F14D32775000853D5 /* KalTileView.m */; };
+		37F7C06514D32775000853D5 /* KalTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C04F14D32775000853D5 /* KalTileView.m */; };
+		37F7C06614D32775000853D5 /* KalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05114D32775000853D5 /* KalView.m */; };
+		37F7C06714D32775000853D5 /* KalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05114D32775000853D5 /* KalView.m */; };
+		37F7C06814D32775000853D5 /* KalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05314D32775000853D5 /* KalViewController.m */; };
+		37F7C06914D32775000853D5 /* KalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05314D32775000853D5 /* KalViewController.m */; };
+		37F7C06A14D32775000853D5 /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05514D32775000853D5 /* NSDateAdditions.m */; };
+		37F7C06B14D32775000853D5 /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05514D32775000853D5 /* NSDateAdditions.m */; };
+		37F7C06C14D32775000853D5 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05714D32775000853D5 /* UIViewAdditions.m */; };
+		37F7C06D14D32775000853D5 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05714D32775000853D5 /* UIViewAdditions.m */; };
 		37FC487013110A9E00A4C0B2 /* BillSearchDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FC486F13110A9E00A4C0B2 /* BillSearchDataSource.m */; };
 		37FE1CA713CB677100655550 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1C7513CB677100655550 /* JSONKit.m */; };
 		37FE1CDD13CB75FD00655550 /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1CD913CB75FD00655550 /* LocalyticsSession.m */; };
@@ -1277,20 +1298,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		371D546C1365F67200A61BD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 372D061912FC799200E63696 /* Kal.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = Kal;
-		};
-		371D54701365F68E00A61BD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 372D061912FC799200E63696 /* Kal.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = Kal;
-		};
 		37C3516214C93D6000B6F118 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3775C7C8131C44C600638ED4 /* RestKit.xcodeproj */;
@@ -1375,13 +1382,6 @@
 			remoteGlobalIDString = 255B7588133BABBF00ED76AD;
 			remoteInfo = RestKit;
 		};
-		37E6A96F1362909A0095D9AE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 372D061912FC799200E63696 /* Kal.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = Kal;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1457,7 +1457,6 @@
 		3729EC2810077F83000AD804 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		372C280E13B06C7500836162 /* iPadTabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = iPadTabBarController.xib; path = "Resources-iPad/iPadTabBarController.xib"; sourceTree = "<group>"; };
 		372D061812FC799200E63696 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Kal.bundle; path = src/Kal.bundle; sourceTree = "<group>"; };
-		372D061912FC799200E63696 /* Kal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kal.xcodeproj; path = src/Kal.xcodeproj; sourceTree = "<group>"; };
 		372D066512FC901C00E63696 /* TexLegeLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexLegeLibrary.h; sourceTree = "<group>"; };
 		372D066612FC901C00E63696 /* TexLegeLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexLegeLibrary.m; sourceTree = "<group>"; };
 		372D5CBE11E9983A005A21E2 /* CapitolMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapitolMap.h; sourceTree = "<group>"; };
@@ -2277,6 +2276,29 @@
 		37F4A814130CAA4F00705EDD /* BillsMenuDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillsMenuDataSource.h; sourceTree = "<group>"; };
 		37F4A815130CAA4F00705EDD /* BillsMenuDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillsMenuDataSource.m; sourceTree = "<group>"; };
 		37F510A90FF1ADEF0020A13B /* Icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_80.png; sourceTree = "<group>"; };
+		37F7C04114D32775000853D5 /* Kal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kal.h; path = src/Kal.h; sourceTree = "<group>"; };
+		37F7C04214D32775000853D5 /* KalDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalDataSource.h; path = src/KalDataSource.h; sourceTree = "<group>"; };
+		37F7C04314D32775000853D5 /* KalDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalDataSource.m; path = src/KalDataSource.m; sourceTree = "<group>"; };
+		37F7C04414D32775000853D5 /* KalDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalDate.h; path = src/KalDate.h; sourceTree = "<group>"; };
+		37F7C04514D32775000853D5 /* KalDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalDate.m; path = src/KalDate.m; sourceTree = "<group>"; };
+		37F7C04614D32775000853D5 /* KalGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalGridView.h; path = src/KalGridView.h; sourceTree = "<group>"; };
+		37F7C04714D32775000853D5 /* KalGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalGridView.m; path = src/KalGridView.m; sourceTree = "<group>"; };
+		37F7C04814D32775000853D5 /* KalLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalLogic.h; path = src/KalLogic.h; sourceTree = "<group>"; };
+		37F7C04914D32775000853D5 /* KalLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalLogic.m; path = src/KalLogic.m; sourceTree = "<group>"; };
+		37F7C04A14D32775000853D5 /* KalMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalMonthView.h; path = src/KalMonthView.h; sourceTree = "<group>"; };
+		37F7C04B14D32775000853D5 /* KalMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalMonthView.m; path = src/KalMonthView.m; sourceTree = "<group>"; };
+		37F7C04C14D32775000853D5 /* KalPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalPrivate.h; path = src/KalPrivate.h; sourceTree = "<group>"; };
+		37F7C04D14D32775000853D5 /* KalPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalPrivate.m; path = src/KalPrivate.m; sourceTree = "<group>"; };
+		37F7C04E14D32775000853D5 /* KalTileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalTileView.h; path = src/KalTileView.h; sourceTree = "<group>"; };
+		37F7C04F14D32775000853D5 /* KalTileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalTileView.m; path = src/KalTileView.m; sourceTree = "<group>"; };
+		37F7C05014D32775000853D5 /* KalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalView.h; path = src/KalView.h; sourceTree = "<group>"; };
+		37F7C05114D32775000853D5 /* KalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalView.m; path = src/KalView.m; sourceTree = "<group>"; };
+		37F7C05214D32775000853D5 /* KalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KalViewController.h; path = src/KalViewController.h; sourceTree = "<group>"; };
+		37F7C05314D32775000853D5 /* KalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KalViewController.m; path = src/KalViewController.m; sourceTree = "<group>"; };
+		37F7C05414D32775000853D5 /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDateAdditions.h; path = src/NSDateAdditions.h; sourceTree = "<group>"; };
+		37F7C05514D32775000853D5 /* NSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDateAdditions.m; path = src/NSDateAdditions.m; sourceTree = "<group>"; };
+		37F7C05614D32775000853D5 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewAdditions.h; path = src/UIViewAdditions.h; sourceTree = "<group>"; };
+		37F7C05714D32775000853D5 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewAdditions.m; path = src/UIViewAdditions.m; sourceTree = "<group>"; };
 		37F9523F1211409300206241 /* 110-bug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "110-bug@2x.png"; sourceTree = "<group>"; };
 		37FBB74812224A8400CD8E20 /* DistrictOfficeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrictOfficeDataSource.h; sourceTree = "<group>"; };
 		37FBB74912224A8400CD8E20 /* DistrictOfficeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictOfficeDataSource.m; sourceTree = "<group>"; };
@@ -2324,7 +2346,6 @@
 				379D72AA123CA39B0094F45B /* QuartzCore.framework in Frameworks */,
 				3775C7FC131C459900638ED4 /* CFNetwork.framework in Frameworks */,
 				3775C7FE131C459900638ED4 /* MobileCoreServices.framework in Frameworks */,
-				37DEFF141363F7C9002D4956 /* libKal.a in Frameworks */,
 				377075431397E4C300E82CA8 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2514,8 +2535,30 @@
 		372D061712FC799200E63696 /* Kal */ = {
 			isa = PBXGroup;
 			children = (
+				37F7C04114D32775000853D5 /* Kal.h */,
+				37F7C04214D32775000853D5 /* KalDataSource.h */,
+				37F7C04314D32775000853D5 /* KalDataSource.m */,
+				37F7C04414D32775000853D5 /* KalDate.h */,
+				37F7C04514D32775000853D5 /* KalDate.m */,
+				37F7C04614D32775000853D5 /* KalGridView.h */,
+				37F7C04714D32775000853D5 /* KalGridView.m */,
+				37F7C04814D32775000853D5 /* KalLogic.h */,
+				37F7C04914D32775000853D5 /* KalLogic.m */,
+				37F7C04A14D32775000853D5 /* KalMonthView.h */,
+				37F7C04B14D32775000853D5 /* KalMonthView.m */,
+				37F7C04C14D32775000853D5 /* KalPrivate.h */,
+				37F7C04D14D32775000853D5 /* KalPrivate.m */,
+				37F7C04E14D32775000853D5 /* KalTileView.h */,
+				37F7C04F14D32775000853D5 /* KalTileView.m */,
+				37F7C05014D32775000853D5 /* KalView.h */,
+				37F7C05114D32775000853D5 /* KalView.m */,
+				37F7C05214D32775000853D5 /* KalViewController.h */,
+				37F7C05314D32775000853D5 /* KalViewController.m */,
+				37F7C05414D32775000853D5 /* NSDateAdditions.h */,
+				37F7C05514D32775000853D5 /* NSDateAdditions.m */,
+				37F7C05614D32775000853D5 /* UIViewAdditions.h */,
+				37F7C05714D32775000853D5 /* UIViewAdditions.m */,
 				372D061812FC799200E63696 /* Kal.bundle */,
-				372D061912FC799200E63696 /* Kal.xcodeproj */,
 			);
 			name = Kal;
 			path = Vendor/Kal;
@@ -3683,14 +3726,6 @@
 			path = Vendor/TTTOrdinalNumberFormatter;
 			sourceTree = SOURCE_ROOT;
 		};
-		37E6A96C1362909A0095D9AE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				37E6A9701362909A0095D9AE /* libKal.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		37F2CA0A1343ADFC001D9D7B /* DDActionHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3783,7 +3818,6 @@
 			);
 			dependencies = (
 				37C3517714C93D6E00B6F118 /* PBXTargetDependency */,
-				371D546D1365F67200A61BD4 /* PBXTargetDependency */,
 			);
 			name = TexLege;
 			productName = foo;
@@ -3803,7 +3837,6 @@
 			);
 			dependencies = (
 				37C7845614D302DF006BBEDE /* PBXTargetDependency */,
-				371D54711365F68E00A61BD4 /* PBXTargetDependency */,
 			);
 			name = "TexLege (Seeding DB)";
 			productName = foo;
@@ -3830,10 +3863,6 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 37E6A96C1362909A0095D9AE /* Products */;
-					ProjectRef = 372D061912FC799200E63696 /* Kal.xcodeproj */;
-				},
 				{
 					ProductGroup = 37C3515514C93D6000B6F118 /* Products */;
 					ProjectRef = 3775C7C8131C44C600638ED4 /* RestKit.xcodeproj */;
@@ -3916,13 +3945,6 @@
 			fileType = wrapper.application;
 			path = UISpec.app;
 			remoteRef = 37C3517414C93D6000B6F118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		37E6A9701362909A0095D9AE /* libKal.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libKal.a;
-			remoteRef = 37E6A96F1362909A0095D9AE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -5090,6 +5112,17 @@
 				37FE1E0C13CB8E3300655550 /* AppendingFlowView.m in Sources */,
 				37FE1F1513CB8EFE00655550 /* IntelligentSplitViewController.m in Sources */,
 				37C7845914D30444006BBEDE /* LocalyticsDatabase.m in Sources */,
+				37F7C05814D32775000853D5 /* KalDataSource.m in Sources */,
+				37F7C05A14D32775000853D5 /* KalDate.m in Sources */,
+				37F7C05C14D32775000853D5 /* KalGridView.m in Sources */,
+				37F7C05E14D32775000853D5 /* KalLogic.m in Sources */,
+				37F7C06014D32775000853D5 /* KalMonthView.m in Sources */,
+				37F7C06214D32775000853D5 /* KalPrivate.m in Sources */,
+				37F7C06414D32775000853D5 /* KalTileView.m in Sources */,
+				37F7C06614D32775000853D5 /* KalView.m in Sources */,
+				37F7C06814D32775000853D5 /* KalViewController.m in Sources */,
+				37F7C06A14D32775000853D5 /* NSDateAdditions.m in Sources */,
+				37F7C06C14D32775000853D5 /* UIViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5215,22 +5248,23 @@
 				37FE1E5613CB8E3300655550 /* AppendingFlowView.m in Sources */,
 				37FE1F3E13CB8EFE00655550 /* IntelligentSplitViewController.m in Sources */,
 				37C7845A14D30444006BBEDE /* LocalyticsDatabase.m in Sources */,
+				37F7C05914D32775000853D5 /* KalDataSource.m in Sources */,
+				37F7C05B14D32775000853D5 /* KalDate.m in Sources */,
+				37F7C05D14D32775000853D5 /* KalGridView.m in Sources */,
+				37F7C05F14D32775000853D5 /* KalLogic.m in Sources */,
+				37F7C06114D32775000853D5 /* KalMonthView.m in Sources */,
+				37F7C06314D32775000853D5 /* KalPrivate.m in Sources */,
+				37F7C06514D32775000853D5 /* KalTileView.m in Sources */,
+				37F7C06714D32775000853D5 /* KalView.m in Sources */,
+				37F7C06914D32775000853D5 /* KalViewController.m in Sources */,
+				37F7C06B14D32775000853D5 /* NSDateAdditions.m in Sources */,
+				37F7C06D14D32775000853D5 /* UIViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		371D546D1365F67200A61BD4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Kal;
-			targetProxy = 371D546C1365F67200A61BD4 /* PBXContainerItemProxy */;
-		};
-		371D54711365F68E00A61BD4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Kal;
-			targetProxy = 371D54701365F68E00A61BD4 /* PBXContainerItemProxy */;
-		};
 		37C3517714C93D6E00B6F118 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = RestKit;
@@ -5282,26 +5316,36 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Vendor/RestKit/Build/\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INSTALL_PATH = /Applications;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = TXL;
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Vendor/RestKit/Build/\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INSTALL_PATH = /Applications;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = TXL;
 			};
 			name = Release;
 		};
@@ -5319,6 +5363,9 @@
 					"RESTKIT_GENERATE_SEED_DB=1",
 					"DEBUG=1",
 				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5334,6 +5381,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5348,6 +5398,9 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5362,6 +5415,9 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5400,9 +5456,6 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Resources/Info.plist;
-				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
-				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -5428,13 +5481,18 @@
 		377629CA102A0A45004700EC /* iTunes Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Vendor/RestKit/Build/\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INSTALL_PATH = /Applications;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = TXL;
 			};
 			name = "iTunes Distribution";
 		};
@@ -5471,9 +5529,6 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Resources/Info.plist;
-				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
-				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				LLVM_LTO = NO;
@@ -5500,13 +5555,18 @@
 		37B2D28510224AC900B493C8 /* AdHoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Vendor/RestKit/Build/\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INSTALL_PATH = /Applications;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = TXL;
 			};
 			name = "AdHoc Distribution";
 		};
@@ -5544,9 +5604,6 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Resources/Info.plist;
-				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
-				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -5602,9 +5659,6 @@
 					"\"$(SRCROOT)/../../GitHub/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
-				INFOPLIST_FILE = Resources/Info.plist;
-				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
-				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
