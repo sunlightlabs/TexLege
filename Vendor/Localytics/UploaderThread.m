@@ -9,124 +9,98 @@
 
 #import "UploaderThread.h"
 #import "LocalyticsSession.h"
+#import "LocalyticsDatabase.h"
+#import <zlib.h>
 
-#define SESSION_FILE_PREFIX  @"s_"   // The prefix denoting the file for a session.
-#define CLOSE_SESSION_FILE_PREFIX @"c_"	// The prefix denoting the file for close events for a session
-#define UPLOAD_FILE_PREFIX   @"u_"   // The prefix denoting a file to be uploaded
-#define UPLOAD_FILE_FORMAT   @"u_%@" // The string format for an upload file.
+#define LOCALYTICS_URL             @"http://analytics.localytics.com/api/v2/applications/%@/uploads"            // url to send the 
 
-#define ANALYTICS_URL        @"http://analytics.localytics.com/api/datapoints/bulk"	// url to send the datapoints to
+static UploaderThread *_sharedUploaderThread = nil;
 
 @interface UploaderThread ()
-- (void)logMessage:(NSString *)message;
-- (void)renameOrAppendFile:(NSFileManager *)fileManager origin:(NSString *)originalFilename destination:(NSString *)destFilename;
 - (void)complete;
+- (NSData *)gzipDeflatedDataWithData:(NSData *)data;
+- (void)logMessage:(NSString *)message;
 @end
 
 @implementation UploaderThread
 
 @synthesize uploadConnection   = _uploadConnection;
-@synthesize localyticsFilePath = _localyticsFilePath;
 @synthesize isUploading        = _isUploading;
 
 #pragma mark Singleton Class
-
-+ (id)sharedUploaderThread
-{
-	static dispatch_once_t pred;
-	static UploaderThread *foo = nil;
-	
-	dispatch_once(&pred, ^{ foo = [[self alloc] init]; });
-	return foo;
-}
-
-#pragma mark Object Initialization
-- (UploaderThread *)init {
-	if ((self = [super init])) {
-		self.isUploading = false;
-		self.uploadConnection = nil;
++ (UploaderThread *)sharedUploaderThread {
+	@synchronized(self) {
+		if (_sharedUploaderThread == nil) 
+		{
+			_sharedUploaderThread = [[self alloc] init];			
+		}
 	}
-	return self;
+	return _sharedUploaderThread;
 }
 
 #pragma mark Class Methods
-- (void)UploaderThread:(NSString *)localyticsFilePath {
-	int currentFile;
+- (void)uploaderThreadwithApplicationKey:(NSString *)localyticsApplicationKey {
 	
 	// Do nothing if already uploading.
 	if (self.uploadConnection != nil || self.isUploading == true) 
 	{
-		//[self logMessage:@"Upload already in progress.  Aborting.."];
+		[self logMessage:@"Upload already in progress.  Aborting."];
 		return;
 	}
-	
+
 	[self logMessage:@"Beginning upload process"];
 	self.isUploading = true;
-	self.localyticsFilePath = localyticsFilePath;
-	
-	NSFileManager *sessionFileManager = [NSFileManager defaultManager];	
-	if(self.localyticsFilePath == nil || ([sessionFileManager fileExistsAtPath:self.localyticsFilePath] == NO))
-	{
-		[self logMessage:@"Localtyics dir does not exist, aborting upload."];
-		self.isUploading = false;
-		return;
-	}
 	
 	// Prepare the data for upload.  The upload could take a long time, so some effort has to be made to be sure that events
 	// which get written while the upload is taking place don't get lost or duplicated.  To achieve this, the logic is:
-	// 1) Go through every session file and rename it by prepending the upload prefix to it.
-	// 2) if an upload file already exists, append the data.
-	// Now, the uploader can focus on upload files and any ongoing sessions can safely write to session files
-	// 3) Go through every upload file and append it's data to the post body
-	// 4) upload the data
-	// 5) on success, delete every file from step 3.
-	
-	// Steps 1 and 2
-	NSArray *listOfFiles = [sessionFileManager contentsOfDirectoryAtPath:self.localyticsFilePath error:nil];
-	for(currentFile = 0; currentFile < [listOfFiles count]; currentFile++)
-	{
-		NSString *currentFilename = [listOfFiles objectAtIndex:currentFile];
-		if([currentFilename hasPrefix:SESSION_FILE_PREFIX] == YES ||
-       [currentFilename hasPrefix:CLOSE_SESSION_FILE_PREFIX] == YES)
-		{						
-			[self renameOrAppendFile:sessionFileManager 
-					 origin:[self.localyticsFilePath stringByAppendingPathComponent:currentFilename]
-					 destination:[self.localyticsFilePath stringByAppendingPathComponent:[NSString stringWithFormat:UPLOAD_FILE_FORMAT, currentFilename]]];
-		}		
-	}
-	
-	// Step 3
-	NSMutableData *requestData = [[NSMutableData alloc] init];
-	listOfFiles = [sessionFileManager contentsOfDirectoryAtPath:self.localyticsFilePath error:nil];
-	for(currentFile = 0; currentFile < [listOfFiles count]; currentFile++)
-	{
-		NSString *currentFilename = [listOfFiles objectAtIndex:currentFile];
-		if([currentFilename hasPrefix:UPLOAD_FILE_PREFIX] == YES)
-		{
-			NSData *newData = [[NSData alloc] initWithContentsOfFile:[self.localyticsFilePath stringByAppendingPathComponent:currentFilename]];
-			[requestData appendData:newData];
-			[newData release];
-		}
-	}
-	
-	// step 4, 
-	NSMutableURLRequest *submitRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:ANALYTICS_URL] 
+    // 1) Append every header row blob string and and those of its associated events to the upload string.
+    // 2) Deflate and upload the data.
+    // 3) On success, delete all blob headers and staged events. Events added while an upload is in process are not
+    //    deleted because they are not associated a header (and cannot be until the upload completes).
+    
+    // Step 1
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    LocalyticsDatabase *db = [LocalyticsDatabase sharedLocalyticsDatabase];
+    NSString *blobString = [db uploadBlobString];
+
+    if ([blobString length] == 0) {
+        // There is nothing outstanding to upload.
+        [self logMessage:@"Abandoning upload. There are no new events."];
+
+        [pool drain];
+        [self complete];
+        return;
+    }
+
+	NSData *requestData = [blobString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *myString = [[[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding] autorelease];
+    [self logMessage:@"Upload data:"];
+    [self logMessage:myString];
+    
+    // Step 2
+    NSData *deflatedRequestData = [[self gzipDeflatedDataWithData:requestData] retain];
+    
+    [pool drain];
+
+    NSString *apiUrlString = [NSString stringWithFormat:LOCALYTICS_URL, [localyticsApplicationKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	NSMutableURLRequest *submitRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:apiUrlString]
 																			 cachePolicy:NSURLRequestReloadIgnoringCacheData 
 																			 timeoutInterval:60.0];
 	[submitRequest setHTTPMethod:@"POST"];
-	[submitRequest setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];				
-	[submitRequest setHTTPBody:requestData];
-	[submitRequest setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
-	[requestData release];
+	[submitRequest setValue:@"application/x-gzip" forHTTPHeaderField:@"Content-Type"];
+    [submitRequest setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
+	[submitRequest setValue:[NSString stringWithFormat:@"%d", [deflatedRequestData length]] forHTTPHeaderField:@"Content-Length"];
+	[submitRequest setHTTPBody:deflatedRequestData];
+    [deflatedRequestData release];
 	
-	// The NSURLConnection Object automatically spawns it's own thread as a default behavior.
+	// The NSURLConnection Object automatically spawns its own thread as a default behavior.
 	@try 
 	{
-		//[self logMessage:@"Spawning new thread for upload"];
+		[self logMessage:@"Spawning new thread for upload"];
 		self.uploadConnection = [NSURLConnection connectionWithRequest:submitRequest delegate:self];
-		[self.uploadConnection retain]; // Todo: remove extra retain and release ?
 		
-		// step 5 is handled by connectionDidFinishLoading
+		// Step 3 is handled by connectionDidFinishLoading.
 	}
 	@catch (NSException * e) 
 	{ 
@@ -135,30 +109,32 @@
 }
 
 #pragma mark **** NSURLConnection FUNCTIONS ****
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	// Used to gather response data from server - Not utilized in this version
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	// If the connection completed, the files should be deleted.  It is important not to
-	// check for a specific return value before deleting the files because this might cause
-	// an invalid file to stick around forever.
-	[self logMessage:@"Upload completed."];
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // Could receive multiple response callbacks, likely due to redirection.
+    // Record status and act only when connection completes load.
+    _responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
+}
 
-	// Presume that upload was successful & delete all uploaded files.  Because only one instance of the uploader
-	// can be running at a time it should not be possible for new upload files to appear so there is no fear of
-	// deleting data which has not yet been uploaded.
-	NSFileManager *sessionFileManager = [NSFileManager defaultManager];
-	NSArray *listOfFiles = [sessionFileManager contentsOfDirectoryAtPath:self.localyticsFilePath error:nil];
-	for(int currentFile = 0; currentFile < [listOfFiles count]; currentFile++)
-	{		
-		NSString *currentFilename =  [listOfFiles objectAtIndex:currentFile];
-		if([currentFilename hasPrefix:UPLOAD_FILE_PREFIX] == YES)
-		{
-			[sessionFileManager removeItemAtPath:[self.localyticsFilePath stringByAppendingPathComponent:currentFilename] error:nil];			
-		}
-	}
-	
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	// If the connection finished loading, the files should be deleted. While response status codes in the 5xx range
+    // leave upload rows intact, the default case is to delete.
+    if (_responseStatusCode >= 500 && _responseStatusCode < 600)
+    {
+        [self logMessage:[NSString stringWithFormat:@"Upload failed with response status code %d", _responseStatusCode]];
+    } else
+    {
+        // The connection finished loading and uploaded data should be deleted.  Because only one instance of the
+        // uploader can be running at a time it should not be possible for new upload rows to appear so there is no
+        // fear of deleting data which has not yet been uploaded.
+        [self logMessage:[NSString stringWithFormat:@"Upload completed successfully. Response code %d", _responseStatusCode]];
+        [[LocalyticsDatabase sharedLocalyticsDatabase] deleteUploadData];
+    }
+
 	// Close upload session
 	[self complete];
 }
@@ -180,35 +156,55 @@
  @abstract closes the upload connection and reports back to the session that the upload is complete
  */
 - (void)complete {
-		//[self.uploadConnection release]; // Todo: remove extra retain and release
+    _responseStatusCode = 0;
 	self.uploadConnection = nil;
 	self.isUploading = false;
 }
 
 /*!
- @method renameOrAppendFile
- @abstract Checks if the destination exists.  If so it appends the origin to the destination, and if not, it just renames the origin.
- @param origin A string containing the path + filename of the original file
- @param destination A string containing the path + filename of the destination file
+ @method gzipDeflatedDataWithData
+ @abstract Deflates the provided data using gzip at the default compression level (6). Complete NSData gzip category available on CocoaDev. http://www.cocoadev.com/index.pl?NSDataCategory.
+ @return the deflated data
  */
-- (void)renameOrAppendFile:(NSFileManager *)fileManager origin:(NSString *)originalFilename destination:(NSString *)destFilename {
-	if ([fileManager fileExistsAtPath:destFilename]) 
-	{
-		// If the destination file already exists then append the data and delete the file 
-		NSData *fileData = [[NSData alloc] initWithContentsOfFile:originalFilename];
-		NSFileHandle *currentYML = [NSFileHandle fileHandleForUpdatingAtPath:destFilename];
-		[currentYML seekToEndOfFile];
-		[currentYML writeData:fileData];
-		[currentYML closeFile];
-		[fileData release];
+- (NSData *)gzipDeflatedDataWithData:(NSData *)data
+{
+	if ([data length] == 0) return data;
+	
+	z_stream strm;
+	
+	strm.zalloc = Z_NULL;
+	strm.zfree = Z_NULL;
+	strm.opaque = Z_NULL;
+	strm.total_out = 0;
+	strm.next_in=(Bytef *)[data bytes];
+	strm.avail_in = [data length];
+	
+	// Compresssion Levels:
+	//   Z_NO_COMPRESSION
+	//   Z_BEST_SPEED
+	//   Z_BEST_COMPRESSION
+	//   Z_DEFAULT_COMPRESSION
+	
+	if (deflateInit2(&strm, Z_DEFAULT_COMPRESSION, Z_DEFLATED, (15+16), 8, Z_DEFAULT_STRATEGY) != Z_OK) return nil;
+	
+	NSMutableData *compressed = [NSMutableData dataWithLength:16384];  // 16K chunks for expansion
+	
+	do {
 		
-		[fileManager removeItemAtPath:originalFilename error:nil];
-	}
-	else
-	{
-		// otherwise just rename the file
-		[fileManager moveItemAtPath:originalFilename toPath:destFilename error:nil];
-	}		
+		if (strm.total_out >= [compressed length])
+			[compressed increaseLengthBy: 16384];
+		
+		strm.next_out = [compressed mutableBytes] + strm.total_out;
+		strm.avail_out = [compressed length] - strm.total_out;
+		
+		deflate(&strm, Z_FINISH);  
+		
+	} while (strm.avail_out == 0);
+	
+	deflateEnd(&strm);
+	
+	[compressed setLength: strm.total_out];
+	return [NSData dataWithData:compressed];
 }
 
 /*!
@@ -217,10 +213,47 @@
  @param message The message to log
 */
 - (void) logMessage:(NSString *)message {
-		printf("[%s] (localytics uploader) %s\n", [[[NSDate date] description] UTF8String], [message UTF8String]);
+    if(DO_LOCALYTICS_LOGGING) {
+		NSLog(@"(localytics uploader) %s\n", [message UTF8String]);
+    }
+}
+
+#pragma mark System Functions
++ (id)allocWithZone:(NSZone *)zone {
+	@synchronized(self) {
+		if (_sharedUploaderThread == nil) {
+			_sharedUploaderThread = [super allocWithZone:zone];
+			return _sharedUploaderThread;
+		}
+	}
+	// returns nil on subsequent allocations
+	return nil;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+	return self;
+}
+
+- (id)retain {
+	return self;
+}
+
+- (unsigned)retainCount {
+	// maximum value of an unsigned int - prevents additional retains for the class
+	return UINT_MAX;
+}
+
+- (oneway void)release {
+	// ignore release commands
+}
+
+- (id)autorelease {
+	return self;
 }
 
 - (void)dealloc {
+	[_uploadConnection release];
+	[_sharedUploaderThread release];
     [super dealloc];
 }
 

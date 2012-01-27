@@ -16,20 +16,18 @@
 
 @interface UploaderThread : NSObject {
 	NSURLConnection *_uploadConnection;		// The connection which uploads the bits
-	NSString *_localyticsFilePath;			// The path to the localytics files, to upload
+    NSInteger _responseStatusCode;          // The HTTP response status code for the current connection
 
 	BOOL _isUploading;						// A flag to gaurantee only one uploader instance can happen at once
 }
 
-
 @property (nonatomic, retain) NSURLConnection *uploadConnection;
-@property (nonatomic, retain) NSString *localyticsFilePath;
 
 @property BOOL isUploading;
 
 /*!
  @method sharedUploaderThread
- @abstract Establishes this as a Singleton Class allowing for data persistance.
+ @abstract Establishes this as a Singleton Class allowing for data persistence.
  The class is accessed within the code using the following syntax:
  [[UploaderThread sharedUploaderThread] functionHere]
  */
@@ -37,15 +35,14 @@
 
 /*!
  @method UploaderThread
- @abstract Creates a thread which uploads the session files in the passed Localytics
- Directory.  All files starting with sessionFilePrefix are renamed,
+ @abstract Creates a thread which uploads all queued header and event data.
+ All files starting with sessionFilePrefix are renamed,
  uploaded and deleted on upload.  This way the sessions can continue
  writing data regardless of whether or not the upload succeeds.  Files
  which have been renamed still count towards the total number of Localytics
  files which can be stored on the disk.
- @param localyticsSes reference to the primary session
- @param filepaPath the full path of the directory containing the localytics session files.
+ @param localyticsApplicationKey the Localytics application ID
  */
-- (void)UploaderThread:(NSString *)localyticsFilePath;
+- (void)uploaderThreadwithApplicationKey:(NSString *)localyticsApplicationKey;
 
 @end

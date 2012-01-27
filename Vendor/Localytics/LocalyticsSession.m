@@ -10,53 +10,62 @@
 #import "LocalyticsSession.h"
 #import "WebserviceConstants.h"
 #import "UploaderThread.h"
+#import "LocalyticsDatabase.h"
 
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include <mach/mach.h>
+#include <sys/socket.h>
+#include <net/if_dl.h>
+#include <ifaddrs.h>
+#include <CommonCrypto/CommonDigest.h>
 
 #pragma mark Constants
-#define CLIENT_VERSION      @"iphone_1.7"	// The version of this library
-#define LOCALYTICS_DIR      @"localytics"	// The directory to store the Localytics files in
-#define SESSION_FILE_PREFIX  @"s_"			// The prefix denoting the file for a session.
-#define CLOSE_SESSION_FILE_PREFIX @"c_"		// The prefix denoting the file for close events for a session
-#define MAX_NUM_SESSIONS    25				// Max number of sessions to store on disk
-#define OPT_OUT_FILENAME    @"OPT_OUT"      // The opt-out file.  If present, Localytics is opted out
-#define OPT_SESSION_FILE    @"opt_session"  // The file used to store the optin/out YML for upload
-
-#define PATH_TO_APT 		@"/private/var/lib/apt/"
+#define PREFERENCES_KEY             @"_localytics_install_id" // The randomly generated ID for each install of the app
+#define CLIENT_VERSION              @"iOS_2.5"      // The version of this library
+#define LOCALYTICS_DIR              @".localytics"	// The directory in which the Localytics database is stored
+#define MAX_DATABASE_SIZE           500000          // The maximum allowed disk size of the primary database file at open, in bytes
+#define MAX_STORED_EVENTS           1000            // The maximum alowed events to be stored in the database.
+#define IFT_ETHER                   0x6             // Ethernet CSMACD
+#define PATH_TO_APT                 @"/private/var/lib/apt/"
 
 #define DEFAULT_BACKGROUND_SESSION_TIMEOUT 15   // Default value for how many seconds a session persists when App shifts to the background.
 
 // The singleton session object.
+static LocalyticsSession *_sharedLocalyticsSession = nil;
 
 @interface LocalyticsSession() 
 
 #pragma mark @property Member Variables
-@property (nonatomic, retain) NSString *localyticsFilePath;
-@property (nonatomic, retain) NSString *optOutFilePath;
-@property (nonatomic, retain) NSString *sessionFilename;
-@property (nonatomic, retain) NSString *closeSessionFilename;
-@property (nonatomic, retain) NSString *fullPathToSession;
-@property (nonatomic, retain) NSString *fullPathToCloseSession;
 @property (nonatomic, retain) NSString *sessionUUID;
 @property (nonatomic, retain) NSString *applicationKey;
+@property (nonatomic, assign) NSTimeInterval lastSessionStartTimestamp;
+@property (nonatomic, retain) NSDate *sessionResumeTime;
 @property (nonatomic, retain) NSDate *sessionCloseTime;
+@property (nonatomic, retain) NSMutableString *unstagedFlowEvents;
+@property (nonatomic, retain) NSMutableString *stagedFlowEvents;
+@property (nonatomic, retain) NSMutableString *screens;
+@property (nonatomic, assign) NSTimeInterval sessionActiveDuration;
 @property (nonatomic, assign) BOOL sessionHasBeenOpen;
 
 #pragma mark Private Methods
-- (BOOL)createEmptySessionFile:(NSString *)fileName;
-- (void)appendDataToFile:(NSString *)fileName data:(NSString *)data;
-- (NSString *)getOpenSessionString;
-- (void)createOptEvent:(BOOL)optState;
+- (NSString *)blobHeaderStringWithSequenceNumber:(int)nextSequenceNumber;
+- (BOOL)createOptEvent:(BOOL)optState;
 - (void)logMessage:(NSString *)message;
 - (NSString *)getRandomUUID;
-- (NSString *)formatControllerValue:(NSString *)paramName paramValue:(NSString *)paramValue;
-- (NSString *)formatDatapoint:(NSString *)paramName paramValue:(NSString *)paramValue;
-- (NSString *) escapeString:(NSString *)input;
-- (NSString *)getGlobalDeviceId;
+- (void)addFlowEventWithName:(NSString *)name type:(NSString *)eventType;
+- (void)addScreenWithName:(NSString *)name;
+- (BOOL)saveApplicationFlowAndRemoveOnResume:(BOOL)removeOnResume;
+- (NSString *)customDimensions;
+- (NSString *)hashString:(NSString *)input;
+- (NSString *)macAddress;
+- (NSString *)formatAttributeWithName:(NSString *)paramName value:(NSString *)paramValue first:(BOOL)firstAttribute;
+- (NSString *)formatAttributeWithName:(NSString *)paramName value:(NSString *)paramValue;
+- (NSString *)escapeString:(NSString *)input;
+- (NSString *)uniqueDeviceIdentifier;
+- (NSString *) installationId;
 - (NSString *)getAppVersion;
-- (NSString *)getTimeAsDatetime;
+- (NSTimeInterval)getTimestamp;
 - (BOOL)isDeviceJailbroken;
 - (NSString *)getDeviceModel;
 - (NSString *)modelSizeString;
@@ -67,66 +76,73 @@
 @implementation LocalyticsSession
 
 #pragma mark synthesis
-@synthesize localyticsFilePath = _localyticsFilePath;
-@synthesize optOutFilePath     = _optOutFilePath;
-@synthesize sessionFilename    = _sessionFilename;
-@synthesize closeSessionFilename    = _closeSessionFilename;
-@synthesize fullPathToSession  = _fullPathToSession;
-@synthesize fullPathToCloseSession  = _fullPathToCloseSession;
-@synthesize sessionUUID        = _sessionUUID; 
-@synthesize applicationKey     = _applicationKey;
-@synthesize sessionCloseTime     = _sessionCloseTime;
-@synthesize isSessionOpen      = _isSessionOpen;
-@synthesize hasInitialized     = _hasInitialized;
-@synthesize backgroundSessionTimeout = _backgroundSessionTimeout;
-@synthesize sessionHasBeenOpen = _sessionHasBeenOpen;
- 
-#pragma mark Singleton Class
+@synthesize sessionUUID                 = _sessionUUID; 
+@synthesize applicationKey              = _applicationKey;
+@synthesize lastSessionStartTimestamp   = _lastSessionStartTimestamp;
+@synthesize sessionResumeTime           = _sessionResumeTime;
+@synthesize sessionCloseTime            = _sessionCloseTime;
+@synthesize isSessionOpen               = _isSessionOpen;
+@synthesize hasInitialized              = _hasInitialized;
+@synthesize backgroundSessionTimeout    = _backgroundSessionTimeout;
+@synthesize unstagedFlowEvents          = _unstagedFlowEvents;
+@synthesize stagedFlowEvents               = _stagedFlowEvents;
+@synthesize screens                     = _screens;
+@synthesize sessionActiveDuration       = _sessionActiveDuration;
+@synthesize sessionHasBeenOpen          = _sessionHasBeenOpen;
 
-+ (id)sharedLocalyticsSession
-{
-	static dispatch_once_t pred;
-	static LocalyticsSession *foo = nil;
-	
-	dispatch_once(&pred, ^{ foo = [[self alloc] init]; });
-	return foo;
+#pragma mark Singleton Class
++ (LocalyticsSession *)sharedLocalyticsSession {    
+	@synchronized(self) {
+		if (_sharedLocalyticsSession == nil) {
+			_sharedLocalyticsSession = [[self alloc] init];
+		}
+	}
+	return _sharedLocalyticsSession;
 }
 
 #pragma mark Object Initialization
-
 - (LocalyticsSession *)init {
-	if ((self = [super init])) {
-		
-		self.isSessionOpen  = NO;
-		self.hasInitialized = NO;
-		self.backgroundSessionTimeout = DEFAULT_BACKGROUND_SESSION_TIMEOUT;
-		self.sessionHasBeenOpen = NO;
-	}
-	return self;
+	if((self = [super init])) {
+        _isSessionOpen  = NO;
+        _hasInitialized = NO;
+        _backgroundSessionTimeout = DEFAULT_BACKGROUND_SESSION_TIMEOUT;
+        _sessionHasBeenOpen = NO;
+        [LocalyticsDatabase sharedLocalyticsDatabase];
+    }
+    
+    return self;
 }
 
 #pragma mark Public Methods
-- (void)LocalyticsSession:(NSString *)appKey {	
+- (void)LocalyticsSession:(NSString *)appKey {	    
 	// If the session has already initialized, don't bother doing it again.
 	if(self.hasInitialized) 
 	{
 		[self logMessage:@"Object has already been initialized."];
 		return;
 	}	
-
+    
 	@try {
-		// Get the path to store the files
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-
-		NSString *documentsDirectory = [paths objectAtIndex:0];
-		if (!documentsDirectory) return;
-
-		self.localyticsFilePath = [NSString stringWithFormat:@"%@/%@/", documentsDirectory, LOCALYTICS_DIR];
-		self.optOutFilePath = [NSString stringWithFormat:@"%@/%@/%@", documentsDirectory, LOCALYTICS_DIR, OPT_OUT_FILENAME];
-		self.applicationKey = appKey;
-		self.hasInitialized = YES;
-		//[self logMessage:[@"Object Initialized.  Application's key is: " stringByAppendingString:self.applicationKey]];
-		[self logMessage:[@"File Path is: " stringByAppendingString:self.localyticsFilePath]];
+        
+        if(appKey == (id)[NSNull null] || appKey.length == 0) {
+            [self logMessage:@"App key is null or empty."];
+            self.hasInitialized = NO;
+            return;
+        }
+        
+        // App key should only be alphanumeric chars and dashes.        
+        NSString *trimmedAppKey = [appKey stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        if([[trimmedAppKey stringByTrimmingCharactersInSet:[NSCharacterSet alphanumericCharacterSet]] isEqualToString:@""] == false) {
+            [self logMessage:@"App key may only contain dashes and alphanumeric characters."];
+            self.hasInitialized = NO;
+            return;
+        }
+        
+        if ([LocalyticsDatabase sharedLocalyticsDatabase]) {
+            self.applicationKey = appKey;
+            self.hasInitialized = YES;            
+            [self logMessage:[@"Object Initialized.  Application's key is: " stringByAppendingString:self.applicationKey]];
+        }
 	}
 	@catch (NSException * e) {}
 }
@@ -137,7 +153,7 @@
 	[self upload];
 }
 
-- (void)open {
+- (void)open {    
 	// There are a number of conditions in which nothing should be done:
 	if (self.hasInitialized == NO ||  // the session object has not yet initialized
       self.isSessionOpen == YES)  // session has already been opened
@@ -147,48 +163,72 @@
 	}
 	
 	if([self isOptedIn] == false) {
-//		[self logMessage:@"Can't open session because user is opted out."];
+		[self logMessage:@"Can't open session because user is opted out."];
 		return;
 	}
 
 	@try {
-		self.isSessionOpen = YES;
-    self.sessionHasBeenOpen = YES;
-
-		// Because no data can get writen before open is called, this is a safe place to get the path
-		// for the session files, and create it if it doesn't exist.
-    NSError *error;
-		NSFileManager *openFileManager = [NSFileManager defaultManager];
-		if ([openFileManager fileExistsAtPath:self.localyticsFilePath] == NO) {
-			[openFileManager createDirectoryAtPath:self.localyticsFilePath
-                 withIntermediateDirectories:NO
-                                  attributes:nil
-                                       error:&error];
-		}
-		NSArray *localFiles = [openFileManager contentsOfDirectoryAtPath:self.localyticsFilePath error:nil];
-
-		// If there are already too many files on the disk, don't bother collecting any more data. 
-		if (([localFiles count]) >= MAX_NUM_SESSIONS && [localFiles count] > 0) {
-			[self logMessage:@"Maximum number of sessions have already been queued on disk."];
+		// If there is too much data on the disk, don't bother collecting any more.
+        LocalyticsDatabase *db = [LocalyticsDatabase sharedLocalyticsDatabase];
+        if([db eventCount] >= MAX_STORED_EVENTS) {
+			[self logMessage:@"Maximum number of events stored in database. Session not opened."];
 			self.isSessionOpen = NO;
 			return;
 		}
 
-		// Determine the filename and full path
-    // Close events are stored in a filename with an alternative suffix, so that they
-    // can be deleted when a session resumes
-		self.sessionUUID = [self getRandomUUID];
-		self.sessionFilename = [NSString stringWithFormat:@"%@%@.yml", SESSION_FILE_PREFIX, self.sessionUUID];	
-		self.closeSessionFilename = [NSString stringWithFormat:@"%@%@.yml", CLOSE_SESSION_FILE_PREFIX, self.sessionUUID];	
-		self.fullPathToSession = [self.localyticsFilePath stringByAppendingPathComponent:self.sessionFilename];
-		self.fullPathToCloseSession = [self.localyticsFilePath stringByAppendingPathComponent:self.closeSessionFilename];
+        self.sessionActiveDuration = 0;
+        self.sessionResumeTime = [NSDate date];
+        self.unstagedFlowEvents = [NSMutableString string];
+        self.stagedFlowEvents = [NSMutableString string];
+        self.screens = [NSMutableString string];
 
-		// Store the blob
-		[self appendDataToFile:self.fullPathToSession data:[self getOpenSessionString]];
+        // Begin transaction for session open.
+        NSString *t = @"open_session";
+        BOOL success = [db beginTransaction:t];
 
-		[self logMessage:[@"Succesfully opened session. UUID is: " stringByAppendingString:self.sessionUUID]];
-		[self logMessage:[@"Session file is: " stringByAppendingString:self.sessionFilename]];
-		[self logMessage:[@"Close session file is: " stringByAppendingString:self.closeSessionFilename]];
+        // Save session start time.
+        self.lastSessionStartTimestamp = [self.sessionResumeTime timeIntervalSince1970];
+        if (success) {
+          success = [db setLastsessionStartTimestamp:self.lastSessionStartTimestamp];
+        }
+
+        // Retrieve next session number.
+        int sessionNumber = 0;
+        if (success) {
+            success = [db incrementLastSessionNumber:&sessionNumber];
+        }
+        
+        if (success) {
+            // Prepare session open event.          
+            self.sessionUUID = [self getRandomUUID];
+
+            // Store event.
+            NSMutableString *openEventString = [NSMutableString string];
+            [openEventString appendString:@"{"];
+            [openEventString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE              value:@"s"              first:YES]];
+            [openEventString appendString:[self formatAttributeWithName:PARAM_NEW_SESSION_UUID           value:self.sessionUUID]];
+            [openEventString appendFormat:@",\"%@\":%u", PARAM_CLIENT_TIME, (long)self.lastSessionStartTimestamp];
+            [openEventString appendFormat:@",\"%@\":%d", PARAM_SESSION_NUMBER, sessionNumber];            
+            
+            [openEventString appendString:[self customDimensions]];
+            
+            [openEventString appendString:@"}\n"];
+            
+            [self customDimensions];
+            
+            success = [db addEventWithBlobString:[[openEventString copy] autorelease]];
+        }
+        
+        if (success) {
+            [db releaseTransaction:t];
+            self.isSessionOpen = YES;
+            self.sessionHasBeenOpen = YES;
+            [self logMessage:[@"Succesfully opened session. UUID is: " stringByAppendingString:self.sessionUUID]];
+        } else {
+            [db rollbackTransaction:t];
+            self.isSessionOpen = NO;
+            [self logMessage:@"Failed to open session."];
+        }
 	}
 	@catch (NSException * e) {}
 }
@@ -197,257 +237,498 @@
   // Do nothing if session is already open
   if(self.isSessionOpen == YES)
     return;
+
+  if([self isOptedIn] == false) {
+    [self logMessage:@"Can't resume session because user is opted out."];
+    return;
+  }  
+
   // conditions for resuming previous session
   if(self.sessionHasBeenOpen &&
      (!self.sessionCloseTime ||
       [self.sessionCloseTime timeIntervalSinceNow]*-1 <= self.backgroundSessionTimeout)) {
-    [self reopenPreviousSession];
+         // Note that we allow the session to be resumed even if the database size exceeds the
+         // maximum. This is because we don't want to create incomplete sessions. If the DB was large
+         // enough that the previous session could not be opened, there will be nothing to resume. But 
+         // if this session caused it to go over it is better to let it complete and stop the next one
+         // from being created.
+         [self logMessage:@"Resume called - Resuming previous session."];
+         [self reopenPreviousSession];
   } else {
     // otherwise open new session and upload
+    [self logMessage:@"Resume called - Opening a new session."];
     [self open];
   }
   self.sessionCloseTime = nil;
 }
 
 - (void)close {
-	// Do nothing if the session is not open
+    // Do nothing if the session is not open
 	if (self.isSessionOpen == NO)
 	{
 		[self logMessage:@"Unable to close session"];
 		return; 
 	}
 
-  // Save time of close
-  self.sessionCloseTime = [NSDate date];
+    // Save time of close
+    self.sessionCloseTime = [NSDate date];
+    
+    // Update active session duration.
+    self.sessionActiveDuration += [self.sessionCloseTime timeIntervalSinceDate:self.sessionResumeTime];
 
-	@try {
-		// Create the YML representing the close blob
-		NSMutableString *closeString = [[NSMutableString alloc] init];
-		[closeString appendString:CONTROLLER_SESSION];
-		[closeString appendString:ACTION_UPDATE];
-		[closeString appendString:[self formatControllerValue:PARAM_UUID paramValue:self.sessionUUID]];
-		[closeString appendString:TARGET_SESSION];
-		[closeString appendString:[self formatDatapoint:PARAM_CLIENT_CLOSE_TIME paramValue:[self getTimeAsDatetime]]];
-		[closeString appendString:[self formatDatapoint:PARAM_APP_KEY paramValue:self.applicationKey]];
-		
-		[self appendDataToFile:self.fullPathToCloseSession data:closeString];
-		[closeString release];
+    int sessionLength = (int)[[NSDate date] timeIntervalSince1970] - self.lastSessionStartTimestamp;
+    
+    @try {
+		// Create the JSON representing the close blob
+		NSMutableString *closeEventString = [NSMutableString string];
+        [closeEventString appendString:@"{"];
+        [closeEventString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE         value:@"c"                      first:YES]];
+		[closeEventString appendString:[self formatAttributeWithName:PARAM_SESSION_UUID      value:self.sessionUUID]];
+        [closeEventString appendString:[self formatAttributeWithName:PARAM_UUID              value:[self getRandomUUID] ]];
+        [closeEventString appendFormat:@",\"%@\":%u", PARAM_SESSION_START, (long)self.lastSessionStartTimestamp];
+        [closeEventString appendFormat:@",\"%@\":%u", PARAM_SESSION_ACTIVE, (long)self.sessionActiveDuration];
+        [closeEventString appendFormat:@",\"%@\":%u", PARAM_CLIENT_TIME, (long)[self getTimestamp]];
+        
+        // Avoid recording session lengths of users with unreasonable client times (usually caused by developers testing clock change attacks)
+        if(sessionLength > 0 && sessionLength < 400000) {
+            [closeEventString appendFormat:@",\"%@\":%u", PARAM_SESSION_TOTAL, sessionLength];
+        }
 
-		self.isSessionOpen = NO;    // Session is no longer open
-		[self logMessage:@"Session succesfully closed."];
+        // Open second level - screen flow
+        [closeEventString appendFormat:@",\"%@\":[", PARAM_SESSION_SCREENFLOW];
+        [closeEventString appendString:self.screens];
+
+        // Close second level - screen flow
+        [closeEventString appendString:@"]"];
+
+        // Append the custom dimensions
+        [closeEventString appendString:[self customDimensions]];
+        
+        // Close first level - close blob 
+        [closeEventString appendString:@"}\n"];
+        
+        BOOL success = [[LocalyticsDatabase sharedLocalyticsDatabase] addCloseEventWithBlobString:[[closeEventString copy] autorelease]];
+        
+		self.isSessionOpen = NO;  // Session is no longer open.
+
+        if (success) {
+            // Record final session flow, opting to remove it from the database if the session happens to resume.
+            // This is safe now that the session has closed because no new events can be added.
+            success = [self saveApplicationFlowAndRemoveOnResume:YES];
+        }
+        
+        if (success) {
+            [self logMessage:@"Session succesfully closed."];
+        } else {
+            [self logMessage:@"Failed to record session close."];
+        }
 	}
 	@catch (NSException * e) {}
 }
 
 - (void)setOptIn:(BOOL)optedIn {
-	if([self isOptedIn] == optedIn) 
-	{
-		[self logMessage:@"Opt status unchanged."];
-		return;
-	}
-		
-	if(optedIn == true)
-	{
-		[[NSFileManager defaultManager] removeItemAtPath:self.optOutFilePath error:false];
-		[self createOptEvent:YES];
-		[self logMessage:@"Application opted in"];
-	}
-	else
-	{
-		[self createEmptySessionFile:self.optOutFilePath];
-		[self createOptEvent:NO];
-		[self logMessage:@"Application opted out"];
-		
-		// Disable all further Localytics calls for this and future sessions
-		// This should not be flipped when the session is opted back in because that
-		// would create an incomplete session
-		self.isSessionOpen = NO;
-	}	
+    if([self isOptedIn] == optedIn)  {
+        [self logMessage:@"Opt status unchanged."];
+        return;
+    }
+
+    @try {
+        LocalyticsDatabase *db = [LocalyticsDatabase sharedLocalyticsDatabase];
+        NSString *t = @"set_opt";
+        BOOL success = [db beginTransaction:t];
+        
+        // Write out opt event.
+        if (success) {
+            success =  [self createOptEvent:optedIn];
+        }
+
+        // Update database with the option (stored internally as an opt-out).
+        if (success) {
+            [db setOptedOut:optedIn == NO];
+        }
+        
+        if (success && optedIn == NO) {
+            // Disable all further Localytics calls for this and future sessions
+            // This should not be flipped when the session is opted back in because that
+            // would create an incomplete session
+            self.isSessionOpen = NO;
+        }
+        
+        if (success) {
+            [db releaseTransaction:t];
+            [self logMessage:[NSString stringWithFormat:@"Application opted %@", optedIn ? @"in" : @"out"]];
+        } else {
+            [db rollbackTransaction:t];
+            [self logMessage:@"Failed to update opt state."];
+        }
+    }
+    @catch (NSException * e) {}
 }
 
 - (BOOL)isOptedIn {
-	// if the opt-out file exists, Localytics is not opted in.
-	return [[NSFileManager defaultManager] fileExistsAtPath:self.optOutFilePath] == false;
+    return [[LocalyticsDatabase sharedLocalyticsDatabase] isOptedOut] == NO;
 }
 
-// A convenience function for users who don't wish to add attributes
+// A convenience function for users who don't wish to add attributes.
 - (void)tagEvent:(NSString *)event {
-	[self tagEvent:event attributes:nil];
+	[self tagEvent:event attributes:nil reportAttributes:nil];
 }
 
+// Most users should use this tagEvent call.
 - (void)tagEvent:(NSString *)event attributes:(NSDictionary *)attributes {
-	// Do nothing if the session is not open.
-	if (self.isSessionOpen == NO) 
-	{
-		[self logMessage:@"Cannot tag an event because the session is not open."];
-		return; 
-	}
+	[self tagEvent:event attributes:attributes reportAttributes:nil];
+}
+
+- (void)tagEvent:(NSString *)event attributes:(NSDictionary *)attributes reportAttributes:(NSDictionary *)reportAttributes {
+    @try {
+        // Do nothing if the session is not open.
+        if (self.isSessionOpen == NO) 
+        {
+            [self logMessage:@"Cannot tag an event because the session is not open."];
+            return; 
+        }
 	
-	@try {
-		// Create the YML for the event
-		NSMutableString *eventString = [[NSMutableString alloc] init];
-		[eventString appendString:CONTROLLER_EVENT];
-		[eventString appendString:ACTION_CREATE];
-		[eventString appendString:TARGET_EVENT];		
-		[eventString appendString:[self formatDatapoint:PARAM_UUID         paramValue:[self getRandomUUID]]];
-		[eventString appendString:[self formatDatapoint:PARAM_APP_KEY      paramValue:self.applicationKey]];		
-		[eventString appendString:[self formatDatapoint:PARAM_SESSION_UUID paramValue:self.sessionUUID]];
-		[eventString appendString:[self formatDatapoint:PARAM_CLIENT_TIME  paramValue:[self getTimeAsDatetime]]];
-		[eventString appendString:[self formatDatapoint:PARAM_EVENT_NAME   paramValue:event]];
-		
+        if(event == (id)[NSNull null] || event.length == 0)
+        {
+            [self logMessage:@"Event tagged without a name. Skipping."];
+            return;
+        }
+        
+		// Create the JSON for the event
+		NSMutableString *eventString = [[[NSMutableString alloc] init] autorelease];
+        [eventString appendString:@"{"];
+        [eventString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE     value:@"e"                      first:YES]];
+		[eventString appendString:[self formatAttributeWithName:PARAM_UUID          value:[self getRandomUUID] ]];
+		[eventString appendString:[self formatAttributeWithName:PARAM_APP_KEY       value:self.applicationKey  ]];
+		[eventString appendString:[self formatAttributeWithName:PARAM_SESSION_UUID  value:self.sessionUUID     ]];
+		[eventString appendString:[self formatAttributeWithName:PARAM_EVENT_NAME    value:[self escapeString:event] ]];
+        [eventString appendFormat:@",\"%@\":%u", PARAM_CLIENT_TIME, (long)[self getTimestamp]];
+
+        // Append the custom dimensions
+        [eventString appendString:[self customDimensions]];
+        
 		// If there are any attributes for this event, add them as a hash
+        int attrIndex = 0;
 		if(attributes != nil)
 		{
-			[eventString appendString:[self formatDatapoint:PARAM_EVENT_ATTRS paramValue:nil]];
-			NSEnumerator * pairs = [attributes keyEnumerator];
-			id key;		
-			while ((key = [pairs nextObject])) 
-			{
-				// Move the key/value pairs in so they are under the attrs: line
-				// Have to escape the paramName because this is the only param that doens't come from the constants list.
+            // Open second level - attributes
+            [eventString appendString:[NSString stringWithFormat:@",\"%@\":{", PARAM_ATTRIBUTES]];
+			for (id key in [attributes allKeys])
+            {
+				// Have to escape paramName and paramValue because they user-defined.
 				[eventString appendString:
-							[self formatDatapoint:[@" " stringByAppendingString:[self escapeString:[key description]]]
-									   paramValue:[ [attributes valueForKey:key] description ]]];
-							 
-			}			
+                 [self formatAttributeWithName:[self escapeString:[key description]] 
+                                         value:[self escapeString:[[attributes valueForKey:key] description]]
+                                         first:(attrIndex == 0)]];
+                attrIndex++;
+			}
+            
+            // Close second level - attributes
+            [eventString appendString:@"}"];
 		}
-		
-		[self appendDataToFile:self.fullPathToSession data:(NSString *)eventString];
-		[eventString release];
-		
-		[self logMessage:[@"Tagged event: " stringByAppendingString:event]];
+
+        // If there are any report attributes for this event, add them as above
+        attrIndex = 0;
+        if(reportAttributes != nil)
+        {
+            [eventString appendString:[NSString stringWithFormat:@",\"%@\":{", PARAM_REPORT_ATTRIBUTES]];
+            for(id key in [reportAttributes allKeys]) {
+                [eventString appendString:
+                 [self formatAttributeWithName:[self escapeString:[key description]] 
+                                         value:[self escapeString:[[reportAttributes valueForKey:key] description]]
+                                         first:(attrIndex == 0)]];
+                attrIndex++;
+            }
+            [eventString appendString:@"}"];
+        }
+        
+        // Close first level - Event information
+		[eventString appendString:@"}\n"];
+
+        BOOL success = [[LocalyticsDatabase sharedLocalyticsDatabase] addEventWithBlobString:[[eventString copy] autorelease]];
+		if (success) {
+            // User-originated events should be tracked as application flow.
+            [self addFlowEventWithName:event type:@"e"]; // "e" for Event.
+
+            [self logMessage:[@"Tagged event: " stringByAppendingString:event]];
+        } else {
+            [self logMessage:@"Failed to tag event."];
+        }
 	}
 	@catch (NSException * e) {}
 }
 
+- (void)tagScreen:(NSString *)screen {
+    // Do nothing if the session is not open.
+    if (self.isSessionOpen == NO) 
+    {
+        [self logMessage:@"Cannot tag a screen because the session is not open."];
+        return; 
+    }
+
+    // Tag screen with description to enforce string type and avoid retaining objects passed by clients in lieu of a
+    // screen name.
+    NSString *screenName = [screen description];
+    [self addFlowEventWithName:screenName type:@"s"]; // "s" for Screen.
+
+    // Maintain a parallel list of only screen names. This is submitted in the session close event.
+    // This may be removed in a future version of the client library.
+    [self addScreenWithName:screenName];
+
+    [self logMessage:[@"Tagged screen: " stringByAppendingString:screenName]];
+}
+
+- (void)setCustomDimension:(int)dimension value:(NSString *)value {
+    if(dimension < 0 || dimension > 3) {
+        [self logMessage:@"Only valid dimensions are 0 - 3"];
+        return;
+    }
+    
+    if(false == [[LocalyticsDatabase sharedLocalyticsDatabase] setCustomDimension:dimension value:value]) {
+        [self logMessage:@"Unable to set custom dimensions."];
+    }
+}
+
+/*
+ @method saveApplicationFlowAndRemoveOnResume:
+ @abstract Constructs an application flow blob string and writes it to the database, optionally flagging it for deletion
+ if the session is resumed.
+ @param removeOnResume YES if the application flow blob should be deleted if the session is resumed.
+ @return YES if the application flow event was written to the database successfully.
+*/
+- (BOOL)saveApplicationFlowAndRemoveOnResume:(BOOL)removeOnResume {
+    BOOL success = YES;
+    
+    // If there are no new events, then there is nothing additional to save.
+    if (self.unstagedFlowEvents.length) {
+        // Flows are uploaded as a distinct blob type containing arrays of new and previously-uploaded event and
+        // screen names. Write a flow event to the database.
+        NSMutableString *flowEventString = [[[NSMutableString alloc] init] autorelease];
+        
+        // Open first level - flow blob event
+        [flowEventString appendString:@"{"];
+        [flowEventString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE value:@"f"                  first:YES]];
+        [flowEventString appendString:[self formatAttributeWithName:PARAM_UUID      value:[self getRandomUUID] ]];
+        [flowEventString appendFormat:@",\"%@\":%u", PARAM_SESSION_START, (long)self.lastSessionStartTimestamp];
+        
+        // Open second level - new flow events
+        [flowEventString appendFormat:@",\"%@\":[", PARAM_NEW_FLOW_EVENTS];
+        [flowEventString appendString:self.unstagedFlowEvents]; // Flow events are escaped in |-addFlowEventWithName:|
+        // Close second level - new flow events
+        [flowEventString appendString:@"]"];
+        
+        // Open second level - old flow events
+        [flowEventString appendFormat:@",\"%@\":[", PARAM_OLD_FLOW_EVENTS];
+        [flowEventString appendString:self.stagedFlowEvents];
+        // Close second level - old flow events
+        [flowEventString appendString:@"]"];
+        
+        // Close first level - flow blob event
+        [flowEventString appendString:@"}\n"];
+
+        success = [[LocalyticsDatabase sharedLocalyticsDatabase] addFlowEventWithBlobString:[[flowEventString copy] autorelease]];
+    }
+    return success;
+}
 
 - (void)upload {
 	@try {
-		[[UploaderThread sharedUploaderThread] UploaderThread:self.localyticsFilePath];
+        if ([[UploaderThread sharedUploaderThread] isUploading]) {
+            [self logMessage:@"An upload is already in progress. Aborting."];
+            return;
+        }
+
+        NSString *t = @"stage_upload";
+        LocalyticsDatabase *db = [LocalyticsDatabase sharedLocalyticsDatabase];
+        BOOL success = [db beginTransaction:t];
+
+        // Lock on new flow events to ensure that:
+        // - The event list for the current session is not modified while an upload is in progress.
+        // - New flow events are only transitioned to the "old" list if the upload is staged successfully.
+        @synchronized (_unstagedFlowEvents) {
+            if (success) {
+                // Write flow blob to database. This is for a session in progress and should not be removed upon resume.
+                success = [self saveApplicationFlowAndRemoveOnResume:NO];
+            }
+
+            if (success && [db unstagedEventCount] > 0) {
+                // Increment upload sequence number.
+                int sequenceNumber = 0;
+                success = [db incrementLastUploadNumber:&sequenceNumber];
+                
+                // Write out header to database.
+                sqlite3_int64 headerRowId = 0;
+                if (success) {
+                    NSString *headerBlob = [self blobHeaderStringWithSequenceNumber:sequenceNumber];
+                    success = [db addHeaderWithSequenceNumber:sequenceNumber blobString:headerBlob rowId:&headerRowId];
+                }
+
+                // Associate unstaged events.
+                if (success) {
+                    success = [db stageEventsForUpload:headerRowId];
+                }
+            }
+            
+            if (success) {
+                // Complete transaction
+                [db releaseTransaction:t];
+
+                // Move new flow events to the old flow event array.
+                if (self.unstagedFlowEvents.length) {
+                    if (self.stagedFlowEvents.length) {
+                        [self.stagedFlowEvents appendFormat:@",%@", self.unstagedFlowEvents];
+                    } else {
+                        self.stagedFlowEvents = [[self.unstagedFlowEvents mutableCopy] autorelease];
+                    }
+                    self.unstagedFlowEvents = [NSMutableString string];
+                }
+                
+                // Begin upload.
+                [[UploaderThread sharedUploaderThread] uploaderThreadwithApplicationKey:self.applicationKey];     
+            } else {
+                [db rollbackTransaction:t];
+                [self logMessage:@"Failed to start upload."];
+            }
+        }
 	}
-	@catch (NSException * e) {}
+	@catch (NSException * e) { }
 }
 
 #pragma mark Private Methods
 /*!
  @method reopenPreviousSession
- @abstract reopens the previous session, using previous session variables.
- Remove close session file if it exists
- If there was no previous session, do nothing
+ @abstract Reopens the previous session, using previous session variables. If there was no previous session, do nothing.
 */
--(void) reopenPreviousSession {
+- (void)reopenPreviousSession {
   if(self.sessionHasBeenOpen == NO){
 		[self logMessage:@"Unable to reopen previous session, because a previous session was never opened."];
     return;
   }
+    
+    // Record session resume time.
+    self.sessionResumeTime = [NSDate date];
 
-  //Remove close session file if it exists
-  NSFileManager *reopenFileManager = [NSFileManager defaultManager];
-  if([reopenFileManager fileExistsAtPath:self.fullPathToCloseSession] == YES) {
-    [reopenFileManager removeItemAtPath:self.fullPathToCloseSession error:nil];			
-  }
+    //Remove close and flow events if they exist.
+    [[LocalyticsDatabase sharedLocalyticsDatabase] removeLastCloseAndFlowEvents];
 
-  self.isSessionOpen = YES;
+    self.isSessionOpen = YES;
 }
 
 /*!
- @method appendDataToFile
- @abstract Uses the NSFileManager writeToFile to write and flush a string to the end of a text file.
- If the file does not exist, a new one is created.
- @param fileName Text file to append data to.  
- @param data String to be appended
+ @method addFlowEventWithName:type:
+ @abstract Adds a simple key-value pair to the list of events tagged during this session.
+ @param name The name of the tagged event.
+ @param eventType A key representing the type of the tagged event. Either "s" for Screen or "e" for Event.
  */
-- (void)appendDataToFile:(NSString *)fileName data:(NSString *)data {
-	// Create the file if it does not already exist
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	if ([fileManager fileExistsAtPath:fileName] == NO) {
-		[self createEmptySessionFile:fileName];
-	}
-
-	// Append the contents of data to the end of the file
-	NSFileHandle *currentYML = [NSFileHandle fileHandleForWritingAtPath:fileName];
-	[currentYML truncateFileAtOffset:[currentYML seekToEndOfFile]];
-	[currentYML writeData:[data dataUsingEncoding:NSASCIIStringEncoding]];
-	[currentYML closeFile];
+- (void)addFlowEventWithName:(NSString *)name type:(NSString *)eventType {
+    if (!name || !eventType)
+        return;
+    
+    // Format new event as simple key-value dictionary.
+    NSString *eventString = [self formatAttributeWithName:eventType value:[self escapeString:name] first:YES];
+    
+    // Flow events are uploaded as a sequence of key-value pairs. Wrap the above in braces and append to the list.
+    // Lock to avoid adding events while an upload is being prepared.
+    @synchronized(_unstagedFlowEvents) {
+        BOOL previousFlowEvents = self.unstagedFlowEvents.length > 0;
+        if (previousFlowEvents) {
+            [self.unstagedFlowEvents appendString:@","];
+        }
+        [self.unstagedFlowEvents appendFormat:@"{%@}", eventString];
+    }
 }
 
 /*!
- @method createEmptySessionFile
- @abstract Creates an empty session File for events to be written to
- @param filename relative path for the file to be created
- @return YES if the file was created, NO if not
+ @method addScreenWithName:
+ @abstract Adds a name to list of screens encountered during this session.
+ @discussion The complete list of names is sent with the session close event. Screen names are stored in parallel to the
+ screen flow events list and may be removed in future versions of this library.
+ @param name The name of the tagged screen.
  */
-- (BOOL)createEmptySessionFile:(NSString *)fileName {
-	NSMutableData *newFile = [[[NSMutableData alloc] init] autorelease];
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	return [fileManager createFileAtPath:fileName contents:newFile attributes:nil];
+- (void)addScreenWithName:(NSString *)name {
+    if (self.screens.length > 0) {
+        [self.screens appendString:@","];
+    }
+    [self.screens appendFormat:@"\"%@\"", [self escapeString:name]];
 }
 
 /*!
- @method getOpenSessionString
- @abstract Creates the YAML string for the open session event.
- Collects all the basic session datapoints and writes them out as a YAML string.  
- @return The YAML blob for the open session event.
+ @method blobHeaderStringWithSequenceNumber:
+ @abstract Creates the JSON string for the upload blob header, substituting in the given upload sequence number.
+ @param  nextSequenceNumber The sequence number for the current upload attempt.
+ @return The upload header JSON blob.
  */
-- (NSString *)getOpenSessionString {
-		
-	NSMutableString *openString = [[[NSMutableString alloc] init] autorelease];
+- (NSString *)blobHeaderStringWithSequenceNumber:(int)nextSequenceNumber {
+
+    NSMutableString *headerString = [[[NSMutableString alloc] init] autorelease];
+
+    // Common header information.
 	UIDevice *thisDevice = [UIDevice currentDevice];
 	NSLocale *locale = [NSLocale currentLocale];
 	NSLocale *english = [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease];
 	NSLocale *device_locale = [[NSLocale preferredLanguages] objectAtIndex:0];	
     NSString *device_language = [english displayNameForKey:NSLocaleIdentifier value:device_locale];
-	NSString *locale_country = [english displayNameForKey:NSLocaleCountryCode value:[locale objectForKey:NSLocaleCountryCode]];			
-	
-	[openString appendString:CONTROLLER_SESSION];
-	[openString appendString:ACTION_CREATE];
-	[openString appendString:TARGET_SESSION];
+	NSString *locale_country = [english displayNameForKey:NSLocaleCountryCode value:[locale objectForKey:NSLocaleCountryCode]];
+    NSString *uuid = [self getRandomUUID];
+    NSString *device_uuid = [self uniqueDeviceIdentifier];
 
-	// Application and session information
-	[openString appendString:[self formatDatapoint:PARAM_UUID			 paramValue:self.sessionUUID]];
-	[openString appendString:[self formatDatapoint:PARAM_APP_KEY		 paramValue:self.applicationKey]];
-	[openString appendString:[self formatDatapoint:PARAM_APP_VERSION	 paramValue:[self getAppVersion]]];
-	[openString appendString:[self formatDatapoint:PARAM_LIBRARY_VERSION paramValue:CLIENT_VERSION]];
-	[openString appendString:[self formatDatapoint:PARAM_CLIENT_TIME     paramValue:[self getTimeAsDatetime]]];
+    // Open first level - blob information
+    [headerString appendString:@"{"];
+    [headerString appendFormat:@"\"%@\":%d", PARAM_SEQUENCE_NUMBER, nextSequenceNumber];
+    [headerString appendFormat:@",\"%@\":%u", PARAM_PERSISTED_AT, (long)[[LocalyticsDatabase sharedLocalyticsDatabase] createdTimestamp]];
+    [headerString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE    value:@"h" ]];
+    [headerString appendString:[self formatAttributeWithName:PARAM_UUID         value:uuid ]];
 
-	// Other device information
-	[openString appendString:[self formatDatapoint:PARAM_DEVICE_UUID	   paramValue:[self getGlobalDeviceId]]];
-	[openString appendString:[self formatDatapoint:PARAM_DEVICE_PLATFORM   paramValue:[thisDevice model]]];
-	[openString appendString:[self formatDatapoint:PARAM_DEVICE_OS_VERSION paramValue:[thisDevice systemVersion]]];
-	[openString appendString:[self formatDatapoint:PARAM_DEVICE_MODEL      paramValue:[self getDeviceModel]]];
-	
-	[openString appendString:[NSString stringWithFormat:@"    dmem: %d\n", [self availableMemory]]];
-	
-	[openString appendString:[self formatDatapoint:PARAM_LOCALE_LANGUAGE   paramValue:device_language]];		
-	[openString appendString:[self formatDatapoint:PARAM_LOCALE_COUNTRY    paramValue:locale_country]];		
-	[openString appendString:[self formatDatapoint:PARAM_DEVICE_COUNTRY    paramValue:[locale objectForKey:NSLocaleCountryCode]]];	
+    // Open second level - blob header attributes
+    [headerString appendString:[NSString stringWithFormat:@",\"%@\":{", PARAM_ATTRIBUTES]];
+    [headerString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE    value:@"a"  first:YES]];
+    
+	// >>  Application and session information
+    [headerString appendString:[self formatAttributeWithName:PARAM_INSTALL_ID       value:[self installationId] ]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_APP_KEY          value:self.applicationKey   ]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_APP_VERSION      value:[self getAppVersion]  ]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_LIBRARY_VERSION  value:CLIENT_VERSION        ]];
+     
+    // >>  Device Information
+	[headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_UUID          value:device_uuid ]];
+    [headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_UUID_HASHED   value:[self hashString:device_uuid] ]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_PLATFORM      value:[thisDevice model]            ]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_OS_VERSION    value:[thisDevice systemVersion]    ]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_MODEL         value:[self getDeviceModel]         ]];
 
-	[openString appendString:[NSString stringWithFormat:@"    j: %@\n", [self isDeviceJailbroken] ? @"true" : @"false"]];
+// MAC Address collection. Uncomment the following line to add Mac address to the mix of collected identifiers
+//    [headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_MAC value:[self hashString:[self macAddress]]     ]];    
+	[headerString appendString:[NSString stringWithFormat:@",\"%@\":%d", PARAM_DEVICE_MEMORY, (long)[self availableMemory]  ]];	
+	[headerString appendString:[self formatAttributeWithName:PARAM_LOCALE_LANGUAGE   value:device_language]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_LOCALE_COUNTRY    value:locale_country]];
+	[headerString appendString:[self formatAttributeWithName:PARAM_DEVICE_COUNTRY    value:[locale objectForKey:NSLocaleCountryCode]]];
+	[headerString appendString:[NSString stringWithFormat:@",\"%@\":%@", PARAM_JAILBROKEN, [self isDeviceJailbroken] ? @"true" : @"false"]];
+    
+    //  Close second level - attributes
+    [headerString appendString:@"}"];
+    
+    // Close first level - blob information
+    [headerString appendString:@"}\n"];
 
-	return (NSString *)openString;
+	return [[headerString copy] autorelease];
 }
 
 /*!
- @method createOptEvent
- @abstract Generates the YML for an opt event (user opting in or out).  The same file is
- used every time to ensure proper ordering.  This file will be uploaded by the uploader.
+ @method createOptEvent:
+ @abstract Generates the JSON for an opt event (user opting in or out) and writes it to the database.
+ @return YES if the event was written to the database, NO otherwise
  */
-- (void)createOptEvent:(BOOL) optState {
-	NSMutableString *optString = [[[NSMutableString alloc] init] autorelease];
-	[optString appendString:CONTROLLER_OPT];
-	[optString appendString:ACTION_OPT];
-	[optString appendString:TARGET_OPT];
-	
-	[optString appendString:[self formatDatapoint:PARAM_DEVICE_UUID paramValue:[self getGlobalDeviceId]]];
-	[optString appendString:[self formatDatapoint:PARAM_APP_KEY		paramValue:self.applicationKey]];
-	[optString appendString:[self formatDatapoint:PARAM_OPT_VALUE   paramValue:(optState ? @"true" : @"false")]];	
-	[optString appendString:[self formatDatapoint:PARAM_CLIENT_TIME     paramValue:[self getTimeAsDatetime]]];
-	
-	// Store the blob
-	[self appendDataToFile:[self.localyticsFilePath 
-		stringByAppendingPathComponent:[NSString 
-			stringWithFormat:@"%@%@.yml", SESSION_FILE_PREFIX, OPT_SESSION_FILE]]
-		data:(NSString *)optString];	 
+- (BOOL)createOptEvent:(BOOL)optState {
+	NSMutableString *optEventString = [NSMutableString string];
+    [optEventString appendString:@"{"];
+    [optEventString appendString:[self formatAttributeWithName:PARAM_DATA_TYPE  value:@"o"                  first:YES]];
+	[optEventString appendString:[self formatAttributeWithName:PARAM_APP_KEY    value:self.applicationKey   first:NO]];
+	[optEventString appendString:[NSString stringWithFormat:@",\"%@\":%@", PARAM_OPT_VALUE, (optState ? @"true" : @"false") ]];	
+    [optEventString appendFormat:@",\"%@\":%u", PARAM_CLIENT_TIME, (long)[self getTimestamp]];
+	[optEventString appendString:@"}\n"];
+
+    BOOL success = [[LocalyticsDatabase sharedLocalyticsDatabase] addEventWithBlobString:[[optEventString copy] autorelease]];
+    return success;
 }
 
 /*!
@@ -457,10 +738,94 @@
  */
 - (void)logMessage:(NSString *)message
 {
-	printf("[%s] (localytics) %s\n", [[[NSDate date] description] UTF8String], [message UTF8String]);
+    if(DO_LOCALYTICS_LOGGING) {
+        NSLog(@"(localytics) %s\n", [message UTF8String]);
+    }
 }
 
 #pragma mark Datapoint Functions
+/*!
+ @method customDimensions
+ @abstract Returns the json blob containing the custom dimensions. Assumes this will be appended
+ to an existing blob and as a result prepends the results with a comma.
+ */
+- (NSString *)customDimensions
+{
+    NSMutableString *dimensions = [[[NSMutableString alloc] init] autorelease];
+    
+    for(int i=0; i <4; i++) {
+        NSString *dimension = [[LocalyticsDatabase sharedLocalyticsDatabase] customDimension:i];
+        if(dimension) {
+            [dimensions appendFormat:@",\"c%i\":\"%@\"", i, dimension];
+        }            
+    }
+    
+    return [[dimensions copy] autorelease];
+}
+
+/*!
+ @method macAddress
+ @abstract Returns the macAddress of this device.
+ */
+- (NSString *)macAddress
+{
+    NSMutableString* result = [NSMutableString string];
+    
+    BOOL success;
+    struct ifaddrs* addrs;
+    const struct ifaddrs* cursor;
+    const struct sockaddr_dl* dlAddr;
+    const uint8_t * base;
+    int i;
+    
+    success = (getifaddrs(&addrs) == 0);
+    if(success)
+    {
+        cursor = addrs;
+        while(cursor != NULL)
+        {
+            if((cursor->ifa_addr->sa_family == AF_LINK) && (((const struct sockaddr_dl *) cursor->ifa_addr)->sdl_type == IFT_ETHER))
+            {
+                dlAddr = (const struct sockaddr_dl *) cursor->ifa_addr;                
+                base = (const uint8_t *) &dlAddr->sdl_data[dlAddr->sdl_nlen];
+                
+                for(i=0; i<dlAddr->sdl_alen; i++) 
+                {
+                    if(i != 0) {
+                        [result appendString:@":"];
+                    }
+                    [result appendFormat:@"%02x", base[i]];
+                }
+                break;
+            }
+            cursor = cursor->ifa_next;
+        }
+        freeifaddrs(addrs);
+    }
+    
+    return result;
+}
+
+/*!
+ @method hashString
+ @abstract SHA1 Hashes a string
+ */
+- (NSString *)hashString:(NSString *)input
+{
+    NSData *stringBytes = [input dataUsingEncoding: NSUTF8StringEncoding];
+    unsigned char digest[CC_SHA1_DIGEST_LENGTH];
+    
+    if (CC_SHA1([stringBytes bytes], [stringBytes length], digest)) {
+        NSMutableString* hashedUUID = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+        for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
+            [hashedUUID appendFormat:@"%02x", digest[i]];
+        }
+        return hashedUUID;
+    }
+    
+    return nil;
+}
+
 /*!
  @method getRandomUUID
  @abstract Generates a random UUID
@@ -474,68 +839,98 @@
 }
 
 /*!
- @method formatControllerValue
- @abstract Returns the given key/value pair as a YAML string.  This string is intended to be
- used to define values for the first level of data in the YAML file.  This is
- different from the datapoints which belong another level in. 
+ @method formatAttributeWithName:value:firstAttribute:
+ @abstract Returns the given string key/value pair as a JSON string.
  @param paramName The name of the parameter 
  @param paramValue The value of the parameter
- @return a YAML string which can be dumped to the YAML file
+ @param firstAttribute YES if this attribute is first in an attribute list
+ @return a JSON string which can be dumped to the JSON file
  */
-- (NSString *)formatControllerValue:(NSString *)paramName paramValue:(NSString *)paramValue {
-	// The params are stored in the second tier of the YAML data.
-	// so with spacing, the expected result is: "    paramname: paramvalue\n"
-	NSMutableString *formattedString = [[[NSMutableString alloc] initWithString:
-										 [NSString stringWithFormat:@"  %@: ", paramName]] autorelease];	
-	
-	if (paramValue != nil)	// It is possible for some parameter values to be nil. 
-	{
-		[formattedString appendString:[self escapeString:paramValue]];
-	}
-	
-	[formattedString appendString:@"\n"];	
-	return formattedString;
+- (NSString *)formatAttributeWithName:(NSString *)paramName value:(NSString *)paramValue first:(BOOL)firstAttribute {
+	// The expected result is one of:
+    //  "paramname":"paramvalue"
+    //  "paramname":null
+    NSMutableString *formattedString = [NSMutableString string];
+    if (!firstAttribute) {
+        [formattedString appendString:@","];
+    }
+
+    NSString *quotedString = @"\"%@\"";
+    paramName = [NSString stringWithFormat:quotedString, paramName];
+    paramValue = paramValue ? [NSString stringWithFormat:quotedString, paramValue] : @"null";
+    [formattedString appendFormat:@"%@:%@", paramName, paramValue];
+	return [[formattedString copy] autorelease];
 }
 
-/*!
- @method formatDatapoint
- @abstract Returns the given datapoint as a formatted YAML string to be stored in the session file.
- @param paramName Name of the parameter as expected by the webservice
- @param paramValue The parameter's value
- @return the YAML formatted string, complete with trailing newline.
- */
-- (NSString *)formatDatapoint:(NSString *)paramName paramValue:(NSString *)paramValue {	
-	// A datapoint variable is exactly the same as a controller value, except it has
-	// two leading spaces which move it to the second level of data.
-	// With spacing, the expected result is: "    paramname:paramvalue\n"
-	return [NSString stringWithFormat:@"  %@", [self formatControllerValue:paramName paramValue:paramValue]];
+// Convenience method for formatAttributeWithName which sets firstAttribute to NO since
+// this is the most common way to call it.
+- (NSString *)formatAttributeWithName:(NSString *)paramName value:(NSString *)paramValue {
+    return [self formatAttributeWithName:paramName value:paramValue first:NO];
 }
 
 /*!
  @method escapeString
- @abstract Formats the input string so it fits nicely in a YML document.  This includes
- sorrounding it with quotes and escaping quote and slash characters.
+ @abstract Formats the input string so it fits nicely in a JSON document.  This includes
+ escaping double quote and slash characters.
  @return The escaped version of the input string
  */
 - (NSString *) escapeString:(NSString *)input
 {		
 	NSString *output = [input stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
 	output = [output stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-	return [NSString stringWithFormat:@"\"%@\"", output];
+    output = [output stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    return output;
 }
 
 /*!
- @method getGlobalDeviceId
+ @method installationId
+ @abstract Looks in user preferences for an ID unique to this installation. If one is not
+ found it checks if one happens to be in the database (carroyover from older version of the db)
+ if not, it generates one.
+ @return A string uniquely identifying this installation of this app
+ */
+- (NSString *) installationId {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *installId = [prefs stringForKey:PREFERENCES_KEY];
+    
+    if(installId == nil)
+    {
+        [self logMessage:@"Install ID not found in preferences, checking DB"];
+        installId = [[LocalyticsDatabase sharedLocalyticsDatabase] installId];
+    }
+    
+    // If it hasn't been found yet, generate a new one.
+    if(installId == nil)
+    {
+        [self logMessage:@"Install ID not find one in database, generating a new one."];
+        installId = [self getRandomUUID];
+    }
+
+    // Store the newly generated installId
+    [prefs setObject:installId forKey:PREFERENCES_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+ 
+    return installId;
+}
+
+/*!
+ @method uniqueDeviceIdentifier
  @abstract A unique device identifier is a hash value composed from various hardware identifiers such
  as the device’s serial number. It is guaranteed to be unique for every device but cannot 
  be tied to a user account. [UIDevice Class Reference]
  @return An 1-way hashed identifier unique to this device.
  */
-- (NSString *)getGlobalDeviceId {
+- (NSString *)uniqueDeviceIdentifier {
+
+// Supress the warning for uniqueIdentifier being deprecated.
+// We collect it as long as it is available along with a randomly generated ID.
+// This way, when this becomes unavailable we can map existing users so the
+// new vs returning counts do not break. This will be removed before it causes grief.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	NSString *systemId = [[UIDevice currentDevice] uniqueIdentifier];
-	if (systemId == nil) {
-		return nil;
-	}
+#pragma clang diagnostic pop    
+    
 	return systemId;
 }
 
@@ -547,17 +942,14 @@
 - (NSString *)getAppVersion {
 	return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];	
 }
-		
+
 /*!
- @method getTimeAsDatetime
- @abstract Gets the current time, along with local timezone, formatted as a DateTime for the webservice. 
- @return a DateTime of the current local time and timezone.
+ @method getTimestamp
+ @abstract Gets the current time as seconds since Unix epoch.
+ @return an NSTimeInterval time.
  */
-- (NSString *)getTimeAsDatetime {
-	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss-00:00"];
-	[dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-	return [dateFormatter stringFromDate:[NSDate date]];
+- (NSTimeInterval)getTimestamp {
+    return [[NSDate date] timeIntervalSince1970];
 }
 
 /*!
@@ -633,15 +1025,51 @@
 	return result;
 }
 
+
+#pragma mark System Functions
++ (id)allocWithZone:(NSZone *)zone {
+	@synchronized(self) {
+		if (_sharedLocalyticsSession == nil) {
+			_sharedLocalyticsSession = [super allocWithZone:zone];
+			return _sharedLocalyticsSession;
+		}
+	}
+	// returns nil on subsequent allocations
+	return nil;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+	return self;
+}
+
+- (id)retain {
+	return self;
+}
+
+- (unsigned)retainCount {
+	// maximum value of an unsigned int - prevents additional retains for the class
+	return UINT_MAX;
+}
+
+- (oneway void)release {
+	// ignore release commands
+}
+
+- (id)autorelease {
+	return self;
+}
+
 - (void)dealloc {
-	[_localyticsFilePath release];
-	[_sessionFilename release];
-	[_closeSessionFilename release];
+    // Remove self for notifications added in this class, only.
+
 	[_sessionUUID release];
 	[_applicationKey release];
 	[_sessionCloseTime release];
-	[_fullPathToSession release];
-	[_fullPathToCloseSession release];
+    [_unstagedFlowEvents release];
+    [_stagedFlowEvents release];
+    [_screens release];
+	[_sharedLocalyticsSession release];
+
 	[super dealloc];
 }
 
