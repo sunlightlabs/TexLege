@@ -19,9 +19,6 @@
 [submodule "Vendor/AppendingFlowView"]
 	path = Vendor/AppendingFlowView
 	url = git://github.com/grgcombs/AppendingFlowView.git
-[submodule "Vendor/RestKit"]
-	path = Vendor/RestKit
-	url = git://github.com/grgcombs/RestKit.git
 [submodule "Vendor/TTTOrdinalNumberFormatter"]
 	path = Vendor/TTTOrdinalNumberFormatter
 	url = git://github.com/grgcombs/TTTOrdinalNumberFormatter.git
