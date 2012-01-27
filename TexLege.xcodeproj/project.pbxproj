@@ -5338,7 +5338,6 @@
 			buildSettings = {
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=iphonesimulator*]" = i386;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Combs (MJMLU3U99Y)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
@@ -5396,8 +5395,7 @@
 					armv6,
 				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gregory Combs";
 				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -5425,8 +5423,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "8C29C66E-0950-4FCC-B3B6-AC62E6F97DDA";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				STRIP_STYLE = all;
@@ -5468,7 +5465,6 @@
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CODE_SIGN_ENTITLEMENTS = Data/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gregory Combs";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gregory Combs";
 				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -5497,8 +5493,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "C7A58625-FE56-4B4B-AF02-6C4684EF4ECE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C7A58625-FE56-4B4B-AF02-6C4684EF4ECE";
+				PROVISIONING_PROFILE = "8C29C66E-0950-4FCC-B3B6-AC62E6F97DDA";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				STRIP_STYLE = all;
@@ -5539,8 +5534,7 @@
 					armv7,
 				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Combs (MJMLU3U99Y)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -5570,8 +5564,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "4FBA2A05-4D25-4C07-A4F2-5EF2AE91453F";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5597,8 +5590,7 @@
 					armv6,
 				);
 				"ARCHS[sdk=iphonesimulator*]" = i386;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Combs (MJMLU3U99Y)";
 				CURRENT_PROJECT_VERSION = 2.6;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -5627,8 +5619,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "4FBA2A05-4D25-4C07-A4F2-5EF2AE91453F";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
