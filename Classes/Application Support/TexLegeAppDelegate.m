@@ -33,7 +33,6 @@
 #import "CalendarEventsLoader.h"
 
 #import "TVOutManager.h"
-#import "MTStatusBarOverlay.h"
 
 #import "StateMetaLoader.h"
 
@@ -347,7 +346,6 @@ NSInteger kNoSelection = -1;
 	[self setupViewControllerHierarchy];
 
 	[self.mainWindow makeKeyAndVisible];
-	[MTStatusBarOverlay sharedMTStatusBarOverlay];
 
 	// register our preference selection data to be archived
 	NSDictionary *savedPrefsDict = [NSDictionary dictionaryWithObjectsAndKeys: 

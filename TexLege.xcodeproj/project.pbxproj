@@ -76,7 +76,6 @@
 		373AB3B90FD3389F0065740E /* TableCellDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AB3B80FD3389F0065740E /* TableCellDataObject.m */; };
 		373B820611E378CD00A81142 /* LegislatorMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B820511E378CD00A81142 /* LegislatorMasterViewController.xib */; };
 		373EBA5112F0A01100A3E604 /* DataModelUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 373EBA5012F0A01100A3E604 /* DataModelUpdateManager.m */; };
-		37400B9F12F37436002B6042 /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 37400B9E12F37436002B6042 /* MTStatusBarOverlay.m */; };
 		37412A39124322C400807502 /* LegislatorContributionsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37412A38124322C400807502 /* LegislatorContributionsDataSource.m */; };
 		37413B1712114D09003CA7E8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37413B1612114D09003CA7E8 /* MessageUI.framework */; };
 		3742D6EF122E18D100698483 /* DistrictMapSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3742D6EE122E18D100698483 /* DistrictMapSearchOperation.m */; };
@@ -1023,7 +1022,6 @@
 		37735BE81323104A0033F343 /* StafferObj+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B253E412EBF681000B6EE2 /* StafferObj+RestKit.m */; };
 		37735BEA1323104A0033F343 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3718895B12EE917B00E3300D /* NSDate+Helper.m */; };
 		37735BEB1323104A0033F343 /* DataModelUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 373EBA5012F0A01100A3E604 /* DataModelUpdateManager.m */; };
-		37735BEC1323104A0033F343 /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 37400B9E12F37436002B6042 /* MTStatusBarOverlay.m */; };
 		37735BED1323104A0033F343 /* TexLegeLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 372D066612FC901C00E63696 /* TexLegeLibrary.m */; };
 		37735BEE1323104A0033F343 /* TexLegeNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 374F70A512FD45D600AD7EEC /* TexLegeNavBar.m */; };
 		37735BEF1323104A0033F343 /* BillsMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F4A815130CAA4F00705EDD /* BillsMenuDataSource.m */; };
@@ -1101,6 +1099,10 @@
 		377ACE4811FFA30E002C7E49 /* CalendarDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 377ACE4711FFA30E002C7E49 /* CalendarDataSource.m */; };
 		377DC4A91344D475000068E1 /* BillVotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 377DC4A81344D475000068E1 /* BillVotesDataSource.m */; };
 		377DC4AA1344D475000068E1 /* BillVotesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 377DC4A81344D475000068E1 /* BillVotesDataSource.m */; };
+		3781E7C714E0930A002A80AC /* MTInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3781E7BE14E0930A002A80AC /* MTInfoPanel.m */; };
+		3781E7C814E0930A002A80AC /* MTInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3781E7BE14E0930A002A80AC /* MTInfoPanel.m */; };
+		3781E7C914E0930A002A80AC /* MTInfoPanel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3781E7C314E0930A002A80AC /* MTInfoPanel.bundle */; };
+		3781E7CA14E0930A002A80AC /* MTInfoPanel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3781E7C314E0930A002A80AC /* MTInfoPanel.bundle */; };
 		3786786311E442800003690F /* CapitolMapsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3786786211E442800003690F /* CapitolMapsDetailViewController.xib */; };
 		37892DCE120EA44300AB1752 /* LegislatorMasterCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37892DCD120EA44300AB1752 /* LegislatorMasterCellView.m */; };
 		378A1CDD1007FF4600BEC4ED /* CommitteePositionObj+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 378A1CD71007FF4600BEC4ED /* CommitteePositionObj+RestKit.m */; };
@@ -1483,8 +1485,6 @@
 		373B820511E378CD00A81142 /* LegislatorMasterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LegislatorMasterViewController.xib; path = "Resources-iPad/LegislatorMasterViewController.xib"; sourceTree = "<group>"; };
 		373EBA4F12F0A01100A3E604 /* DataModelUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModelUpdateManager.h; sourceTree = "<group>"; };
 		373EBA5012F0A01100A3E604 /* DataModelUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModelUpdateManager.m; sourceTree = "<group>"; };
-		37400B9D12F37436002B6042 /* MTStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTStatusBarOverlay.h; sourceTree = "<group>"; };
-		37400B9E12F37436002B6042 /* MTStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTStatusBarOverlay.m; sourceTree = "<group>"; };
 		37412A37124322C400807502 /* LegislatorContributionsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegislatorContributionsDataSource.h; sourceTree = "<group>"; };
 		37412A38124322C400807502 /* LegislatorContributionsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegislatorContributionsDataSource.m; sourceTree = "<group>"; };
 		37413B1612114D09003CA7E8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1964,6 +1964,9 @@
 		377DC4A71344D475000068E1 /* BillVotesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillVotesDataSource.h; sourceTree = "<group>"; };
 		377DC4A81344D475000068E1 /* BillVotesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillVotesDataSource.m; sourceTree = "<group>"; };
 		377E8CF0100C39F300686B23 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = "Classes/Application Support/Constants.h"; sourceTree = SOURCE_ROOT; };
+		3781E7BD14E0930A002A80AC /* MTInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTInfoPanel.h; path = MTInfoPanel/MTInfoPanel.h; sourceTree = "<group>"; };
+		3781E7BE14E0930A002A80AC /* MTInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTInfoPanel.m; path = MTInfoPanel/MTInfoPanel.m; sourceTree = "<group>"; };
+		3781E7C314E0930A002A80AC /* MTInfoPanel.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MTInfoPanel.bundle; path = Resources/MTInfoPanel.bundle; sourceTree = "<group>"; };
 		3786786211E442800003690F /* CapitolMapsDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CapitolMapsDetailViewController.xib; path = Resources/CapitolMapsDetailViewController.xib; sourceTree = "<group>"; };
 		37892DCC120EA44300AB1752 /* LegislatorMasterCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LegislatorMasterCellView.h; path = "Classes/Custom Cells and Views/LegislatorMasterCellView.h"; sourceTree = SOURCE_ROOT; };
 		37892DCD120EA44300AB1752 /* LegislatorMasterCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LegislatorMasterCellView.m; path = "Classes/Custom Cells and Views/LegislatorMasterCellView.m"; sourceTree = SOURCE_ROOT; };
@@ -2514,6 +2517,7 @@
 			isa = PBXGroup;
 			children = (
 				3775C7C8131C44C600638ED4 /* RestKit.xcodeproj */,
+				3781E7BA14E0930A002A80AC /* MTInfoPanel */,
 				37FE1EAE13CB8EFE00655550 /* IntelligentSplitViewController */,
 				37FE1D9413CB8E3300655550 /* AppendingFlowView */,
 				375E5ACA133D6F9E0070EA64 /* s7graphview */,
@@ -2856,6 +2860,17 @@
 			name = "Bill Tracking";
 			sourceTree = "<group>";
 		};
+		3781E7BA14E0930A002A80AC /* MTInfoPanel */ = {
+			isa = PBXGroup;
+			children = (
+				3781E7BD14E0930A002A80AC /* MTInfoPanel.h */,
+				3781E7BE14E0930A002A80AC /* MTInfoPanel.m */,
+				3781E7C314E0930A002A80AC /* MTInfoPanel.bundle */,
+			);
+			name = MTInfoPanel;
+			path = Vendor/MTInfoPanel/MTInfoPanel;
+			sourceTree = SOURCE_ROOT;
+		};
 		378678F511E452EF0003690F /* Resources-iPhone */ = {
 			isa = PBXGroup;
 			children = (
@@ -2946,8 +2961,6 @@
 				3742D722122E1FDF00698483 /* NSInvocation+CWVariableArguments.m */,
 				3709AEAC101FBE7900C1061B /* Reachability.h */,
 				3709AEAD101FBE7900C1061B /* Reachability.m */,
-				37400B9D12F37436002B6042 /* MTStatusBarOverlay.h */,
-				37400B9E12F37436002B6042 /* MTStatusBarOverlay.m */,
 				3763ED6D1354E0F4000E524C /* UIImage+ResolutionIndependent.h */,
 				3763ED6E1354E0F4000E524C /* UIImage+ResolutionIndependent.m */,
 			);
@@ -4439,6 +4452,7 @@
 				37F3579813CA684200C1EE29 /* gavel@2x.png in Resources */,
 				37F357B113CA684200C1EE29 /* multipins.png in Resources */,
 				37F357B213CA684200C1EE29 /* multipins@2x.png in Resources */,
+				3781E7C914E0930A002A80AC /* MTInfoPanel.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4955,6 +4969,7 @@
 				37F3577C13CA684200C1EE29 /* gavel@2x.png in Resources */,
 				37F3579513CA684200C1EE29 /* multipins.png in Resources */,
 				37F3579613CA684200C1EE29 /* multipins@2x.png in Resources */,
+				3781E7CA14E0930A002A80AC /* MTInfoPanel.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5060,7 +5075,6 @@
 				37B253E512EBF681000B6EE2 /* StafferObj+RestKit.m in Sources */,
 				3718895C12EE917B00E3300D /* NSDate+Helper.m in Sources */,
 				373EBA5112F0A01100A3E604 /* DataModelUpdateManager.m in Sources */,
-				37400B9F12F37436002B6042 /* MTStatusBarOverlay.m in Sources */,
 				372D066712FC901C00E63696 /* TexLegeLibrary.m in Sources */,
 				374F70A612FD45D600AD7EEC /* TexLegeNavBar.m in Sources */,
 				378E1242130F4D6100C425D4 /* BillsMenuDataSource.m in Sources */,
@@ -5123,6 +5137,7 @@
 				37F7C06814D32775000853D5 /* KalViewController.m in Sources */,
 				37F7C06A14D32775000853D5 /* NSDateAdditions.m in Sources */,
 				37F7C06C14D32775000853D5 /* UIViewAdditions.m in Sources */,
+				3781E7C714E0930A002A80AC /* MTInfoPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5195,7 +5210,6 @@
 				37735BE81323104A0033F343 /* StafferObj+RestKit.m in Sources */,
 				37735BEA1323104A0033F343 /* NSDate+Helper.m in Sources */,
 				37735BEB1323104A0033F343 /* DataModelUpdateManager.m in Sources */,
-				37735BEC1323104A0033F343 /* MTStatusBarOverlay.m in Sources */,
 				37735BED1323104A0033F343 /* TexLegeLibrary.m in Sources */,
 				37735BEE1323104A0033F343 /* TexLegeNavBar.m in Sources */,
 				37735BEF1323104A0033F343 /* BillsMenuDataSource.m in Sources */,
@@ -5259,6 +5273,7 @@
 				37F7C06914D32775000853D5 /* KalViewController.m in Sources */,
 				37F7C06B14D32775000853D5 /* NSDateAdditions.m in Sources */,
 				37F7C06D14D32775000853D5 /* UIViewAdditions.m in Sources */,
+				3781E7C814E0930A002A80AC /* MTInfoPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@
 #import "UtilityMethods.h"
 #import "TexLegeReachability.h"
 #import "TexLegeCoreDataUtils.h"
-#import "MTStatusBarOverlay.h"
+#import "MTInfoPanel.h"
 #import "LocalyticsSession.h"
 #import "DistrictMapObj+RestKit.h"
 #import "NSDate+Helper.h"
@@ -41,7 +41,10 @@ enum TXL_QueryTypes {
 #define numToInt(number) (number ? [number integerValue] : 0)	// should this be NSNotFound or nil or null?
 #define intToNum(integer) [NSNumber numberWithInt:integer]
 
-@interface DataModelUpdateManager (Private)
+@interface DataModelUpdateManager()
+
+@property (nonatomic,readonly) UIView *appRootView;
+@property (nonatomic,retain) MTInfoPanel *infoPanel;
 
 - (NSString *)localDataTimestampForModel:(NSString *)classString;
 
@@ -55,6 +58,7 @@ enum TXL_QueryTypes {
 
 @implementation DataModelUpdateManager
 @synthesize activeUpdates;
+@synthesize infoPanel = _infoPanel;
 
 - (id) init {
 	if ((self=[super init])) {
@@ -89,6 +93,23 @@ enum TXL_QueryTypes {
 	[super dealloc];
 }
 
+// Totally cheating my way through this right now.  But it'll pass the app store reviewers!!!
+- (UIView *)appRootView {
+    UITabBarController *tabBarController = (UITabBarController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+    NSAssert([tabBarController isKindOfClass:[UITabBarController class]], @"Unexpected root view controller for app's key window.");
+    UIViewController *currentVC = nil;
+    if ([UtilityMethods isIPadDevice]) {
+        UISplitViewController *splitView = (UISplitViewController *)tabBarController.selectedViewController;
+        NSAssert([splitView isKindOfClass:[UISplitViewController class]], @"Unexpected view controller expected split view controller: %@", splitView);
+        currentVC = [splitView.viewControllers objectAtIndex:1];
+    }
+    else {
+        UINavigationController *navControl = (UINavigationController *)tabBarController.selectedViewController;
+        NSAssert([navControl isKindOfClass:[UINavigationController class]], @"Unexpected view controller expected navigation controller: %@", navControl);
+        currentVC = [navControl topViewController];
+    }
+    return currentVC.view;
+}
 
 #pragma mark -
 #pragma mark Check & Perform Updates
@@ -98,12 +119,7 @@ enum TXL_QueryTypes {
 	if ([TexLegeReachability texlegeReachable]) {
 		[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"DATABASE_UPDATE_REQUEST"];
 		NSString *statusString = NSLocalizedStringFromTable(@"Checking for Data Updates", @"DataTableUI", @"Status indicator for updates");
-		MTStatusBarOverlay *overlay = [MTStatusBarOverlay sharedMTStatusBarOverlay] ;
-		overlay.historyEnabled = YES;
-		overlay.animation = MTStatusBarOverlayAnimationFallDown;  // MTStatusBarOverlayAnimationShrink
-		overlay.detailViewMode = MTDetailViewModeHistory;         // enable automatic history-tracking and show in detail-view
-		overlay.progress = 0.0;
-		[overlay postMessage:statusString animated:YES];	
+        self.infoPanel = [MTInfoPanel showPanelInView:self.appRootView type:MTInfoPanelTypeActivity title:NSLocalizedString(@"Data Update", @"") subtitle:statusString];
 		
 		self.activeUpdates = [NSCountedSet set];
 						
@@ -180,9 +196,9 @@ enum TXL_QueryTypes {
 		NSString *notification = [NSString stringWithFormat:@"RESTKIT_LOADED_%@", [className uppercaseString]];
 		[[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil];
 		
-		NSString *statusString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Pruned %@", @"DataTableUI", @"Status indicator for updates, these objects are being removed from the database"), 
-								  [statusBlurbsAndModels objectForKey:className]];
-		[[MTStatusBarOverlay sharedMTStatusBarOverlay] postImmediateMessage:statusString duration:1 animated:YES];
+		NSString *statusString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Pruned %@", @"DataTableUI", @"Status indicator for updates, these objects are being removed from the database"), [statusBlurbsAndModels objectForKey:className]];
+        if (self.infoPanel)
+            self.infoPanel.subtitle = statusString;
 	}	
 }
 
@@ -191,7 +207,7 @@ enum TXL_QueryTypes {
 	CGFloat progress = 1.0f;
 	if (count > 0)
 		progress = 1.0f / (CGFloat)count;
-	[MTStatusBarOverlay sharedMTStatusBarOverlay].progress = progress;
+        //[MTStatusBarOverlay sharedMTStatusBarOverlay].progress = progress;
 }
 
 #pragma mark -
@@ -210,8 +226,14 @@ enum TXL_QueryTypes {
 - (void)requestQueueDidFinishLoading:(RKRequestQueue *)queue {
 //    _statusLabel.text = [NSString stringWithFormat:@"Queue %@ Finished Loading...", queue];
 	[self updateProgress];
-	if ([_queue count] == 0)
-		[[MTStatusBarOverlay sharedMTStatusBarOverlay] postFinishMessage:NSLocalizedStringFromTable(@"Update Completed", @"DataTableUI", @"Status indicator for updates") duration:5];	
+	if ([_queue count] == 0) {
+        NSString *statusString = NSLocalizedStringFromTable(@"Update Completed", @"DataTableUI", @"Status indicator for updates");
+        if (self.infoPanel) {
+            self.infoPanel.subtitle = statusString;
+            [self.infoPanel hidePanel];
+        }
+        self.infoPanel = [MTInfoPanel showPanelInView:self.appRootView type:MTInfoPanelTypeSuccess title:NSLocalizedString(@"Data Update", @"") subtitle:statusString hideAfter:4];
+    }
 }
 
 #pragma mark -
@@ -262,9 +284,11 @@ enum TXL_QueryTypes {
 				NSString *notification = [NSString stringWithFormat:@"RESTKIT_LOADED_%@", [className uppercaseString]];
 				debug_NSLog(@"%@ %d objects", notification, [objects count]);
 				
-				NSString *statusString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Updated %@", @"DataTableUI", @"Status indicator for updates"), 
-										  [statusBlurbsAndModels objectForKey:className]];
-				[[MTStatusBarOverlay sharedMTStatusBarOverlay] postMessage:statusString animated:YES];				
+				NSString *statusString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Updated %@", @"DataTableUI", @"Status indicator for updates"), [statusBlurbsAndModels objectForKey:className]];
+                if (self.infoPanel) {
+                    self.infoPanel.subtitle = statusString;
+                }
+
 			
 				// We shouldn't do a costly reset if there's another reset headed out way in a few seconds.
 				if (([className isEqualToString:@"DistrictMapObj"] &! [self.activeUpdates containsObject:@"LegislatorObj"]) 
@@ -287,7 +311,7 @@ enum TXL_QueryTypes {
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
 	[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"RESTKIT_DATA_ERROR"];
-	[[MTStatusBarOverlay sharedMTStatusBarOverlay] postErrorMessage:NSLocalizedStringFromTable(@"Error During Update", @"AppAlerts", @"Status indicator for updates") duration:8];
+    self.infoPanel = [MTInfoPanel showPanelInView:self.appRootView type:MTInfoPanelTypeError title:NSLocalizedString(@"Data Update", @"") subtitle:NSLocalizedStringFromTable(@"Error During Update", @"AppAlerts", @"Status indicator for updates") hideAfter:5];
 	NSString *className = NSStringFromClass(objectLoader.objectClass);
 	if (className)
 		[self.activeUpdates removeObject:className];
