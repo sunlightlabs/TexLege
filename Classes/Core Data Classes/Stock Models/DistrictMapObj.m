@@ -11,7 +11,6 @@
 //
 
 #import "DistrictMapObj.h"
-
 #import "LegislatorObj.h"
 
 @implementation DistrictMapObj 
@@ -36,4 +35,8 @@
 @dynamic centerLat;
 @dynamic legislator;
 
+- (NSString *)boundaryID {
+    NSString *chamberCode = [self.chamber integerValue] == 1 ? @"l" : @"u";
+    return [NSString stringWithFormat:@"sld%@/tx-%@", self.district, chamberCode];
+}
 @end

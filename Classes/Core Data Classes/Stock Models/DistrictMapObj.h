@@ -39,6 +39,7 @@
 @property (nonatomic, retain) NSNumber * minLon;
 @property (nonatomic, retain) NSNumber * centerLat;
 @property (nonatomic, retain) LegislatorObj * legislator;
+@property (nonatomic, readonly) NSString * boundaryID;
 
 @end
 
