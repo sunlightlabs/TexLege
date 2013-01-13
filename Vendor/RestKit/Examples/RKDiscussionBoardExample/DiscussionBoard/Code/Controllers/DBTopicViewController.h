@@ -8,7 +8,7 @@
 
 #import <Three20/Three20.h>
 #import "DBAuthenticatedTableViewController.h"
-#import "../Models/DBTopic.h"
+#import "DBTopic.h"
 
 @interface DBTopicViewController : DBAuthenticatedTableViewController <RKObjectLoaderDelegate> {
 	UITextField* _topicNameField;

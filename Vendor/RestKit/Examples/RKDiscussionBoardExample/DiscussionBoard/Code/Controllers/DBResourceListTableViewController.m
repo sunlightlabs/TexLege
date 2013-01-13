@@ -7,9 +7,9 @@
 //
 
 #import "DBResourceListTableViewController.h"
-#import "../Other/DBManagedObjectCache.h"
-#import "../Models/DBUser.h"
-#import "../Models/DBContentObject.h"
+#import "DBManagedObjectCache.h"
+#import "DBUser.h"
+#import "DBContentObject.h"
 
 @implementation UINavigationBar (CustomImage)
 

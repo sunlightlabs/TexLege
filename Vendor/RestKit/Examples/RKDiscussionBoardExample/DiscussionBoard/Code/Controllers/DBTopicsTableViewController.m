@@ -8,14 +8,15 @@
 
 #import <Three20/Three20+Additions.h>
 #import "DBTopicsTableViewController.h"
-#import "../Models/DBTopic.h"
-#import "../Models/DBUser.h"
+#import "DBTopic.h"
+#import "DBUser.h"
 
 @implementation DBTopicsTableViewController
 
 - (id)initWithNavigatorURL:(NSURL *)URL query:(NSDictionary *)query {
 	if (self = [super initWithNavigatorURL:URL query:query]) {
 		self.title = @"Topics";
+		_tableTitleHeaderLabel.text = @"Recent Topics";
 		
 		_resourcePath = [@"/topics" retain];
 		_resourceClass = [DBTopic class];
@@ -23,8 +24,8 @@
 	return self;
 }
 
-- (void)loadView {
-	[super loadView];
+- (void)createModel {
+	[super createModel];
 
 	UIBarButtonItem* item = nil;
 	if ([[DBUser currentUser] isLoggedIn]) {

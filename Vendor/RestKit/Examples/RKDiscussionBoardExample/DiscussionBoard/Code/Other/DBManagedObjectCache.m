@@ -7,8 +7,8 @@
 //
 
 #import "DBManagedObjectCache.h"
-#import "../Models/DBTopic.h"
-#import "../Models/DBPost.h"
+#import "DBTopic.h"
+#import "DBPost.h"
 
 @implementation DBManagedObjectCache
 

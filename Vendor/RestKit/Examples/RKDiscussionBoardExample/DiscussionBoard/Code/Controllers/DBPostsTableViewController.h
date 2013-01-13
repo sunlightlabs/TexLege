@@ -8,7 +8,7 @@
 
 #import <Three20/Three20.h>
 #import "DBResourceListTableViewController.h"
-#import "../Models/DBTopic.h"
+#import "DBTopic.h"
 
 /**
  * Displays a table of Posts within a given Topic

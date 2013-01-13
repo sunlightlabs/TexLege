@@ -42,9 +42,9 @@
 		// TODO: Does the lack of retain here cause problems with synchronous requests, since they
 		// are not being retained by the RKRequestQueue??
 		_request = request;
-		_httpURLResponse = [URLResponse retain];
+		_httpURLResponse = [(NSHTTPURLResponse *)URLResponse retain];
 		_failureError = [error retain];
-		_body = [body retain];
+		_body = [body mutableCopy];
 	}
 
 	return self;

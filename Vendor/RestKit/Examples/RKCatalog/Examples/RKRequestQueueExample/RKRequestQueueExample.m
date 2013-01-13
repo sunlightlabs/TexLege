@@ -31,7 +31,6 @@
 // We have been dismissed -- clean up any open requests
 - (void)dealloc {
     [[RKRequestQueue sharedQueue] cancelRequestsWithDelegate:self];
-    [_queue cancelAllRequests];
     [_queue release];
     
     [super dealloc];
