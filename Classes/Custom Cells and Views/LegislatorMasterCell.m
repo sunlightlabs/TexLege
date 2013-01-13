@@ -14,7 +14,7 @@
 #import "LegislatorMasterCellView.h"
 #import "LegislatorObj.h"
 #import "DisclosureQuartzView.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LegislatorMasterCell
 @synthesize cellView;
@@ -58,7 +58,7 @@
 
 
 - (void)setLegislator:(LegislatorObj *)value {
-	self.imageView.image = [UIImage imageNamed:value.photo_name];
+    [self.imageView setImageWithURL:[NSURL URLWithString:value.photo_url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 	[self.cellView setLegislator:value];
 }
 

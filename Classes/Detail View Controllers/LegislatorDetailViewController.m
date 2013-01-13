@@ -40,7 +40,7 @@
 #import "CapitolMapsDetailViewController.h"
 
 #import "PartisanIndexStats.h"
-#import "UIImage+ResolutionIndependent.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "TexLegeEmailComposer.h"
 #import "PartisanScaleView.h"
@@ -189,8 +189,7 @@
 	self.leg_nameLab.text = legName;
 	self.navigationItem.title = legName;
 
-	//[[ImageCache sharedImageCache] loadImageView:self.leg_photoView fromPath:[UIImage highResImagePathWithPath:member.photo_name]];
-	self.leg_photoView.image = [UIImage imageNamed:[UIImage highResImagePathWithPath:member.photo_name]];
+    [self.leg_photoView setImageWithURL:[NSURL URLWithString:member.photo_url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 	self.leg_partyLab.text = [member party_name];
 	self.leg_districtLab.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"District %@", @"DataTableUI", @"District number"), 
 								 member.district];

@@ -17,6 +17,7 @@
 #import "TexLegeStandardGroupCell.h"
 #import "LegislatorDetailViewController.h"
 #import "LegislatorObj+RestKit.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BillVotesDataSource (Private)
 - (void) loadVotesAndVoters;
@@ -146,7 +147,7 @@
 	}
 	cell.textLabel.text = [dataObj objectForKey:@"subtitle"];
 	cell.detailTextLabel.text = [dataObj objectForKey:@"name"];
-	cell.imageView.image = [UIImage imageNamed:[dataObj objectForKey:@"photo"]];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[dataObj objectForKey:@"photo_url"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 
 	cell.backgroundColor = (indexPath.row % 2 == 0) ? [TexLegeTheme backgroundDark] : [TexLegeTheme backgroundLight];
 	return cell;	
@@ -211,7 +212,7 @@
 												  member.legislatorID, @"legislatorID",
 												  voteCode, @"vote",
 												  [member labelSubText], @"subtitle",
-												  member.photo_name, @"photo",
+												  member.photo_url, @"photo_url",
 												  nil];
 					[voters_ addObject:voter];
 					[voter release];
