@@ -110,12 +110,9 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 - (void)dealloc {
 	[[TexLegeReachability sharedTexLegeReachability] removeObserver:self forKeyPath:@"openstatesConnectionStatus"];
 	[[RKRequestQueue sharedQueue] cancelRequestsWithDelegate:self];
-	if (updated)
-		[updated release], updated = nil;
-	if (_events)
-		[_events release], _events = nil;
-	if (eventStore)
-		[eventStore release], eventStore = nil;
+	nice_release(updated);
+    nice_release(_events);
+	nice_release(eventStore);
 	[super dealloc];
 }
 
@@ -176,8 +173,7 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 	
 	isFresh = NO;
 
-	if (_events)
-		[_events release];
+	nice_release(_events);
 
 	// We had trouble loading the events online, so pull up the cache from the one in the documents folder, if possible
 	NSString *thePath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kCalendarEventsCacheFile];
@@ -186,8 +182,9 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 		debug_NSLog(@"EventsLoader: using cached events in the documents folder.");
 		_events = [[NSMutableArray arrayWithContentsOfFile:thePath] retain];
 	}
-	if (!_events)
+	if (!_events) {
 		_events = [[NSMutableArray array] retain];
+    }
 
 	if (self.loadingStatus != LOADING_NO_NET) {
 		self.loadingStatus = LOADING_NO_NET;
@@ -201,9 +198,8 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 		// Success! Let's take a look at the data
 		self.loadingStatus = LOADING_IDLE;
 
-		if (_events)
-			[_events release], _events = nil;	
-		
+        nice_release(_events);
+
 		NSArray *allEvents = [response.body objectFromJSONData];
 		if (IsEmpty(allEvents))
 			return;
@@ -235,8 +231,7 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 			}
 			
 			isFresh = YES;
-			if (updated)
-				[updated release];
+            nice_release(updated);
 			updated = [[NSDate date] retain];
 						
 			[[NSNotificationCenter defaultCenter] postNotificationName:kCalendarEventsNotifyLoaded object:nil];
@@ -418,7 +413,7 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 	if (delegate && [delegate respondsToSelector:@selector(presentEventEditorForEvent:)]) {
 		[delegate performSelector:@selector(presentEventEditorForEvent:) withObject:event];
 	}
-	[eventIDs release];
-}	
+    nice_release(eventIDs);
+}
 
 @end

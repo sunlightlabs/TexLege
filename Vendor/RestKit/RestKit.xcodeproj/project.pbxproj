@@ -19,10 +19,7 @@
 				255B758F133BABCD00ED76AD /* PBXTargetDependency */,
 				255B7591133BABCD00ED76AD /* PBXTargetDependency */,
 				255B7593133BABCD00ED76AD /* PBXTargetDependency */,
-				255B7595133BABCD00ED76AD /* PBXTargetDependency */,
-				255B7597133BABCD00ED76AD /* PBXTargetDependency */,
 				255B7599133BABCD00ED76AD /* PBXTargetDependency */,
-				259DF78A134029BB00233DF4 /* PBXTargetDependency */,
 				255B759B133BABCD00ED76AD /* PBXTargetDependency */,
 			);
 			name = RestKit;
@@ -259,20 +256,6 @@
 			remoteGlobalIDString = 253A080B12551D3000976E89;
 			remoteInfo = RestKitSupport;
 		};
-		255B7594133BABCD00ED76AD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2590E64E125231F600531FA8;
-			remoteInfo = "RestKitJSONParser+YAJL";
-		};
-		255B7596133BABCD00ED76AD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2590E66A1252353700531FA8;
-			remoteInfo = "RestKitJSONParser+SBJSON";
-		};
 		255B7598133BABCD00ED76AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
@@ -287,13 +270,6 @@
 			remoteGlobalIDString = 253A081312551D5300976E89;
 			remoteInfo = RestKitCoreData;
 		};
-		258C6836133CDF97004388A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 255B7588133BABBF00ED76AD;
-			remoteInfo = RestKit;
-		};
 		258C6838133CDF97004388A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 259D5548132856A400897272 /* UISpec.xcodeproj */;
@@ -307,20 +283,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = C76EB5D20F74586B00EF8398;
 			remoteInfo = UISpec;
-		};
-		259DF789134029BB00233DF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 259DF7791340290600233DF4;
-			remoteInfo = "RestKitXMLParser+libxml";
-		};
-		25E5F2BD133C2EA500C33091 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 255B7588133BABBF00ED76AD;
-			remoteInfo = RestKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1295,7 +1257,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				25E5F2BE133C2EA500C33091 /* PBXTargetDependency */,
 			);
 			name = RestKitThree20;
 			productName = "Three20 Support";
@@ -1432,7 +1393,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				258C6837133CDF97004388A4 /* PBXTargetDependency */,
 				258C6839133CDF97004388A4 /* PBXTargetDependency */,
 			);
 			name = UISpec;
@@ -1794,16 +1754,6 @@
 			target = 253A080B12551D3000976E89 /* RestKitSupport */;
 			targetProxy = 255B7592133BABCD00ED76AD /* PBXContainerItemProxy */;
 		};
-		255B7595133BABCD00ED76AD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2590E64E125231F600531FA8 /* RestKitJSONParser+YAJL */;
-			targetProxy = 255B7594133BABCD00ED76AD /* PBXContainerItemProxy */;
-		};
-		255B7597133BABCD00ED76AD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2590E66A1252353700531FA8 /* RestKitJSONParser+SBJSON */;
-			targetProxy = 255B7596133BABCD00ED76AD /* PBXContainerItemProxy */;
-		};
 		255B7599133BABCD00ED76AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 73057FD01331AD2E001908EE /* RestKitJSONParser+JSONKit */;
@@ -1814,25 +1764,10 @@
 			target = 253A081312551D5300976E89 /* RestKitCoreData */;
 			targetProxy = 255B759A133BABCD00ED76AD /* PBXContainerItemProxy */;
 		};
-		258C6837133CDF97004388A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 255B7588133BABBF00ED76AD /* RestKit */;
-			targetProxy = 258C6836133CDF97004388A4 /* PBXContainerItemProxy */;
-		};
 		258C6839133CDF97004388A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UISpec;
 			targetProxy = 258C6838133CDF97004388A4 /* PBXContainerItemProxy */;
-		};
-		259DF78A134029BB00233DF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 259DF7791340290600233DF4 /* RestKitXMLParser+Libxml */;
-			targetProxy = 259DF789134029BB00233DF4 /* PBXContainerItemProxy */;
-		};
-		25E5F2BE133C2EA500C33091 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 255B7588133BABBF00ED76AD /* RestKit */;
-			targetProxy = 25E5F2BD133C2EA500C33091 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1850,7 +1785,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SYMROOT = Build;
 			};
 			name = Debug;
 		};
@@ -1866,7 +1800,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SYMROOT = Build;
 			};
 			name = Release;
 		};
@@ -1941,7 +1874,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SYMROOT = Build;
 			};
 			name = Distribution;
 		};

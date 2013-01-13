@@ -30,4 +30,4 @@
 	url = git://github.com/grgcombs/DDActionHeaderView.git
 [submodule "Vendor/SDWebImage"]
 	path = Vendor/SDWebImage
-	url = git://github.com/rs/SDWebImage.git
+	url = git@github.com:grgcombs/SDWebImage.git

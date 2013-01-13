@@ -582,6 +582,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		37093E6516A36B1200399644 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37E9C9FD16A227CC005C7CCE /* SDWebImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 531041C2157EAFA400BBABC3;
+			remoteInfo = "SDWebImage+MKAnnotation";
+		};
 		37C3516214C93D6000B6F118 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3775C7C8131C44C600638ED4 /* RestKit.xcodeproj */;
@@ -679,13 +686,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 255B7588133BABBF00ED76AD;
 			remoteInfo = RestKit;
-		};
-		37E9CA2316A228CC005C7CCE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37E9C9FD16A227CC005C7CCE /* SDWebImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 539F912B16316D2D00160719;
-			remoteInfo = SDWebImageFramework;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -2419,7 +2419,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				37E9CA2416A228CC005C7CCE /* PBXTargetDependency */,
+				37093E6616A36B1200399644 /* PBXTargetDependency */,
 				37E9CA2216A228C2005C7CCE /* PBXTargetDependency */,
 			);
 			name = TexLege;
@@ -3168,6 +3168,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		37093E6616A36B1200399644 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SDWebImage+MKAnnotation";
+			targetProxy = 37093E6516A36B1200399644 /* PBXContainerItemProxy */;
+		};
 		37C7845614D302DF006BBEDE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = RestKit;
@@ -3177,11 +3182,6 @@
 			isa = PBXTargetDependency;
 			name = RestKit;
 			targetProxy = 37E9CA2116A228C2005C7CCE /* PBXContainerItemProxy */;
-		};
-		37E9CA2416A228CC005C7CCE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SDWebImageFramework;
-			targetProxy = 37E9CA2316A228CC005C7CCE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3224,19 +3224,17 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Builds/Build/Headers",
+					"\"$(SRCROOT)/Vendor/SDWebImage\"",
+					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
-				OBJROOT = "$(SRCROOT)/Builds/Build/Products/Intermediates";
-				SYMROOT = "$(SRCROOT)/Builds//Build/Products";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3245,19 +3243,17 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Builds/Build/Headers",
+					"\"$(SRCROOT)/Vendor/SDWebImage\"",
+					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
-				OBJROOT = "$(SRCROOT)/Builds/Build/Products/Intermediates";
-				SYMROOT = "$(SRCROOT)/Builds//Build/Products";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3266,8 +3262,6 @@
 		37735C0C1323104A0033F343 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphonesimulator*]" = i386;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3289,8 +3283,6 @@
 		37735C0D1323104A0033F343 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphonesimulator*]" = i386;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
@@ -3307,8 +3299,6 @@
 		37735C0E1323104A0033F343 /* AdHoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphonesimulator*]" = i386;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
@@ -3324,8 +3314,6 @@
 		37735C0F1323104A0033F343 /* iTunes Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphonesimulator*]" = i386;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
@@ -3363,7 +3351,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "8C29C66E-0950-4FCC-B3B6-AC62E6F97DDA";
+				PROVISIONING_PROFILE = "26BD1CBE-B29E-4CA1-A91B-4F9E447B0215";
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -3379,20 +3367,17 @@
 		377629CA102A0A45004700EC /* iTunes Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Builds/Build/Headers",
+					"\"$(SRCROOT)/Vendor/SDWebImage\"",
+					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
-				OBJROOT = "$(SRCROOT)/Builds/Build/Products/Intermediates";
-				SYMROOT = "$(SRCROOT)/Builds//Build/Products";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3425,7 +3410,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "8C29C66E-0950-4FCC-B3B6-AC62E6F97DDA";
+				PROVISIONING_PROFILE = "BB8BA8B5-87E0-4D0B-8FAC-AF73B5ECBD7D";
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -3441,20 +3426,17 @@
 		37B2D28510224AC900B493C8 /* AdHoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_32_BIT)";
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Builds/Build/Headers",
+					"\"$(SRCROOT)/Vendor/SDWebImage\"",
+					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
-				OBJROOT = "$(SRCROOT)/Builds/Build/Products/Intermediates";
-				SYMROOT = "$(SRCROOT)/Builds//Build/Products";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3465,7 +3447,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Combs (MJMLU3U99Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 2.6.1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -3487,7 +3469,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "4FBA2A05-4D25-4C07-A4F2-5EF2AE91453F";
+				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -3505,7 +3487,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gregory Combs (MJMLU3U99Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.6.1;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -3526,7 +3508,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = TexLege;
-				PROVISIONING_PROFILE = "4FBA2A05-4D25-4C07-A4F2-5EF2AE91453F";
+				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
