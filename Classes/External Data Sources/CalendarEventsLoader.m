@@ -309,7 +309,7 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 #pragma mark -
 #pragma mark EventKit
 - (void)addAllEventsToiCal:(id)sender {
-#warning see about asking what calendar they want to put these in
+//#warning see about asking what calendar they want to put these in
 
 	if (![UtilityMethods supportsEventKit] || !eventStore) {
 		debug_NSLog(@"EventKit not available on this device");

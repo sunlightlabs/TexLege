@@ -180,17 +180,17 @@ static NSString *networkStatusDesc(NetworkStatus status) {
             
 		case kNotReachable:
             
-            return [NSString stringWithString: @"Not Reachable"];
+            return @"Not Reachable";
 			break;
             
 		case kReachableViaWWAN:
             
-			return [NSString stringWithString: @"Reachable via WWAN"];
+			return @"Reachable via WWAN";
 			break;
             
 		case kReachableViaWiFi:
             
-			return [NSString stringWithString: @"Reachable via WiFi"];
+			return @"Reachable via WiFi";
 			break;
             
         default:

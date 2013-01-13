@@ -349,7 +349,7 @@ static NSLock *crayolaNameCacheLock;
 	if (h > 360.f) h -= 360.0f;
 	
 	// Create a color in RGB
-	return [UIColor colorWithHue:h saturation:s brightness:v alpha:a];
+	return [UIColor exColorWithHue:h saturation:s brightness:v alpha:a];
 }
 
 // Pick two colors more colors such that all three are equidistant on the color wheel
@@ -375,8 +375,8 @@ static NSLock *crayolaNameCacheLock;
 		CGFloat h1 = fmodf(h + a, 360.0f);
 		CGFloat h2 = fmodf(h + 360.0f - a, 360.0f);
 		
-		[colors addObject:[UIColor colorWithHue:h1 saturation:s brightness:v alpha:a]];
-		[colors addObject:[UIColor colorWithHue:h2 saturation:s brightness:v alpha:a]];
+		[colors addObject:[UIColor exColorWithHue:h1 saturation:s brightness:v alpha:a]];
+		[colors addObject:[UIColor exColorWithHue:h2 saturation:s brightness:v alpha:a]];
 	}
 	
 	return [[colors copy] autorelease];
@@ -401,7 +401,7 @@ static NSLock *crayolaNameCacheLock;
 }
 
 - (NSString *)hexStringFromColor {
-	return [NSString stringWithFormat:@"%0.6X", self.rgbHex];
+	return [NSString stringWithFormat:@"%0.6lX", self.rgbHex];
 }
 
 - (NSString *)closestColorNameFor: (const char *) aColorDatabase {
@@ -540,7 +540,7 @@ static NSLock *crayolaNameCacheLock;
 	return crayolaNameCache;
 }
 
-+ (UIColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha {
++ (UIColor *)exColorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha {
 	// Convert hsb to rgb
 	CGFloat r,g,b;
 	[self hue:hue saturation:saturation brightness:brightness toRed:&r green:&g blue:&b];

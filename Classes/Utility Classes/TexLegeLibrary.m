@@ -191,8 +191,6 @@ NSString *stringForParty(NSInteger party, TLStringReturnType type) {
 	return partyString;
 }
 
-#warning state specific (Bill IDs)
-
 NSString *billTypeStringFromBillID(NSString *billID) {
 	NSArray *words = [billID componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	if (!IsEmpty(words))

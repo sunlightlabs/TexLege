@@ -355,7 +355,7 @@ NSInteger kNoSelection = -1;
 									[NSNumber numberWithBool:NO], kShowedSplashScreenKey,
 									[NSDictionary dictionary], kSegmentControlPrefKey,
 									[NSNumber numberWithBool:NO], kResetSavedDatabaseKey,
-									[NSString stringWithString:@"support@texlege.com"], kSupportEmailKey,
+									@"support@texlege.com", kSupportEmailKey,
 									version, @"CFBundleVersion",
 									nil];
 	

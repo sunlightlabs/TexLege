@@ -23,7 +23,7 @@
 - (NSComparisonResult)compareMembersByName:(LegislatorObj *)p;
 - (NSString *) partyShortName;
 - (NSString *) legTypeShortName;
-- (NSString *)  chamberName;
+- (NSString *) chamberName;
 - (NSString *) legProperName;
 - (NSString *) districtPartyString;
 - (NSString *) fullName;

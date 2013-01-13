@@ -203,7 +203,6 @@
 	}			
 }
 
-#warning state specific (Todays Bills)
 - (void)startSearchForRecentBills {
 	NSDictionary *queryParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 								 @"todaysbillspassed", @"Type",

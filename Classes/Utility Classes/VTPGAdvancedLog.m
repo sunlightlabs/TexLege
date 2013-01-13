@@ -57,7 +57,7 @@ static NSString* VTPGStringFromBoolOrCharValue(BOOL boolOrCharvalue) {
 }
 
 static NSString *VTPGStringFromFourCharCodeOrUnsignedInt32(FourCharCode fourcc) {
-	return [NSString stringWithFormat:@"%u ('%c%c%c%c')",
+	return [NSString stringWithFormat:@"%lu ('%lu%lu%lu%lu')",
 			fourcc,
 			(fourcc >> 24) & 0xFF,
 			(fourcc >> 16) & 0xFF,
@@ -106,7 +106,7 @@ return [NSString stringWithFormat:(formatString), (*(typeToMatch*)value)]
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(unsigned short,@"%hu");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(int,@"%i");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(unsigned, @"%u");
-	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(long,@"%i");
+	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(long,@"%ld");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(long double,@"%Lf"); //WARNING on older versions of OS X, @encode(long double) == @encode(double)
 	
 	//C-strings

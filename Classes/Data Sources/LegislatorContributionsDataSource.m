@@ -306,7 +306,7 @@
 			cellInfo.parameter = self.queryCycle;
 			cellInfo.action = [NSNumber numberWithInteger:kContributionQueryRecipient];
 
-#warning state specific (Bob Perry Contributions)
+//#warning state specific (Bob Perry Contributions)
 
 			if (!dataID || [[NSNull null] isEqual:dataID] || ![dataID isKindOfClass:[NSString class]]) {
 				NSLog(@"ERROR - Contribution results have an empty entity ID for: %@", name);								
