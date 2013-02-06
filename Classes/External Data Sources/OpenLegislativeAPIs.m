@@ -17,6 +17,14 @@
 #import "StateMetaLoader.h"
 
 
+NSString * const osApiHost =		@"openstates.sunlightlabs.com";
+NSString * const osApiBaseURL =		@"http://openstates.sunlightlabs.com/api/v1";
+NSString * const transApiBaseURL =	@"http://transparencydata.com/api/1.0";
+NSString * const vsApiBaseURL =		@"http://api.votesmart.org";
+NSString * const tloApiHost =		@"www.legis.state.tx.us";
+NSString * const tloApiBaseURL =	@"http://www.legis.state.tx.us";
+
+
 @implementation OpenLegislativeAPIs
 @synthesize osApiClient, transApiClient, vsApiClient, tloApiClient;
 

@@ -9,12 +9,12 @@
 
 #import <RestKit/RestKit.h>
 
-static NSString *osApiHost =		@"openstates.sunlightlabs.com";
-static NSString *osApiBaseURL =		@"http://openstates.sunlightlabs.com/api/v1";
-static NSString *transApiBaseURL =	@"http://transparencydata.com/api/1.0";
-static NSString *vsApiBaseURL =		@"http://api.votesmart.org";
-static NSString *tloApiHost =		@"www.legis.state.tx.us";
-static NSString *tloApiBaseURL =	@"http://www.legis.state.tx.us";
+extern NSString * const osApiHost;
+extern NSString * const osApiBaseURL;
+extern NSString * const transApiBaseURL;
+extern NSString * const vsApiBaseURL;
+extern NSString * const tloApiHost;
+extern NSString * const tloApiBaseURL;
 
 @interface OpenLegislativeAPIs : NSObject <RKRequestDelegate> {
 	RKClient *osApiClient;	

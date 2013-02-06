@@ -23,7 +23,6 @@
 
 + (id)dataObjectWithPredicate:(NSPredicate *)predicate entityName:(NSString*)entityName lightProperties:(BOOL)light;
 + (id)dataObjectWithPredicate:(NSPredicate *)predicate entityName:(NSString*)entityName;
-+ (id)dataObjectWithPredicate:(NSPredicate *)predicate entityName:(NSString*)entityName;
 + (LegislatorObj*)legislatorForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber;
 + (DistrictMapObj*)districtMapForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber;
 + (DistrictMapObj*)districtMapForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber lightProperties:(BOOL)light;

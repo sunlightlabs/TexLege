@@ -444,7 +444,7 @@ CGFloat quartzRowHeight = 73.f;
 	
 	if (cell == nil) {
 		
-		if (CellIdentifier == @"CommitteeMember") {
+		if ([CellIdentifier isEqualToString:@"CommitteeMember"]) {
 			if (![UtilityMethods isIPadDevice]) {
 				LegislatorMasterCell *newcell = [[[LegislatorMasterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 				newcell.frame = CGRectMake(0.0, 0.0, 234.0, quartzRowHeight);		
