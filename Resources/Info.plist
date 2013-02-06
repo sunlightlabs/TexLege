@@ -22,7 +22,24 @@
 		<string>Icon-Settings@2x~iphone.png</string>
 		<string>Icon-Small-50.png</string>
 		<string>Icon-Small.png</string>
+		<string>Icon@2x~ipad.png</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Icon.png</string>
+				<string>Icon~ipad.png</string>
+				<string>Icon@2x~iphone.png</string>
+				<string>Icon-Settings@2x~iphone.png</string>
+				<string>Icon-Small-50.png</string>
+				<string>Icon-Small.png</string>
+				<string>Icon@2x~ipad.png</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>5EMVYB9KRX.com.texlege.TexLege</string>
 	<key>CFBundleInfoDictionaryVersion</key>

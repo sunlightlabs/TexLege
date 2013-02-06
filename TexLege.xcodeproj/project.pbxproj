@@ -497,6 +497,8 @@
 		37D46DCA123BFA9800C2C403 /* CommitteeDetailViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D46DC9123BFA9800C2C403 /* CommitteeDetailViewController~ipad.xib */; };
 		37D6E82810175F0800D4D7C2 /* UtilityMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D6E82710175F0800D4D7C2 /* UtilityMethods.m */; };
 		37D6E8C51017772B00D4D7C2 /* Map.SamHoustonLoc.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37D6E8C41017772B00D4D7C2 /* Map.SamHoustonLoc.pdf */; };
+		37DD473716C2EA9A00D960C9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD473616C2EA9A00D960C9 /* Default-568h@2x.png */; };
+		37DD473D16C2ED9800D960C9 /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD473C16C2ED9800D960C9 /* Icon@2x~ipad.png */; };
 		37E2068412204D5000103D76 /* DistrictOfficeObj+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2068112204D5000103D76 /* DistrictOfficeObj+MapKit.m */; };
 		37E2068512204D5000103D76 /* DistrictMapObj+MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2068312204D5000103D76 /* DistrictMapObj+MapKit.m */; };
 		37E207C71220779B00103D76 /* bluestar.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E207C31220779B00103D76 /* bluestar.png */; };
@@ -1182,6 +1184,8 @@
 		37D6E82610175F0800D4D7C2 /* UtilityMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UtilityMethods.h; path = "Classes/Utility Classes/UtilityMethods.h"; sourceTree = SOURCE_ROOT; };
 		37D6E82710175F0800D4D7C2 /* UtilityMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UtilityMethods.m; path = "Classes/Utility Classes/UtilityMethods.m"; sourceTree = SOURCE_ROOT; };
 		37D6E8C41017772B00D4D7C2 /* Map.SamHoustonLoc.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Map.SamHoustonLoc.pdf; path = Resources/Maps/Map.SamHoustonLoc.pdf; sourceTree = "<group>"; };
+		37DD473616C2EA9A00D960C9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		37DD473C16C2ED9800D960C9 /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = "<group>"; };
 		37E2068012204D5000103D76 /* DistrictOfficeObj+MapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DistrictOfficeObj+MapKit.h"; sourceTree = "<group>"; };
 		37E2068112204D5000103D76 /* DistrictOfficeObj+MapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DistrictOfficeObj+MapKit.m"; sourceTree = "<group>"; };
 		37E2068212204D5000103D76 /* DistrictMapObj+MapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DistrictMapObj+MapKit.h"; sourceTree = "<group>"; };
@@ -2294,11 +2298,13 @@
 				1D30AB170D05D02000671497 /* Icon.png */,
 				37C63DC411D9B52200352CF3 /* Icon~ipad.png */,
 				37C63DC311D9B52200352CF3 /* Icon@2x~iphone.png */,
+				37DD473C16C2ED9800D960C9 /* Icon@2x~ipad.png */,
 				37C63DC111D9B52200352CF3 /* Icon-Settings@2x~iphone.png */,
 				37C63DC211D9B52200352CF3 /* Icon-Small.png */,
 				37C63DC011D9B52200352CF3 /* Icon-Small-50.png */,
 				376B59F50FC1BDCF0094D80B /* Default.png */,
 				37782771121303C1001BD23D /* Default@2x.png */,
+				37DD473616C2EA9A00D960C9 /* Default-568h@2x.png */,
 				3775F9BF11D860BA00D69AC5 /* Default-Landscape~ipad.png */,
 				3775F9C011D860BA00D69AC5 /* Default-Portrait~ipad.png */,
 				37F510A90FF1ADEF0020A13B /* Icon_80.png */,
@@ -2701,6 +2707,8 @@
 				3781E7C914E0930A002A80AC /* MTInfoPanel.bundle in Resources */,
 				37E9CA2D16A22D17005C7CCE /* placeholder.png in Resources */,
 				37E9CA2F16A22D17005C7CCE /* placeholder@2x.png in Resources */,
+				37DD473716C2EA9A00D960C9 /* Default-568h@2x.png in Resources */,
+				37DD473D16C2ED9800D960C9 /* Icon@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
