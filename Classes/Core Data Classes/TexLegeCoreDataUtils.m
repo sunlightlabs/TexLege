@@ -289,8 +289,9 @@
     // NOTE: If all of your mapped objects use element -> class registration, you can perform seeding in one line of code:
     // [RKManagedObjectSeeder generateSeedDatabaseWithObjectManager:objectManager fromFiles:@"users.json", nil];
 #endif
-	
-	objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:APP_DB_NAME 
+
+	objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:APP_DB_NAME
+                                                                       inDirectory:[self applicationCacheDirectory]
 															 usingSeedDatabaseName:SEED_DB_NAME 
 																managedObjectModel:mom];
 	//objectManager.objectStore.managedObjectCache = [[TexLegeObjectCache new] autorelease];
@@ -303,6 +304,12 @@
 	[importer release];
 	
 #endif
+}
+
++ (NSString *)applicationCacheDirectory {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
 }
 
 + (NSArray *)registeredDataModels {
