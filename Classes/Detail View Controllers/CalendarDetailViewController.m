@@ -213,8 +213,11 @@
 		[self.searchDisplayController setActive:NO animated:YES];
 		[self showAndSelectDate:[eventDict objectForKey:kCalendarEventsLocalizedDateKey]];
 	}
-		
-	NSURL *url = [NSURL URLWithString:[eventDict objectForKey:kCalendarEventsAnnouncementURLKey]];
+
+    if (IsEmpty([eventDict objectForKey:kCalendarEventsAnnouncementURLKey])) {
+        return;
+    }
+	NSURL *url = [eventDict objectForKey:kCalendarEventsAnnouncementURLKey];
 	
 	if ([TexLegeReachability canReachHostWithURL:url]) { // do we have a good URL/connection?
 		if ([UtilityMethods isIPadDevice]) {	

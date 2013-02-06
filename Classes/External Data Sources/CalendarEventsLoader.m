@@ -286,7 +286,11 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 		
 	BOOL canceled = ([[loadedEvent objectForKey:kCalendarEventsStatusKey] isEqualToString:kCalendarEventsCanceledKey]);
 	[loadedEvent setObject:[NSNumber numberWithBool:canceled] forKey:kCalendarEventsCanceledKey];
-	
+
+    NSURL *announcementURL = [self announcementURLForEvent:loadedEvent];
+    if (announcementURL) {
+        [loadedEvent setObject:announcementURL forKey:kCalendarEventsAnnouncementURLKey];
+    }
 	return loadedEvent;
 }
 
@@ -318,6 +322,22 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 	for (NSDictionary *meeting in meetings) {
 		[self addEventToiCal:meeting delegate:nil];
 	}
+}
+
+- (NSURL *)announcementURLForEvent:(NSDictionary *)eventDict {
+    NSString *urlString = [eventDict objectForKey:kCalendarEventsAnnouncementURLKey];
+    if (NO == IsEmpty(urlString)) {
+        return [NSURL URLWithString:urlString];
+    }
+    NSArray *urls = [eventDict valueForKeyPath:kCalendarEventsSourceURLKeyPath];
+    if (IsEmpty(urls)) {
+        return nil;
+    }
+    if (![urls isKindOfClass:[NSArray class]]) {
+        return nil;
+    }
+    urlString = [urls objectAtIndex:0];
+    return [NSURL URLWithString:urlString];
 }
 
 - (void)addEventToiCal:(NSDictionary *)eventDict delegate:(id)delegate {
@@ -362,11 +382,13 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 	event.location = [eventDict objectForKey:kCalendarEventsLocationKey];
 	
 	event.notes = NSLocalizedStringFromTable(@"[TexLege] Length of this meeting is only an estimate.", @"DataTableUI", @"inserted into iOS calendar events");
-	if (NO == IsEmpty([eventDict objectForKey:kCalendarEventsNotesKey]))
+    if (NO == IsEmpty([eventDict objectForKey:kCalendarEventsAgendaKey]))
+        event.notes = [eventDict objectForKey:kCalendarEventsAgendaKey];
+	else if (NO == IsEmpty([eventDict objectForKey:kCalendarEventsNotesKey]))
 		event.notes = [eventDict objectForKey:kCalendarEventsNotesKey];
-	else if (NO == IsEmpty([eventDict objectForKey:kCalendarEventsAnnouncementURLKey])) {
-		NSURL *url = [NSURL URLWithString:[eventDict objectForKey:kCalendarEventsAnnouncementURLKey]];
-		if ([TexLegeReachability canReachHostWithURL:url alert:NO]) {
+	else {
+		NSURL *url = [self announcementURLForEvent:eventDict];
+		if (url && [TexLegeReachability canReachHostWithURL:url alert:NO]) {
 			NSError *error = nil;
 			NSString *urlcontents = [NSString stringWithContentsOfURL:url encoding:NSWindowsCP1252StringEncoding error:&error];
 			if (!error && urlcontents && [urlcontents length]) {

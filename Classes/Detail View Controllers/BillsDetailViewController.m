@@ -249,6 +249,10 @@ enum _billSections {
 	}
 	self.actionHeader.titleLabel.text = billTitle;
 	[self.actionHeader setNeedsDisplay];
+
+    if (IsEmpty([bill objectForKey:@"actions"])) {
+        return;
+    }
 	
 	NSDictionary *currentAction = [[bill objectForKey:@"actions"] lastObject];
 	NSDate *currentActionDate = [NSDate dateFromString:[currentAction objectForKey:@"date"]];
