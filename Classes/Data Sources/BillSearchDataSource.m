@@ -331,7 +331,7 @@
 		NSDictionary *tagSubject = [NSDictionary dictionaryWithObject:searchSubject forKey:@"subject"];
 		[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"BILL_SUBJECTS" attributes:tagSubject];	
 	}
-	[queryParams setObject:searchSubject forKey:@"subject"];
+	[queryParams setObject:searchSubject forKey:@"subjects"];
 				
 	[self startSearchWithQueryString:@"/bills" params:queryParams];
 }
