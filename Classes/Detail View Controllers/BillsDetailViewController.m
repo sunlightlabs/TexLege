@@ -595,7 +595,7 @@ enum _billSections {
 								
 				SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
 				webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-				[self presentModalViewController:webViewController animated:YES];	
+				[self presentViewController:webViewController animated:YES completion:nil];
 				[webViewController release];
 			}
 		}

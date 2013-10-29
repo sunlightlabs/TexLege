@@ -39,4 +39,8 @@
     NSString *chamberCode = [self.chamber integerValue] == 1 ? @"l" : @"u";
     return [NSString stringWithFormat:@"sld%@/tx-%@", self.district, chamberCode];
 }
+
+- (CLLocationCoordinate2D)coordinate {
+    return CLLocationCoordinate2DMake(self.centerLat.doubleValue, self.centerLon.doubleValue);
+}
 @end

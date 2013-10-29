@@ -127,12 +127,12 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		cell.textLabel.textColor =	[TexLegeTheme textDark];
-		cell.textLabel.textAlignment = UITextAlignmentLeft;
+		cell.textLabel.textAlignment = NSTextAlignmentLeft;
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
 		
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 		cell.textLabel.adjustsFontSizeToFitWidth = YES;
-		cell.textLabel.minimumFontSize = 12.0f;
+        cell.textLabel.minimumScaleFactor = (12.0 / cell.textLabel.font.pointSize); // 12.f = deprecated minimumFontSize
 		//cell.accessoryView = [TexLegeTheme disclosureLabel:YES];
 		//cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]] autorelease];
 		DisclosureQuartzView *qv = [[DisclosureQuartzView alloc] initWithFrame:CGRectMake(0.f, 0.f, 28.f, 28.f)];

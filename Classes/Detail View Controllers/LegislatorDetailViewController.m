@@ -498,7 +498,7 @@
 					
 					SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
 					webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-					[self presentModalViewController:webViewController animated:YES];	
+					[self presentViewController:webViewController animated:YES completion:nil];
 					[webViewController release];
 				}
 			}
@@ -530,7 +530,7 @@
 											 caseInsensitive:YES]) {
 		height = 98.0f;
 	}
-	else if ([cellInfo.entryValue isKindOfClass:[NSString string]]) {
+	else if ([cellInfo.entryValue isKindOfClass:[NSString class]]) {
 		NSString *tempStr = cellInfo.entryValue;
 		if (!tempStr || [tempStr length] <= 0) {
 			height = 0.0f;

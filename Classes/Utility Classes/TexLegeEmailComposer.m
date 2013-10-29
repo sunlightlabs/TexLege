@@ -74,7 +74,7 @@
 		[[self.mailComposerVC navigationBar] setTintColor:[TexLegeTheme navbar]];
 		self.isComposingMail = YES;
 				
-		[self.currentCommander presentModalViewController:self.mailComposerVC animated:YES];
+		[self.currentCommander presentViewController:self.mailComposerVC animated:YES completion:nil];
 
 	}
 	else {   // Mail functions are unavailable
@@ -105,7 +105,7 @@
 	}
 	
 	self.isComposingMail = NO;
-	[self.currentCommander dismissModalViewControllerAnimated:YES];
+	[self.currentCommander dismissViewControllerAnimated:YES completion:nil];
 	self.mailComposerVC = nil;
 	self.currentCommander = nil;
 }

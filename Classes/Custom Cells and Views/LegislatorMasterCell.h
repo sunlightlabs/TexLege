@@ -12,11 +12,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LegislatorMasterCellView.h"
-@class LegislatorObj;
+#import "LegislatorCellProtocol.h"
 
-@interface LegislatorMasterCell : UITableViewCell {
-	
-}
+@interface LegislatorMasterCell : UITableViewCell <LegislatorCellProtocol>
 @property (nonatomic,retain) IBOutlet LegislatorMasterCellView *cellView;
-- (void)setLegislator:(LegislatorObj *)value;
 @end

@@ -92,9 +92,9 @@
 	label.backgroundColor = [TexLegeTheme accent];
 	label.font = [TexLegeTheme boldFifteen];
 	//label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.8];
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentCenter;
 	label.textColor = [TexLegeTheme backgroundLight];
-	label.lineBreakMode = UILineBreakModeTailTruncation;
+	label.lineBreakMode = NSLineBreakByTruncatingTail;
 	//label.numberOfLines =
 	label.text = NSLocalizedStringFromTable(@"Large subjects download slowly.", @"DataTableUI", @"Tells the user that downloading a long list of bills for a given subject will take some time."); 
 	self.tableView.tableHeaderView = label;

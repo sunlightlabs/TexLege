@@ -142,9 +142,10 @@ CGFloat quartzRowHeight = 73.f;
 	//[[TexLegeAppDelegate appDelegate] resetPopoverMenus];
 	
 	NSArray *visibleCells = self.tableView.visibleCells;
-	for (id cell in visibleCells) {
-		if ([cell respondsToSelector:@selector(redisplay)])
-			[cell performSelector:@selector(redisplay)];
+	for (id<LegislatorCellProtocol> cell in visibleCells) {
+		if ([cell conformsToProtocol:@protocol(LegislatorCellProtocol)]) {
+            [cell redisplay];
+        }
 	}
 	
 }
@@ -576,7 +577,7 @@ CGFloat quartzRowHeight = 73.f;
 		
 		SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
 		webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-		[self presentModalViewController:webViewController animated:YES];	
+		[self presentViewController:webViewController animated:YES completion:nil];
 		[webViewController release];
 	}
 }

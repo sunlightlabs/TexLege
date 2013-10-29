@@ -261,7 +261,7 @@ const CGFloat kCommitteeMemberCellViewHeight = 73.0f;
 	drawRect.size.height = roundf(resolution * drawRect.size.height) / resolution;
 	font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:11.0f];
 	[tenureColor set];
-	[[self tenure] drawInRect:drawRect withFont:font lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentRight];
+	[[self tenure] drawInRect:drawRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentRight];
 	
 	// District
 	
@@ -294,7 +294,7 @@ const CGFloat kCommitteeMemberCellViewHeight = 73.0f;
 	drawRect.size.height = roundf(resolution * drawRect.size.height) / resolution;
 	font = [TexLegeTheme boldTen];
 	[rankColor set];
-	[[self rank] drawInRect:drawRect withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentRight];
+	[[self rank] drawInRect:drawRect withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentRight];
 	
 	// Title
 	

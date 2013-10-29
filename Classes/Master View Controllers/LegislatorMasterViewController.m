@@ -123,9 +123,10 @@
 
 - (IBAction)redisplayVisibleCells:(id)sender {
 	NSArray *visibleCells = self.tableView.visibleCells;
-	for (id cell in visibleCells) {
-		if ([cell respondsToSelector:@selector(redisplay)])
-			[cell performSelector:@selector(redisplay)];
+	for (id<LegislatorCellProtocol> cell in visibleCells) {
+		if ([cell conformsToProtocol:@protocol(LegislatorCellProtocol)]) {
+            [cell redisplay];
+        }
 	}
 }
 

@@ -172,9 +172,9 @@
 		cell.textLabel.textColor =	[TexLegeTheme accent];
 		
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-		cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+		cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 		cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-		cell.detailTextLabel.minimumFontSize = 12.0f;
+        cell.detailTextLabel.minimumScaleFactor = (12.0 / cell.detailTextLabel.font.pointSize); // 12.f = deprecated minimumFontSize
 		//cell.accessoryView = [TexLegeTheme disclosureLabel:YES];
 		//cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]] autorelease];
 		DisclosureQuartzView *qv = [[DisclosureQuartzView alloc] initWithFrame:CGRectMake(0.f, 0.f, 28.f, 28.f)];

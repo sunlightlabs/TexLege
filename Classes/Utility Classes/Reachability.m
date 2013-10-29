@@ -119,6 +119,10 @@ NSString *const kConnectionOnDemandKey   = @"connectionOnDemand";
 NSString *const kInterventionRequiredKey = @"interventionRequired";
 
 
+static void logKey_(const char *name, int line, Reachability *reachability);
+static void logNetworkStatus_(const char *name, int line, NetworkStatus status);
+static void logReachabilityFlags_(const char *name, int line, SCNetworkReachabilityFlags flags);
+
 static NSString *reachabilityFlags_(SCNetworkReachabilityFlags flags) {
     
 #if TARGET_OS_IPHONE

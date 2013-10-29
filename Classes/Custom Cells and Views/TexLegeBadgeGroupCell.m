@@ -89,10 +89,10 @@
 	
 	if (self.cell && self.cell.isEditing) {
 		[currentSummaryColor set];
-		[self.cell.summary drawAtPoint:CGPointMake(10, 10) forWidth:rect.size.width withFont:[TexLegeTheme boldFifteen] lineBreakMode:UILineBreakModeTailTruncation];
+		[self.cell.summary drawAtPoint:CGPointMake(10, 10) forWidth:rect.size.width withFont:[TexLegeTheme boldFifteen] lineBreakMode:NSLineBreakByTruncatingTail];
 		
 		//[currentDetailColor set];
-		//[self.cell.detail drawAtPoint:CGPointMake(10, 32) forWidth:rect.size.width withFont:[TexLegeTheme boldTwelve] lineBreakMode:UILineBreakModeTailTruncation];		
+		//[self.cell.detail drawAtPoint:CGPointMake(10, 32) forWidth:rect.size.width withFont:[TexLegeTheme boldTwelve] lineBreakMode:NSLineBreakByTruncatingTail];		
 	} else {
 		CGSize badgeTextSize = [self.cell.badgeText sizeWithFont:[TexLegeTheme boldTwelve]];
 		CGRect badgeViewFrame = CGRectIntegral(CGRectMake(rect.size.width - badgeTextSize.width - 24, (rect.size.height - badgeTextSize.height - 4) / 2, badgeTextSize.width + 14, badgeTextSize.height + 4));
@@ -113,10 +113,10 @@
 		CGContextRestoreGState(context);
 		
 		[currentSummaryColor set];
-		[self.cell.summary drawAtPoint:CGPointMake(10, 10) forWidth:(rect.size.width - badgeViewFrame.size.width - 24) withFont:[TexLegeTheme boldFifteen] lineBreakMode:UILineBreakModeTailTruncation];
+		[self.cell.summary drawAtPoint:CGPointMake(10, 10) forWidth:(rect.size.width - badgeViewFrame.size.width - 24) withFont:[TexLegeTheme boldFifteen] lineBreakMode:NSLineBreakByTruncatingTail];
 		
 		//[currentDetailColor set];
-		//[self.cell.detail drawAtPoint:CGPointMake(10, 32) forWidth:(rect.size.width - badgeViewFrame.size.width - 24) withFont:[TexLegeTheme boldTwelve] lineBreakMode:UILineBreakModeTailTruncation];		
+		//[self.cell.detail drawAtPoint:CGPointMake(10, 32) forWidth:(rect.size.width - badgeViewFrame.size.width - 24) withFont:[TexLegeTheme boldTwelve] lineBreakMode:NSLineBreakByTruncatingTail];		
 	}
 }
 

@@ -14,6 +14,7 @@
 #import "CommitteePositionObj.h"
 #import "WnomObj.h"
 #import "UtilityMethods.h"
+#import "CommitteePositionObj+RestKit.h"
 
 @implementation LegislatorObj (RestKit)
 

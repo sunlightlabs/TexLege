@@ -208,7 +208,7 @@ const CGFloat kLegislatorMasterCellViewHeight = 73.0f;
 	drawRect.size.height = roundf(resolution * drawRect.size.height) / resolution;
 	font = [TexLegeTheme boldTen];
 	[tenureColor set];
-	[[self tenure] drawInRect:drawRect withFont:font lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentRight];
+	[[self tenure] drawInRect:drawRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentRight];
 	
 	// Title
 	

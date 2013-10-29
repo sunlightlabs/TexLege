@@ -12,12 +12,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CommitteeMemberCellView.h"
-@class LegislatorObj;
+#import "LegislatorCellProtocol.h"
 
-@interface CommitteeMemberCell : UITableViewCell {
-	
-}
+@interface CommitteeMemberCell : UITableViewCell <LegislatorCellProtocol>
 @property (nonatomic,retain) IBOutlet CommitteeMemberCellView *cellView;
-- (void)setLegislator:(LegislatorObj *)value;
-
 @end

@@ -292,7 +292,7 @@ static LocalyticsDatabase *_sharedLocalyticsDatabase = nil;
     NSDictionary *fileAttributes = [[NSFileManager defaultManager] 
                                     attributesOfItemAtPath:[LocalyticsDatabase localyticsDatabasePath]
                                     error:nil];
-    size = [fileAttributes fileSize];
+    size = (NSUInteger)[fileAttributes fileSize];
     return size;
 }
 
@@ -632,7 +632,7 @@ static LocalyticsDatabase *_sharedLocalyticsDatabase = nil;
     NSString *stageEvents = [NSString stringWithFormat:@"UPDATE events SET upload_header = ? WHERE upload_header IS NULL"];
     sqlite3_stmt *updateEvents;
     sqlite3_prepare_v2(_databaseConnection, [stageEvents UTF8String], -1, &updateEvents, NULL);
-    sqlite3_bind_int(updateEvents, 1, headerId);
+    sqlite3_bind_int(updateEvents, 1, (int)headerId);
     int code = sqlite3_step(updateEvents);
     sqlite3_finalize(updateEvents);
     BOOL success = (code == SQLITE_DONE);

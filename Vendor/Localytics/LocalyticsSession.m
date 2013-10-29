@@ -926,12 +926,15 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
 // We collect it as long as it is available along with a randomly generated ID.
 // This way, when this becomes unavailable we can map existing users so the
 // new vs returning counts do not break. This will be removed before it causes grief.
+    return nil;
+    /*
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	NSString *systemId = [[UIDevice currentDevice] uniqueIdentifier];
 #pragma clang diagnostic pop    
     
 	return systemId;
+     */
 }
 
 /*!

@@ -144,7 +144,7 @@ const CGFloat kDisclosureQuartzViewHeight = 32.0f;
 	font = [UIFont fontWithName:@"HiraKakuProN-W6" size:28.0f];
 	color = [TexLegeTheme accent];
 	[color set];
-	[string drawInRect:drawRect withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+	[string drawInRect:drawRect withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
 	CGContextRestoreGState(context);
 	
 	// Inner Shadow Effect

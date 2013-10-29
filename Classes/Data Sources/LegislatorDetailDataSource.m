@@ -540,7 +540,7 @@
 			cell.detailTextLabel.textColor = [UIColor grayColor];
 	}
 	else if (cellInfo.entryType == DirectoryTypeMap) {
-			cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+			cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
 			cell.detailTextLabel.numberOfLines = 4;
 	}			
 	

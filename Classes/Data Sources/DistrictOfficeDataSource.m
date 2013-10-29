@@ -154,7 +154,7 @@
 		cell.textLabel.textColor =	[TexLegeTheme accent];
 		
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-		cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+		cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 		cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 		cell.detailTextLabel.minimumFontSize = 12.0f;
 		//cell.accessoryView = [TexLegeTheme disclosureLabel:YES];

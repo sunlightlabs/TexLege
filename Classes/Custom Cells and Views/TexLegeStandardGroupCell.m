@@ -41,10 +41,10 @@
 
 		self.textLabel.adjustsFontSizeToFitWidth =	YES;
 
-		self.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+		self.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 		self.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-		self.detailTextLabel.minimumFontSize = 12.0f;
-		
+        self.detailTextLabel.minimumScaleFactor = (12.0 / self.detailTextLabel.font.pointSize); // 12.f = deprecated minimumFontSize
+
 		//cell.accessoryView = [TexLegeTheme disclosureLabel:YES];
 		//self.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]] autorelease];
 		DisclosureQuartzView *qv = [[DisclosureQuartzView alloc] initWithFrame:CGRectMake(0.f, 0.f, 28.f, 28.f)];
