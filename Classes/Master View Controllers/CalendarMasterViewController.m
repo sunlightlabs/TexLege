@@ -95,6 +95,8 @@
 	if (!self.detailViewController) {
 		CalendarDetailViewController *temp = [[CalendarDetailViewController alloc] initWithNibName:[CalendarDetailViewController nibName] 
 																							bundle:nil];
+        temp.edgesForExtendedLayout = UIRectEdgeBottom;
+//        temp.extendedLayoutIncludesOpaqueBars = YES;
 		self.detailViewController = temp;
 		[temp release];
 	}

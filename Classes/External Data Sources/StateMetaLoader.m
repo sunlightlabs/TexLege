@@ -11,7 +11,6 @@
 //
 
 #import "StateMetaLoader.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "UtilityMethods.h"
 #import "TexLegeReachability.h"
 #import "OpenLegislativeAPIs.h"
@@ -108,7 +107,8 @@
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if ([fileManager fileExistsAtPath:localPath]) {
 		NSData *jsonFile = [NSData dataWithContentsOfFile:localPath];
-		_metadata = [[jsonFile mutableObjectFromJSONData] retain];
+        NSError *error = nil;
+        _metadata = [[NSJSONSerialization JSONObjectWithData:jsonFile options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error] retain];
 	} else {
 		_metadata = [[NSMutableDictionary alloc] init];
 	}		
@@ -220,8 +220,10 @@
 
 		if (NO == [request.resourcePath hasPrefix:@"/metadata"]) 
 			return;
-		
-		NSMutableDictionary *stateMeta = [response.body mutableObjectFromJSONData];
+
+		NSError *error = nil;
+        NSMutableDictionary *stateMeta = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
 		if (IsEmpty(stateMeta)) {
 			[self request:request didFailLoadWithError:nil];
 			return;
@@ -253,7 +255,9 @@
 			}
 			
 			NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kStateMetaFile];
-			if (![[_metadata JSONData] writeToFile:localPath atomically:YES])
+
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_metadata options:NSJSONWritingPrettyPrinted error:&error];
+			if (![jsonData writeToFile:localPath atomically:YES])
 				NSLog(@"StateMetadataLoader: error writing cache to file: %@", localPath);
 			isFresh = YES;
 			[[NSNotificationCenter defaultCenter] postNotificationName:kStateMetaNotifyLoaded object:nil];

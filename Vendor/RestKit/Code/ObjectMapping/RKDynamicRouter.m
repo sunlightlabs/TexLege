@@ -134,7 +134,7 @@
     
     // add nested relationships
     for (NSString* elementName in [relationships allKeys]) {
-        NSObject *relationship = [relationships objectForKey:elementName];
+        NSObject<RKObjectMappable> *relationship = [relationships objectForKey:elementName];
         NSString *relationshipPath = [NSString stringWithFormat:@"%@", elementName];
         // to-many relation 
         if ([relationship isKindOfClass:[NSArray class]] || 

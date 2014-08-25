@@ -11,7 +11,6 @@
 //
 
 #import "DataModelUpdateManager.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "UtilityMethods.h"
 #import "TexLegeReachability.h"
 #import "TexLegeCoreDataUtils.h"
@@ -257,7 +256,9 @@ enum TXL_QueryTypes {
 		NSInteger queryType = numToInt([request.userData objectForKey:TXLUPDMGR_QUERYKEY]);
 		
 		if (NO == queryIsComplete(queryType)) { // we're only working with an array of IDs
-			NSArray *resultIDs = [response bodyAsJSON];
+            NSError *error = nil;
+            NSArray *resultIDs = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
 			if (resultIDs && [resultIDs count]) {
 				if (queryType == QUERYTYPE_IDS_NEW) {
 					// DO SOMETHING
@@ -282,7 +283,7 @@ enum TXL_QueryTypes {
 			
 			if (objects && [objects count]) {
 				NSString *notification = [NSString stringWithFormat:@"RESTKIT_LOADED_%@", [className uppercaseString]];
-				debug_NSLog(@"%@ %d objects", notification, [objects count]);
+				debug_NSLog(@"%@ %lu objects", notification, (unsigned long)[objects count]);
 				
 				NSString *statusString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Updated %@", @"DataTableUI", @"Status indicator for updates"), [statusBlurbsAndModels objectForKey:className]];
                 if (self.infoPanel) {

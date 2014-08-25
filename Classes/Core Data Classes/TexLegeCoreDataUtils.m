@@ -99,9 +99,9 @@
 	NSFetchRequest *fetchRequest = [LegislatorObj fetchRequest];
 	NSString *predicateString = nil;
 	if (party > kUnknownParty)
-		predicateString = [NSString stringWithFormat:@"legtype == %d AND party_id == %d", chamber, party];
+		predicateString = [NSString stringWithFormat:@"legtype == %ld AND party_id == %ld", (long)chamber, (long)party];
 	else
-		predicateString = [NSString stringWithFormat:@"legtype == %d", chamber];
+		predicateString = [NSString stringWithFormat:@"legtype == %ld", (long)chamber];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateString]; 
 	[fetchRequest setPredicate:predicate];

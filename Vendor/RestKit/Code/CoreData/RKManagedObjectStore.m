@@ -250,7 +250,7 @@ static NSString* const kRKManagedObjectContextKey = @"RKManagedObjectContext";
 			NSString* primaryKey = [class performSelector:@selector(primaryKeyProperty)];
 			id primaryKeyValue = [object valueForKey:primaryKey];
 			
-			NSMutableDictionary* classCache = [threadDictionary objectForKey:class];
+			NSMutableDictionary* classCache = [threadDictionary objectForKey:NSStringFromClass(class)];
 			if (classCache && primaryKeyValue && [classCache objectForKey:primaryKeyValue] == nil) {
 				[classCache setObject:object forKey:primaryKeyValue];
 			}
@@ -291,11 +291,11 @@ static NSString* const kRKManagedObjectContextKey = @"RKManagedObjectContext";
 		NSArray* objects = nil;
 		NSMutableDictionary* threadDictionary = [[NSThread currentThread] threadDictionary];
 		
-		if (nil == [threadDictionary objectForKey:class]) {
+		if (nil == [threadDictionary objectForKey:NSStringFromClass(class)]) {
 			NSFetchRequest* fetchRequest = [class fetchRequest];
 			[fetchRequest setReturnsObjectsAsFaults:NO];			
 			objects = [class objectsWithFetchRequest:fetchRequest];
-			NSLog(@"Caching all %d %@ objects to thread local storage", [objects count], class);
+			NSLog(@"Caching all %lu %@ objects to thread local storage", (unsigned long)[objects count], class);
 			NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
 			NSString* primaryKey = [class performSelector:@selector(primaryKeyProperty)];
 			for (id theObject in objects) {			
@@ -305,10 +305,10 @@ static NSString* const kRKManagedObjectContextKey = @"RKManagedObjectContext";
 				}
 			}
 			
-			[threadDictionary setObject:dictionary forKey:class];
+			[threadDictionary setObject:dictionary forKey:NSStringFromClass(class)];
 		}
 		
-		NSMutableDictionary* dictionary = [threadDictionary objectForKey:class];
+		NSMutableDictionary* dictionary = [threadDictionary objectForKey:NSStringFromClass(class)];
 		object = [dictionary objectForKey:primaryKeyValue];
 		
 		if (object == nil && primaryKeyValue && [class respondsToSelector:@selector(object)]) {

@@ -18,7 +18,6 @@
 #import "DisclosureQuartzView.h"
 #import "BillSearchDataSource.h"
 #import "OpenLegislativeAPIs.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "TexLegeStandardGroupCell.h"
 #import "NSDate+Helper.h"
 #import "TexLegeCoreDataUtils.h"
@@ -259,8 +258,12 @@
 		// Success! Let's take a look at the data  
 		loadingStatus = LOADING_IDLE;
 
-		[keyBills_ removeAllObjects];	
-		[keyBills_ addObjectsFromArray:[response.body mutableObjectFromJSONData]];
+		[keyBills_ removeAllObjects];
+
+        NSError *error = nil;
+        NSMutableArray *items = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
+		[keyBills_ addObjectsFromArray:items];
 
 		// if we wanted blocks, we'd do this instead:
 		[keyBills_ sortUsingComparator:^(NSMutableDictionary *item1, NSMutableDictionary *item2) {

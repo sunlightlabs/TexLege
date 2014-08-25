@@ -90,7 +90,7 @@ static UploaderThread *_sharedUploaderThread = nil;
 	[submitRequest setHTTPMethod:@"POST"];
 	[submitRequest setValue:@"application/x-gzip" forHTTPHeaderField:@"Content-Type"];
     [submitRequest setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
-	[submitRequest setValue:[NSString stringWithFormat:@"%d", [deflatedRequestData length]] forHTTPHeaderField:@"Content-Length"];
+	[submitRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[deflatedRequestData length]] forHTTPHeaderField:@"Content-Length"];
 	[submitRequest setHTTPBody:deflatedRequestData];
     [deflatedRequestData release];
 	
@@ -125,13 +125,13 @@ static UploaderThread *_sharedUploaderThread = nil;
     // leave upload rows intact, the default case is to delete.
     if (_responseStatusCode >= 500 && _responseStatusCode < 600)
     {
-        [self logMessage:[NSString stringWithFormat:@"Upload failed with response status code %d", _responseStatusCode]];
+        [self logMessage:[NSString stringWithFormat:@"Upload failed with response status code %ld", (long)_responseStatusCode]];
     } else
     {
         // The connection finished loading and uploaded data should be deleted.  Because only one instance of the
         // uploader can be running at a time it should not be possible for new upload rows to appear so there is no
         // fear of deleting data which has not yet been uploaded.
-        [self logMessage:[NSString stringWithFormat:@"Upload completed successfully. Response code %d", _responseStatusCode]];
+        [self logMessage:[NSString stringWithFormat:@"Upload completed successfully. Response code %ld", (long)_responseStatusCode]];
         [[LocalyticsDatabase sharedLocalyticsDatabase] deleteUploadData];
     }
 
@@ -144,8 +144,8 @@ static UploaderThread *_sharedUploaderThread = nil;
 	// so it is not deleted.  In the event that we accidently store data which was succesfully uploaded, the
 	// duplicate data will be ignored by the server when it is next uploaded.
 	[self logMessage:[NSString stringWithFormat: 
-					  @"Error Uploading.  Code: %d,  Description: %@", 
-					  [error code], 
+					  @"Error Uploading.  Code: %ld,  Description: %@", 
+					  (long)[error code],
 					  [error localizedDescription]]];
 
 	[self complete];
@@ -177,7 +177,7 @@ static UploaderThread *_sharedUploaderThread = nil;
 	strm.opaque = Z_NULL;
 	strm.total_out = 0;
 	strm.next_in=(Bytef *)[data bytes];
-	strm.avail_in = [data length];
+	strm.avail_in = (uInt)[data length];
 	
 	// Compresssion Levels:
 	//   Z_NO_COMPRESSION
@@ -195,7 +195,7 @@ static UploaderThread *_sharedUploaderThread = nil;
 			[compressed increaseLengthBy: 16384];
 		
 		strm.next_out = [compressed mutableBytes] + strm.total_out;
-		strm.avail_out = [compressed length] - strm.total_out;
+		strm.avail_out = (uInt)([compressed length] - strm.total_out);
 		
 		deflate(&strm, Z_FINISH);  
 		
@@ -238,9 +238,9 @@ static UploaderThread *_sharedUploaderThread = nil;
 	return self;
 }
 
-- (unsigned)retainCount {
+- (NSUInteger)retainCount {
 	// maximum value of an unsigned int - prevents additional retains for the class
-	return UINT_MAX;
+	return NSUIntegerMax;
 }
 
 - (oneway void)release {

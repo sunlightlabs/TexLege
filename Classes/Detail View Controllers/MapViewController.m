@@ -675,7 +675,8 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
     return nil;
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id)overlay{
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay
+{
 	NSArray *colors = [[UIColor randomColor] triadicColors];
 	UIColor *myColor = [[colors objectAtIndex:colorIndex] colorByDarkeningTo:0.50f];
 	colorIndex++;
@@ -699,7 +700,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 			senate = YES;
 		}
 
-		MKPolygonView *aView = [[[MKPolygonView alloc] initWithPolygon:(MKPolygon*)overlay] autorelease];
+		MKPolygonRenderer *aView = [[[MKPolygonRenderer alloc] initWithPolygon:(MKPolygon*)overlay] autorelease];
 		if (senate) {
 			self.senateDistrictView = aView;
 		}
@@ -716,7 +717,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	
 	else if ([overlay isKindOfClass:[MKPolyline class]])
     {
-        MKPolylineView*    aView = [[[MKPolylineView alloc] initWithPolyline:(MKPolyline*)overlay] autorelease];
+        MKPolylineRenderer*    aView = [[[MKPolylineRenderer alloc] initWithPolyline:(MKPolyline*)overlay] autorelease];
 				
         aView.strokeColor = myColor;// colorWithAlphaComponent:0.7];
         aView.lineWidth = 3;

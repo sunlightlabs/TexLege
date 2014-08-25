@@ -17,7 +17,6 @@
 #import "TexLegeStandardGroupCell.h"
 #import "TexLegeTheme.h"
 #import "UtilityMethods.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 
 @interface LegislatorContributionsDataSource(Private)
 - (void)parseJSONObject:(id)jsonDeserialized;
@@ -136,7 +135,7 @@
 	TableCellDataObject *cellInfo = [self dataObjectForIndexPath:indexPath];
 	
 	if (cellInfo == nil) {
-		debug_NSLog(@"ContributionsDataSource: error finding table entry for section:%d row:%d", indexPath.section, indexPath.row);
+		debug_NSLog(@"ContributionsDataSource: error finding table entry for section:%ld row:%ld", (long)indexPath.section, (long)indexPath.row);
 		return nil;
 	}
 	
@@ -496,7 +495,9 @@
 	if ([request isGET] && [response isOK]) {  
 		// Success! Let's take a look at the data  
 
-		id jsonDeserialized = [response.body mutableObjectFromJSONDataWithParseOptions:(JKParseOptionUnicodeNewlines & JKParseOptionLooseUnicode)];
+        NSError *error = nil;
+        id jsonDeserialized = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
 		if (IsEmpty(jsonDeserialized))
 			return;
 		

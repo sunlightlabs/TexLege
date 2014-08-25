@@ -127,7 +127,7 @@
 }
 
 - (NSString *)districtPartyString {
-	NSString *string = [NSString stringWithFormat: @"(%@-%d)", self.partyShortName, [self.district integerValue]];
+	NSString *string = [NSString stringWithFormat: @"(%@-%ld)", self.partyShortName, (long)[self.district integerValue]];
 	return string;
 }
 

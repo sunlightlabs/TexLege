@@ -17,7 +17,7 @@
 
 + (LoadingCell *)loadingCellWithStatus:(NSInteger)loadingStatus tableView:(UITableView *)tableView {
 	
-	NSString *loadingCellIdentifier = [NSString stringWithFormat:@"LOADING_CELL_%d", loadingStatus];
+	NSString *loadingCellIdentifier = [NSString stringWithFormat:@"LOADING_CELL_%ld", (long)loadingStatus];
 	LoadingCell *loadingCell = (LoadingCell *)[tableView dequeueReusableCellWithIdentifier:loadingCellIdentifier];
 	if (loadingCell == nil)
 	{

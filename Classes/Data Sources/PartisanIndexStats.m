@@ -17,7 +17,6 @@
 #import "TexLegeCoreDataUtils.h"
 #import "NSDate+Helper.h"
 #import "DataModelUpdateManager.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "TexLegeAppDelegate.h"
 
 @interface PartisanIndexStats (Private)
@@ -91,15 +90,15 @@
 				if (aggregatesArray && [aggregatesArray count]) {
 					NSNumber *avgIndex = [aggregatesArray objectAtIndex:0];
 					if (avgIndex)
-						[tempAggregates setObject:avgIndex forKey:[NSString stringWithFormat:@"AvgC%d+P%d", chamber, party]];
+						[tempAggregates setObject:avgIndex forKey:[NSString stringWithFormat:@"AvgC%ld+P%ld", (long)chamber, (long)party]];
 					
 					NSNumber *maxIndex = [aggregatesArray objectAtIndex:1];
 					if (maxIndex)
-						[tempAggregates setObject:maxIndex forKey:[NSString stringWithFormat:@"MaxC%d+P%d", chamber, party]];
+						[tempAggregates setObject:maxIndex forKey:[NSString stringWithFormat:@"MaxC%ld+P%ld", (long)chamber, (long)party]];
 					
 					NSNumber *minIndex = [aggregatesArray objectAtIndex:2];
 					if (minIndex)
-						[tempAggregates setObject:minIndex forKey:[NSString stringWithFormat:@"MinC%d+P%d", chamber, party]];
+						[tempAggregates setObject:minIndex forKey:[NSString stringWithFormat:@"MinC%ld+P%ld", (long)chamber, (long)party]];
 				}
 				else
 					NSLog(@"PartisanIndexStates: Error pulling aggregate dictionary.");
@@ -114,23 +113,23 @@
 /* These are convenience methods for accessing our aggregate calculations from cache */
 - (CGFloat) minPartisanIndexUsingChamber:(NSInteger)chamber {
 	return [[self.partisanIndexAggregates objectForKey:
-			[NSString stringWithFormat:@"MinC%d+P0", chamber]] floatValue];
+			[NSString stringWithFormat:@"MinC%ld+P0", (long)chamber]] floatValue];
 };
 
 - (CGFloat) maxPartisanIndexUsingChamber:(NSInteger)chamber {
 	return [[self.partisanIndexAggregates objectForKey:
-			[NSString stringWithFormat:@"MaxC%d+P0", chamber]] floatValue];
+			[NSString stringWithFormat:@"MaxC%ld+P0", (long)chamber]] floatValue];
 };
 
 - (CGFloat) overallPartisanIndexUsingChamber:(NSInteger)chamber {
 	return [[self.partisanIndexAggregates objectForKey:
-			[NSString stringWithFormat:@"AvgC%d+P0", chamber]] floatValue];
+			[NSString stringWithFormat:@"AvgC%ld+P0", (long)chamber]] floatValue];
 };
 
 
 - (CGFloat) partyPartisanIndexUsingChamber:(NSInteger)chamber andPartyID:(NSInteger)party {
 	return [[self.partisanIndexAggregates objectForKey:
-			[NSString stringWithFormat:@"AvgC%d+P%d", chamber, party]] floatValue];
+			[NSString stringWithFormat:@"AvgC%ld+P%ld", (long)chamber, (long)party]] floatValue];
 };
 
 
@@ -153,10 +152,10 @@
 	if (tempNum)
 		maxWnomSession = [tempNum integerValue];
 	
-	NSMutableString *predicateString = [NSMutableString stringWithFormat:@"self.legislator.legtype == %d AND self.session == %d", chamber, maxWnomSession];
+	NSMutableString *predicateString = [NSMutableString stringWithFormat:@"self.legislator.legtype == %ld AND self.session == %ld", (long)chamber, (long)maxWnomSession];
 	
 	if (party > kUnknownParty)
-		[predicateString appendFormat:@" AND self.legislator.party_id == %d", party];
+		[predicateString appendFormat:@" AND self.legislator.party_id == %ld", (long)party];
 
 	if (maxWnomSession == 81)	// let's try some special cases for the party switchers Pena and Hopson and Ritter
 		[predicateString appendString:@" AND self.legislator.legislatorID != 50000 AND self.legislator.legislatorID != 49745 AND self.legislator.legislatorID != 25363"];
@@ -230,9 +229,9 @@
 	
 	if (!IsEmpty(m_rawPartisanIndexAggregates))
 	{
-		NSArray *chamberArray = [m_rawPartisanIndexAggregates findAllWhereKeyPath:@"chamber" equals:[NSNumber numberWithInt:chamber]];
+		NSArray *chamberArray = [m_rawPartisanIndexAggregates findAllWhereKeyPath:@"chamber" equals:@(chamber)];
 		if (chamberArray) {
-			NSArray *partyArray = [chamberArray findAllWhereKeyPath:@"party" equals:[NSNumber numberWithInt:party]];
+			NSArray *partyArray = [chamberArray findAllWhereKeyPath:@"party" equals:@(party)];
 			return partyArray;
 		}
 	}
@@ -322,8 +321,10 @@
 	
 	NSData *jsonFile = [NSData dataWithContentsOfFile:localPath];
 	if (m_rawPartisanIndexAggregates)
-		[m_rawPartisanIndexAggregates release];	
-	m_rawPartisanIndexAggregates = [[jsonFile mutableObjectFromJSONData] retain];
+		[m_rawPartisanIndexAggregates release];
+
+    m_rawPartisanIndexAggregates = [[NSJSONSerialization JSONObjectWithData:jsonFile options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&newError] retain];
+
 	if (m_rawPartisanIndexAggregates) {
 		[self resetData:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kPartisanIndexNotifyLoaded object:nil];
@@ -365,14 +366,17 @@
 		// Success! Let's take a look at the data  
 		if (m_rawPartisanIndexAggregates)
 			[m_rawPartisanIndexAggregates release];	
-		
-		m_rawPartisanIndexAggregates = [[response.body mutableObjectFromJSONData] retain];
+
+        NSError *error = nil;
+        m_rawPartisanIndexAggregates = [[NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error] retain];
+
 		if (m_rawPartisanIndexAggregates) {
 			if (updated)
 				[updated release];
 			updated = [[NSDate date] retain];
 			NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kPartisanIndexFile];
-			if (![[m_rawPartisanIndexAggregates JSONData] writeToFile:localPath atomically:YES])
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:m_rawPartisanIndexAggregates options:NSJSONWritingPrettyPrinted error:&error];
+			if (![jsonData writeToFile:localPath atomically:YES])
 				NSLog(@"PartisanIndex: error writing cache to file: %@", localPath);
 			isFresh = YES;
 			[self resetData:nil];

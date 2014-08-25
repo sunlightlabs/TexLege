@@ -717,9 +717,9 @@ static LocalyticsDatabase *_sharedLocalyticsDatabase = nil;
 	return self;
 }
 
-- (unsigned)retainCount {
+- (NSUInteger)retainCount {
 	// maximum value of an unsigned int - prevents additional retains for the class
-	return UINT_MAX;
+	return NSUIntegerMax;
 }
 
 - (oneway void)release {

@@ -41,7 +41,7 @@
 }
 
 - (NSDictionary *)propertyNamesAndTypesForClass:(Class)class {
-	NSMutableDictionary* propertyNames = [_cachedPropertyNamesAndTypes objectForKey:class];
+	NSMutableDictionary* propertyNames = [_cachedPropertyNamesAndTypes objectForKey:NSStringFromClass(class)];
 	if (propertyNames) {
 		return propertyNames;
 	}
@@ -77,7 +77,7 @@
 		currentClass = [currentClass superclass];
 	}
 	
-	[_cachedPropertyNamesAndTypes setObject:propertyNames forKey:class];	
+	[_cachedPropertyNamesAndTypes setObject:propertyNames forKey:NSStringFromClass(class)];
 	return propertyNames;
 }
 

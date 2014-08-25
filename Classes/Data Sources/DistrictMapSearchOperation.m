@@ -48,10 +48,10 @@
 
 - (void)informDelegateOfFailureWithMessage:(NSString *)message failOption:(DistrictMapSearchOperationFailOption)failOption;
 {
-    if ([delegate respondsToSelector:@selector(DistrictMapSearchOperationDidFail:errorMessage:option:)])
+    if ([delegate respondsToSelector:@selector(districtMapSearchOperationDidFail:errorMessage:option:)])
     {
         NSInvocation *invocation = [NSInvocation invocationWithTarget:delegate 
-                                                             selector:@selector(DistrictMapSearchOperationDidFail:errorMessage:option:) 
+                                                             selector:@selector(districtMapSearchOperationDidFail:errorMessage:option:)
                                                       retainArguments:YES, self, message, failOption];
         [invocation invokeOnMainThreadWaitUntilDone:YES];
     } 

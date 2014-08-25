@@ -70,7 +70,7 @@
 	self.tableView.rowHeight = 73.0f;
 	
 	if ([UtilityMethods isIPadDevice])
-	    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+	    self.preferredContentSize = CGSizeMake(320.0, 600.0);
 	
 	self.searchDisplayController.delegate = self;
 	self.searchDisplayController.searchResultsDelegate = self;

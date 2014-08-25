@@ -19,7 +19,6 @@
 #import "TexLegeLibrary.h"
 #import "UtilityMethods.h"
 #import "OpenLegislativeAPIs.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "LocalyticsSession.h"
 #import "LoadingCell.h"
 #import "StateMetaLoader.h"
@@ -279,7 +278,6 @@
 				if ([tail integerValue] > 0) {
 					isBillID = YES;
 
-//#warning state specific (Bill IDs)
 					NSNumber *billNumber = [NSNumber numberWithInteger:[tail integerValue]];		// we specifically convolute this to ensure we're grabbing only the numerical of the string
 					[queryString appendFormat:@"/%@/%@/%@%%20%@", meta.selectedState, meta.currentSession, billType, billNumber];
 					
@@ -331,7 +329,7 @@
 		NSDictionary *tagSubject = [NSDictionary dictionaryWithObject:searchSubject forKey:@"subject"];
 		[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"BILL_SUBJECTS" attributes:tagSubject];	
 	}
-	[queryParams setObject:searchSubject forKey:@"subjects"];
+	[queryParams setObject:searchSubject forKey:@"subject"];
 				
 	[self startSearchWithQueryString:@"/bills" params:queryParams];
 }
@@ -432,8 +430,10 @@
 			loadingStatus = LOADING_IDLE;
 
 		[_rows removeAllObjects];	
-				
-		id results = [response.body mutableObjectFromJSONData];
+
+        NSError *error = nil;
+        id results= [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
 		if ([results isKindOfClass:[NSMutableArray class]])
 			[_rows addObjectsFromArray:results];
 		else if ([results isKindOfClass:[NSMutableDictionary class]])

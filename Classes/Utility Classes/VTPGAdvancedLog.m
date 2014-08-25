@@ -36,8 +36,8 @@
 #import "VTPGAdvancedLog.h"
 
 static BOOL TypeCodeIsCharArray(const char *typeCode){
-	int lastCharOffset = strlen(typeCode) - 1;
-	int secondToLastCharOffset = lastCharOffset - 1 ;
+	size_t lastCharOffset = strlen(typeCode) - 1;
+	size_t secondToLastCharOffset = lastCharOffset - 1 ;
 	
 	BOOL isCharArray = typeCode[0] == '[' &&
 	typeCode[secondToLastCharOffset] == 'c' && typeCode[lastCharOffset] == ']';
@@ -57,8 +57,8 @@ static NSString* VTPGStringFromBoolOrCharValue(BOOL boolOrCharvalue) {
 }
 
 static NSString *VTPGStringFromFourCharCodeOrUnsignedInt32(FourCharCode fourcc) {
-	return [NSString stringWithFormat:@"%lu ('%lu%lu%lu%lu')",
-			fourcc,
+	return [NSString stringWithFormat:@"%u ('%lu%lu%lu%lu')",
+			(unsigned int)fourcc,
 			(fourcc >> 24) & 0xFF,
 			(fourcc >> 16) & 0xFF,
 			(fourcc >> 8) & 0xFF,

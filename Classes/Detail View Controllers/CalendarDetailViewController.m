@@ -57,7 +57,14 @@
 
 	self.navigationController.navigationBar.tintColor = [TexLegeTheme navbar];
 	self.searchDisplayController.searchBar.tintColor = [TexLegeTheme navbar];
-	self.navigationItem.titleView = self.searchDisplayController.searchBar;
+    if ([UtilityMethods isIPadDevice])
+    {
+        self.navigationItem.titleView = self.searchDisplayController.searchBar;
+    }
+    else
+    {
+        self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    }
 }
 
 - (void)awakeFromNib {
@@ -137,10 +144,13 @@
 }
 
 - (void)setChamberCalendar:(ChamberCalendarObj *)newObj {
-	if (chamberCalendar && newObj && self.webView) {
-		if (![[chamberCalendar valueForKey:@"title"] isEqualToString:[newObj valueForKey:@"title"]])
-			[self.webView loadHTMLString:@"<html></html>" baseURL:nil];
-	}
+    if (self.isViewLoaded)
+    {
+        if (chamberCalendar && newObj && self.webView) {
+            if (![[chamberCalendar valueForKey:@"title"] isEqualToString:[newObj valueForKey:@"title"]])
+                [self.webView loadHTMLString:@"<html></html>" baseURL:nil];
+        }
+    }
 	
 	if (chamberCalendar) [chamberCalendar release], chamberCalendar = nil;
 	if (newObj) {
@@ -233,7 +243,7 @@
 			
 			SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
 			webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-			[self presentModalViewController:webViewController animated:YES];	
+            [self presentViewController:webViewController animated:YES completion:nil];
 			[webViewController release];
 		}		
 	}
@@ -241,20 +251,6 @@
 
 #pragma mark -
 #pragma mark Search Results Delegate
-
-- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-	id gridView = self.calendarView.gridView;
-	if (gridView && [gridView respondsToSelector:@selector(setAlpha:)]) {
-		[gridView setAlpha:0.4f];
-	}
-}
-
-- (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
-	id gridView = self.calendarView.gridView;
-	if (gridView && [gridView respondsToSelector:@selector(setAlpha:)]) {
-		[gridView setAlpha:1.0f];
-	}
-}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
 	[self.chamberCalendar filterEventsByString:searchString];
@@ -268,6 +264,7 @@
 	EKEventViewController *controller = [[EKEventViewController alloc] init];			
 	controller.event = event;
 	controller.allowsEditing = YES;
+    controller.delegate = self;
 	
 	if (NO == [UtilityMethods isIPadDevice]) {
 		//	Push eventViewController onto the navigation controller stack
@@ -297,6 +294,13 @@
 		[aPopover release];				
 	}
 	[controller release];
+}
+
+- (void)eventViewController:(EKEventViewController *)controller didCompleteWithAction:(EKEventViewAction)action {
+    if (self.eventPopover) {
+        [self.eventPopover dismissPopoverAnimated:YES];
+        self.eventPopover = nil;
+    }
 }
 
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)newPop {

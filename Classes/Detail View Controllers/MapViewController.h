@@ -34,7 +34,7 @@
 @property (nonatomic,retain) SVGeocoder *geocoder;
 @property (nonatomic,readonly) MKCoordinateRegion texasRegion;
 @property (nonatomic,retain) UserPinAnnotation *searchLocation;
-@property (nonatomic,assign) MKPolygonView *senateDistrictView, *houseDistrictView;
+@property (nonatomic,assign) MKPolygonRenderer *senateDistrictView, *houseDistrictView;
 @property (nonatomic,retain) NSOperationQueue *genericOperationQueue;
 
 - (IBAction) showAllDistricts:(id)sender;

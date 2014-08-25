@@ -51,11 +51,11 @@
 						title = %@ \
 						subtitle = %@ \
 						entryValue = %@ \
-						entryType = %d \
+						entryType = %ld \
 						isClickable = %d \
 						action = %@ \
 						parameter = %@", 
-						self.title, self.subtitle, self.entryValue, self.entryType, self.isClickable, self.action, self.parameter];
+						self.title, self.subtitle, self.entryValue, (long)self.entryType, self.isClickable, self.action, self.parameter];
 	return string;
 }
 

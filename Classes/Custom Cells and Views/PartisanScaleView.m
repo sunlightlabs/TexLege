@@ -203,8 +203,7 @@ const CGFloat kPartisanScaleViewHeight = 32.0f;
 
 	if (self.showUnknown) {
 		if (!self.questionImage) {
-			NSString *imageString = /*(self.usesSmallStar) ? @"Slider_Question.png" :*/ @"Slider_Question_big.png";
-			self.questionImage = [UIImage imageNamed:imageString];
+			self.questionImage = [UIImage imageNamed:@"error"];
 		}
 		drawRect = CGRectMake(68.f, 0.f, 35.f, 32.f);
 		[self.questionImage drawInRect:drawRect blendMode:kCGBlendModeNormal alpha:0.6];
@@ -213,12 +212,8 @@ const CGFloat kPartisanScaleViewHeight = 32.0f;
 	{
 		// StarGroup
 		
-		// Setup for Shadow Effect
-		color = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
 		CGContextSaveGState(context);
-		CGContextSetShadowWithColor(context, CGSizeMake(0.724f * resolution, 2.703f * resolution), 1.679f * resolution, [color CGColor]);
-		CGContextBeginTransparencyLayer(context, NULL);
-		
+
 		// Star
 		
 		stroke = 1.0f;
@@ -283,10 +278,10 @@ const CGFloat kPartisanScaleViewHeight = 32.0f;
 		CGPathCloseSubpath(path);
 		
 		colors = [NSMutableArray arrayWithCapacity:2];
-		color = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
+		color = [UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f];
 		[colors addObject:(id)[color CGColor]];
 		locations[0] = 0.0f;
-		color = [UIColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f];
+		color = [UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f];
 		[colors addObject:(id)[color CGColor]];
 		locations[1] = 1.0f;
 		gradient = CGGradientCreateWithColors(space, (CFArrayRef)colors, locations);
@@ -310,8 +305,6 @@ const CGFloat kPartisanScaleViewHeight = 32.0f;
 		CGContextStrokePath(context);
 		CGPathRelease(path);
 		
-		// Shadow Effect
-		CGContextEndTransparencyLayer(context);
 		CGContextRestoreGState(context);
 	}
 

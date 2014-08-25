@@ -23,7 +23,6 @@
 #import "SVWebViewController.h"
 #import "LocalyticsSession.h"
 #import "NSDate+Helper.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "BillMetadataLoader.h"
 #import "DDActionHeaderView.h"
 #import "TexLegeTheme.h"
@@ -115,7 +114,6 @@ enum _billSections {
     starButton.frame = CGRectMake(0.0f, 0.0f, 66.0f, 66.0f);
     starButton.center = CGPointMake(25.0f, 25.0f);
 	self.actionHeader.items = [NSArray arrayWithObjects:starButton, nil];
-	self.actionHeader.borderGradientHidden = YES;
 
 	NSString *thePath = [[UtilityMethods applicationDocumentsDirectory] stringByAppendingPathComponent:kBillFavoritesStorageFile];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -646,9 +644,10 @@ enum _billSections {
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {  
 	if ([request isGET] && [response isOK]) {  
-		// Success! Let's take a look at the data  
-		self.bill = [response.body mutableObjectFromJSONData];	
-		
+		// Success! Let's take a look at the data
+        NSError *error = nil;
+        self.bill = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves error:&error];
+
 		NSDictionary *tagBill = [NSDictionary dictionaryWithObject:watchIDForBill(self.bill) forKey:@"bill"];
 		[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"BILL_SELECT" attributes:tagBill];
 	}

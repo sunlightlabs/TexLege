@@ -26,7 +26,7 @@
 }
 
 - (void)setModelName:(NSString*)modelName forClass:(Class<RKObjectMappable>)class {
-	[_classToModelMappings setObject:modelName forKey:class];
+	[_classToModelMappings setObject:modelName forKey:NSStringFromClass(class)];
 }
 
 #pragma mark RKRouter
@@ -44,7 +44,7 @@
 	NSMutableDictionary* resourceParams = [NSMutableDictionary dictionaryWithCapacity:entryCount];	
 	
     // set up model name
-    NSString* modelName = [_classToModelMappings objectForKey:[object class]];
+    NSString* modelName = [_classToModelMappings objectForKey:NSStringFromClass([object class])];
 	if (nil == modelName) {
 		NSString* className = NSStringFromClass([object class]);
 		[NSException raise:nil format:@"Unable to find registered modelName for class '%@'", className];

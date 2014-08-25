@@ -11,11 +11,12 @@
 //
 #import "Kal.h"
 #import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 
 @class ChamberCalendarObj;
 @class TexLegeNavBar;
 
-@interface CalendarDetailViewController : KalViewController <UISplitViewControllerDelegate,UISearchDisplayDelegate,UITableViewDelegate, UIPopoverControllerDelegate> {
+@interface CalendarDetailViewController : KalViewController <UISplitViewControllerDelegate,UISearchDisplayDelegate,UITableViewDelegate, UIPopoverControllerDelegate, EKEventViewDelegate> {
 	id dataObject;
 	UIPopoverController *masterPopover;
 	UIPopoverController *eventPopover;

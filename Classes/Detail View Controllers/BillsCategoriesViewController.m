@@ -20,7 +20,6 @@
 #import "TexLegeBadgeGroupCell.h"
 #import "BillMetadataLoader.h"
 #import "OpenLegislativeAPIs.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "LoadingCell.h"
 #import "StateMetaLoader.h"
 
@@ -118,7 +117,7 @@
 - (IBAction)filterChamber:(id)sender {
 	NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
 	if (segPrefs) {
-		NSString *segIndex = [NSString stringWithFormat:@"%d",self.chamberControl.selectedSegmentIndex];
+		NSString *segIndex = [NSString stringWithFormat:@"%ld",(long)self.chamberControl.selectedSegmentIndex];
 		NSMutableDictionary *newDict = [segPrefs mutableCopy];
 		[newDict setObject:segIndex forKey:NSStringFromClass([self class])];
 		[[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
@@ -133,7 +132,7 @@
 	NSInteger theChamber = BOTH_CHAMBERS;
 	if (chamberControl)
 		theChamber = chamberControl.selectedSegmentIndex;
-	return [NSString stringWithFormat:@"%d", theChamber];
+	return [NSString stringWithFormat:@"%ld", (long)theChamber];
 }
 
 - (void)viewDidUnload {
@@ -287,7 +286,6 @@
 	ctl.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
 	ctl.enabled = YES;
 	ctl.opaque = NO;
-	ctl.segmentedControlStyle = UISegmentedControlStyleBar;
 	ctl.selectedSegmentIndex = 0;
 	ctl.userInteractionEnabled = YES;
 	self.chamberControl = ctl;
@@ -315,8 +313,9 @@
 	if ([fileManager fileExistsAtPath:thePath]) {
 		debug_NSLog(@"BillCategories: using cached categories in the documents folder.");
 		NSData *json = [NSData dataWithContentsOfFile:thePath];
+        NSError *error = nil;
 		if (json)
-			categories_ = [[json mutableObjectFromJSONData] retain];
+            categories_ = [[NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error] retain];
 	}
 	if (!categories_) {
 		categories_ = [[NSMutableDictionary dictionary] retain];
@@ -334,7 +333,9 @@
 	if ([request isGET] && [response isOK]) {  
 		// Success! Let's take a look at the data  
 		
-		NSMutableDictionary *newCats = [response.body mutableObjectFromJSONData];
+        NSError *error = nil;
+        NSMutableDictionary *newCats = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
 		if (!newCats)
 			return;
 		
@@ -357,7 +358,7 @@
 		else if ([[request resourcePath] hasSubstring:@"/lower" caseInsensitive:NO])
 			inChamber = HOUSE;
 
-		[categories_ setObject:newArray forKey:[NSString stringWithFormat:@"%d", inChamber]];
+		[categories_ setObject:newArray forKey:[NSString stringWithFormat:@"%ld", (long)inChamber]];
 		[newArray release];
 		
 		if (inChamber < SENATE)
@@ -366,7 +367,8 @@
 		if ([[categories_ allKeys] count] == 3) { // once we have all three arrays ready to go, let's save it
 			NSString *thePath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kBillCategoriesCacheFile];
 			NSError *error = nil;
-			NSData *json = [categories_ JSONDataWithOptions:JKSerializeOptionEscapeUnicode error:&error];
+            NSData *json = [NSJSONSerialization dataWithJSONObject:categories_ options:NSJSONWritingPrettyPrinted error:&error];
+
 			if (![json writeToFile:thePath atomically:YES]) {
 				NSLog(@"BillCategories: Error writing categories cache to file: %@ = %@", [error localizedDescription], thePath);
 			}

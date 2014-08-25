@@ -218,7 +218,7 @@
 		for (section=0; section < sectionCount; section++) {
 			tableHeight += [self.tableView rectForSection:section].size.height;
 		}
-		self.contentSizeForViewInPopover = CGSizeMake(320.0, tableHeight);
+		self.preferredContentSize = CGSizeMake(320.0, tableHeight);
 	}
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginUpdates:) name:@"TABLEUPDATE_START" object:self.dataSource];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endUpdates:) name:@"TABLEUPDATE_END" object:self.dataSource];

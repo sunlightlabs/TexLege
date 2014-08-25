@@ -19,7 +19,6 @@
 #import "OpenLegislativeAPIs.h"
 #import "TexLegeStandardGroupCell.h"
 #import "XMLReader.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "LoadingCell.h"
 
 @interface BillsTodayViewController (Private)

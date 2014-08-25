@@ -165,12 +165,6 @@
 		377359891323104A0033F343 /* Icon_512.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730B43211DD4B4D00BA10D0 /* Icon_512.png */; };
 		3773598A1323104A0033F343 /* LegislatorMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B820511E378CD00A81142 /* LegislatorMasterViewController.xib */; };
 		3773598B1323104A0033F343 /* CapitolMapsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3786786211E442800003690F /* CapitolMapsDetailViewController.xib */; };
-		3773598E1323104A0033F343 /* Slider_Question_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3778E80D11EDC19800278273 /* Slider_Question_big.png */; };
-		3773598F1323104A0033F343 /* Slider_Question_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3778E80E11EDC19800278273 /* Slider_Question_big@2x.png */; };
-		377359901323104A0033F343 /* Month Calendar Shadow Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4CE12026FE300507757 /* Month Calendar Shadow Down.png */; };
-		377359911323104A0033F343 /* Month Calendar Shadow Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4CF12026FE300507757 /* Month Calendar Shadow Right.png */; };
-		377359921323104A0033F343 /* Month Calendar Shadow Vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4D012026FE300507757 /* Month Calendar Shadow Vertical.png */; };
-		377359931323104A0033F343 /* Month Calendar Shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4D112026FE300507757 /* Month Calendar Shadow.png */; };
 		377359941323104A0033F343 /* CalendarDetailViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C5CC12027D2D00507757 /* CalendarDetailViewController~ipad.xib */; };
 		377359951323104A0033F343 /* 01-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C806120344D000507757 /* 01-refresh.png */; };
 		377359961323104A0033F343 /* 02-redo.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C807120344D000507757 /* 02-redo.png */; };
@@ -336,8 +330,6 @@
 		3775FA3D11D86E1700D69AC5 /* LegislatorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3775FA3B11D86E1700D69AC5 /* LegislatorDetailViewController.m */; };
 		3775FA4C11D8701B00D69AC5 /* LegislatorMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3775FA4B11D8701B00D69AC5 /* LegislatorMasterViewController.m */; };
 		37782772121303C1001BD23D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37782771121303C1001BD23D /* Default@2x.png */; };
-		3778E81111EDC19800278273 /* Slider_Question_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 3778E80D11EDC19800278273 /* Slider_Question_big.png */; };
-		3778E81211EDC19800278273 /* Slider_Question_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3778E80E11EDC19800278273 /* Slider_Question_big@2x.png */; };
 		377A4F4D139A9BC100CDBACE /* 113-navigation-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 377A4F38139A9BC100CDBACE /* 113-navigation-inv.png */; };
 		377A4F4E139A9BC100CDBACE /* 113-navigation-inv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 377A4F39139A9BC100CDBACE /* 113-navigation-inv@2x.png */; };
 		377A4F50139A9BC100CDBACE /* 123-id-card-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 377A4F3B139A9BC100CDBACE /* 123-id-card-inv.png */; };
@@ -482,10 +474,6 @@
 		37D0D20B1357A534003DA1BB /* DistrictOfficeObj+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D0D2091357A534003DA1BB /* DistrictOfficeObj+RestKit.m */; };
 		37D0D2101357A685003DA1BB /* DistrictMapObj+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D0D20F1357A685003DA1BB /* DistrictMapObj+RestKit.m */; };
 		37D0D2111357A685003DA1BB /* DistrictMapObj+RestKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D0D20F1357A685003DA1BB /* DistrictMapObj+RestKit.m */; };
-		37D1C4D212026FE300507757 /* Month Calendar Shadow Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4CE12026FE300507757 /* Month Calendar Shadow Down.png */; };
-		37D1C4D312026FE300507757 /* Month Calendar Shadow Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4CF12026FE300507757 /* Month Calendar Shadow Right.png */; };
-		37D1C4D412026FE300507757 /* Month Calendar Shadow Vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4D012026FE300507757 /* Month Calendar Shadow Vertical.png */; };
-		37D1C4D512026FE300507757 /* Month Calendar Shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C4D112026FE300507757 /* Month Calendar Shadow.png */; };
 		37D1C527120272F000507757 /* CalendarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D1C526120272F000507757 /* CalendarDetailViewController.m */; };
 		37D1C5CD12027D2D00507757 /* CalendarDetailViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C5CC12027D2D00507757 /* CalendarDetailViewController~ipad.xib */; };
 		37D1C89F120344D000507757 /* 01-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C806120344D000507757 /* 01-refresh.png */; };
@@ -882,8 +870,6 @@
 		3775FA3B11D86E1700D69AC5 /* LegislatorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LegislatorDetailViewController.m; path = "Classes/Detail View Controllers/LegislatorDetailViewController.m"; sourceTree = SOURCE_ROOT; };
 		3775FA4B11D8701B00D69AC5 /* LegislatorMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LegislatorMasterViewController.m; path = "Classes/Master View Controllers/LegislatorMasterViewController.m"; sourceTree = SOURCE_ROOT; };
 		37782771121303C1001BD23D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3778E80D11EDC19800278273 /* Slider_Question_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Slider_Question_big.png; path = "partisanship elements/Slider_Question_big.png"; sourceTree = "<group>"; };
-		3778E80E11EDC19800278273 /* Slider_Question_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Slider_Question_big@2x.png"; path = "partisanship elements/Slider_Question_big@2x.png"; sourceTree = "<group>"; };
 		377A4F38139A9BC100CDBACE /* 113-navigation-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "113-navigation-inv.png"; sourceTree = "<group>"; };
 		377A4F39139A9BC100CDBACE /* 113-navigation-inv@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "113-navigation-inv@2x.png"; sourceTree = "<group>"; };
 		377A4F3B139A9BC100CDBACE /* 123-id-card-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "123-id-card-inv.png"; sourceTree = "<group>"; };
@@ -1035,10 +1021,6 @@
 		37D0D2091357A534003DA1BB /* DistrictOfficeObj+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DistrictOfficeObj+RestKit.m"; sourceTree = "<group>"; };
 		37D0D20E1357A630003DA1BB /* DistrictMapObj+RestKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DistrictMapObj+RestKit.h"; sourceTree = "<group>"; };
 		37D0D20F1357A685003DA1BB /* DistrictMapObj+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DistrictMapObj+RestKit.m"; sourceTree = "<group>"; };
-		37D1C4CE12026FE300507757 /* Month Calendar Shadow Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Month Calendar Shadow Down.png"; sourceTree = "<group>"; };
-		37D1C4CF12026FE300507757 /* Month Calendar Shadow Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Month Calendar Shadow Right.png"; sourceTree = "<group>"; };
-		37D1C4D012026FE300507757 /* Month Calendar Shadow Vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Month Calendar Shadow Vertical.png"; sourceTree = "<group>"; };
-		37D1C4D112026FE300507757 /* Month Calendar Shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Month Calendar Shadow.png"; sourceTree = "<group>"; };
 		37D1C525120272F000507757 /* CalendarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDetailViewController.h; sourceTree = "<group>"; };
 		37D1C526120272F000507757 /* CalendarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDetailViewController.m; sourceTree = "<group>"; };
 		37D1C5CC12027D2D00507757 /* CalendarDetailViewController~ipad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "CalendarDetailViewController~ipad.xib"; path = "Resources-iPad/CalendarDetailViewController~ipad.xib"; sourceTree = "<group>"; };
@@ -1665,7 +1647,6 @@
 			children = (
 				37BA161813B2FAA50088057B /* Bill Elements */,
 				37D3640612362A7D00CCF86E /* Map Elements */,
-				37BA160A13B2F9B20088057B /* Calendar Elements */,
 				37BA161513B2FA7F0088057B /* Legislator Elements */,
 				376DFE9113492C1400360BF4 /* Common UI Elements */,
 				376B59460FC1AE060094D80B /* Glyphish */,
@@ -2036,17 +2017,6 @@
 			path = "Political Party Stars";
 			sourceTree = "<group>";
 		};
-		37BA160A13B2F9B20088057B /* Calendar Elements */ = {
-			isa = PBXGroup;
-			children = (
-				37D1C4CE12026FE300507757 /* Month Calendar Shadow Down.png */,
-				37D1C4CF12026FE300507757 /* Month Calendar Shadow Right.png */,
-				37D1C4D012026FE300507757 /* Month Calendar Shadow Vertical.png */,
-				37D1C4D112026FE300507757 /* Month Calendar Shadow.png */,
-			);
-			name = "Calendar Elements";
-			sourceTree = "<group>";
-		};
 		37BA160D13B2F9F50088057B /* Map Pins */ = {
 			isa = PBXGroup;
 			children = (
@@ -2060,8 +2030,6 @@
 			isa = PBXGroup;
 			children = (
 				37BA160713B2F9760088057B /* Political Party Stars */,
-				3778E80D11EDC19800278273 /* Slider_Question_big.png */,
-				3778E80E11EDC19800278273 /* Slider_Question_big@2x.png */,
 				37E9CA2B16A22D17005C7CCE /* placeholder.png */,
 				37E9CA2C16A22D17005C7CCE /* placeholder@2x.png */,
 			);
@@ -2602,12 +2570,6 @@
 				3730B43311DD4B4D00BA10D0 /* Icon_512.png in Resources */,
 				373B820611E378CD00A81142 /* LegislatorMasterViewController.xib in Resources */,
 				3786786311E442800003690F /* CapitolMapsDetailViewController.xib in Resources */,
-				3778E81111EDC19800278273 /* Slider_Question_big.png in Resources */,
-				3778E81211EDC19800278273 /* Slider_Question_big@2x.png in Resources */,
-				37D1C4D212026FE300507757 /* Month Calendar Shadow Down.png in Resources */,
-				37D1C4D312026FE300507757 /* Month Calendar Shadow Right.png in Resources */,
-				37D1C4D412026FE300507757 /* Month Calendar Shadow Vertical.png in Resources */,
-				37D1C4D512026FE300507757 /* Month Calendar Shadow.png in Resources */,
 				37D1C5CD12027D2D00507757 /* CalendarDetailViewController~ipad.xib in Resources */,
 				37D1C89F120344D000507757 /* 01-refresh.png in Resources */,
 				3735DD3D12087CEF0000AF5A /* CalendarDetailViewController~iphone.xib in Resources */,
@@ -2737,12 +2699,6 @@
 				377359891323104A0033F343 /* Icon_512.png in Resources */,
 				3773598A1323104A0033F343 /* LegislatorMasterViewController.xib in Resources */,
 				3773598B1323104A0033F343 /* CapitolMapsDetailViewController.xib in Resources */,
-				3773598E1323104A0033F343 /* Slider_Question_big.png in Resources */,
-				3773598F1323104A0033F343 /* Slider_Question_big@2x.png in Resources */,
-				377359901323104A0033F343 /* Month Calendar Shadow Down.png in Resources */,
-				377359911323104A0033F343 /* Month Calendar Shadow Right.png in Resources */,
-				377359921323104A0033F343 /* Month Calendar Shadow Vertical.png in Resources */,
-				377359931323104A0033F343 /* Month Calendar Shadow.png in Resources */,
 				377359941323104A0033F343 /* CalendarDetailViewController~ipad.xib in Resources */,
 				377359951323104A0033F343 /* 01-refresh.png in Resources */,
 				377359961323104A0033F343 /* 02-redo.png in Resources */,
@@ -3234,13 +3190,17 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/include",
 					"\"$(SRCROOT)/Vendor/SDWebImage\"",
 					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
+					"${inherited}",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
@@ -3253,13 +3213,17 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/include",
 					"\"$(SRCROOT)/Vendor/SDWebImage\"",
 					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
+					"${inherited}",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
@@ -3362,7 +3326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-licucore",
@@ -3387,13 +3351,17 @@
 		377629CA102A0A45004700EC /* iTunes Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/include",
 					"\"$(SRCROOT)/Vendor/SDWebImage\"",
 					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
+					"${inherited}",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
@@ -3430,7 +3398,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LLVM_LTO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -3456,13 +3424,17 @@
 		37B2D28510224AC900B493C8 /* AdHoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/include/RestKit",
 					"\"$(SRCROOT)/Vendor/SDWebImage\"",
 					"\"$(SRCROOT)/Vendor/RestKit/Build\"",
 					"\"$(SRCROOT)/Vendor/Kal/src/\"",
 					"\"/usr/include/libxml2\"/**",
+					"${inherited}",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
@@ -3500,7 +3472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-licucore",
@@ -3549,7 +3521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-licucore",

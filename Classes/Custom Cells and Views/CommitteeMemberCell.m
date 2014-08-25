@@ -44,7 +44,6 @@
 	return self;
 }
 
-
  - (void)setHighlighted:(BOOL)val animated:(BOOL)animated {               // animate between regular and highlighted state
 	[super setHighlighted:val animated:animated];
 
@@ -57,17 +56,37 @@
 	self.cellView.highlighted = val;
 }
 
-
-- (void)setLegislator:(LegislatorObj *)value {
-    [self.imageView setImageWithURL:[NSURL URLWithString:value.photo_url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+- (void)setLegislator:(LegislatorObj *)value
+{
+    NSURL *photoURL = nil;
+    if (value && value.photo_url)
+    {
+        photoURL = [NSURL URLWithString:value.photo_url];
+    }
+    [self.imageView setImageWithURL:photoURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
 	[self.cellView setLegislator:value];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    CGRect imageRect = CGRectZero;
+    CGRect contentRect = CGRectZero;
+    CGRectDivide(self.contentView.bounds, &imageRect, &contentRect, 53, CGRectMinXEdge);
+
+    self.imageView.frame = imageRect;
+    self.cellView.frame = contentRect;
 }
 
 - (void)redisplay {
 	[cellView setNeedsDisplay];
 }
 
-
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self setLegislator:nil];
+}
 
 - (void)dealloc {
 	if (cellView)
@@ -75,6 +94,5 @@
 	
     [super dealloc];
 }
-
 
 @end

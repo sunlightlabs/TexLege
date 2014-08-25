@@ -217,7 +217,8 @@
     switch (panelType) {
         case MTInfoPanelTypeActivity:
         case MTInfoPanelTypeInfo: {
-            startColor = MT_RGBA(117,177,165,1.0); //MT_RGBA(91, 134, 206, 1.0);
+ //           startColor = MT_RGBA(117,177,165,1.0); //MT_RGBA(91, 134, 206, 1.0);
+            startColor = MT_RGBA(91,138,129,1.0); //MT_RGBA(69, 106, 177, 1.0);
             endColor = MT_RGBA(91,138,129,1.0); //MT_RGBA(69, 106, 177, 1.0);
             detailColor = MT_RGBA(245,245,237,1.0); //MT_RGBA(210, 210, 235, 1.0);
             titleColor = detailColor;
@@ -226,7 +227,8 @@
         }
             
         case MTInfoPanelTypeNotice: {
-            startColor = MT_RGBA(118, 119, 120, 1.0);
+//            startColor = MT_RGBA(118, 119, 120, 1.0);
+            startColor = MT_RGBA(63, 65, 67, 1.0);
             endColor = MT_RGBA(63, 65, 67, 1.0);
             detailColor = MT_RGBA(210, 210, 235, 1.0);
             image = [UIImage imageNamed:@"MTInfoPanel.bundle/Notice"];
@@ -234,7 +236,8 @@
         }
             
         case MTInfoPanelTypeSuccess: {
-            startColor = MT_RGBA(127, 191, 34, 1.0);
+//            startColor = MT_RGBA(127, 191, 34, 1.0);
+            startColor = MT_RGBA(136, 159, 86, 1.0);
             endColor = MT_RGBA(136, 159, 86, 1.0);
             detailColor = MT_RGBA(59, 69, 39, 1.0);
             image = [UIImage imageNamed:@"MTInfoPanel.bundle/Tick"];
@@ -243,7 +246,8 @@
             
             
         case MTInfoPanelTypeWarning: {
-            startColor = MT_RGBA(253, 178, 77, 1.0);
+//            startColor = MT_RGBA(253, 178, 77, 1.0);
+            startColor = MT_RGBA(196, 123, 20, 1.0);
             endColor = MT_RGBA(196, 123, 20, 1.0);
             detailColor = MT_RGBA(97, 61, 24, 1.0);
             image = [UIImage imageNamed:@"MTInfoPanel.bundle/Warning"];
@@ -252,7 +256,8 @@
             
         case MTInfoPanelTypeError:
         default: {
-            startColor = MT_RGBA(200, 36, 0, 1.0);
+//            startColor = MT_RGBA(200, 36, 0, 1.0);
+            startColor = MT_RGBA(150, 24, 0, 1.0);
             endColor = MT_RGBA(150, 24, 0, 1.0);
             detailColor = MT_RGBA(255, 166, 166, 1.0);
             image = [UIImage imageNamed:@"MTInfoPanel.bundle/Warning"];
@@ -308,7 +313,7 @@
     // changing these changes the original, so we copy it
     CGFloat *oldComponents = (CGFloat *)CGColorGetComponents([sourceColor CGColor]);
     CGFloat newComponents[4];
-    int numComponents = CGColorGetNumberOfComponents([sourceColor CGColor]);
+    size_t numComponents = CGColorGetNumberOfComponents([sourceColor CGColor]);
     
     switch (numComponents) {
         case 2: {
@@ -403,18 +408,13 @@
     
     backgroundGradient_ = [[UIView alloc] initWithFrame:self.bounds];
     backgroundGradient_.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    backgroundGradient_.alpha = 0.88f;
+    backgroundGradient_.alpha = 1;
     [self addSubview:backgroundGradient_];
     
     titleLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(57.f,7.f,240.f,19.f)];
     titleLabel_.backgroundColor = [UIColor clearColor];
     titleLabel_.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-    
-    titleLabel_.layer.shadowOffset = CGSizeMake(0.f, -1.f);
-    titleLabel_.layer.shadowColor = [UIColor blackColor].CGColor;
-	titleLabel_.layer.shadowRadius = 1.f;
-	titleLabel_.layer.shadowOpacity = 0.7;
-    
+
     [self addSubview:titleLabel_];
     
     detailLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(57.f, 26.f, 251.f, 32.f)];

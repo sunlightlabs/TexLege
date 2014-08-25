@@ -300,7 +300,7 @@ NSInteger kNoSelection = -1;
 	
 	UIViewController * savedTabController = [self.tabBarController.viewControllers objectAtIndex:savedTabSelectionIndex];
 	if (!savedTabController || !savedTabController.tabBarItem.enabled) {
-		debug_NSLog (@"Couldn't find a view/navigation controller at index: %d", savedTabSelectionIndex);
+		debug_NSLog (@"Couldn't find a view/navigation controller at index: %ld", (long)savedTabSelectionIndex);
 		savedTabController = [self.tabBarController.viewControllers objectAtIndex:0];
 	}
 	else if (self.tabBarController.moreNavigationController) {

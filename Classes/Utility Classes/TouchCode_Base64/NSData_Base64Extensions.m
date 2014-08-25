@@ -36,9 +36,9 @@
 + (id)dataWithBase64EncodedString:(NSString *)inString flags:(NSInteger)inFlags
 {
 	NSData *theEncodedData = [inString dataUsingEncoding:NSASCIIStringEncoding];
-	size_t theDecodedDataSize = EstimateBas64DecodedDataSize([theEncodedData length], inFlags);
+	size_t theDecodedDataSize = EstimateBas64DecodedDataSize([theEncodedData length], (int32_t)inFlags);
 	void *theDecodedData = malloc(theDecodedDataSize);
-	Base64DecodeData([theEncodedData bytes], [theEncodedData length], theDecodedData, &theDecodedDataSize, inFlags);
+	Base64DecodeData([theEncodedData bytes], [theEncodedData length], theDecodedData, &theDecodedDataSize, (int32_t)inFlags);
 	theDecodedData = reallocf(theDecodedData, theDecodedDataSize);
 	if (theDecodedData == NULL)
         return(NULL);
@@ -59,9 +59,9 @@ return([self asBase64EncodedString:Base64Flags_IncludeNewlines]);
 
 - (NSString *)asBase64EncodedString:(NSInteger)inFlags;
 {
-	size_t theEncodedDataSize = EstimateBas64EncodedDataSize([self length], inFlags);
+	size_t theEncodedDataSize = EstimateBas64EncodedDataSize([self length], (int32_t)inFlags);
 	void *theEncodedData = malloc(theEncodedDataSize);
-	Base64EncodeData([self bytes], [self length], theEncodedData, &theEncodedDataSize, inFlags);
+	Base64EncodeData([self bytes], [self length], theEncodedData, &theEncodedDataSize, (int32_t)inFlags);
 	theEncodedData = reallocf(theEncodedData, theEncodedDataSize);
 	if (theEncodedData == NULL)
         return(NULL);

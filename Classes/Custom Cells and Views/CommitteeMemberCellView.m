@@ -371,8 +371,7 @@ const CGFloat kCommitteeMemberCellViewHeight = 73.0f;
 	// we don't use sliderVal here because it's already been adjusted to compensate for minMax...
 	if (self.partisan_index == 0.0f) {
 		if (!self.questionImage) {
-			NSString *imageString = /*(self.usesSmallStar) ? @"Slider_Question.png" :*/ @"Slider_Question_big.png";
-			self.questionImage = [UIImage imageNamed:imageString];
+			self.questionImage = [UIImage imageNamed:@"error"];
 		}
 		drawRect = CGRectMake(374.f, 19.5f, 36.f, 36.f);
 		[self.questionImage drawInRect:drawRect blendMode:kCGBlendModeNormal alpha:0.6];

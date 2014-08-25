@@ -815,7 +815,7 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
     NSData *stringBytes = [input dataUsingEncoding: NSUTF8StringEncoding];
     unsigned char digest[CC_SHA1_DIGEST_LENGTH];
     
-    if (CC_SHA1([stringBytes bytes], [stringBytes length], digest)) {
+    if (CC_SHA1([stringBytes bytes], (CC_LONG)[stringBytes length], digest)) {
         NSMutableString* hashedUUID = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
         for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
             [hashedUUID appendFormat:@"%02x", digest[i]];
@@ -1008,7 +1008,7 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
 	// Find nearest power of 2 (eg, 1,2,4,8,16,32,etc).  Over 64 and we return 0
 	for (NSInteger gig = 1; gig < 257; gig = gig << 1) {
 		if (size < gig)
-			return [NSString stringWithFormat:@"%dGB", gig];
+			return [NSString stringWithFormat:@"%ldGB", (long)gig];
 	}
 	return nil;
 }
@@ -1049,9 +1049,9 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
 	return self;
 }
 
-- (unsigned)retainCount {
+- (NSUInteger)retainCount {
 	// maximum value of an unsigned int - prevents additional retains for the class
-	return UINT_MAX;
+	return NSUIntegerMax;
 }
 
 - (oneway void)release {

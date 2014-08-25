@@ -13,7 +13,6 @@
 #import "TexLegeAppDelegate.h"
 #import "BillsFavoritesViewController.h"
 #import "BillsDetailViewController.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "UtilityMethods.h"
 #import "TexLegeTheme.h"
 #import "DisclosureQuartzView.h"
@@ -294,8 +293,10 @@
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {  
 	if ([request isGET] && [response isOK]) {  
 		// Success! Let's take a look at the data  
-		
-		NSMutableDictionary *object = [response.body mutableObjectFromJSONData];
+
+        NSError *error = nil;
+        NSMutableDictionary *object = [NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
+
 		if (object && _cachedBills) {
 			NSString *watchID = watchIDForBill(object);
 			[_cachedBills setObject:object forKey:watchID];

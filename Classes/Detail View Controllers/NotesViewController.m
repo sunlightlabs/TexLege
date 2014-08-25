@@ -28,7 +28,7 @@
 	if ([UtilityMethods isIPadDevice]) {
 		self.navBar.tintColor = [TexLegeTheme accent];
 		self.navTitle.rightBarButtonItem = self.editButtonItem;
-		self.contentSizeForViewInPopover = CGSizeMake(320.f, 320.f);
+		self.preferredContentSize = CGSizeMake(320.f, 320.f);
 	}
 	else {
 		self.navigationItem.title = NSLocalizedStringFromTable(@"Notes", @"DataTableUI", @"Title for the cell indicating custom notes option");

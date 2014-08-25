@@ -72,16 +72,18 @@
 																stringForChamber(HOUSE, TLReturnFull),
 																stringForChamber(SENATE, TLReturnFull),
 																nil];
-	
-	if ([UtilityMethods isIPadDevice]) {	
+
+#if 0
+	if ([UtilityMethods isIPadDevice]) {
 		self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-	    	
+
 		/* This "avoids" a bug on iPads where the scope bar get's crammed into the top line in landscape. */
 		if ([self.searchDisplayController.searchBar respondsToSelector:@selector(setCombinesLandscapeBars:)]) 
 		{ 
 			objc_msgSend(self.searchDisplayController.searchBar, @selector(setCombinesLandscapeBars:), NO );
 		}
 	}
+#endif
 		
 /*	for (id subview in self.searchDisplayController.searchBar.subviews )
 	{

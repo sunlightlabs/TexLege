@@ -11,7 +11,6 @@
 //
 
 #import "BillMetadataLoader.h"
-#import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 #import "UtilityMethods.h"
 #import "TexLegeReachability.h"
 #import "OpenLegislativeAPIs.h"
@@ -103,8 +102,8 @@
 
 	NSData *jsonFile = [NSData dataWithContentsOfFile:localPath];
 	if (_metadata)
-		[_metadata release];	
-	_metadata = [[jsonFile mutableObjectFromJSONData] retain];
+		[_metadata release];
+    _metadata = [[NSJSONSerialization JSONObjectWithData:jsonFile options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&newError] retain];
 	if (_metadata) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:kBillMetadataNotifyLoaded object:nil];
 	}
@@ -117,15 +116,19 @@
 	if ([request isGET] && [response isOK]) {  
 		// Success! Let's take a look at the data  
 		nice_release(_metadata);
-		
-		_metadata = [[response.body mutableObjectFromJSONData] retain];
+
+        NSError *error = nil;
+        _metadata = [[NSJSONSerialization JSONObjectWithData:response.body options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error] retain];
+
 		if (_metadata) {
 			
 			nice_release(updated);
 			updated = [[NSDate date] retain];
 			
 			NSString *localPath = [[UtilityMethods applicationCachesDirectory] stringByAppendingPathComponent:kBillMetadataFile];
-			if (![[_metadata JSONData] writeToFile:localPath atomically:YES])
+
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_metadata options:NSJSONWritingPrettyPrinted error:&error];
+			if (![jsonData writeToFile:localPath atomically:YES])
 				NSLog(@"BillMetadataLoader: error writing cache to file: %@", localPath);
 			isFresh = YES;
 			[[NSNotificationCenter defaultCenter] postNotificationName:kBillMetadataNotifyLoaded object:nil];

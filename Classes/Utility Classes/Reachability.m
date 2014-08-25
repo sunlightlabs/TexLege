@@ -121,7 +121,6 @@ NSString *const kInterventionRequiredKey = @"interventionRequired";
 
 static void logKey_(const char *name, int line, Reachability *reachability);
 static void logNetworkStatus_(const char *name, int line, NetworkStatus status);
-static void logReachabilityFlags_(const char *name, int line, SCNetworkReachabilityFlags flags);
 
 static NSString *reachabilityFlags_(SCNetworkReachabilityFlags flags) {
     
@@ -171,12 +170,6 @@ static NSString *reachabilityFlags_(SCNetworkReachabilityFlags flags) {
 	
 } // reachabilityFlags_()
 
-static void logReachabilityFlags_(const char *name, int line, SCNetworkReachabilityFlags flags) {
-	
-    NSLog(@"%s (%d) \n\t%@", name, line, reachabilityFlags_(flags));
-	
-} // logReachabilityFlags_()
-
 
 static NSString *networkStatusDesc(NetworkStatus status) {
 	
@@ -206,6 +199,11 @@ static NSString *networkStatusDesc(NetworkStatus status) {
 } // networkStatusDesc()
 
 
+
+
+//#define CLASS_DEBUG 1 // Turn on logReachabilityFlags. Must also have a project wide defined DEBUG.
+#if (defined DEBUG && defined CLASS_DEBUG)
+
 static void logNetworkStatus_(const char *name, int line, NetworkStatus status) {
 	
 	NSLog(@"%s (%d) \n\tNetwork Status: %@", name, line, networkStatusDesc(status));
@@ -219,9 +217,12 @@ static void logKey_(const char *name, int line, Reachability *reachability) {
 	
 } // logKey_()
 
+static void logReachabilityFlags_(const char *name, int line, SCNetworkReachabilityFlags flags) {
 
-//#define CLASS_DEBUG 1 // Turn on logReachabilityFlags. Must also have a project wide defined DEBUG.
-#if (defined DEBUG && defined CLASS_DEBUG)
+    NSLog(@"%s (%d) \n\t%@", name, line, reachabilityFlags_(flags));
+
+} // logReachabilityFlags_()
+
 
 #define logReachabilityFlags(flags) (logReachabilityFlags_(__PRETTY_FUNCTION__, __LINE__, flags))
 #define logNetworkStatus(status) (logNetworkStatus_(__PRETTY_FUNCTION__, __LINE__, status))
