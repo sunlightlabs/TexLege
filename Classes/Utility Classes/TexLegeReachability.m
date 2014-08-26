@@ -14,6 +14,7 @@
 #import "UtilityMethods.h"
 #import "OpenLegislativeAPIs.h"
 #import "Reachability.h"
+#import "TexLegeAppDelegate.h"
 
 #define ALLOW_SLOW_DNS_LOOKUPS	0
 
@@ -136,10 +137,11 @@
 			self.openstatesConnectionStatus = currentStatus;
 		if(curReach == tloReach)
 			self.tloConnectionStatus = currentStatus;
-		
-		if (appDelegate && [appDelegate respondsToSelector:@selector(changingReachability:)])
-			[appDelegate performSelector:@selector(changingReachability:) withObject:curReach];
-				
+
+        if (appDelegate)
+        {
+            [(TexLegeAppDelegate *)appDelegate changingReachability:curReach];
+        }
 	}
 }
 

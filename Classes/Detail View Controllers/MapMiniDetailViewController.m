@@ -73,6 +73,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	
 	[self.view setBackgroundColor:[TexLegeTheme backgroundLight]];
 	self.mapView.showsUserLocation = NO;
+    self.mapView.delegate = self;
 	
 	// Set up the map's region to frame the state of Texas.
 	// Zoom = 6
@@ -80,6 +81,11 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	
 	self.navigationController.navigationBar.tintColor = [TexLegeTheme navbar];
 	//self.navigationItem.title = @"District Location";
+
+    if (self.districtOverlay)
+    {
+        [self.mapView addOverlay:self.districtOverlay];
+    }
 }
 
 - (void) viewDidUnload {
@@ -165,6 +171,19 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	}
 	else
 		[self performSelector:@selector(animateToAnnotation:) withObject:annotation afterDelay:0.7];	
+}
+
+- (void)addDistrictOverlay:(id<MKOverlay>)overlay
+{
+    self.districtOverlay = overlay;
+    if (!self.isViewLoaded || !self.mapView)
+    {
+        return;
+    }
+    __block MapMiniDetailViewController *bself = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [bself.mapView addOverlay:overlay];
+    });
 }
 
 #pragma mark -
@@ -262,8 +281,10 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
         else
         {
             pinView.annotation = annotation;
-			if ([pinView respondsToSelector:@selector(resetPinColorWithAnnotation:)])
-				[pinView performSelector:@selector(resetPinColorWithAnnotation:) withObject:annotation];
+            if ([pinView isKindOfClass:[DistrictPinAnnotationView class]])
+            {
+                [(DistrictPinAnnotationView *)pinView resetPinColorWithAnnotation:annotation];
+            }
 			
 			pinView.rightCalloutAccessoryView = nil;
         }		
@@ -274,7 +295,8 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	return nil;
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id)overlay{
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+{
 	NSArray *colors = [[UIColor randomColor] triadicColors];
 	UIColor *myColor = [[colors objectAtIndex:colorIndex] colorByDarkeningTo:0.50f];
 	colorIndex++;
@@ -293,10 +315,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 				myColor = [TexLegeTheme texasGreen];
 		}
 
-		//MKPolygonView*    aView = [[[MKPolygonView alloc] initWithPolygon:(MKPolygon*)overlay] autorelease];
-		MKPolygonView *aView = nil;
-
-		aView = [[[MKPolygonView alloc] initWithPolygon:(MKPolygon*)overlay] autorelease];		
+		MKPolygonRenderer *aView = [[[MKPolygonRenderer alloc] initWithPolygon:(MKPolygon*)overlay] autorelease];
 		aView.fillColor = [/*[UIColor cyanColor]*/myColor colorWithAlphaComponent:0.2];
         aView.strokeColor = [myColor colorWithAlphaComponent:0.7];
         aView.lineWidth = 3;
@@ -308,7 +327,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	
 	else if ([overlay isKindOfClass:[MKPolyline class]])
     {
-        MKPolylineView*    aView = [[[MKPolylineView alloc] initWithPolyline:(MKPolyline*)overlay] autorelease];
+        MKPolylineRenderer*    aView = [[[MKPolylineRenderer alloc] initWithPolyline:(MKPolyline*)overlay] autorelease];
 				
         aView.strokeColor = myColor;// colorWithAlphaComponent:0.7];
         aView.lineWidth = 3;
@@ -351,13 +370,15 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 		
 		//[self.mapView removeOverlays:self.mapView.overlays];
 		if (toRemove && [toRemove count])
-			[self.mapView performSelector:@selector(removeOverlays:) withObject:toRemove];
+        {
+            [self.mapView removeOverlays:toRemove];
+        }
 
 		[toRemove release];
 		
 		if (!foundOne) {
 			MKPolygon *mapPoly = [(DistrictMapObj*)annotation polygon];
-			[self.mapView performSelector:@selector(addOverlay:) withObject:mapPoly afterDelay:0.2f];
+            [self addDistrictOverlay:mapPoly];
 		}
 		[self.mapView setRegion:region animated:TRUE];
 	}			

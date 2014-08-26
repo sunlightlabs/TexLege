@@ -17,9 +17,11 @@
 
 @property (nonatomic,retain) IBOutlet MKMapView *mapView;
 @property (nonatomic,readonly) MKCoordinateRegion texasRegion;
-@property (nonatomic,assign) MKPolygonView *districtView;
+@property (nonatomic,retain) MKPolygonRenderer *districtView;
 @property (nonatomic) CLLocationCoordinate2D annotationActionCoord;
+@property (nonatomic,retain) id<MKOverlay> districtOverlay;
 
+- (void) addDistrictOverlay:(id<MKOverlay>)overlay;
 - (void) clearAnnotationsAndOverlays;
 - (void) resetMapViewWithAnimation:(BOOL)animated;
 - (void) moveMapToAnnotation:(id<MKAnnotation>)annotation;

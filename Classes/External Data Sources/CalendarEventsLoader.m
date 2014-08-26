@@ -155,7 +155,7 @@ NSComparisonResult sortByDate(id firstItem, id secondItem, void *context)
 - (NSArray*)events {
 	if (self.loadingStatus > LOADING_NO_NET || !_events || !isFresh || !updated || ([[NSDate date] timeIntervalSinceDate:updated] > 1800)) {	// if we're over a half-hour old, let's refresh
 		isFresh = NO;
-		debug_NSLog(@"CalendarEventsLoader is stale, need to refresh");
+//		debug_NSLog(@"CalendarEventsLoader is stale, need to refresh");
 
 		[self loadEvents:nil];
 	}

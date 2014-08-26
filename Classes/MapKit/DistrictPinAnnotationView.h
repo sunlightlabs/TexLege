@@ -13,8 +13,8 @@
 #import <MapKit/MapKit.h>
 
 
-@interface DistrictPinAnnotationView : MKPinAnnotationView {
+@interface DistrictPinAnnotationView : MKPinAnnotationView
 
-}
+- (void)resetPinColorWithAnnotation:(id <MKAnnotation>)anAnnotation;
 
 @end

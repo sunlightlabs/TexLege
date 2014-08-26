@@ -139,8 +139,10 @@
 			[mapVC clearAnnotationsAndOverlays];
 
 			[mapView addAnnotation:map];
-			[mapVC moveMapToAnnotation:map];	
-			[mapView performSelector:@selector(addOverlay:) withObject:[map polygon] afterDelay:1.0f];
+			[mapVC moveMapToAnnotation:map];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [mapView addOverlay:map.polygon];
+            });
 		}
 		if (aTableView == self.searchDisplayController.searchResultsTableView) { // we've clicked in a search table
 			[self searchBarCancelButtonClicked:nil];

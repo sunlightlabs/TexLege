@@ -469,8 +469,7 @@
 					theAnnotation = member.districtMap;
 					[mapViewController.mapView addAnnotation:theAnnotation];
 					[mapViewController moveMapToAnnotation:theAnnotation];
-					[mapViewController.mapView performSelector:@selector(addOverlay:) 
-													withObject:[member.districtMap polygon] afterDelay:0.5f];
+                    [mapViewController addDistrictOverlay:member.districtMap.polygon];
 					isDistMap = YES;
 				}
 				if (theAnnotation) {
@@ -523,7 +522,7 @@
 	TableCellDataObject *cellInfo = [self.dataSource dataObjectForIndexPath:indexPath];
 	
 	if (cellInfo == nil) {
-		debug_NSLog(@"LegislatorDetailViewController:heightForRow: error finding table entry for section:%ld row:%ld", indexPath.section, indexPath.row);
+		debug_NSLog(@"LegislatorDetailViewController:heightForRow: error finding table entry for index path: %@", indexPath);
 		return height;
 	}
 	if (cellInfo.subtitle && [cellInfo.subtitle hasSubstring:NSLocalizedStringFromTable(@"Address", @"DataTableUI", @"Cell title listing a street address")

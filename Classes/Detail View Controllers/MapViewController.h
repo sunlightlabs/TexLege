@@ -34,7 +34,7 @@
 @property (nonatomic,retain) SVGeocoder *geocoder;
 @property (nonatomic,readonly) MKCoordinateRegion texasRegion;
 @property (nonatomic,retain) UserPinAnnotation *searchLocation;
-@property (nonatomic,assign) MKPolygonRenderer *senateDistrictView, *houseDistrictView;
+@property (nonatomic,retain) MKPolygonRenderer *senateDistrictView, *houseDistrictView;
 @property (nonatomic,retain) NSOperationQueue *genericOperationQueue;
 
 - (IBAction) showAllDistricts:(id)sender;
@@ -45,5 +45,6 @@
 - (void) resetMapViewWithAnimation:(BOOL)animated;
 - (void) moveMapToAnnotation:(id<MKAnnotation>)annotation;
 - (void) searchDistrictMapsForCoordinate:(CLLocationCoordinate2D)aCoordinate;
+- (void)annotationCoordinateChanged:(id)sender;
 
 @end

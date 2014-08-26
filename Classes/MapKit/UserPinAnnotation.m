@@ -15,6 +15,8 @@
 #import "TexLegeAppDelegate.h"
 #import <AddressBookUI/ABAddressFormatting.h>
 #import "UtilityMethods.h"
+#import "MapViewController.h"
+
 @interface UserPinAnnotation (Private)
 - (void)reloadTitle;
 @end

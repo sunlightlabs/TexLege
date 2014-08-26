@@ -11,7 +11,7 @@
 //
 
 #import "TexLegeMapPins.h"
-
+#import "UserPinAnnotation.h"
 
 @implementation TexLegeMapPins
 

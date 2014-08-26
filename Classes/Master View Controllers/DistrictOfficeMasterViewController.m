@@ -163,8 +163,10 @@
 			[mapVC clearAnnotationsAndOverlays];
 
 			[mapView addAnnotation:office];
-			[mapVC moveMapToAnnotation:office];			
-			[mapView performSelector:@selector(addOverlay:) withObject:[office.legislator.districtMap polygon] afterDelay:0.5f];
+			[mapVC moveMapToAnnotation:office];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [mapView addOverlay:office.legislator.districtMap.polygon];
+            });
 		}
 		if (aTableView == self.searchDisplayController.searchResultsTableView) { // we've clicked in a search table
 			[self searchBarCancelButtonClicked:nil];

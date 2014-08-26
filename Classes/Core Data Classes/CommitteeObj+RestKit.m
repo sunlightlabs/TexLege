@@ -14,6 +14,7 @@
 
 #import "CommitteePositionObj.h"
 #import "LegislatorObj.h"
+#import "LegislatorObj+RestKit.h"
 
 @implementation CommitteeObj (RestKit)
 

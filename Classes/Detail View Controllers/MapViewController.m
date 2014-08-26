@@ -337,10 +337,12 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 		DistrictMapObj *district = [DistrictMapObj objectWithPrimaryKeyValue:districtID];
 		if (district) {
 			[self.mapView addAnnotation:district];
-			[self.mapView performSelector:@selector(addOverlay:) withObject:[district polygon] afterDelay:0.5f];
-			//for (DistrictOfficeObj *office in district.legislator.districtOffices)
-			//	[self.mapView addAnnotation:office];
-			
+
+            __block MapViewController *bself = self;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [bself.mapView addOverlay:district.polygon];
+            });
+
 			[[DistrictMapObj managedObjectContext] refreshObject:district mergeChanges:NO];	// re-fault it to free memory
 		}
 	}	
@@ -649,8 +651,10 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
         else
         {
             pinView.annotation = annotation;
-			if ([pinView respondsToSelector:@selector(resetPinColorWithAnnotation:)])
-				[pinView performSelector:@selector(resetPinColorWithAnnotation:) withObject:annotation];
+            if ([pinView isKindOfClass:[DistrictPinAnnotationView class]])
+            {
+                [(DistrictPinAnnotationView *)pinView resetPinColorWithAnnotation:annotation];
+            }
         }		
 
         return pinView;
@@ -768,13 +772,18 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 		}
 		
 		if (!IsEmpty(toRemove)) {
-			[self.mapView performSelector:@selector(removeOverlays:) withObject:toRemove];
+            [self.mapView removeOverlays:toRemove];
 		}
 		[toRemove release];
 		
 		if (!foundOne) {
 			MKPolygon *mapPoly = [(DistrictMapObj*)annotation polygon];
-			[self.mapView performSelector:@selector(addOverlay:) withObject:mapPoly afterDelay:0.2f];
+
+            __block MapViewController *bself = self;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [bself.mapView addOverlay:mapPoly];
+            });
+
 			[[DistrictMapObj managedObjectContext] refreshObject:(DistrictMapObj*)annotation mergeChanges:NO];
 		}
 		[self.mapView setRegion:region animated:TRUE];
