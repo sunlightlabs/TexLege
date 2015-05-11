@@ -20,7 +20,7 @@
 {
 }
 
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSNumber * position;
 @property (nonatomic, retain) NSNumber * legislatorID;
 @property (nonatomic, retain) NSNumber * committeePositionID;

@@ -118,9 +118,12 @@ NSString *const kConnectionRequiredKey   = @"connectionRequired";
 NSString *const kConnectionOnDemandKey   = @"connectionOnDemand";
 NSString *const kInterventionRequiredKey = @"interventionRequired";
 
+//#define CLASS_DEBUG 1 // Turn on logReachabilityFlags. Must also have a project wide defined DEBUG.
 
+#if (defined DEBUG && defined CLASS_DEBUG)
 static void logKey_(const char *name, int line, Reachability *reachability);
 static void logNetworkStatus_(const char *name, int line, NetworkStatus status);
+#endif
 
 static NSString *reachabilityFlags_(SCNetworkReachabilityFlags flags) {
     
@@ -201,7 +204,6 @@ static NSString *networkStatusDesc(NetworkStatus status) {
 
 
 
-//#define CLASS_DEBUG 1 // Turn on logReachabilityFlags. Must also have a project wide defined DEBUG.
 #if (defined DEBUG && defined CLASS_DEBUG)
 
 static void logNetworkStatus_(const char *name, int line, NetworkStatus status) {

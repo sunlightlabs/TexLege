@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,8 +16,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "25160D2514564E820060A5C5"
-               BuildableName = "RestKitTests.octest"
+               BlueprintIdentifier = "37678E2C1AFEC2060016B8E5"
+               BuildableName = "RestKitTests.xctest"
                BlueprintName = "RestKitTests"
                ReferencedContainer = "container:RestKit.xcodeproj">
             </BuildableReference>

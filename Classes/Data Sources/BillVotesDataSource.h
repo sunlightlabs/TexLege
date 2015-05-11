@@ -13,11 +13,11 @@
 
 #import "LegislatorsDataSource.h"
 
-enum {
+typedef NS_ENUM(int16_t, BillVotesTypes) {
 	BillVotesTypePNV = -1,
 	BillVotesTypeNay,
 	BillVotesTypeYea
-} BillVotesTypes;
+};
 
 @interface BillVotesDataSource : LegislatorsDataSource <UITableViewDelegate> {
 	NSMutableDictionary *billVotes_;

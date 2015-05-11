@@ -20,7 +20,7 @@
 @dynamic spanLat;
 @dynamic districtMapID;
 @dynamic lineWidth;
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic coordinatesData;
 @dynamic pinColorIndex;
 @dynamic numberOfCoords;
@@ -43,4 +43,5 @@
 - (CLLocationCoordinate2D)coordinate {
     return CLLocationCoordinate2DMake(self.centerLat.doubleValue, self.centerLon.doubleValue);
 }
+
 @end

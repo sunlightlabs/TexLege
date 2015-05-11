@@ -17,7 +17,7 @@
 
 @implementation CommitteePositionObj 
 
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic position;
 @dynamic legislatorID;
 @dynamic committeePositionID;

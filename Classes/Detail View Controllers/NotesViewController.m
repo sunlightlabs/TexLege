@@ -17,6 +17,7 @@
 #import "LocalyticsSession.h"
 #import "TexLegeCoreDataUtils.h"
 #import "TexLegeAppDelegate.h"
+#import "TXLDetailProtocol.h"
 
 @implementation NotesViewController
 

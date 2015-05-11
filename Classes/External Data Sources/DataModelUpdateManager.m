@@ -24,16 +24,17 @@
 #define JSONDATA_ENCODING		NSUTF8StringEncoding
 #define TXLUPDMGR_CLASSKEY		@"className"
 #define TXLUPDMGR_QUERYKEY		@"queryType"
-#define TXLUPDMGR_UPDATEDPROP	@"updated"
+#define TXLUPDMGR_UPDATEDPROP	@"updatedDate"
 #define TXLUPDMGR_UPDATEDPARAM	@"updated_since"
 
-						// QUERIES RETURN AN ARRAY OF ROWS
-enum TXL_QueryTypes {
-	QUERYTYPE_IDS_NEW = 1,		//	 *filtered* by updated_since;	contains only primaryKey
-	QUERYTYPE_IDS_ALL_PRUNE,	//	 **PRUNES CORE DATA**		;	contains only primaryKey
-	QUERYTYPE_COMPLETE_NEW,		//   *filtered* by updated_since;	contains *all* properties
-	QUERYTYPE_COMPLETE_ALL		//						all rows;	contains *all* properties
+// QUERIES RETURN AN ARRAY OF ROWS
+typedef NS_ENUM(NSUInteger, TXL_QueryTypes) {
+    QUERYTYPE_IDS_NEW = 1,		//	 *filtered* by updated_since;	contains only primaryKey
+    QUERYTYPE_IDS_ALL_PRUNE,	//	 **PRUNES CORE DATA**		;	contains only primaryKey
+    QUERYTYPE_COMPLETE_NEW,		//   *filtered* by updated_since;	contains *all* properties
+    QUERYTYPE_COMPLETE_ALL		//						all rows;	contains *all* properties
 };
+
 #define queryIsComplete(query) (query >= QUERYTYPE_COMPLETE_NEW)
 #define queryIsNew(query) ((query == QUERYTYPE_IDS_NEW) || (query == QUERYTYPE_COMPLETE_NEW))
 

@@ -12,16 +12,6 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		3701B62819AD34CB00A9F631 /* libRestKitCoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B61919AD348800A9F631 /* libRestKitCoreData.a */; };
-		3701B62919AD34CB00A9F631 /* libRestKitJSONParserJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B61519AD348800A9F631 /* libRestKitJSONParserJSONKit.a */; };
-		3701B62A19AD34CB00A9F631 /* libRestKitNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B60B19AD348800A9F631 /* libRestKitNetwork.a */; };
-		3701B62B19AD34CB00A9F631 /* libRestKitObjectMapping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B60D19AD348800A9F631 /* libRestKitObjectMapping.a */; };
-		3701B62C19AD34CB00A9F631 /* libRestKitSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B60F19AD348800A9F631 /* libRestKitSupport.a */; };
-		3701B63B19AD34F500A9F631 /* libRestKitCoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B61919AD348800A9F631 /* libRestKitCoreData.a */; };
-		3701B63C19AD34F500A9F631 /* libRestKitJSONParserJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B61519AD348800A9F631 /* libRestKitJSONParserJSONKit.a */; };
-		3701B63D19AD34F500A9F631 /* libRestKitNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B60B19AD348800A9F631 /* libRestKitNetwork.a */; };
-		3701B63E19AD34F500A9F631 /* libRestKitObjectMapping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B60D19AD348800A9F631 /* libRestKitObjectMapping.a */; };
-		3701B63F19AD34F500A9F631 /* libRestKitSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3701B60F19AD348800A9F631 /* libRestKitSupport.a */; };
 		3701B64019AD34F500A9F631 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9CA1116A227CC005C7CCE /* libSDWebImage.a */; };
 		3701B64119AD34F500A9F631 /* libSDWebImage+MKAnnotation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9CA1316A227CC005C7CCE /* libSDWebImage+MKAnnotation.a */; };
 		370298CE11F97C7A00D65FCB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370298CD11F97C7A00D65FCB /* MapKit.framework */; };
@@ -103,8 +93,6 @@
 		37507ED7130F64D400A925F5 /* 30-key.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C842120344D000507757 /* 30-key.png */; };
 		37507ED8130F64EE00A925F5 /* 96-book.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C886120344D000507757 /* 96-book.png */; };
 		37507F36130F816500A925F5 /* BillsMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B2C1FA130BCEFC00140212 /* BillsMasterViewController.xib */; };
-		375E5AC8133D6F8B0070EA64 /* VotingRecordDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E5AC7133D6F8B0070EA64 /* VotingRecordDataSource.m */; };
-		375E5AC9133D6F8B0070EA64 /* VotingRecordDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E5AC7133D6F8B0070EA64 /* VotingRecordDataSource.m */; };
 		375E5ACE133D6F9E0070EA64 /* S7GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E5ACC133D6F9E0070EA64 /* S7GraphView.m */; };
 		375E5ACF133D6F9E0070EA64 /* S7GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E5ACC133D6F9E0070EA64 /* S7GraphView.m */; };
 		375F316313B238CC0002F12F /* action.png in Resources */ = {isa = PBXBuildFile; fileRef = 375F316113B238CC0002F12F /* action.png */; };
@@ -124,6 +112,10 @@
 		37674B321002C492003FD09F /* Map.FloorE1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37674B2B1002C492003FD09F /* Map.FloorE1.pdf */; };
 		37674B331002C492003FD09F /* Map.Floor3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37674B2C1002C492003FD09F /* Map.Floor3.pdf */; };
 		37674B341002C492003FD09F /* Map.FloorE2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37674B2D1002C492003FD09F /* Map.FloorE2.pdf */; };
+		37678E8A1AFEC2DC0016B8E5 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37678E851AFEC2C20016B8E5 /* libRestKit.a */; };
+		37678F491AFFE92F0016B8E5 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1C7513CB677100655550 /* JSONKit.m */; };
+		37678F4A1AFFE93E0016B8E5 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1C7513CB677100655550 /* JSONKit.m */; };
+		37678F561AFFEC9F0016B8E5 /* VotingRecordDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E5AC7133D6F8B0070EA64 /* VotingRecordDataSource.m */; };
 		376850221234AAFD00AEEC3D /* PartisanScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376850211234AAFD00AEEC3D /* PartisanScaleView.m */; };
 		3768911B19ACE0F900E38DEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3768911A19ACE0F900E38DEB /* Images.xcassets */; };
 		3768E93913B156F600BA5A67 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3768E93613B156F600BA5A67 /* SVWebViewController.m */; };
@@ -529,7 +521,6 @@
 		37F7C06C14D32775000853D5 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05714D32775000853D5 /* UIViewAdditions.m */; };
 		37F7C06D14D32775000853D5 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C05714D32775000853D5 /* UIViewAdditions.m */; };
 		37FC487013110A9E00A4C0B2 /* BillSearchDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FC486F13110A9E00A4C0B2 /* BillSearchDataSource.m */; };
-		37FE1CA713CB677100655550 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1C7513CB677100655550 /* JSONKit.m */; };
 		37FE1CDD13CB75FD00655550 /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1CD913CB75FD00655550 /* LocalyticsSession.m */; };
 		37FE1CDE13CB75FD00655550 /* UploaderThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1CDB13CB75FD00655550 /* UploaderThread.m */; };
 		37FE1CDF13CB75FD00655550 /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FE1CD913CB75FD00655550 /* LocalyticsSession.m */; };
@@ -544,146 +535,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3701B60A19AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 253A07FC1255161B00976E89;
-			remoteInfo = RestKitNetwork;
-		};
-		3701B60C19AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 253A08031255162C00976E89;
-			remoteInfo = RestKitObjectMapping;
-		};
-		3701B60E19AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 253A080C12551D3000976E89;
-			remoteInfo = RestKitSupport;
-		};
-		3701B61019AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2590E64F125231F600531FA8;
-			remoteInfo = "RestKitJSONParser+YAJL";
-		};
-		3701B61219AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2590E66B1252353700531FA8;
-			remoteInfo = "RestKitJSONParser+SBJSON";
-		};
-		3701B61419AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73057FD11331AD2E001908EE;
-			remoteInfo = "RestKitJSONParser+JSONKit";
-		};
-		3701B61619AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25BD43BD1340315800DBACDD;
-			remoteInfo = "RestKitXMLParser+Libxml";
-		};
-		3701B61819AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 253A081412551D5300976E89;
-			remoteInfo = RestKitCoreData;
-		};
-		3701B61A19AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2523360511E79F090048F9B4;
-			remoteInfo = RestKitThree20;
-		};
-		3701B61C19AD348800A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3F6C39A510FE5C95008F47C5;
-			remoteInfo = UISpec;
-		};
-		3701B61E19AD34AD00A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A07FB1255161B00976E89;
-			remoteInfo = RestKitNetwork;
-		};
-		3701B62019AD34AD00A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A08021255162C00976E89;
-			remoteInfo = RestKitObjectMapping;
-		};
-		3701B62219AD34AD00A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A080B12551D3000976E89;
-			remoteInfo = RestKitSupport;
-		};
-		3701B62419AD34AD00A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 73057FD01331AD2E001908EE;
-			remoteInfo = "RestKitJSONParser+JSONKit";
-		};
-		3701B62619AD34AD00A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A081312551D5300976E89;
-			remoteInfo = RestKitCoreData;
-		};
-		3701B62D19AD34E400A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A07FB1255161B00976E89;
-			remoteInfo = RestKitNetwork;
-		};
-		3701B62F19AD34E400A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A08021255162C00976E89;
-			remoteInfo = RestKitObjectMapping;
-		};
-		3701B63119AD34E400A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A080B12551D3000976E89;
-			remoteInfo = RestKitSupport;
-		};
-		3701B63319AD34E400A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 73057FD01331AD2E001908EE;
-			remoteInfo = "RestKitJSONParser+JSONKit";
-		};
-		3701B63519AD34E400A9F631 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A081312551D5300976E89;
-			remoteInfo = RestKitCoreData;
-		};
 		3701B63719AD34E400A9F631 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37E9C9FD16A227CC005C7CCE /* SDWebImage.xcodeproj */;
@@ -704,6 +555,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 531041C2157EAFA400BBABC3;
 			remoteInfo = "SDWebImage+MKAnnotation";
+		};
+		37678E841AFEC2C20016B8E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37678E231AFEC2060016B8E5;
+			remoteInfo = RestKit;
+		};
+		37678E861AFEC2C20016B8E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37678E2D1AFEC2060016B8E5;
+			remoteInfo = RestKitTests;
+		};
+		37678E881AFEC2C80016B8E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3701B5FA19AD348800A9F631 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 37678E221AFEC2060016B8E5;
+			remoteInfo = RestKit;
 		};
 		37E9CA1016A227CC005C7CCE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -860,6 +732,8 @@
 		37674B2B1002C492003FD09F /* Map.FloorE1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Map.FloorE1.pdf; path = Resources/Maps/Map.FloorE1.pdf; sourceTree = "<group>"; };
 		37674B2C1002C492003FD09F /* Map.Floor3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Map.Floor3.pdf; path = Resources/Maps/Map.Floor3.pdf; sourceTree = "<group>"; };
 		37674B2D1002C492003FD09F /* Map.FloorE2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Map.FloorE2.pdf; path = Resources/Maps/Map.FloorE2.pdf; sourceTree = "<group>"; };
+		37678F571AFFEE9D0016B8E5 /* TexLege 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TexLege 5.xcdatamodel"; sourceTree = "<group>"; };
+		37678F581AFFF1F00016B8E5 /* TXLDetailProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLDetailProtocol.h; sourceTree = "<group>"; };
 		376850201234AAFD00AEEC3D /* PartisanScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartisanScaleView.h; path = "Classes/Custom Cells and Views/PartisanScaleView.h"; sourceTree = SOURCE_ROOT; };
 		376850211234AAFD00AEEC3D /* PartisanScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PartisanScaleView.m; path = "Classes/Custom Cells and Views/PartisanScaleView.m"; sourceTree = SOURCE_ROOT; };
 		3768911A19ACE0F900E38DEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
@@ -1278,11 +1152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3701B62819AD34CB00A9F631 /* libRestKitCoreData.a in Frameworks */,
-				3701B62919AD34CB00A9F631 /* libRestKitJSONParserJSONKit.a in Frameworks */,
-				3701B62A19AD34CB00A9F631 /* libRestKitNetwork.a in Frameworks */,
-				3701B62B19AD34CB00A9F631 /* libRestKitObjectMapping.a in Frameworks */,
-				3701B62C19AD34CB00A9F631 /* libRestKitSupport.a in Frameworks */,
+				37678E8A1AFEC2DC0016B8E5 /* libRestKit.a in Frameworks */,
 				37E9CA2816A22959005C7CCE /* ImageIO.framework in Frameworks */,
 				37E9CA2616A22924005C7CCE /* libSDWebImage+MKAnnotation.a in Frameworks */,
 				37C7845F14D30A98006BBEDE /* libz.dylib in Frameworks */,
@@ -1309,11 +1179,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3701B63B19AD34F500A9F631 /* libRestKitCoreData.a in Frameworks */,
-				3701B63C19AD34F500A9F631 /* libRestKitJSONParserJSONKit.a in Frameworks */,
-				3701B63D19AD34F500A9F631 /* libRestKitNetwork.a in Frameworks */,
-				3701B63E19AD34F500A9F631 /* libRestKitObjectMapping.a in Frameworks */,
-				3701B63F19AD34F500A9F631 /* libRestKitSupport.a in Frameworks */,
 				3701B64019AD34F500A9F631 /* libSDWebImage.a in Frameworks */,
 				3701B64119AD34F500A9F631 /* libSDWebImage+MKAnnotation.a in Frameworks */,
 				37C7846014D30AA3006BBEDE /* libz.dylib in Frameworks */,
@@ -1429,16 +1294,8 @@
 		3701B5FB19AD348800A9F631 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3701B60B19AD348800A9F631 /* libRestKitNetwork.a */,
-				3701B60D19AD348800A9F631 /* libRestKitObjectMapping.a */,
-				3701B60F19AD348800A9F631 /* libRestKitSupport.a */,
-				3701B61119AD348800A9F631 /* libRestKitJSONParserYAJL.a */,
-				3701B61319AD348800A9F631 /* libRestKitJSONParserSBJSON.a */,
-				3701B61519AD348800A9F631 /* libRestKitJSONParserJSONKit.a */,
-				3701B61719AD348800A9F631 /* libRestKitXMLParserLibxml.a */,
-				3701B61919AD348800A9F631 /* libRestKitCoreData.a */,
-				3701B61B19AD348800A9F631 /* libRestKitThree20.a */,
-				3701B61D19AD348800A9F631 /* UISpec.app */,
+				37678E851AFEC2C20016B8E5 /* libRestKit.a */,
+				37678E871AFEC2C20016B8E5 /* RestKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1651,6 +1508,7 @@
 		3766EE1212108E610073C705 /* Detail View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				37678F581AFFF1F00016B8E5 /* TXLDetailProtocol.h */,
 				373AB3B70FD3389F0065740E /* TableCellDataObject.h */,
 				373AB3B80FD3389F0065740E /* TableCellDataObject.m */,
 				379C1EE91012DF28007844B5 /* NotesViewController.h */,
@@ -2396,11 +2254,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3701B61F19AD34AD00A9F631 /* PBXTargetDependency */,
-				3701B62119AD34AD00A9F631 /* PBXTargetDependency */,
-				3701B62319AD34AD00A9F631 /* PBXTargetDependency */,
-				3701B62519AD34AD00A9F631 /* PBXTargetDependency */,
-				3701B62719AD34AD00A9F631 /* PBXTargetDependency */,
+				37678E891AFEC2C80016B8E5 /* PBXTargetDependency */,
 				37093E6616A36B1200399644 /* PBXTargetDependency */,
 			);
 			name = TexLege;
@@ -2420,11 +2274,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3701B62E19AD34E400A9F631 /* PBXTargetDependency */,
-				3701B63019AD34E400A9F631 /* PBXTargetDependency */,
-				3701B63219AD34E400A9F631 /* PBXTargetDependency */,
-				3701B63419AD34E400A9F631 /* PBXTargetDependency */,
-				3701B63619AD34E400A9F631 /* PBXTargetDependency */,
 				3701B63819AD34E400A9F631 /* PBXTargetDependency */,
 				3701B63A19AD34E400A9F631 /* PBXTargetDependency */,
 			);
@@ -2439,7 +2288,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Gregory S. Combs";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
@@ -2476,74 +2325,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3701B60B19AD348800A9F631 /* libRestKitNetwork.a */ = {
+		37678E851AFEC2C20016B8E5 /* libRestKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libRestKitNetwork.a;
-			remoteRef = 3701B60A19AD348800A9F631 /* PBXContainerItemProxy */;
+			path = libRestKit.a;
+			remoteRef = 37678E841AFEC2C20016B8E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3701B60D19AD348800A9F631 /* libRestKitObjectMapping.a */ = {
+		37678E871AFEC2C20016B8E5 /* RestKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitObjectMapping.a;
-			remoteRef = 3701B60C19AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B60F19AD348800A9F631 /* libRestKitSupport.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitSupport.a;
-			remoteRef = 3701B60E19AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61119AD348800A9F631 /* libRestKitJSONParserYAJL.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitJSONParserYAJL.a;
-			remoteRef = 3701B61019AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61319AD348800A9F631 /* libRestKitJSONParserSBJSON.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitJSONParserSBJSON.a;
-			remoteRef = 3701B61219AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61519AD348800A9F631 /* libRestKitJSONParserJSONKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitJSONParserJSONKit.a;
-			remoteRef = 3701B61419AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61719AD348800A9F631 /* libRestKitXMLParserLibxml.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitXMLParserLibxml.a;
-			remoteRef = 3701B61619AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61919AD348800A9F631 /* libRestKitCoreData.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitCoreData.a;
-			remoteRef = 3701B61819AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61B19AD348800A9F631 /* libRestKitThree20.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKitThree20.a;
-			remoteRef = 3701B61A19AD348800A9F631 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3701B61D19AD348800A9F631 /* UISpec.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = UISpec.app;
-			remoteRef = 3701B61C19AD348800A9F631 /* PBXContainerItemProxy */;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.xctest;
+			remoteRef = 37678E861AFEC2C20016B8E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		37E9CA1116A227CC005C7CCE /* libSDWebImage.a */ = {
@@ -2852,6 +2645,7 @@
 				37A0E4730FD2DEAA009B65F7 /* CapitolMapsDetailViewController.m in Sources */,
 				37A0E4740FD2DEAA009B65F7 /* GeneralTableViewController.m in Sources */,
 				37A0E4750FD2DEAA009B65F7 /* CapitolMapsDataSource.m in Sources */,
+				37678F491AFFE92F0016B8E5 /* JSONKit.m in Sources */,
 				373AB3B90FD3389F0065740E /* TableCellDataObject.m in Sources */,
 				37C9B67E11EDB28E001F0010 /* TexLege.xcdatamodeld in Sources */,
 				378A1CDD1007FF4600BEC4ED /* CommitteePositionObj+RestKit.m in Sources */,
@@ -2925,7 +2719,6 @@
 				370EAC381337E3CF007788BC /* TexLegeObjectCache.m in Sources */,
 				370EAD321338029E007788BC /* OpenLegislativeAPIs.m in Sources */,
 				37094D97133B162E00B9693C /* TexLegeBadgeGroupCell.m in Sources */,
-				375E5AC9133D6F8B0070EA64 /* VotingRecordDataSource.m in Sources */,
 				375E5ACF133D6F9E0070EA64 /* S7GraphView.m in Sources */,
 				37F2CA121343AE40001D9D7B /* DDActionHeaderView.m in Sources */,
 				37F2CA961343BF1A001D9D7B /* TVOutManager.m in Sources */,
@@ -2962,6 +2755,7 @@
 				37FE1F1513CB8EFE00655550 /* IntelligentSplitViewController.m in Sources */,
 				37C7845914D30444006BBEDE /* LocalyticsDatabase.m in Sources */,
 				37F7C05814D32775000853D5 /* KalDataSource.m in Sources */,
+				37678F561AFFEC9F0016B8E5 /* VotingRecordDataSource.m in Sources */,
 				37F7C05A14D32775000853D5 /* KalDate.m in Sources */,
 				37F7C05C14D32775000853D5 /* KalGridView.m in Sources */,
 				37F7C05E14D32775000853D5 /* KalLogic.m in Sources */,
@@ -2986,6 +2780,7 @@
 				37735B5A1323104A0033F343 /* CapitolMapsDetailViewController.m in Sources */,
 				37735B5B1323104A0033F343 /* GeneralTableViewController.m in Sources */,
 				37735B5C1323104A0033F343 /* CapitolMapsDataSource.m in Sources */,
+				37678F4A1AFFE93E0016B8E5 /* JSONKit.m in Sources */,
 				37735B5D1323104A0033F343 /* TableCellDataObject.m in Sources */,
 				37735B5E1323104A0033F343 /* TexLege.xcdatamodeld in Sources */,
 				37735B5F1323104A0033F343 /* CommitteePositionObj+RestKit.m in Sources */,
@@ -3060,7 +2855,6 @@
 				370EAC371337E3CF007788BC /* TexLegeObjectCache.m in Sources */,
 				370EAD311338029E007788BC /* OpenLegislativeAPIs.m in Sources */,
 				37094D96133B162E00B9693C /* TexLegeBadgeGroupCell.m in Sources */,
-				375E5AC8133D6F8B0070EA64 /* VotingRecordDataSource.m in Sources */,
 				375E5ACE133D6F9E0070EA64 /* S7GraphView.m in Sources */,
 				37F2CA111343AE40001D9D7B /* DDActionHeaderView.m in Sources */,
 				376AE79D13445CA400825C4D /* BillsKeyViewController.m in Sources */,
@@ -3091,7 +2885,6 @@
 				37CD0A6B13A340E100F4C68B /* NSString+DKAdditions.m in Sources */,
 				3770C66813A49BE800906021 /* BillActionParser.m in Sources */,
 				3768E93C13B156F600BA5A67 /* SVWebViewController.m in Sources */,
-				37FE1CA713CB677100655550 /* JSONKit.m in Sources */,
 				37FE1CDF13CB75FD00655550 /* LocalyticsSession.m in Sources */,
 				37FE1CE013CB75FD00655550 /* UploaderThread.m in Sources */,
 				37FE1E5613CB8E3300655550 /* AppendingFlowView.m in Sources */,
@@ -3115,56 +2908,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3701B61F19AD34AD00A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitNetwork;
-			targetProxy = 3701B61E19AD34AD00A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B62119AD34AD00A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitObjectMapping;
-			targetProxy = 3701B62019AD34AD00A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B62319AD34AD00A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitSupport;
-			targetProxy = 3701B62219AD34AD00A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B62519AD34AD00A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "RestKitJSONParser+JSONKit";
-			targetProxy = 3701B62419AD34AD00A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B62719AD34AD00A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitCoreData;
-			targetProxy = 3701B62619AD34AD00A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B62E19AD34E400A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitNetwork;
-			targetProxy = 3701B62D19AD34E400A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B63019AD34E400A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitObjectMapping;
-			targetProxy = 3701B62F19AD34E400A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B63219AD34E400A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitSupport;
-			targetProxy = 3701B63119AD34E400A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B63419AD34E400A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "RestKitJSONParser+JSONKit";
-			targetProxy = 3701B63319AD34E400A9F631 /* PBXContainerItemProxy */;
-		};
-		3701B63619AD34E400A9F631 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKitCoreData;
-			targetProxy = 3701B63519AD34E400A9F631 /* PBXContainerItemProxy */;
-		};
 		3701B63819AD34E400A9F631 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SDWebImage;
@@ -3179,6 +2922,11 @@
 			isa = PBXTargetDependency;
 			name = "SDWebImage+MKAnnotation";
 			targetProxy = 37093E6516A36B1200399644 /* PBXContainerItemProxy */;
+		};
+		37678E891AFEC2C80016B8E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 37678E881AFEC2C80016B8E5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3238,6 +2986,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3263,6 +3012,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3345,12 +3095,15 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gregory Combs (X69RXDFP2D)";
 				CURRENT_PROJECT_VERSION = 2.7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3403,6 +3156,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3418,13 +3172,16 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = Data/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gregory Combs (X69RXDFP2D)";
 				CURRENT_PROJECT_VERSION = 2.7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3478,6 +3235,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Resources/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = TXL;
 			};
@@ -3493,12 +3251,15 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 2.7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
@@ -3543,12 +3304,15 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TexLege_Prefix.pch;
@@ -3625,11 +3389,12 @@
 		37C9B67D11EDB28E001F0010 /* TexLege.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				37678F571AFFEE9D0016B8E5 /* TexLege 5.xcdatamodel */,
 				3737802211F800AF00E36500 /* TexLege 2.xcdatamodel */,
 				37B253D912EBF072000B6EE2 /* TexLege 3.xcdatamodel */,
 				3794A692131CABF900D0B648 /* TexLege 4.xcdatamodel */,
 			);
-			currentVersion = 3794A692131CABF900D0B648 /* TexLege 4.xcdatamodel */;
+			currentVersion = 37678F571AFFEE9D0016B8E5 /* TexLege 5.xcdatamodel */;
 			path = TexLege.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

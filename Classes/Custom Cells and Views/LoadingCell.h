@@ -12,11 +12,11 @@
 
 #import <UIKit/UIKit.h>
 
-enum {
+typedef NS_ENUM(uint16_t, LoadingStatusCodes) {
 	LOADING_IDLE = 0,
 	LOADING_ACTIVE,
 	LOADING_NO_NET
-} LoadingStatusCodes;
+};
 
 
 @interface LoadingCell : UITableViewCell {

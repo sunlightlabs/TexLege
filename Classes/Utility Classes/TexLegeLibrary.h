@@ -30,32 +30,32 @@ enum kParties {
 };
 
 // Committe Position Roles
-enum kPositions {
+typedef NS_ENUM(uint16_t, kPositions) {
     POS_MEMBER = 0,
     POS_VICE,
     POS_CHAIR
 };
 
-typedef enum  {
+typedef NS_ENUM(uint16_t, TLStringReturnType) {
     TLReturnFull = 0,		// Return the full string
     TLReturnAbbrev,			// Return an abbreviation
     TLReturnInitial,		// Return an initial
 	TLReturnOpenStates,
 	TLReturnAbbrevPlural,	// Like "Dems", "Repubs", etc.
 	TLReturnTitle			// Return a member title like Senator or Representative
-} TLStringReturnType;
+};
 
-enum  {
-	BillStageUnknown = 0,
-	BillStageFiled,
-	BillStageOutOfCommittee,
-	BillStageChamberVoted,
-	BillStageOutOfOpposingCommittee,
-	BillStageOpposingChamberVoted,
-	BillStageSentToGovernor,
-	BillStageBecomesLaw,
-	BillStageVetoed = -1
-} TexLegeBillStages;
+typedef NS_ENUM(uint16_t, TexLegeBillStages) {
+    BillStageUnknown = 0,
+    BillStageFiled,
+    BillStageOutOfCommittee,
+    BillStageChamberVoted,
+    BillStageOutOfOpposingCommittee,
+    BillStageOpposingChamberVoted,
+    BillStageSentToGovernor,
+    BillStageBecomesLaw,
+    BillStageVetoed = -1
+};
 										/*
 										 1. Filed
 										 2. Out of (current chamber) Committee

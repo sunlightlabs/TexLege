@@ -31,7 +31,7 @@
 @dynamic nickname;
 @dynamic party_id;
 @dynamic nimsp_id;
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic twitter;
 @dynamic district;
 @dynamic cap_phone2;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0630"
    version = "1.8">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "255B7588133BABBF00ED76AD"
-               BuildableName = "RestKit"
+               BlueprintIdentifier = "37678E221AFEC2060016B8E5"
+               BuildableName = "libRestKit.a"
                BlueprintName = "RestKit"
                ReferencedContainer = "container:RestKit.xcodeproj">
             </BuildableReference>
@@ -41,6 +41,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "37678E221AFEC2060016B8E5"
+            BuildableName = "libRestKit.a"
+            BlueprintName = "RestKit"
+            ReferencedContainer = "container:RestKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

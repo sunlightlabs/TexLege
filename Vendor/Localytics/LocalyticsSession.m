@@ -986,11 +986,7 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
  @return A string identifying the model, e.g. 8GB, 16GB, etc
  */
 - (NSString *) modelSizeString {
-	
-#if TARGET_IPHONE_SIMULATOR
-	return @"simulator";
-#endif
-	
+		
 	// User partition
 	NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSDictionary *stats = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[path lastObject] error:nil];  
@@ -1003,12 +999,12 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
 	
 	// Add up and convert to gigabytes
 	// TODO: seem to be missing a system partiton or two...
-	NSInteger size = (user + system) >> 30;
+	uint64_t size = (user + system) >> 30;
 	
 	// Find nearest power of 2 (eg, 1,2,4,8,16,32,etc).  Over 64 and we return 0
-	for (NSInteger gig = 1; gig < 257; gig = gig << 1) {
+	for (uint64_t gig = 1; gig < 257; gig = gig << 1) {
 		if (size < gig)
-			return [NSString stringWithFormat:@"%ldGB", (long)gig];
+			return [NSString stringWithFormat:@"%lluGB", gig];
 	}
 	return nil;
 }

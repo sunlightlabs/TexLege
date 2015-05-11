@@ -194,7 +194,6 @@
 		NSString *votesString = [type stringByAppendingString:@"_votes"];
 		NSNumber *voteCode = [NSNumber numberWithInteger:codeIndex];
 		
-#warning state specific (Speaker's Legislator ID)
 		if ([billVotes_ objectForKey:countString] && [[billVotes_ objectForKey:countString] integerValue]) {
 			for (NSMutableDictionary *voter in [billVotes_ objectForKey:votesString]) {
 				/* We sometimes (all the time?) have to hard code in the Speaker ... let's just hope 

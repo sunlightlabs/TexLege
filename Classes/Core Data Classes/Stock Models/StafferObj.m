@@ -17,7 +17,7 @@
 @implementation StafferObj 
 
 @dynamic phone;
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic legislatorID;
 @dynamic title;
 @dynamic email;

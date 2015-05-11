@@ -31,7 +31,9 @@
 #import "DistrictPinAnnotationView.h"
 
 
-@interface MapViewController (Private)
+@interface MapViewController()
+@property (nonatomic,assign,getter=isLocationServicesDenied) BOOL locationServicesDenied;
+
 - (void) animateToState;
 - (void) animateToAnnotation:(id<MKAnnotation>)annotation;
 - (void) clearAnnotationsAndOverlays;
@@ -39,13 +41,12 @@
 - (void) clearAnnotationsAndOverlaysExcept:(id)annotation;
 - (void) resetMapViewWithAnimation:(BOOL)animated;
 - (BOOL) region:(MKCoordinateRegion)region1 isEqualTo:(MKCoordinateRegion)region2;
-- (IBAction) showHidePopoverButton:(id)sender;
 
 - (void) geocodeAddressWithCoordinate:(CLLocationCoordinate2D)newCoord;
 - (void) geocodeCoordinateWithAddress:(NSString *)address;
+
 @end
 
-NSInteger colorIndex;
 static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 
 @implementation MapViewController
@@ -56,6 +57,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 @synthesize senateDistrictView, houseDistrictView;
 @synthesize masterPopover;
 @synthesize genericOperationQueue;
+@synthesize colorIndex=colorIndex;
 
 #pragma mark -
 #pragma mark Initialization and Memory Management
@@ -105,6 +107,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	
 	[self.view setBackgroundColor:[TexLegeTheme backgroundLight]];
 	self.mapView.showsUserLocation = NO;
+    self.mapView.showsBuildings = YES;
 	
 	// Set up the map's region to frame the state of Texas.
 	// Zoom = 6
@@ -378,8 +381,6 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 - (void)showLocateUserButton {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
-	NSInteger buttonIndex = 0;
-	
 	UIBarButtonItem *locateItem = [[UIBarButtonItem alloc] 
 								   initWithImage:[UIImage imageNamed:@"locationarrow.png"]
 									style:UIBarButtonItemStyleBordered
@@ -387,13 +388,27 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 									action:@selector(locateUser:)];
 
 	locateItem.tag = 999;
+    if (self.isLocationServicesDenied)
+        locateItem.enabled = NO;
 	
 	NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.toolbar.items];
 
-	UIBarButtonItem *otherButton = [items objectAtIndex:buttonIndex];
-	if (otherButton.tag == 998 || otherButton.tag == 999)
-		[items removeObjectAtIndex:buttonIndex];
+    __block NSUInteger buttonIndex = NSNotFound;
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIBarButtonItem *item = obj;
+        if (item.tag == 999 || item.tag == 998)
+        {
+            *stop = YES;
+            buttonIndex = idx;
+        }
+    }];
+
+    if (buttonIndex != NSNotFound)
+        [items removeObjectAtIndex:buttonIndex];
+    else
+        buttonIndex = 0;
 	[items insertObject:locateItem atIndex:buttonIndex];
+
 	self.userLocationButton = locateItem;
 	[self.toolbar setItems:items animated:YES];
 	[locateItem release];
@@ -403,20 +418,33 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 - (void)showLocateActivityButton {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-	NSInteger buttonIndex = 0;
 
 	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 	[activityIndicator startAnimating];
 	UIBarButtonItem *activityItem = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
 	[activityIndicator release];
 	activityItem.tag = 998;
-	
+    if (self.isLocationServicesDenied)
+        activityItem.enabled = NO;
+
 	NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.toolbar.items];
-	
-	UIBarButtonItem *otherButton = [items objectAtIndex:buttonIndex];
-	if (otherButton.tag == 999 || otherButton.tag == 998)
-		[items removeObjectAtIndex:buttonIndex];
-	[items insertObject:activityItem atIndex:buttonIndex];
+
+    __block NSUInteger buttonIndex = NSNotFound;
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIBarButtonItem *item = obj;
+        if (item.tag == 999 || item.tag == 998)
+        {
+            *stop = YES;
+            buttonIndex = idx;
+        }
+    }];
+
+    if (buttonIndex != NSNotFound)
+        [items removeObjectAtIndex:buttonIndex];
+    else
+        buttonIndex = 0;
+    [items insertObject:activityItem atIndex:buttonIndex];
+
 	[self.toolbar setItems:items animated:YES];
 	[activityItem release];
 	[items release];
@@ -426,10 +454,58 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	[self clearAnnotationsAndOverlays];
 	[self showLocateActivityButton];				// this gets changed in viewForAnnotation once we receive the location
 
-	if ([UtilityMethods locationServicesEnabled]) 
+    
+	if ([self determineOrRequestLocationAuthorization])
 		self.mapView.showsUserLocation = YES;
 }
 
+#pragma mark -
+#pragma mark MapKit
+
+- (void)setLocationServicesDenied:(BOOL)locationServicesDenied
+{
+    _locationServicesDenied = locationServicesDenied;
+    if (_locationServicesDenied &&
+        self.userLocationButton)
+    {
+        self.userLocationButton.enabled = NO;
+    }
+}
+
+- (BOOL)determineOrRequestLocationAuthorization
+{
+    BOOL locationEnabled = NO;
+
+    switch ([CLLocationManager authorizationStatus])
+    {
+        case kCLAuthorizationStatusNotDetermined:
+        {
+            if ([CLLocationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+                [CLLocationManager performSelector:@selector(requestWhenInUseAuthorization)];
+            else
+                [CLLocationManager locationServicesEnabled];
+            break;
+        }
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusDenied:
+        {
+            self.locationServicesDenied = YES;
+            break;
+        }
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        {
+            self.locationServicesDenied = NO;
+            locationEnabled = YES;
+            break;
+        }
+    }
+
+    return locationEnabled;
+}
+
+
+#if 0 // can't get custom objects while using propertiesToFetch: anymore
 - (IBAction) showAllDistricts:(id)sender {
 	[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"SHOWING_ALL_DISTRICTS"];
 	
@@ -441,6 +517,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	}
 	[pool drain];
 }
+#endif
 
 /*
 - (IBAction) showAllDistrictOffices:(id)sender {

@@ -55,7 +55,7 @@
 				NSString* updatedString = [[paramsDict objectForKey:@"updated_since"] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 				NSDate *updatedDate = [NSDate dateFromString:updatedString];
 				NSFetchRequest* request = [modelClass fetchRequest];
-				NSPredicate* predicate = [NSPredicate predicateWithFormat:@"updated >= %@", updatedDate, nil];
+				NSPredicate* predicate = [NSPredicate predicateWithFormat:@"updatedDate >= %@", updatedDate, nil];
 				[request setPredicate:predicate];
 				NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:primaryKey ascending:YES];
 				[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];

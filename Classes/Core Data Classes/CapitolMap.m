@@ -87,12 +87,10 @@
 }
 */
 
-- (NSURL *)url {
-	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-	NSString *filePath = [ NSString stringWithFormat:
-						 @"%@/%@.app/%@",NSHomeDirectory(),appName, self.file ];
-	
-	return [NSURL fileURLWithPath:filePath];
+- (NSURL *)url
+{
+    return [[NSBundle mainBundle] URLForResource:[self.file stringByDeletingPathExtension]
+                                   withExtension:[self.file pathExtension]];
 }
 
 @end

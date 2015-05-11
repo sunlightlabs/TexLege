@@ -75,15 +75,11 @@
 }
 		
 + (DistrictMapObj*)districtMapForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber {
-	return [TexLegeCoreDataUtils districtMapForDistrict:district andChamber:chamber lightProperties:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.district == %@ AND self.chamber == %@", district, chamber];
+    return [TexLegeCoreDataUtils dataObjectWithPredicate:predicate entityName:@"DistrictMapObj"];
 }
 
-+ (DistrictMapObj*)districtMapForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber lightProperties:(BOOL)light {
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.district == %@ AND self.chamber == %@", district, chamber];
-	return [TexLegeCoreDataUtils dataObjectWithPredicate:predicate entityName:@"DistrictMapObj" lightProperties:light];
-}
-
-+ (LegislatorObj*)legislatorForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber 
++ (LegislatorObj*)legislatorForDistrict:(NSNumber*)district andChamber:(NSNumber*)chamber
 {
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.district == %@ AND self.legtype == %@", district, chamber];
 	return [LegislatorObj objectWithPredicate:predicate];
@@ -127,17 +123,10 @@
 }
 
 + (id)dataObjectWithPredicate:(NSPredicate *)predicate entityName:(NSString*)entityName {
-	return [TexLegeCoreDataUtils dataObjectWithPredicate:predicate entityName:entityName lightProperties:YES];
-}
-
-// You better make the predicate specific ... so that it only provides one result.  
-+ (id)dataObjectWithPredicate:(NSPredicate *)predicate entityName:(NSString*)entityName lightProperties:(BOOL)light {
 	if (!predicate || !entityName || !NSClassFromString(entityName))
 		return nil;
 
 	NSFetchRequest *request = [NSClassFromString(entityName) fetchRequest];
-	if (light && [entityName isEqualToString:@"DistrictMapObj"])
-		[request setPropertiesToFetch:[DistrictMapObj lightPropertiesToFetch]];
 	[request setPredicate:predicate];
 	
 	return [NSClassFromString(entityName) objectWithFetchRequest:request];
@@ -168,11 +157,13 @@
 	return nil;
 }
 
+#if 0 // can't get custom objects while using propertiesToFetch: anymore
 + (NSArray *) allDistrictMapsLight {
 	NSFetchRequest *fetchRequest = [DistrictMapObj fetchRequest];	
 	[fetchRequest setPropertiesToFetch:[DistrictMapObj lightPropertiesToFetch]];
 	return [DistrictMapObj objectsWithFetchRequest:fetchRequest];
 }
+#endif
 
 + (NSArray *)allDistrictMapIDsWithBoundingBoxesContaining:(CLLocationCoordinate2D)coordinate
 {		

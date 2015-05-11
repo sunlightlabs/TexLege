@@ -192,7 +192,7 @@ BOOL IsEmpty(id thing) {
 /*		NSLog(@"ORIENTATION WAS WRONG ... WE'RE RESETTING ... IS THIS OKAY???");
 		[[UIApplication sharedApplication] setStatusBarOrientation:orientation animated:NO];
 */
-		return UIInterfaceOrientationIsLandscape(orientation);	
+		return UIDeviceOrientationIsLandscape(orientation);
 	}
 	else
 		return UIInterfaceOrientationIsLandscape(statusBarOrientation);
@@ -219,17 +219,6 @@ BOOL IsEmpty(id thing) {
 	}
 	return isRunningOniPad;
 }
-
-#pragma mark -
-#pragma mark MapKit
-
-+ (BOOL) locationServicesEnabled {
-	BOOL locationEnabled = NO;
-	if ([[CLLocationManager class] respondsToSelector:@selector(locationServicesEnabled)])
-		locationEnabled = [CLLocationManager locationServicesEnabled];
-	return locationEnabled;
-}
-
 
 #pragma mark -
 #pragma mark File Handling

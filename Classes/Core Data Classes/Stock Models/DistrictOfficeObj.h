@@ -28,7 +28,7 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * stateCode;
 @property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSString * fax;
 @property (nonatomic, retain) NSString * formattedAddress;
 @property (nonatomic, retain) NSString * address;

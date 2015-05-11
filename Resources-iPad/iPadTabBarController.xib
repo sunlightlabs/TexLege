@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1024" defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment version="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TexLegeAppDelegate">
@@ -20,11 +20,8 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tabBarController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="2">
             <extendedEdge key="edgesForExtendedLayout"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <tabBar key="tabBar" contentMode="scaleToFill" id="3">
                 <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -36,17 +33,8 @@
         </tabBarController>
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Legislators" id="8" userLabel="LegislatorSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="10">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="11" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,11 +44,6 @@
                         <navigationItem key="navigationItem" id="20">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="21" id="70"/>
                         </connections>
@@ -68,11 +51,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="9">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="12">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,11 +61,6 @@
                         <navigationItem key="navigationItem" id="25">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </tableViewController>
                 </viewControllers>
             </navigationController>
@@ -97,17 +70,8 @@
         </splitViewController>
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Committees" id="26" userLabel="CommitteeSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="27">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="33" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -117,11 +81,6 @@
                         <navigationItem key="navigationItem" id="34">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="29" id="71"/>
                         </connections>
@@ -129,11 +88,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="28">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="30">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -144,11 +98,6 @@
                         <navigationItem key="navigationItem" id="31">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </tableViewController>
                 </viewControllers>
             </navigationController>
@@ -159,16 +108,8 @@
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Districts" id="109" userLabel="DistrictMapsSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <nil key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="110">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="116" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -178,11 +119,6 @@
                         <navigationItem key="navigationItem" id="117">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="112" id="118"/>
                         </connections>
@@ -190,11 +126,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="111">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="113">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -205,11 +136,6 @@
                         <navigationItem key="navigationItem" id="114">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </viewController>
                 </viewControllers>
             </navigationController>
@@ -219,17 +145,8 @@
         </splitViewController>
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Meetings" id="35" userLabel="CalendarsSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="37">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="38" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -239,11 +156,6 @@
                         <navigationItem key="navigationItem" id="40">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="44" id="72"/>
                         </connections>
@@ -251,11 +163,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="36">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="41">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -267,11 +174,6 @@
                         <navigationItem key="navigationItem" id="45">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </viewController>
                 </viewControllers>
             </navigationController>
@@ -282,16 +184,8 @@
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Maps" id="123" userLabel="BillsSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <nil key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="125">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="126" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -301,11 +195,6 @@
                         <navigationItem key="navigationItem" id="128">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="130" id="133"/>
                         </connections>
@@ -313,11 +202,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="124">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="129">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -328,11 +212,6 @@
                         <navigationItem key="navigationItem" id="131">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </viewController>
                 </viewControllers>
             </navigationController>
@@ -343,16 +222,8 @@
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Maps" id="46" userLabel="CapitolMapsSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <nil key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="47">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="53" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -362,11 +233,6 @@
                         <navigationItem key="navigationItem" id="54">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="49" id="73"/>
                         </connections>
@@ -374,11 +240,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="48">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="50">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -389,11 +250,6 @@
                         <navigationItem key="navigationItem" id="51">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </viewController>
                 </viewControllers>
             </navigationController>
@@ -404,16 +260,8 @@
         <splitViewController autoresizesArchivedViewToFullSize="NO" title="Resources" id="55" userLabel="LinksSplitView" customClass="IntelligentSplitViewController">
             <toolbarItems/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <nil key="simulatedDestinationMetrics"/>
             <navigationController key="masterViewController" autoresizesArchivedViewToFullSize="NO" id="57">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="58" customClass="TexLegeNavBar">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="tintColor" red="0.30588235289999999" green="0.36078431370000003" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -423,11 +271,6 @@
                         <navigationItem key="navigationItem" id="60">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                         <connections>
                             <outlet property="detailViewController" destination="62" id="74"/>
                         </connections>
@@ -435,11 +278,6 @@
                 </viewControllers>
             </navigationController>
             <navigationController key="detailViewController" autoresizesArchivedViewToFullSize="NO" id="56">
-                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                <nil key="simulatedTopBarMetrics"/>
-                <nil key="simulatedBottomBarMetrics"/>
-                <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                <nil key="simulatedDestinationMetrics"/>
                 <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="61">
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -450,11 +288,6 @@
                         <navigationItem key="navigationItem" id="63">
                             <nil key="title"/>
                         </navigationItem>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                        <nil key="simulatedTopBarMetrics"/>
-                        <nil key="simulatedBottomBarMetrics"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                        <nil key="simulatedDestinationMetrics"/>
                     </viewController>
                 </viewControllers>
             </navigationController>
@@ -463,4 +296,9 @@
             </connections>
         </splitViewController>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

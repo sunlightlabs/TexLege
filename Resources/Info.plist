@@ -28,6 +28,10 @@
 	<string>GIT_COMMIT_COUNT</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>If privacy settings permit access, TexLege will use your mobile device location only to determine the legislative representation for your vicinity.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>If privacy settings permit access, TexLege will use your mobile device location only to determine the legislative representation for your vicinity.</string>
 	<key>UIInterfaceOrientation~ipad</key>
 	<string>UIInterfaceOrientationLandscapeLeft</string>
 	<key>UIInterfaceOrientation~iphone</key>

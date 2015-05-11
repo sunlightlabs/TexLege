@@ -19,6 +19,6 @@
 @dynamic section;
 @dynamic sortOrder;
 @dynamic url;
-@dynamic updated;
+@dynamic updatedDate;
 
 @end

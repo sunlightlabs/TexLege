@@ -85,7 +85,8 @@ const CGFloat kDisclosureQuartzViewHeight = 32.0f;
 	bytesPerRow = scaleMod * 4 * roundf(bounds.size.width);
 
 	bitmapData = calloc(bytesPerRow * round(bounds.size.height), 8);
-	context = CGBitmapContextCreate(bitmapData, scaleMod*round(bounds.size.width), scaleMod*round(bounds.size.height), 8, bytesPerRow, space, kCGImageAlphaPremultipliedLast);
+
+    context = CGBitmapContextCreate(bitmapData, scaleMod*round(bounds.size.width), scaleMod*round(bounds.size.height), 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
 
 	UIGraphicsPushContext(context);
 	CGContextScaleCTM(context, scaleMod*(bounds.size.width / imageBounds.size.width), scaleMod*(bounds.size.height / imageBounds.size.height));

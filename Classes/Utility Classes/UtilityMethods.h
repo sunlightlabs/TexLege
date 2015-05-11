@@ -28,8 +28,6 @@ BOOL IsEmpty(id thing);
 	
 + (BOOL) supportsEventKit;
 
-+ (BOOL) locationServicesEnabled;
-
 + (BOOL) isLandscapeOrientation;
 + (BOOL) isIPadDevice;
 

@@ -512,7 +512,7 @@
 	TableCellDataObject *cellInfo = [self dataObjectForIndexPath:indexPath];
 		
 	if (cellInfo == nil) {
-		debug_NSLog(@"LegislatorDetailDataSource:cellForRow: error finding table entry for section:%ld row:%ld", indexPath.section, (long)indexPath.row);
+		debug_NSLog(@"LegislatorDetailDataSource:cellForRow: error finding table entry for section:%ld row:%ld", (long)indexPath.section, (long)indexPath.row);
 		return nil;
 	}
 	

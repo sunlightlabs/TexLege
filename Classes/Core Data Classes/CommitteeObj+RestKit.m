@@ -34,7 +34,7 @@
 			@"txlonline_id", @"txlonline_id",
 			@"url", @"url",
 			@"votesmartID", @"votesmartID",
-			@"updated", @"updated",
+			@"updated", @"updatedDate",
 			nil];
 }
 
@@ -42,21 +42,6 @@
 	return @"committeeId";
 }
 
-#pragma mark Property Accessor Issues
-/* These methods are the exact same thing (or at least *should* be the same) as the default core data object methods
- However, for whatever reason, sometimes the default returns an NSNumber instead of an NSString ... this makes sure */
-- (NSString *)updated {
-	[self willAccessValueForKey:@"updated"];
-	NSString *outValue = [self primitiveValueForKey:@"updated"];
-	[self didAccessValueForKey:@"updated"];
-	return outValue;
-}
-
-- (void)setUpdated:(NSString *)inValue {
-	[self willChangeValueForKey:@"updated"];
-	[self setPrimitiveValue:inValue forKey:@"updated"];
-	[self didChangeValueForKey:@"updated"];
-}
 
 #pragma mark Custom Accessors
 

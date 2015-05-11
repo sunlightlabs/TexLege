@@ -16,9 +16,8 @@
 {
 }
 
-@property (nonatomic, readonly) CLLocationCoordinate2D	coordinate;
-@property (nonatomic, readonly) MKCoordinateRegion		region;
-@property (nonatomic, readonly) MKCoordinateSpan		span;
+- (MKCoordinateRegion)region;
+- (MKCoordinateSpan)span;
 
 - (UIImage *)image;
 - (MKPolyline *)polyline;

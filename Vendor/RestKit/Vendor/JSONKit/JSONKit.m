@@ -2036,7 +2036,12 @@ static void *jk_cachedObjects(JKParseState *parseState) {
   }
   
   switch(parseState->token.value.type) {
-    case JKValueTypeString:           parsedAtom = (void *)CFStringCreateWithBytes(NULL, parseState->token.value.ptrRange.ptr, parseState->token.value.ptrRange.length, kCFStringEncodingUTF8, 0); break;
+    case JKValueTypeString:
+      {
+          JKConstPtrRange parsedValue = parseState->token.value.ptrRange;
+          parsedAtom = (void *)CFStringCreateWithBytes(NULL, parsedValue.ptr, parsedValue.length, kCFStringEncodingUTF8, 0);
+          break;
+      }
     case JKValueTypeLongLong:         parsedAtom = (void *)CFNumberCreate(NULL, kCFNumberLongLongType, &parseState->token.value.number.longLongValue);                                             break;
     case JKValueTypeUnsignedLongLong:
       if(parseState->token.value.number.unsignedLongLongValue <= LLONG_MAX) { parsedAtom = (void *)CFNumberCreate(NULL, kCFNumberLongLongType, &parseState->token.value.number.unsignedLongLongValue); }
@@ -2608,38 +2613,38 @@ static int jk_encode_add_atom_to_buffer(JKEncodeState *encodeState, void *object
   //     gains in the two to three percent range.
   //     
   // XXX XXX XXX XXX
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-objc-pointer-introspection"
-    BOOL workAroundMacOSXABIBreakingBug = (JK_EXPECT_F(((NSUInteger)object) & 0x1)) ? YES : NO;
-#pragma clang diagnostic pop
-
-  void  *objectISA                      = (JK_EXPECT_F(workAroundMacOSXABIBreakingBug)) ? NULL : *((void **)object);
-  if(JK_EXPECT_F(workAroundMacOSXABIBreakingBug)) { goto slowClassLookup; }
-
-       if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.stringClass))     { isClass = JKClassString;     }
-  else if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.numberClass))     { isClass = JKClassNumber;     }
-  else if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.dictionaryClass)) { isClass = JKClassDictionary; }
-  else if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.arrayClass))      { isClass = JKClassArray;      }
-  else if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.nullClass))       { isClass = JKClassNull;       }
-  else {
-  slowClassLookup:
-         if(JK_EXPECT_T([object isKindOfClass:[NSString     class]])) { if(workAroundMacOSXABIBreakingBug == NO) { encodeState->fastClassLookup.stringClass     = objectISA; } isClass = JKClassString;     }
-    else if(JK_EXPECT_T([object isKindOfClass:[NSNumber     class]])) { if(workAroundMacOSXABIBreakingBug == NO) { encodeState->fastClassLookup.numberClass     = objectISA; } isClass = JKClassNumber;     }
-    else if(JK_EXPECT_T([object isKindOfClass:[NSDictionary class]])) { if(workAroundMacOSXABIBreakingBug == NO) { encodeState->fastClassLookup.dictionaryClass = objectISA; } isClass = JKClassDictionary; }
-    else if(JK_EXPECT_T([object isKindOfClass:[NSArray      class]])) { if(workAroundMacOSXABIBreakingBug == NO) { encodeState->fastClassLookup.arrayClass      = objectISA; } isClass = JKClassArray;      }
-    else if(JK_EXPECT_T([object isKindOfClass:[NSNull       class]])) { if(workAroundMacOSXABIBreakingBug == NO) { encodeState->fastClassLookup.nullClass       = objectISA; } isClass = JKClassNull;       }
-    else {
-      if((rerunningAfterClassFormatter == NO) && (
-#ifdef __BLOCKS__
-           ((encodeState->classFormatterBlock) && ((object = encodeState->classFormatterBlock(object))                                                                         != NULL)) ||
-#endif
-           ((encodeState->classFormatterIMP)   && ((object = encodeState->classFormatterIMP(encodeState->classFormatterDelegate, encodeState->classFormatterSelector, object)) != NULL))    )) { rerunningAfterClassFormatter = YES; goto rerunAfterClassFormatter; }
-      
-      if(rerunningAfterClassFormatter == NO) { jk_encode_error(encodeState, @"Unable to serialize object class %@.", NSStringFromClass([encodeCacheObject class])); return(1); }
-      else { jk_encode_error(encodeState, @"Unable to serialize object class %@ that was returned by the unsupported class formatter.  Original object class was %@.", (object == NULL) ? @"NULL" : NSStringFromClass([object class]), NSStringFromClass([encodeCacheObject class])); return(1); }
+    
+    if(JK_EXPECT_T([object isKindOfClass:[NSString class]])) {
+        isClass = JKClassString;
     }
-  }
+    else if(JK_EXPECT_T([object isKindOfClass:[NSNumber class]])) {
+        isClass = JKClassNumber;
+    }
+    else if(JK_EXPECT_T([object isKindOfClass:[NSDictionary class]])) {
+        isClass = JKClassDictionary;
+    }
+    else if(JK_EXPECT_T([object isKindOfClass:[NSArray class]])) {
+        isClass = JKClassArray;
+    }
+    else if(JK_EXPECT_T([object isKindOfClass:[NSNull class]])) {
+        isClass = JKClassNull;
+    }
+    else {
+        if((rerunningAfterClassFormatter == NO) &&
+           (((encodeState->classFormatterBlock) &&
+             ((object = encodeState->classFormatterBlock(object)) != NULL)) ||
+            ((encodeState->classFormatterIMP) && ((object = encodeState->classFormatterIMP(encodeState->classFormatterDelegate, encodeState->classFormatterSelector, object)) != NULL)) ))
+        {
+            rerunningAfterClassFormatter = YES; goto rerunAfterClassFormatter;
+        }
+        
+        if(rerunningAfterClassFormatter == NO) {
+            jk_encode_error(encodeState, @"Unable to serialize object class %@.", NSStringFromClass([encodeCacheObject class])); return(1);
+        }
+        else {
+            jk_encode_error(encodeState, @"Unable to serialize object class %@ that was returned by the unsupported class formatter.  Original object class was %@.", (object == NULL) ? @"NULL" : NSStringFromClass([object class]), NSStringFromClass([encodeCacheObject class])); return(1);
+        }
+    }
 
   // This is here for the benefit of the optimizer.  It allows the optimizer to do loop invariant code motion for the JKClassArray
   // and JKClassDictionary cases when printing simple, single characters via jk_encode_write(), which is actually a macro:
@@ -2810,9 +2815,8 @@ static int jk_encode_add_atom_to_buffer(JKEncodeState *encodeState, void *object
           for(id keyObject in enumerateObject) {
             if(JK_EXPECT_T(printComma)) { if(JK_EXPECT_F(jk_encode_write1(encodeState, 0L, ","))) { return(1); } }
             printComma = 1;
-            void *keyObjectISA = *((void **)keyObject);
-            if(JK_EXPECT_F((keyObjectISA != encodeState->fastClassLookup.stringClass)) && JK_EXPECT_F(([keyObject isKindOfClass:[NSString class]] == NO))) { jk_encode_error(encodeState, @"Key must be a string object."); return(1); }
-            if(JK_EXPECT_F(jk_encode_add_atom_to_buffer(encodeState, keyObject)))                                                        { return(1); }
+              if(JK_EXPECT_F(([keyObject isKindOfClass:[NSString class]] == NO))) { jk_encode_error(encodeState, @"Key must be a string object."); return(1); }
+              if(JK_EXPECT_F(jk_encode_add_atom_to_buffer(encodeState, keyObject)))                                                        { return(1); }
             if(JK_EXPECT_F(jk_encode_write1(encodeState, 0L, ":")))                                                                      { return(1); }
             if(JK_EXPECT_F(jk_encode_add_atom_to_buffer(encodeState, (void *)CFDictionaryGetValue((CFDictionaryRef)object, keyObject)))) { return(1); }
           }
@@ -2822,8 +2826,7 @@ static int jk_encode_add_atom_to_buffer(JKEncodeState *encodeState, void *object
           for(idx = 0L; idx < dictionaryCount; idx++) {
             if(JK_EXPECT_T(printComma)) { if(JK_EXPECT_F(jk_encode_write1(encodeState, 0L, ","))) { return(1); } }
             printComma = 1;
-            void *keyObjectISA = *((void **)keys[idx]);
-            if(JK_EXPECT_F(keyObjectISA != encodeState->fastClassLookup.stringClass) && JK_EXPECT_F([(id)keys[idx] isKindOfClass:[NSString class]] == NO)) { jk_encode_error(encodeState, @"Key must be a string object."); return(1); }
+            if(JK_EXPECT_F([(id)keys[idx] isKindOfClass:[NSString class]] == NO)) { jk_encode_error(encodeState, @"Key must be a string object."); return(1); }
             if(JK_EXPECT_F(jk_encode_add_atom_to_buffer(encodeState, keys[idx])))    { return(1); }
             if(JK_EXPECT_F(jk_encode_write1(encodeState, 0L, ":")))                  { return(1); }
             if(JK_EXPECT_F(jk_encode_add_atom_to_buffer(encodeState, objects[idx]))) { return(1); }

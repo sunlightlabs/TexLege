@@ -19,7 +19,6 @@
 @interface DistrictOfficeObj (MapKit)
 
 // MKAnnotation protocol
-@property (nonatomic, readonly) CLLocationCoordinate2D	coordinate;
 @property (nonatomic, readonly) MKCoordinateRegion		region;
 @property (nonatomic, readonly) MKCoordinateSpan		span;
 

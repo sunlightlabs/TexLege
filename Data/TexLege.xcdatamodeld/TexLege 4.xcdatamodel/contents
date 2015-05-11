@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CommitteeObj" representedClassName="CommitteeObj" syncable="YES">
+        <attribute name="clerk" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clerk_email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="committeeId" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="committeeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="committeeNameInitial" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="committeeType" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="office" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="openstatesID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="txlonline_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="votesmartID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <relationship name="committeePositions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CommitteePositionObj" inverseName="committee" inverseEntity="CommitteePositionObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="CommitteePositionObj" representedClassName="CommitteePositionObj" syncable="YES">
+        <attribute name="committeeId" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="committeePositionID" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="legislatorID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="committee" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CommitteeObj" inverseName="committeePositions" inverseEntity="CommitteeObj" indexed="YES" syncable="YES"/>
+        <relationship name="legislator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LegislatorObj" inverseName="committeePositions" inverseEntity="LegislatorObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="DistrictMapObj" representedClassName="DistrictMapObj" syncable="YES">
+        <attribute name="centerLat" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="centerLon" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="chamber" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="coordinatesBase64" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coordinatesData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="district" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="districtMapID" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="lineColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="lineWidth" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxLat" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxLon" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="minLat" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="minLon" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="numberOfCoords" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pinColorIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="spanLat" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="spanLon" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="legislator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LegislatorObj" inverseName="districtMap" inverseEntity="LegislatorObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="DistrictOfficeObj" representedClassName="DistrictOfficeObj" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chamber" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="county" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="district" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="districtOfficeID" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="fax" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="formattedAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="legislatorID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pinColorIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="spanLat" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="spanLon" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="stateCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="legislator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LegislatorObj" inverseName="districtOffices" inverseEntity="LegislatorObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="LegislatorObj" representedClassName="LegislatorObj" syncable="YES">
+        <attribute name="bio_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cap_fax" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cap_office" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cap_phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cap_phone2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cap_phone2_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="district" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastnameInitial" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="legislatorID" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="legtype" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="legtype_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middlename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nextElection" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nimsp_id" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="openstatesID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="partisan_index" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="party_id" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="party_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="preferredname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="searchName" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stateID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="suffix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tenure" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="transDataContributorID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="txlonline_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="votesmartDistrictID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="votesmartID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="votesmartOfficeID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <relationship name="committeePositions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CommitteePositionObj" inverseName="legislator" inverseEntity="CommitteePositionObj" indexed="YES" syncable="YES"/>
+        <relationship name="districtMap" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="DistrictMapObj" inverseName="legislator" inverseEntity="DistrictMapObj" indexed="YES" syncable="YES"/>
+        <relationship name="districtOffices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DistrictOfficeObj" inverseName="legislator" inverseEntity="DistrictOfficeObj" indexed="YES" syncable="YES"/>
+        <relationship name="staffers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StafferObj" inverseName="legislator" inverseEntity="StafferObj" indexed="YES" syncable="YES"/>
+        <relationship name="wnomScores" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WnomObj" inverseName="legislator" inverseEntity="WnomObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="LinkObj" representedClassName="LinkObj" syncable="YES">
+        <attribute name="label" attributeType="String" syncable="YES"/>
+        <attribute name="section" attributeType="Integer 16" minValueString="0" defaultValueString="1" syncable="YES"/>
+        <attribute name="sortOrder" attributeType="Integer 16" indexed="YES" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="StafferObj" representedClassName="StafferObj" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="legislatorID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stafferID" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="legislator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LegislatorObj" inverseName="staffers" inverseEntity="LegislatorObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <entity name="WnomObj" representedClassName="WnomObj" syncable="YES">
+        <attribute name="adjMean" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="legislatorID" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="session" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wnomAdj" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="wnomID" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="wnomStderr" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <relationship name="legislator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LegislatorObj" inverseName="wnomScores" inverseEntity="LegislatorObj" indexed="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CommitteeObj" positionX="331" positionY="6" width="128" height="270"/>
+        <element name="LinkObj" positionX="484" positionY="24" width="128" height="120"/>
+        <element name="LegislatorObj" positionX="16" positionY="-18" width="128" height="675"/>
+        <element name="CommitteePositionObj" positionX="502" positionY="288" width="128" height="150"/>
+        <element name="StafferObj" positionX="27" positionY="693" width="128" height="165"/>
+        <element name="DistrictOfficeObj" positionX="549" positionY="486" width="128" height="330"/>
+        <element name="WnomObj" positionX="187" positionY="9" width="128" height="165"/>
+        <element name="DistrictMapObj" positionX="286" positionY="402" width="128" height="330"/>
+    </elements>
+</model>

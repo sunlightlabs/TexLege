@@ -12,8 +12,9 @@
 
  
 #import "CapitolMap.h"
+#import "TXLDetailProtocol.h"
 
-@interface CapitolMapsDetailViewController : UIViewController <UISplitViewControllerDelegate> {
+@interface CapitolMapsDetailViewController : UIViewController <UISplitViewControllerDelegate, TXLDetailProtocol> {
 }
 @property (nonatomic,assign) id dataObject;
 

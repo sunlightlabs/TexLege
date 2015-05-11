@@ -11,10 +11,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXLDetailProtocol.h"
 
 @class CommitteeObj;
 @class PartisanScaleView;
-@interface CommitteeDetailViewController : UITableViewController <UISplitViewControllerDelegate>  {
+@interface CommitteeDetailViewController : UITableViewController <UISplitViewControllerDelegate, TXLDetailProtocol>  {
 	id dataObject;
 	UIPopoverController *masterPopover;
 	IBOutlet UILabel *membershipLab;

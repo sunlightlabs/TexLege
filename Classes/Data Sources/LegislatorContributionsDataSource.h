@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 
-enum ContributionQueryType {
+typedef NS_ENUM(uint16_t, ContributionQueryType) {
 	kContributionQueryRecipient	= 0,
 	kContributionQueryDonor,
 	kContributionQueryIndividual,
@@ -21,7 +21,7 @@ enum ContributionQueryType {
 	kContributionQueryTop10Recipients,
 	kContributionQueryTop10RecipientsIndiv,
 	kContributionQueryEntitySearch,
-} ContributionQueryType;
+};
 
 #define kContributionsDataNotifyLoaded	@"ContributionsDataChangedKey"
 #define kContributionsDataNotifyError	@"ContributionsDataErrorKey"

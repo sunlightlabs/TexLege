@@ -59,16 +59,11 @@
 }
 
 - (CLLocationCoordinate2D) center {
-	CLLocationCoordinate2D point = {[self.centerLat doubleValue], [self.centerLon doubleValue]};
-	return point;
+	return self.coordinate;
 }
 
 - (MKCoordinateRegion)region {
 	return MKCoordinateRegionMake(self.center, self.span);
-}
-
-- (CLLocationCoordinate2D) coordinate {
-	return self.center;
 }
 
 - (MKCoordinateSpan) span {
@@ -84,8 +79,6 @@
 	return polyLine;
 }
 
-#warning state specific (Hole in District 83 Map)
-
 - (MKPolygon *)polygon {
 	MKPolygon *polyGon=nil;
 		
@@ -93,8 +86,7 @@
 		NSArray *interiorPolygons = nil;
 		
 		DistrictMapObj *interiorDistrict = [TexLegeCoreDataUtils districtMapForDistrict:[NSNumber numberWithInt:84] 
-																			 andChamber:self.chamber 
-																		lightProperties:NO];
+																			 andChamber:self.chamber];
 		if (interiorDistrict) {
 			MKPolygon *interiorPolygon = [interiorDistrict polygon];
 			if (interiorPolygon)

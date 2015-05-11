@@ -34,7 +34,7 @@
 @property (nonatomic, retain) NSString * nickname;
 @property (nonatomic, retain) NSNumber * party_id;
 @property (nonatomic, retain) NSNumber * nimsp_id;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSString * twitter;
 @property (nonatomic, retain) NSNumber * district;
 @property (nonatomic, retain) NSString * cap_phone2;

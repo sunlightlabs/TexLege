@@ -19,7 +19,7 @@
 @dynamic adjMean;
 @dynamic wnomID;
 @dynamic legislatorID;
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic wnomAdj;
 @dynamic session;
 @dynamic wnomStderr;

@@ -37,7 +37,7 @@
 			@"minLat", @"minLat",
 			@"numberOfCoords", @"numberOfCoords",
 //			@"coordinatesData", @"coordinatesData",
-			@"updated", @"updated",
+			@"updated", @"updatedDate",
 			@"coordinatesBase64", @"coordinatesBase64",
 			nil];
 }
@@ -46,21 +46,6 @@
 	return @"districtMapID";
 }
 
-#pragma mark Property Accessor Issues
-/* These methods are the exact same thing (or at least *should* be the same) as the default core data object methods
- However, for whatever reason, sometimes the default returns an NSNumber instead of an NSString ... this makes sure */
-- (NSString *)updated {
-	[self willAccessValueForKey:@"updated"];
-	NSString *outValue = [self primitiveValueForKey:@"updated"];
-	[self didAccessValueForKey:@"updated"];
-	return outValue;
-}
-
-- (void)setUpdated:(NSString *)inValue {
-	[self willChangeValueForKey:@"updated"];
-	[self setPrimitiveValue:inValue forKey:@"updated"];
-	[self didChangeValueForKey:@"updated"];
-}
 
 #pragma mark -
 #pragma mark RestKit Additions
@@ -83,6 +68,7 @@
 #pragma mark -
 #pragma mark Custom
 
+#if 0 // this doesn't work like it used to -- can't get real objects with propertiesToFetch: anymore.
 + (NSArray *)lightPropertiesToFetch {
 	NSArray *props = [NSArray arrayWithObjects:
 					  @"districtMapID",
@@ -100,12 +86,13 @@
 					  @"minLon",
 					  @"minLat",
 					  @"numberOfCoords",
-					  @"updated",
+					  @"updatedDate",
 					  @"legislator.lastname",
 					  @"legislator.firstname",
 					  nil];
 	return props;
 }
+#endif
 
 /*
 - (void) importFromDictionary: (NSDictionary *)dictionary

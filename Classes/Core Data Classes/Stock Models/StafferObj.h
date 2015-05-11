@@ -20,7 +20,7 @@
 }
 
 @property (nonatomic, retain) NSString * phone;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSNumber * legislatorID;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * email;

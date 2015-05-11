@@ -87,7 +87,6 @@
 			DistrictMapObj * map = [DistrictMapObj objectWithPrimaryKeyValue:distID];
 			if ([map districtContainsCoordinate:[self searchCoordinate]]) {
 
-#warning state specific (Hole in District 83 Map)
 				if ([map.districtMapID integerValue] == 41 || [map.district integerValue] == 83) {
 					DistrictMapObj * holeDist = [DistrictMapObj objectWithPrimaryKeyValue:[NSNumber numberWithInt:40]];	// dist 84
 					if (NO == [holeDist districtContainsCoordinate:[self searchCoordinate]]) {

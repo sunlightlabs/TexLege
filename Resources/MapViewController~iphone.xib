@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1024" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment version="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
             <connections>
-                <outlet property="districtOfficesButton" destination="73" id="97"/>
                 <outlet property="mapTypeControl" destination="81" id="91"/>
                 <outlet property="mapView" destination="31" id="44"/>
                 <outlet property="searchBar" destination="94" id="96"/>
                 <outlet property="toolbar" destination="72" id="90"/>
+                <outlet property="userLocationButton" destination="79" id="moV-P3-gQc"/>
                 <outlet property="view" destination="1" id="45"/>
             </connections>
         </placeholder>
@@ -54,25 +54,20 @@
                             </segmentedControl>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="75"/>
-                        <barButtonItem image="multipins.png" id="73">
-                            <connections>
-                                <action selector="showAllDistricts:" destination="-1" id="99"/>
-                            </connections>
-                        </barButtonItem>
                     </items>
                     <color key="tintColor" red="0.26274509800000001" green="0.33725490200000002" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                 </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <searchBar contentMode="redraw" text="" placeholder="1100 N Congress Ave, Austin, TX" id="94">
+        <searchBar opaque="NO" contentMode="redraw" text="" placeholder="1100 N Congress Ave, Austin, TX" id="94">
             <rect key="frame" x="0.0" y="0.0" width="196" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.26274509800000001" green="0.33725490200000002" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
-            <textInputTraits key="textInputTraits"/>
+            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="search"/>
             <connections>
                 <outlet property="delegate" destination="-1" id="95"/>
             </connections>
@@ -80,6 +75,10 @@
     </objects>
     <resources>
         <image name="locationarrow.png" width="30" height="30"/>
-        <image name="multipins.png" width="24" height="30"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

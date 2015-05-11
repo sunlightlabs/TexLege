@@ -19,7 +19,7 @@
 @dynamic clerk_email;
 @dynamic phone;
 @dynamic committeeType;
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic committeeId;
 @dynamic votesmartID;
 @dynamic url;

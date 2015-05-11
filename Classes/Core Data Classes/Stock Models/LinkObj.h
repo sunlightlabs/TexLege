@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSNumber * section;
 @property (nonatomic, retain) NSNumber * sortOrder;
 @property (nonatomic, retain) NSString * url;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 
 @end
 

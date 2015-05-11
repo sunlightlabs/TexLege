@@ -12,12 +12,13 @@
 
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
+#import "TXLDetailProtocol.h"
 
 @class TableCellDataObject;
 @class DDActionHeaderView;
 @class BillVotesDataSource;
 @class AppendingFlowView;
-@interface BillsDetailViewController : UITableViewController <RKRequestDelegate, UISplitViewControllerDelegate, UIPopoverControllerDelegate> {
+@interface BillsDetailViewController : UITableViewController <RKRequestDelegate, UISplitViewControllerDelegate, UIPopoverControllerDelegate, TXLDetailProtocol> {
 	IBOutlet NSMutableDictionary *bill;
 	IBOutlet UIView *headerView, *descriptionView;
 	IBOutlet AppendingFlowView *statusView;

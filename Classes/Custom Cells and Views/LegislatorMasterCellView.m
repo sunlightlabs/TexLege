@@ -34,9 +34,9 @@ const CGFloat kLegislatorMasterCellViewHeight = 73.0f;
 		title = [@"Representative - (D-23)" retain];
 		name = [@"Rafael Anchía" retain];
 		tenure = [@"4 Years" retain];
-		sliderValue = 0.0f, partisan_index = 0.0f;
-		sliderMin = -1.5f;
-		sliderMax = 1.5f;
+		sliderValue = 0.0, partisan_index = 0.0;
+		sliderMin = -1.5;
+		sliderMax = 1.5;
 		questionImage = nil;
 		
 		[self setOpaque:YES];
@@ -60,10 +60,10 @@ const CGFloat kLegislatorMasterCellViewHeight = 73.0f;
 
 - (void)configure
 {
-    sliderValue = 0.0f;
-    partisan_index = 0.0f;
-	sliderMin = -1.5f;
-	sliderMax = 1.5f;
+    sliderValue = 0;
+    partisan_index = 0;
+	sliderMin = -1.5;
+	sliderMax = 1.5;
 	[self setOpaque:YES];
 }
 - (void)dealloc
@@ -88,9 +88,9 @@ const CGFloat kLegislatorMasterCellViewHeight = 73.0f;
 	else
 		sliderMax = (-sliderMin);
 		
-#define	kStarAtDemoc 0.5f
-#define kStarAtRepub 162.0f
-#define	kStarAtHalf 81.5f
+#define	kStarAtDemoc 0.5
+#define kStarAtRepub 162.0
+#define	kStarAtHalf 81.5
 #define kStarMagnifierBase (kStarAtRepub - kStarAtDemoc)
 	
 	CGFloat magicNumber = (kStarMagnifierBase / (sliderMax - sliderMin));
@@ -152,12 +152,14 @@ const CGFloat kLegislatorMasterCellViewHeight = 73.0f;
 	self.tenure = [value tenureString];
 		
 	PartisanIndexStats *indexStats = [PartisanIndexStats sharedPartisanIndexStats];
-	CGFloat minSlider = [indexStats minPartisanIndexUsingChamber:[value.legtype integerValue]];
-	CGFloat maxSlider = [indexStats maxPartisanIndexUsingChamber:[value.legtype integerValue]];
-	self.sliderMax = maxSlider;
-	self.sliderMin = minSlider;	
-	[self setSliderValue:self.partisan_index];
-	
+    if (indexStats.hasData) {
+        CGFloat minSlider = [indexStats minPartisanIndexUsingChamber:[value.legtype integerValue]];
+        CGFloat maxSlider = [indexStats maxPartisanIndexUsingChamber:[value.legtype integerValue]];
+        self.sliderMax = maxSlider;
+        self.sliderMin = minSlider;
+        [self setSliderValue:self.partisan_index];
+    }
+    
 	[self setNeedsDisplay];	
 }
 
@@ -263,7 +265,7 @@ const CGFloat kLegislatorMasterCellViewHeight = 73.0f;
         CGPathRelease(path);
 
         // we don't use sliderVal here because it's already been adjusted to compensate for minMax...
-        if (self.partisan_index == 0.0f) {
+        if (self.partisan_index == 0 || ![[PartisanIndexStats sharedPartisanIndexStats] hasData]) {
             if (!self.questionImage) {
                 self.questionImage = [UIImage imageNamed:@"error"];
             }

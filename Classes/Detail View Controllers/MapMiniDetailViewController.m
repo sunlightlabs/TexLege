@@ -31,9 +31,9 @@
 - (void) clearOverlaysExceptRecent;
 - (void) resetMapViewWithAnimation:(BOOL)animated;
 - (BOOL) region:(MKCoordinateRegion)region1 isEqualTo:(MKCoordinateRegion)region2;
+
 @end
 
-NSInteger colorIndex;
 static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 
 @implementation MapMiniDetailViewController
@@ -41,6 +41,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 @synthesize texasRegion;
 @synthesize districtView;
 @synthesize annotationActionCoord;
+@synthesize colorIndex = _colorIndex;
 
 #pragma mark -
 #pragma mark Initialization and Memory Management
@@ -67,7 +68,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 - (void) viewDidLoad {
 	[super viewDidLoad];
 	
-	colorIndex = 0;
+	_colorIndex = 0;
 	if (![UtilityMethods isIPadDevice])
 		self.hidesBottomBarWhenPushed = YES;
 	
@@ -223,8 +224,11 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 	popupQuery.actionSheetStyle = UIActionSheetStyleAutomatic;
 	
 	UIView *aView = sender;
-	if (aView)
-		[popupQuery showFromRect:aView.bounds inView:aView animated:YES];
+	if (aView && [aView isKindOfClass:[UIView class]])
+    {
+        CGRect fromRect = [self.mapView convertRect:aView.bounds fromView:aView];
+        [popupQuery showFromRect:fromRect inView:self.mapView animated:YES];
+    }
 	else
 		[popupQuery showInView:self.mapView];
 	[popupQuery release];
@@ -298,10 +302,10 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
 	NSArray *colors = [[UIColor randomColor] triadicColors];
-	UIColor *myColor = [[colors objectAtIndex:colorIndex] colorByDarkeningTo:0.50f];
-	colorIndex++;
-	if (colorIndex > 1)
-		colorIndex = 0;
+	UIColor *myColor = [[colors objectAtIndex:_colorIndex] colorByDarkeningTo:0.50f];
+	_colorIndex++;
+	if (_colorIndex > 1)
+		_colorIndex = 0;
 	
 	if ([overlay isKindOfClass:[MKPolygon class]])
     {		

@@ -57,12 +57,12 @@ static NSString* VTPGStringFromBoolOrCharValue(BOOL boolOrCharvalue) {
 }
 
 static NSString *VTPGStringFromFourCharCodeOrUnsignedInt32(FourCharCode fourcc) {
-	return [NSString stringWithFormat:@"%u ('%lu%lu%lu%lu')",
+	return [NSString stringWithFormat:@"%u ('%u%u%u%u')",
 			(unsigned int)fourcc,
-			(fourcc >> 24) & 0xFF,
-			(fourcc >> 16) & 0xFF,
-			(fourcc >> 8) & 0xFF,
-			fourcc & 0xFF];
+			(unsigned int)((fourcc >> 24) & 0xFF),
+			(unsigned int)((fourcc >> 16) & 0xFF),
+			(unsigned int)((fourcc >> 8) & 0xFF),
+			(unsigned int)(fourcc & 0xFF)];
 }
 
 static NSString *StringFromNSDecimalWithCurrentLocal(NSDecimal dcm) {

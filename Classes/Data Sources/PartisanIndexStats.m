@@ -110,6 +110,11 @@
 	return m_partisanIndexAggregates;
 }
 
+- (BOOL)hasData
+{
+    return [[self partisanIndexAggregates] count] > 0;
+}
+
 /* These are convenience methods for accessing our aggregate calculations from cache */
 - (CGFloat) minPartisanIndexUsingChamber:(NSInteger)chamber {
 	return [[self.partisanIndexAggregates objectForKey:
@@ -190,24 +195,26 @@
 	[request setPredicate:predicate];
 	[request setPropertiesToFetch:[NSArray arrayWithObjects:edAvg, edMax, edMin, nil]];
 	[request setResultType:NSDictionaryResultType];
-	[edAvg release], [edMax release], [edMin release];
-	
+
+    NSArray *allResults = nil;
 	NSArray *objects = [WnomObj objectsWithFetchRequest:request];
 	if (IsEmpty(objects)) {
 		debug_NSLog(@"PartisanIndexStats Error while fetching Legislators");
 	}
 	else {
-		NSNumber *avgPartisanIndex = [[objects objectAtIndex:0] valueForKey:@"averagePartisanIndex"];
-		NSNumber *maxPartisanIndex = [[objects objectAtIndex:0] valueForKey:@"maxPartisanIndex"];
-		NSNumber *minPartisanIndex = [[objects objectAtIndex:0] valueForKey:@"minPartisanIndex"];
+        NSDictionary *first = [objects firstObject];
+		NSNumber *avgPartisanIndex = [first valueForKey:@"averagePartisanIndex"];
+		NSNumber *maxPartisanIndex = [first valueForKey:@"maxPartisanIndex"];
+		NSNumber *minPartisanIndex = [first valueForKey:@"minPartisanIndex"];
 
 /*		debug_NSLog(@"Partisanship for Chamber (%d) Party (%d): min=%@ max=%@ avg=%@", 
 					chamber, party, minPartisanIndex, maxPartisanIndex, avgPartisanIndex);
 */
-		return [NSArray arrayWithObjects:avgPartisanIndex, maxPartisanIndex, minPartisanIndex, nil];
+		allResults = [NSArray arrayWithObjects:avgPartisanIndex, maxPartisanIndex, minPartisanIndex, nil];
 	}
 	
-	return nil;
+    [edAvg release], [edMax release], [edMin release];
+	return allResults;
 }
 
 #pragma mark -

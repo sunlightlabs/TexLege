@@ -19,6 +19,7 @@
 #import "BillsMenuDataSource.h"
 #import "TexLegeTheme.h"
 #import "TexLegeReachability.h"
+#import "TXLDetailProtocol.h"
 
 @implementation GeneralTableViewController
 @synthesize dataSource, detailViewController, controllerEnabled;

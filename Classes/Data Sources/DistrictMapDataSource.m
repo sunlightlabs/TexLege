@@ -490,7 +490,7 @@
 		and we need change notification in order to make updating work ... so now we just have to rely
 		on some judicious use of refreshObject: to clear the memory footprint
 	 */
-	[fetchRequest setPropertiesToFetch:[DistrictMapObj lightPropertiesToFetch]];
+//	[fetchRequest setPropertiesToFetch:[DistrictMapObj lightPropertiesToFetch]];
 //	[fetchRequest setResultType:NSDictionaryResultType];
 	[fetchRequest setSortDescriptors:[self sortDescriptors]];
 	

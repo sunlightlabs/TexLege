@@ -24,7 +24,7 @@
 @dynamic longitude;
 @dynamic stateCode;
 @dynamic latitude;
-@dynamic updated;
+@dynamic updatedDate;
 @dynamic fax;
 @dynamic formattedAddress;
 @dynamic address;

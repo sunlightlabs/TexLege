@@ -71,11 +71,6 @@
 	return nil;
 }
 
-- (CLLocationCoordinate2D) coordinate {
-	CLLocationCoordinate2D tempCoord = {[self.latitude doubleValue],[self.longitude doubleValue]};
-	return tempCoord;
-}
-
 - (MKCoordinateSpan) span {
 	return MKCoordinateSpanMake([self.spanLat doubleValue], [self.spanLon doubleValue]);
 }

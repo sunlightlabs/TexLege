@@ -12,6 +12,7 @@
 
 #import <UIKit/UIKit.h>
 #import "S7GraphView.h"
+#import "TXLDetailProtocol.h"
 
 @class LegislatorObj;
 @class PartisanScaleView;
@@ -19,7 +20,7 @@
 @class LegislatorDetailDataSource;
 @class VotingRecordDataSource;
 @interface LegislatorDetailViewController : UITableViewController <UISplitViewControllerDelegate, 
-													UIPopoverControllerDelegate>
+													UIPopoverControllerDelegate, TXLDetailProtocol>
 {	
 }
 @property (nonatomic,assign) id dataObject;

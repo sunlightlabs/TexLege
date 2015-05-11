@@ -20,6 +20,7 @@
 @property (nonatomic,retain) MKPolygonRenderer *districtView;
 @property (nonatomic) CLLocationCoordinate2D annotationActionCoord;
 @property (nonatomic,retain) id<MKOverlay> districtOverlay;
+@property (nonatomic,assign) NSInteger colorIndex;
 
 - (void) addDistrictOverlay:(id<MKOverlay>)overlay;
 - (void) clearAnnotationsAndOverlays;

@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSNumber * spanLat;
 @property (nonatomic, retain) NSNumber * districtMapID;
 @property (nonatomic, retain) NSNumber * lineWidth;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSData * coordinatesData;
 @property (nonatomic, retain) NSNumber * pinColorIndex;
 @property (nonatomic, retain) NSNumber * numberOfCoords;

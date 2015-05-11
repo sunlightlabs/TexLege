@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSString * clerk_email;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSNumber * committeeType;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSNumber * committeeId;
 @property (nonatomic, retain) NSNumber * votesmartID;
 @property (nonatomic, retain) NSString * url;

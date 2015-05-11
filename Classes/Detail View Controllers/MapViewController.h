@@ -15,12 +15,12 @@
 #import "SVGeocoder.h"
 #import "SVPlacemark.h"
 #import "DistrictMapSearchOperation.h"
+@import CoreLocation;
 
 @class DistrictMapDataSource, UserPinAnnotation;
 @interface MapViewController : UIViewController <MKMapViewDelegate, UISearchBarDelegate, UIPopoverControllerDelegate,
 		SVGeocoderDelegate, UISplitViewControllerDelegate, UIActionSheetDelegate,
-		UIGestureRecognizerDelegate, DistrictMapSearchOperationDelegate> {
-}
+		UIGestureRecognizerDelegate, DistrictMapSearchOperationDelegate>
 
 @property (nonatomic,retain) IBOutlet UIPopoverController *masterPopover;
 @property (nonatomic,retain) IBOutlet MKMapView *mapView;
@@ -36,8 +36,12 @@
 @property (nonatomic,retain) UserPinAnnotation *searchLocation;
 @property (nonatomic,retain) MKPolygonRenderer *senateDistrictView, *houseDistrictView;
 @property (nonatomic,retain) NSOperationQueue *genericOperationQueue;
+@property (nonatomic,assign) NSInteger colorIndex;
 
+#if 0 // can't get custom objects while using propertiesToFetch: anymore
 - (IBAction) showAllDistricts:(id)sender;
+#endif
+
 //- (IBAction) showAllDistrictOffices:(id)sender;
 - (IBAction) changeMapType:(id)sender;
 - (IBAction) locateUser:(id)sender;

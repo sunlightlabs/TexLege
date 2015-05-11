@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSNumber * adjMean;
 @property (nonatomic, retain) NSNumber * wnomID;
 @property (nonatomic, retain) NSNumber * legislatorID;
-@property (nonatomic, retain) NSString * updated;
+@property (nonatomic, retain) NSString * updatedDate;
 @property (nonatomic, retain) NSNumber * wnomAdj;
 @property (nonatomic, retain) NSNumber * session;
 @property (nonatomic, retain) NSNumber * wnomStderr;
