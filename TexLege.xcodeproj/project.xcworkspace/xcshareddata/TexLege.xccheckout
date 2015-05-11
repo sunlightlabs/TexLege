@@ -10,85 +10,85 @@
 	<string>TexLege</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>04A344F8-7EEE-4753-9A13-0163500F098D</key>
-		<string>git://github.com/grgcombs/TTTOrdinalNumberFormatter.git</string>
-		<key>1532F9C0-D5ED-488E-9311-02BAC55054F1</key>
-		<string>git://github.com/grgcombs/AppendingFlowView.git</string>
-		<key>2281787E-AA05-4256-A430-6E3CB6C1228E</key>
-		<string>git://github.com/grgcombs/IntelligentSplitViewController.git</string>
-		<key>4B94E360-073C-4941-81A1-F00342217966</key>
-		<string>ssh://github.com/grgcombs/SDWebImage.git</string>
-		<key>4D184AAE-BC1B-4B9F-884D-B39964654EB3</key>
-		<string>git://github.com/grgcombs/DDActionHeaderView.git</string>
-		<key>4FD43E0A-1F55-485D-8205-028F61215359</key>
-		<string>git://github.com/grgcombs/SVGeocoder.git</string>
-		<key>65200D49-A05D-495F-ACA3-3B193CA2F62D</key>
-		<string>ssh://github.com/sunlightlabs/TexLege.git</string>
-		<key>77E770DB-42B4-497B-B70A-898258EEA22F</key>
-		<string>ssh://github.com/grgcombs/MTInfoPanel.git</string>
-		<key>8B0340B3-33AF-458F-8163-ECA0EA676865</key>
-		<string>git://github.com/grgcombs/Kal.git</string>
-		<key>B57F9C8B-C1D6-4181-BAA3-D873CD864F72</key>
+		<key>00DEE37500E6C7998F4D113C875F3996AE26D5BE</key>
 		<string>git://github.com/grgcombs/SVWebViewController.git</string>
-		<key>C192290C-757B-4C52-91E9-9EB9012AF60A</key>
+		<key>087811D9999EC639BE6EB35E71107BD0E1F2E9D4</key>
+		<string>git://github.com/grgcombs/Kal.git</string>
+		<key>23407041CA039A6FE90908D43A46F455D34AC4FD</key>
+		<string>git://github.com/grgcombs/TTTOrdinalNumberFormatter.git</string>
+		<key>61E2EAE4DD8744704A2AB48F1F4950E56D86FE5D</key>
+		<string>git://github.com/grgcombs/AppendingFlowView.git</string>
+		<key>B4BBE247D1D92687B43EB1612AD17A042181BA17</key>
+		<string>git://github.com/grgcombs/DDActionHeaderView.git</string>
+		<key>B5E1788961908EBABE3AF94D0343C1DCC080325B</key>
+		<string>ssh://github.com/sunlightlabs/TexLege.git</string>
+		<key>D6AB87D061DF4A38796EEA1A6850A753E2A242FE</key>
 		<string>git://github.com/grgcombs/Customed-s7graphview.git</string>
-		<key>CFEDA313-1652-4807-9F73-1FBBE75AE8B5</key>
-		<string>git://github.com/johnezang/JSONKit.git</string>
+		<key>D78740BB5B159EA13C82AB5AF1D92A0F3C627237</key>
+		<string>ssh://github.com/RestKit/RestKit.git</string>
 		<key>D941F5D0-8D1C-407D-BAD1-4EC9E6500AB7</key>
 		<string>git://github.com/twotoasters/UISpec.git</string>
-		<key>E1A400ED-A721-4D42-A995-17A868E40BFA</key>
+		<key>E1D7EDCDA5D09ECF59D4D7E602013F4E01A8D9C6</key>
+		<string>ssh://github.com/grgcombs/MTInfoPanel.git</string>
+		<key>E28E36D423EC87798E52E2BF482E9F7A1E6479D6</key>
+		<string>ssh://github.com/grgcombs/SDWebImage.git</string>
+		<key>E2B7594EFACE7AD65A9BEB90CB92F44B627C5DB8</key>
 		<string>git://github.com/grgcombs/TVOutManager.git</string>
-		<key>FBD49BB4-91FE-4B56-9AF9-05817B6B2550</key>
-		<string>ssh://github.com/RestKit/RestKit.git</string>
+		<key>EF51387A5AF28E4351AFB0302884600583A438B5</key>
+		<string>git://github.com/johnezang/JSONKit.git</string>
+		<key>F25C92A57D9F0F32EA44C965115984B5628A9497</key>
+		<string>git://github.com/grgcombs/IntelligentSplitViewController.git</string>
+		<key>FE86366953AF9E081BC7A5581F96F105D72A1D38</key>
+		<string>git://github.com/grgcombs/SVGeocoder.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TexLege.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>04A344F8-7EEE-4753-9A13-0163500F098D</key>
-		<string>../../Vendor/TTTOrdinalNumberFormatter</string>
-		<key>1532F9C0-D5ED-488E-9311-02BAC55054F1</key>
-		<string>../../Vendor/AppendingFlowView</string>
-		<key>2281787E-AA05-4256-A430-6E3CB6C1228E</key>
-		<string>../../Vendor/IntelligentSplitViewController</string>
-		<key>4B94E360-073C-4941-81A1-F00342217966</key>
-		<string>../../Vendor/SDWebImage</string>
-		<key>4D184AAE-BC1B-4B9F-884D-B39964654EB3</key>
-		<string>../../Vendor/DDActionHeaderView</string>
-		<key>4FD43E0A-1F55-485D-8205-028F61215359</key>
-		<string>../../Vendor/SVGeocoder</string>
-		<key>65200D49-A05D-495F-ACA3-3B193CA2F62D</key>
-		<string>../..</string>
-		<key>77E770DB-42B4-497B-B70A-898258EEA22F</key>
-		<string>../../Vendor/MTInfoPanel</string>
-		<key>8B0340B3-33AF-458F-8163-ECA0EA676865</key>
-		<string>../../Vendor/Kal</string>
-		<key>B57F9C8B-C1D6-4181-BAA3-D873CD864F72</key>
+		<key>00DEE37500E6C7998F4D113C875F3996AE26D5BE</key>
 		<string>../../Vendor/SVWebViewController</string>
-		<key>C192290C-757B-4C52-91E9-9EB9012AF60A</key>
+		<key>087811D9999EC639BE6EB35E71107BD0E1F2E9D4</key>
+		<string>../../Vendor/Kal</string>
+		<key>23407041CA039A6FE90908D43A46F455D34AC4FD</key>
+		<string>../../Vendor/TTTOrdinalNumberFormatter</string>
+		<key>61E2EAE4DD8744704A2AB48F1F4950E56D86FE5D</key>
+		<string>../../Vendor/AppendingFlowView</string>
+		<key>B4BBE247D1D92687B43EB1612AD17A042181BA17</key>
+		<string>../../Vendor/DDActionHeaderView</string>
+		<key>B5E1788961908EBABE3AF94D0343C1DCC080325B</key>
+		<string>../..</string>
+		<key>D6AB87D061DF4A38796EEA1A6850A753E2A242FE</key>
 		<string>../../Vendor/S7GraphView</string>
-		<key>CFEDA313-1652-4807-9F73-1FBBE75AE8B5</key>
-		<string>../../Vendor/JSONKit</string>
+		<key>D78740BB5B159EA13C82AB5AF1D92A0F3C627237</key>
+		<string>../../Vendor/RestKit</string>
 		<key>D941F5D0-8D1C-407D-BAD1-4EC9E6500AB7</key>
 		<string>../../Vendor/RestKit/Specs/Runner/UISpec</string>
-		<key>E1A400ED-A721-4D42-A995-17A868E40BFA</key>
+		<key>E1D7EDCDA5D09ECF59D4D7E602013F4E01A8D9C6</key>
+		<string>../../Vendor/MTInfoPanel</string>
+		<key>E28E36D423EC87798E52E2BF482E9F7A1E6479D6</key>
+		<string>../../Vendor/SDWebImage</string>
+		<key>E2B7594EFACE7AD65A9BEB90CB92F44B627C5DB8</key>
 		<string>../../Vendor/TVOutManager</string>
-		<key>FBD49BB4-91FE-4B56-9AF9-05817B6B2550</key>
-		<string>../../Vendor/RestKit</string>
+		<key>EF51387A5AF28E4351AFB0302884600583A438B5</key>
+		<string>../../Vendor/JSONKit</string>
+		<key>F25C92A57D9F0F32EA44C965115984B5628A9497</key>
+		<string>../../Vendor/IntelligentSplitViewController</string>
+		<key>FE86366953AF9E081BC7A5581F96F105D72A1D38</key>
+		<string>../../Vendor/SVGeocoder</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/sunlightlabs/TexLege.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>65200D49-A05D-495F-ACA3-3B193CA2F62D</string>
+	<string>B5E1788961908EBABE3AF94D0343C1DCC080325B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1532F9C0-D5ED-488E-9311-02BAC55054F1</string>
+			<string>61E2EAE4DD8744704A2AB48F1F4950E56D86FE5D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>AppendingFlowView</string>
 		</dict>
@@ -96,7 +96,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4D184AAE-BC1B-4B9F-884D-B39964654EB3</string>
+			<string>B4BBE247D1D92687B43EB1612AD17A042181BA17</string>
 			<key>IDESourceControlWCCName</key>
 			<string>DDActionHeaderView</string>
 		</dict>
@@ -104,7 +104,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2281787E-AA05-4256-A430-6E3CB6C1228E</string>
+			<string>F25C92A57D9F0F32EA44C965115984B5628A9497</string>
 			<key>IDESourceControlWCCName</key>
 			<string>IntelligentSplitViewController</string>
 		</dict>
@@ -112,7 +112,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CFEDA313-1652-4807-9F73-1FBBE75AE8B5</string>
+			<string>EF51387A5AF28E4351AFB0302884600583A438B5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>JSONKit</string>
 		</dict>
@@ -120,7 +120,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8B0340B3-33AF-458F-8163-ECA0EA676865</string>
+			<string>087811D9999EC639BE6EB35E71107BD0E1F2E9D4</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Kal</string>
 		</dict>
@@ -128,7 +128,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>77E770DB-42B4-497B-B70A-898258EEA22F</string>
+			<string>E1D7EDCDA5D09ECF59D4D7E602013F4E01A8D9C6</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MTInfoPanel</string>
 		</dict>
@@ -136,7 +136,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FBD49BB4-91FE-4B56-9AF9-05817B6B2550</string>
+			<string>D78740BB5B159EA13C82AB5AF1D92A0F3C627237</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RestKit</string>
 		</dict>
@@ -144,7 +144,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C192290C-757B-4C52-91E9-9EB9012AF60A</string>
+			<string>D6AB87D061DF4A38796EEA1A6850A753E2A242FE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>S7GraphView</string>
 		</dict>
@@ -152,7 +152,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4B94E360-073C-4941-81A1-F00342217966</string>
+			<string>E28E36D423EC87798E52E2BF482E9F7A1E6479D6</string>
 			<key>IDESourceControlWCCName</key>
 			<string>SDWebImage</string>
 		</dict>
@@ -160,7 +160,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4FD43E0A-1F55-485D-8205-028F61215359</string>
+			<string>FE86366953AF9E081BC7A5581F96F105D72A1D38</string>
 			<key>IDESourceControlWCCName</key>
 			<string>SVGeocoder</string>
 		</dict>
@@ -168,7 +168,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B57F9C8B-C1D6-4181-BAA3-D873CD864F72</string>
+			<string>00DEE37500E6C7998F4D113C875F3996AE26D5BE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>SVWebViewController</string>
 		</dict>
@@ -176,7 +176,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>65200D49-A05D-495F-ACA3-3B193CA2F62D</string>
+			<string>B5E1788961908EBABE3AF94D0343C1DCC080325B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TexLege</string>
 		</dict>
@@ -184,7 +184,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>04A344F8-7EEE-4753-9A13-0163500F098D</string>
+			<string>23407041CA039A6FE90908D43A46F455D34AC4FD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TTTOrdinalNumberFormatter</string>
 		</dict>
@@ -192,7 +192,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E1A400ED-A721-4D42-A995-17A868E40BFA</string>
+			<string>E2B7594EFACE7AD65A9BEB90CB92F44B627C5DB8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TVOutManager</string>
 		</dict>

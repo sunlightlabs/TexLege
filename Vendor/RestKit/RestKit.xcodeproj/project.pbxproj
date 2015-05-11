@@ -692,10 +692,13 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = PrivateHeaders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = RestKit/Headers;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -730,10 +733,13 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = PrivateHeaders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = RestKit/Headers;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -769,10 +775,13 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = PrivateHeaders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = RestKit/Headers;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -929,6 +938,7 @@
 				37678E371AFEC2070016B8E5 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		37678E381AFEC2070016B8E5 /* Build configuration list for PBXNativeTarget "RestKitTests" */ = {
 			isa = XCConfigurationList;
@@ -938,6 +948,7 @@
 				37678E3B1AFEC2070016B8E5 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
