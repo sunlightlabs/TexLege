@@ -13,8 +13,6 @@
 #import "LegislatorObj.h"
 
 @interface LegislatorObj (RestKit)
-{
-}
 
 @property (nonatomic, readonly) NSString * districtMapURL;
 @property (nonatomic, readonly) WnomObj *latestWnomScore;
@@ -37,4 +35,3 @@
 - (NSArray *) sortedCommitteePositions;
 - (NSArray *) sortedStaffers;
 @end
-

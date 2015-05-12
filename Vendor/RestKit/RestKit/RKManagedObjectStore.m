@@ -49,13 +49,19 @@ static NSString* const kRKManagedObjectContextKey = @"RKManagedObjectContext";
     self = [self init];
 	if (self) {
 		_storeFilename = [storeFilename retain];
-		
-		if( nilOrDirectoryPath == nil ) {
-			nilOrDirectoryPath = [self applicationDocumentsDirectory];
-		}
-		else {
-			BOOL isDir;
-			NSAssert1([[NSFileManager defaultManager] fileExistsAtPath:nilOrDirectoryPath isDirectory:&isDir] && isDir == YES, @"Specified storage directory exists", nilOrDirectoryPath);
+
+        NSString *defaultStoreDir = [self applicationDocumentsDirectory];
+
+		if ( nilOrDirectoryPath == nil )
+			nilOrDirectoryPath = defaultStoreDir;
+		else
+        {
+			BOOL isDir = NO;
+            BOOL pathExists = [[NSFileManager defaultManager] fileExistsAtPath:nilOrDirectoryPath isDirectory:&isDir];
+            BOOL isValidDir = (pathExists && isDir == YES);
+			NSAssert1(isValidDir, @"Specified storage directory must exist: %@", nilOrDirectoryPath);
+            if (!isValidDir)
+                nilOrDirectoryPath = defaultStoreDir;
 		}
 		_pathToStoreFile = [[nilOrDirectoryPath stringByAppendingPathComponent:_storeFilename] retain];
 		

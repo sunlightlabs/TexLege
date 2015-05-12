@@ -36,7 +36,18 @@
 	return self;
 }
 
-- (void)dealloc {	
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark
+{
+    self = [super initWithPlacemark:placemark];
+    if (self)
+    {
+        pinColorIndex = [NSNumber numberWithInteger:MKPinAnnotationColorPurple];
+        [self reloadTitle];
+    }
+    return self;
+}
+
+- (void)dealloc {
 	self.imageName = nil;
 	self.pinColorIndex = nil;
 	self.coordinateChangedDelegate = nil;

@@ -12,15 +12,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "SVGeocoder.h"
 #import "SVPlacemark.h"
 #import "DistrictMapSearchOperation.h"
 @import CoreLocation;
 
 @class DistrictMapDataSource, UserPinAnnotation;
 @interface MapViewController : UIViewController <MKMapViewDelegate, UISearchBarDelegate, UIPopoverControllerDelegate,
-		SVGeocoderDelegate, UISplitViewControllerDelegate, UIActionSheetDelegate,
-		UIGestureRecognizerDelegate, DistrictMapSearchOperationDelegate>
+                                                 UISplitViewControllerDelegate, UIActionSheetDelegate,
+                                                 UIGestureRecognizerDelegate, DistrictMapSearchOperationDelegate,
+                                                 CLLocationManagerDelegate>
 
 @property (nonatomic,retain) IBOutlet UIPopoverController *masterPopover;
 @property (nonatomic,retain) IBOutlet MKMapView *mapView;
@@ -31,7 +31,6 @@
 @property (nonatomic,retain) IBOutlet UIBarButtonItem *districtOfficesButton;
 @property (nonatomic,retain) IBOutlet UIBarButtonItem *searchBarButton;
 @property (nonatomic,retain) IBOutlet UISearchBar *searchBar;
-@property (nonatomic,retain) SVGeocoder *geocoder;
 @property (nonatomic,readonly) MKCoordinateRegion texasRegion;
 @property (nonatomic,retain) UserPinAnnotation *searchLocation;
 @property (nonatomic,retain) MKPolygonRenderer *senateDistrictView, *houseDistrictView;
@@ -45,10 +44,10 @@
 //- (IBAction) showAllDistrictOffices:(id)sender;
 - (IBAction) changeMapType:(id)sender;
 - (IBAction) locateUser:(id)sender;
-- (void) clearAnnotationsAndOverlays;
-- (void) resetMapViewWithAnimation:(BOOL)animated;
-- (void) moveMapToAnnotation:(id<MKAnnotation>)annotation;
-- (void) searchDistrictMapsForCoordinate:(CLLocationCoordinate2D)aCoordinate;
+- (void)clearAnnotationsAndOverlays;
+- (void)resetMapViewWithAnimation:(BOOL)animated;
+- (void)moveMapToAnnotation:(id<MKAnnotation>)annotation;
+- (void)searchDistrictMapsForCoordinate:(CLLocationCoordinate2D)aCoordinate;
 - (void)annotationCoordinateChanged:(id)sender;
 
 @end

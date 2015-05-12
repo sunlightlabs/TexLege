@@ -29,9 +29,9 @@
 	[super viewDidLoad];
 	self.hidesBottomBarWhenPushed = YES;
 	
-	[self.webView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+	[self.webView setBackgroundColor:[UIColor darkGrayColor]];
 	[self.webView setOpaque:YES];
-	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+	self.view.backgroundColor = [UIColor darkGrayColor];
 	
 	if (self.map) {
 		self.navigationItem.title = self.map.name;

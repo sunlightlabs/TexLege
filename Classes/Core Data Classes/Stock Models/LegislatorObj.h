@@ -20,8 +20,6 @@
 @class WnomObj;
 
 @interface LegislatorObj :  RKManagedObject  
-{
-}
 
 @property (nonatomic, retain) NSString * transDataContributorID;
 @property (nonatomic, retain) NSNumber * legislatorID;

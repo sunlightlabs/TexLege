@@ -632,6 +632,7 @@
 		37155727100859E700FA57DB /* CommitteeObj+RestKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CommitteeObj+RestKit.m"; sourceTree = "<group>"; };
 		3718895A12EE917B00E3300D /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		3718895B12EE917B00E3300D /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		371968051B01D30F0033258E /* LegislatorAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LegislatorAnnotation.h; path = "Classes/Core Data Classes/LegislatorAnnotation.h"; sourceTree = SOURCE_ROOT; };
 		371A44281346597000DFDBB8 /* VoteNay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VoteNay.png; sourceTree = "<group>"; };
 		371A44291346597000DFDBB8 /* VoteNay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VoteNay@2x.png"; sourceTree = "<group>"; };
 		371A442A1346597000DFDBB8 /* VotePNV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VotePNV.png; sourceTree = "<group>"; };
@@ -1717,6 +1718,7 @@
 			isa = PBXGroup;
 			children = (
 				37D0D1D41357A0F0003DA1BB /* Stock Models */,
+				371968051B01D30F0033258E /* LegislatorAnnotation.h */,
 				37B253E412EBF681000B6EE2 /* StafferObj+RestKit.m */,
 				37E2068012204D5000103D76 /* DistrictOfficeObj+MapKit.h */,
 				37E2068112204D5000103D76 /* DistrictOfficeObj+MapKit.m */,

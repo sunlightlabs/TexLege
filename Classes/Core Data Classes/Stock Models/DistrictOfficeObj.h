@@ -13,12 +13,11 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData/CoreData.h>
 #import <MapKit/MapKit.h>
+#import "LegislatorAnnotation.h"
 
 @class LegislatorObj;
 
-@interface DistrictOfficeObj :  RKManagedObject  <MKAnnotation>
-{
-}
+@interface DistrictOfficeObj :  RKManagedObject  <MKAnnotation, LegislatorAnnotation>
 
 @property (nonatomic, retain) NSNumber * chamber;
 @property (nonatomic, retain) NSNumber * spanLat;
