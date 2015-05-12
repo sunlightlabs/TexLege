@@ -102,10 +102,16 @@
 		}
 		self.selectObjectOnAppear = detailObject;
 	}	
-	if ([UtilityMethods isIPadDevice])
-		[self.tableView reloadData]; // this "fixes" an issue where it's using cached (bogus) values for our vote index sliders
-	
-	// END: IPAD ONLY
+
+    [self reapplyFiltersAndSort];
+}
+
+- (void)reapplyFiltersAndSort
+{
+    [self filterContentForSearchText:self.searchDisplayController.searchBar.text
+                               scope:self.chamberControl.selectedSegmentIndex];
+
+    [super reapplyFiltersAndSort];
 }
 
 
@@ -187,23 +193,21 @@
 	
 }
 
-- (IBAction)filterChamber:(id)sender {
-	if (sender == chamberControl) {
-		[self filterContentForSearchText:self.searchDisplayController.searchBar.text 
-								   scope:self.chamberControl.selectedSegmentIndex];
+- (IBAction) filterChamber:(id)sender
+{
+    if (sender != self.chamberControl)
+        return;
 
-		NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
-		if (segPrefs) {
-			NSNumber *segIndex = [NSNumber numberWithInteger:self.chamberControl.selectedSegmentIndex];
-			NSMutableDictionary *newDict = [segPrefs mutableCopy];
-			[newDict setObject:segIndex forKey:NSStringFromClass([self class])];
-			[[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-			[newDict release];
-		}
-		
-		[self.tableView reloadData];
-	}
+    NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
+    if (segPrefs) {
+        NSNumber *segIndex = [NSNumber numberWithInteger:self.chamberControl.selectedSegmentIndex];
+        NSMutableDictionary *newDict = [segPrefs mutableCopy];
+        [newDict setObject:segIndex forKey:NSStringFromClass([self class])];
+        [[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [newDict release];
+    }
+    [self reapplyFiltersAndSort];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString

@@ -25,9 +25,9 @@
 	#import "TexLegePrivateStrings.h"
 
 	#ifdef DEBUG
-		#define debug_NSLog(format, ...) NSLog(format, ## __VA_ARGS__)
+		#define debug_NSLog(format, ...) do { NSLog(format, ## __VA_ARGS__); } while(0)
 	#else
-		#define debug_NSLog(format, ...)
+		#define debug_NSLog(format, ...) do {} while(0)
 	#endif
 
 	#define nice_release(var) if (var) [var release], var = nil

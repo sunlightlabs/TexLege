@@ -52,12 +52,20 @@
 + (UIFont *)boldFifteen {return [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.f];}
 + (UIFont *)boldEighteen {return [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.f];}
 
-+ (void) logFontNames {	
-	for (NSString *family in [UIFont familyNames]) {
-		for (NSString *font in [UIFont fontNamesForFamilyName:family]) 
-			debug_NSLog(@"Font: %@", font);
+#ifdef DEBUG
++ (void) logFontNames
+{
+	for (NSString *family in [UIFont familyNames])
+    {
+        NSArray *fonts = [UIFont fontNamesForFamilyName:family];
+		for (NSString *font in fonts)
+        {
+			NSLog(@"Font: %@", font);
+        }
 	}
 }
+#endif
+
 + (UIColor *)segmentCtl {return [UIColor colorWithRed:0.592157f green:0.631373f blue:0.65098f alpha:1.0];}
 + (UIColor *)tableBackground {return [UIColor colorWithRed:0.769f green:0.796f blue:0.82f alpha:1.0];}
 + (UIColor *)backgroundDark {return [UIColor colorWithRed:0.855f green:0.875f blue:0.886f alpha:1.0];}

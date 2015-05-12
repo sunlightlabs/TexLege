@@ -441,9 +441,9 @@
 	
 	//debug_NSLog(@"Found placemarks: %d", [parser.results count]);
 	
-	if ([parser.results count] == 0)
+    if ([parser.results count] == 0) {
 		debug_NSLog(@"Nothing found for %@", searchQuery);
-	
+    }
 	
 	[parser release];	
 	
@@ -485,9 +485,12 @@
 		if ([obj.latitude doubleValue] < 20.0f) { // we don't have a valid location
 			[self geocodeDistrictOffice:obj];
 			if ([obj.latitude doubleValue] < 20.0f) // we don't have a valid location
+            {
 				debug_NSLog(@"Found invalid location: %@", [obj address]);
-			else
+            }
+            else {
 				debug_NSLog(@"Fixed one: %@", [obj address]);
+            }
 		}
 	}
 	[self saveAction:nil];

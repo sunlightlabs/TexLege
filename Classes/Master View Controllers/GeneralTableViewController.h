@@ -32,7 +32,7 @@
 - (Class)dataSourceClass;
 - (IBAction)selectDefaultObject:(id)sender;
 - (id)firstDataObject;
-
+- (void)reapplyFiltersAndSort;
 - (void)beginUpdates:(NSNotification *)aNotification;
 - (void)endUpdates:(NSNotification *)aNotification;
 

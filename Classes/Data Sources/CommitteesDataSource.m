@@ -47,11 +47,18 @@
 	return self;
 }
 
-- (void)resetCoreData:(NSNotification *)notification {
-	[NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
-	self.fetchedResultsController = nil;
-	NSError *error = nil;
-	[self.fetchedResultsController performFetch:&error];
+- (void)resetCoreData:(NSNotification *)notification
+{
+    // You've got to delete the cache, or disable caching before you modify the predicate...
+    [NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
+    [self.fetchedResultsController.fetchRequest setPredicate:[self getFilterPredicate]];
+    [self.fetchedResultsController.fetchRequest setSortDescriptors:[self sortDescriptors]];
+
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Handle error
+        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
 }
 
 
@@ -242,29 +249,26 @@
 // You cannot necessarily translate “arbitrary” SQL queries into predicates.
 //*
 
-- (void) updateFilterPredicate {
-	NSMutableString * predString = [NSMutableString stringWithString:@""];
-	
-	if (self.filterString.length > 0)	// do some string filtering
-			[predString appendFormat:@"(committeeName contains[cd] '%@')", self.filterString];
-		if (self.filterChamber > 0) {		// do some chamber filtering
-			if (predString.length > 0)	// we already have some predicate action, insert "AND"
-				[predString appendString:@" AND "];
-			[predString appendFormat:@"((committeeType == %@) OR (committeeType == 3))", [NSNumber numberWithInteger:self.filterChamber]];
-			
-		}
-		
-	NSPredicate *predicate = (predString.length > 0) ? [NSPredicate predicateWithFormat:predString] : nil;
+- (NSPredicate *)getFilterPredicate
+{
+    NSMutableString * predString = [NSMutableString stringWithString:@""];
 
-	// You've got to delete the cache, or disable caching before you modify the predicate...
-	[NSFetchedResultsController deleteCacheWithName:[fetchedResultsController cacheName]];
-	[fetchedResultsController.fetchRequest setPredicate:predicate];
-	
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
-        // Handle error
-        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }           
+    if (self.filterString.length > 0)	// do some string filtering
+        [predString appendFormat:@"(committeeName contains[cd] '%@')", self.filterString];
+    if (self.filterChamber > 0) {		// do some chamber filtering
+        if (predString.length > 0)	// we already have some predicate action, insert "AND"
+            [predString appendString:@" AND "];
+        [predString appendFormat:@"((committeeType == %@) OR (committeeType == 3))", [NSNumber numberWithInteger:self.filterChamber]];
+
+    }
+
+    NSPredicate *predicate = (predString.length > 0) ? [NSPredicate predicateWithFormat:predString] : nil;
+    return predicate;
+}
+
+- (void) updateFilterPredicate
+{
+    return [self resetCoreData:nil];
 }
 
 // probably unnecessary, but we might as well validate the new info with our expectations...
@@ -297,6 +301,11 @@
 	//    [self.tableView endUpdates];
 }
 
+- (NSArray *)sortDescriptors
+{
+    NSSortDescriptor *sort = [[[NSSortDescriptor alloc] initWithKey:@"committeeName" ascending:YES] autorelease];
+    return [NSArray arrayWithObject:sort];
+}
 /*
  Set up the fetched results controller.
  */
@@ -310,8 +319,7 @@
 	NSFetchRequest *fetchRequest = [CommitteeObj fetchRequest];
 			
 	// Sort by committeeName.
-	NSSortDescriptor *nameInitialSortOrder = [[NSSortDescriptor alloc] initWithKey:@"committeeName" ascending:YES];
-	[fetchRequest setSortDescriptors:[NSArray arrayWithObject:nameInitialSortOrder]];
+	[fetchRequest setSortDescriptors:[self sortDescriptors]];
 	
 	NSString * sectionString;
 	// we don't want sections when searching, change to hasFilter if you don't want it for toolbarAction either...
@@ -327,8 +335,7 @@
 															 sectionNameKeyPath:sectionString cacheName:@"Committees"];
 
     fetchedResultsController.delegate = self;
-	[nameInitialSortOrder release];	
-	
+
 	return fetchedResultsController;
 }    
 

@@ -72,11 +72,18 @@
 	return self;
 }
 
-- (void)resetCoreData:(NSNotification *)notification {
-	[NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
-	self.fetchedResultsController = nil;
-	NSError *error = nil;
-	[self.fetchedResultsController performFetch:&error];
+- (void)resetCoreData:(NSNotification *)notification
+{
+    // You've got to delete the cache, or disable caching before you modify the predicate...
+    [NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
+    [self.fetchedResultsController.fetchRequest setPredicate:[self getFilterPredicate]];
+    [self.fetchedResultsController.fetchRequest setSortDescriptors:[self sortDescriptors]];
+
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Handle error
+        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }           
 }
 
 -(void)dataSourceReceivedMemoryWarning:(id)sender {
@@ -284,29 +291,26 @@
 // You cannot necessarily translate “arbitrary” SQL queries into predicates.
 //*
 
-- (void) updateFilterPredicate {
-	NSMutableString * predString = [NSMutableString stringWithString:@""];
-	
-	if (self.filterChamber > 0)	// do some chamber filtering
-		[predString appendFormat:@"(chamber = %@)", [NSNumber numberWithInteger:self.filterChamber]];
-	if (self.filterString.length > 0) {		// do some string filtering
-		if (predString.length > 0)	// we already have some predicate action, insert "AND"
-			[predString appendString:@" AND "];
-		[predString appendFormat:@"((legislator.lastname CONTAINS[cd] '%@') OR (legislator.firstname CONTAINS[cd] '%@')", self.filterString, self.filterString];
-		[predString appendFormat:@" OR (legislator.middlename CONTAINS[cd] '%@') OR (legislator.nickname CONTAINS[cd] '%@')", self.filterString, self.filterString];
-		[predString appendFormat:@" OR (district CONTAINS[cd] '%@') OR (ANY legislator.districtOffices.formattedAddress CONTAINS [cd] '%@'))", self.filterString, self.filterString];
-	}
-	NSPredicate *predicate = (predString.length > 0) ? [NSPredicate predicateWithFormat:predString] : nil;
-	
-	// You've got to delete the cache, or disable caching before you modify the predicate...
-	[NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
-	[self.fetchedResultsController.fetchRequest setPredicate:predicate];
-	
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Handle error
-        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }           
+- (NSPredicate *)getFilterPredicate
+{
+    NSMutableString * predString = [NSMutableString stringWithString:@""];
+
+    if (self.filterChamber > 0)	// do some chamber filtering
+        [predString appendFormat:@"(chamber = %@)", [NSNumber numberWithInteger:self.filterChamber]];
+    if (self.filterString.length > 0) {		// do some string filtering
+        if (predString.length > 0)	// we already have some predicate action, insert "AND"
+            [predString appendString:@" AND "];
+        [predString appendFormat:@"((legislator.lastname CONTAINS[cd] '%@') OR (legislator.firstname CONTAINS[cd] '%@')", self.filterString, self.filterString];
+        [predString appendFormat:@" OR (legislator.middlename CONTAINS[cd] '%@') OR (legislator.nickname CONTAINS[cd] '%@')", self.filterString, self.filterString];
+        [predString appendFormat:@" OR (district CONTAINS[cd] '%@') OR (ANY legislator.districtOffices.formattedAddress CONTAINS [cd] '%@'))", self.filterString, self.filterString];
+    }
+    NSPredicate *predicate = (predString.length > 0) ? [NSPredicate predicateWithFormat:predString] : nil;
+    return predicate;
+}
+
+- (void) updateFilterPredicate
+{
+    [self resetCoreData:nil];
 }
 
 // probably unnecessary, but we might as well validate the new info with our expectations...
@@ -326,14 +330,9 @@
 	
 }	
 
-- (IBAction) sortByType:(id)sender {
-	[NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
-	self.fetchedResultsController = nil;
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Handle error
-        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }           
+- (IBAction) sortByType:(id)sender
+{
+    [self resetCoreData:nil];
 }
 
 #if NEEDS_TO_PARSE_KMLMAPS == 1
@@ -362,9 +361,10 @@
 					break;
 				}
 			}
-			if (!foundOne)
+            if (!foundOne) {
 				debug_NSLog(@"District had no suitable offices inside the boundaries, district=%@ chamber=%@ legislator=%@", 
 							map.district, map.chamber, map.legislator.lastname);
+            }
 		}
 		
 	}	 

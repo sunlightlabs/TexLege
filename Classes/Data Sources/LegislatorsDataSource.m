@@ -51,11 +51,18 @@
 	return self;
 }
 
-- (void)resetCoreData:(NSNotification *)notification {
-	[NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
-	self.fetchedResultsController = nil;
-	NSError *error = nil;
-	[self.fetchedResultsController performFetch:&error];
+- (void)resetCoreData:(NSNotification *)notification
+{
+    // You've got to delete the cache, or disable caching before you modify the predicate...
+    [NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
+    [self.fetchedResultsController.fetchRequest setPredicate:[self getFilterPredicate]];
+    [self.fetchedResultsController.fetchRequest setSortDescriptors:[self sortDescriptors]];
+
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Handle error
+        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
 }
 
 - (void)dealloc {	
@@ -232,30 +239,27 @@
 // You cannot necessarily translate “arbitrary” SQL queries into predicates.
 //*
 
-- (void)updateFilterPredicate {
-	NSMutableString * predString = [NSMutableString stringWithString:@""];
+- (NSPredicate *)getFilterPredicate
+{
+    NSMutableString * predString = [NSMutableString stringWithString:@""];
 
-	if (self.filterChamber > 0)	// do some chamber filtering
-		[predString appendFormat:@"(legtype = %@)", [NSNumber numberWithInteger:self.filterChamber]];
-	if (self.filterString.length > 0) {		// do some string filtering
-		if (predString.length > 0)	// we already have some predicate action, insert "AND"
-			[predString appendString:@" AND "];
-		[predString appendFormat:@"((lastname CONTAINS[cd] '%@') OR (firstname CONTAINS[cd] '%@')", self.filterString, self.filterString];
-		[predString appendFormat:@" OR (middlename CONTAINS[cd] '%@') OR (nickname CONTAINS[cd] '%@')", self.filterString, self.filterString];
-		[predString appendFormat:@" OR (district CONTAINS[cd] '%@'))", self.filterString];
-	}
+    if (self.filterChamber > 0)	// do some chamber filtering
+        [predString appendFormat:@"(legtype = %@)", [NSNumber numberWithInteger:self.filterChamber]];
+    if (self.filterString.length > 0) {		// do some string filtering
+        if (predString.length > 0)	// we already have some predicate action, insert "AND"
+            [predString appendString:@" AND "];
+        [predString appendFormat:@"((lastname CONTAINS[cd] '%@') OR (firstname CONTAINS[cd] '%@')", self.filterString, self.filterString];
+        [predString appendFormat:@" OR (middlename CONTAINS[cd] '%@') OR (nickname CONTAINS[cd] '%@')", self.filterString, self.filterString];
+        [predString appendFormat:@" OR (district CONTAINS[cd] '%@'))", self.filterString];
+    }
 
-	NSPredicate *predicate = (predString.length > 0) ? [NSPredicate predicateWithFormat:predString] : nil;
-	
-	// You've got to delete the cache, or disable caching before you modify the predicate...
-	[NSFetchedResultsController deleteCacheWithName:[self.fetchedResultsController cacheName]];
-	[self.fetchedResultsController.fetchRequest setPredicate:predicate];
-	
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Handle error
-        debug_NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }           
+    NSPredicate *predicate = (predString.length > 0) ? [NSPredicate predicateWithFormat:predString] : nil;
+    return predicate;
+}
+
+- (void)updateFilterPredicate
+{
+    [self resetCoreData:nil];
 }
 
 // probably unnecessary, but we might as well validate the new info with our expectations...
@@ -287,10 +291,18 @@
 //    [self.tableView endUpdates];
 }
 
+- (NSArray *)sortDescriptors
+{
+    NSSortDescriptor *last = [[[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES] autorelease];
+    NSSortDescriptor *first = [[[NSSortDescriptor alloc] initWithKey:@"firstname"ascending:YES] autorelease];
+    return [NSArray arrayWithObjects:last, first, nil];
+}
+
 /*
  Set up the fetched results controller.
  */
-- (NSFetchedResultsController *)fetchedResultsController {
+- (NSFetchedResultsController *)fetchedResultsController
+{
     
     if (fetchedResultsController != nil) {
         return fetchedResultsController;
@@ -298,19 +310,13 @@
 	// Create the fetch request for the entity.
 	NSFetchRequest *fetchRequest = [LegislatorObj fetchRequest];
 	
-	NSSortDescriptor *nameInitialSortOrder = [[NSSortDescriptor alloc] initWithKey:@"lastname"
-																   ascending:YES] ;
-	NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstname"
-																	ascending:YES] ;
-	[fetchRequest setSortDescriptors:[NSArray arrayWithObjects:nameInitialSortOrder, firstDescriptor, nil]];
+    [fetchRequest setSortDescriptors:[self sortDescriptors]];
 	
 	
-	NSString * sectionString;
+	NSString * sectionString = nil;
 	// we don't want sections when searching, change to hasFilter if you don't want it for toolbarAction either...
     // nil for section name key path means "no sections".
-	if (self.filterString.length > 0) 
-		sectionString = nil;
-	else
+	if (self.filterString.length == 0)
 		sectionString = @"lastnameInitial";
 	
 	fetchedResultsController = [[NSFetchedResultsController alloc] 
@@ -319,9 +325,6 @@
 															 sectionNameKeyPath:sectionString cacheName:@"Legislators"];
     fetchedResultsController.delegate = self;
 	
-	[nameInitialSortOrder release];	
-	[firstDescriptor release];	
-
 	return fetchedResultsController;
 }    
 

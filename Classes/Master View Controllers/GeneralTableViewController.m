@@ -278,6 +278,12 @@
 	}
 }
 
+- (void)reapplyFiltersAndSort
+{
+    if (!self.isViewLoaded)
+        return;
+    [self.tableView reloadData];
+}
 
 #pragma -
 #pragma UITableViewDelegate

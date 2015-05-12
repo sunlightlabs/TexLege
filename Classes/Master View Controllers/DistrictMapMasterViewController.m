@@ -99,6 +99,20 @@
 			self.sortControl.selectedSegmentIndex = [segIndex integerValue];
 		
 	}
+
+    [self reapplyFiltersAndSort];
+}
+
+- (void)reapplyFiltersAndSort
+{
+    [self filterContentForSearchText:self.searchDisplayController.searchBar.text
+                               scope:self.chamberControl.selectedSegmentIndex];
+
+    BOOL byDistrict = (self.sortControl.selectedSegmentIndex == 1);
+    [(DistrictMapDataSource *) self.dataSource setByDistrict:byDistrict];
+    [(DistrictMapDataSource *) self.dataSource sortByType:self.sortControl];
+
+    [super reapplyFiltersAndSort];
 }
 
 
@@ -194,44 +208,38 @@
 	
 }
 
-- (IBAction) filterChamber:(id)sender {
-	if (sender == chamberControl) {
-		[self filterContentForSearchText:self.searchDisplayController.searchBar.text 
-								   scope:self.chamberControl.selectedSegmentIndex];
+- (IBAction) filterChamber:(id)sender
+{
+	if (sender != self.chamberControl)
+        return;
 
-		NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
-		if (segPrefs) {
-			NSNumber *segIndex = [NSNumber numberWithInteger:self.chamberControl.selectedSegmentIndex];
-			NSMutableDictionary *newDict = [segPrefs mutableCopy];
-			[newDict setObject:segIndex forKey:@"DistrictMapChamberKey"];
-			[[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-			[newDict release];
-		}
-		
-		[self.tableView reloadData];
-	}
+    NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
+    if (segPrefs) {
+        NSNumber *segIndex = [NSNumber numberWithInteger:self.chamberControl.selectedSegmentIndex];
+        NSMutableDictionary *newDict = [segPrefs mutableCopy];
+        [newDict setObject:segIndex forKey:@"DistrictMapChamberKey"];
+        [[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [newDict release];
+    }
+    [self reapplyFiltersAndSort];
 }
 
-- (IBAction) sortType:(id)sender {
-	if (sender == self.sortControl) {
-		BOOL byDistrict = (self.sortControl.selectedSegmentIndex == 1);
-		
-		[(DistrictMapDataSource *) self.dataSource setByDistrict:byDistrict];
-		[(DistrictMapDataSource *) self.dataSource sortByType:sender];
-				
-		NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
-		if (segPrefs) {
-			NSNumber *segIndex = [NSNumber numberWithInteger:self.sortControl.selectedSegmentIndex];
-			NSMutableDictionary *newDict = [segPrefs mutableCopy];
-			[newDict setObject:segIndex forKey:@"DistrictMapSortTypeKey"];
-			[[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
-			[[NSUserDefaults standardUserDefaults] synchronize];
-			[newDict release];
-		}
-				
-		[self.tableView reloadData];
-	}
+- (IBAction) sortType:(id)sender
+{
+	if (sender != self.sortControl)
+        return;
+
+    NSDictionary *segPrefs = [[NSUserDefaults standardUserDefaults] objectForKey:kSegmentControlPrefKey];
+    if (segPrefs) {
+        NSNumber *segIndex = [NSNumber numberWithInteger:self.sortControl.selectedSegmentIndex];
+        NSMutableDictionary *newDict = [segPrefs mutableCopy];
+        [newDict setObject:segIndex forKey:@"DistrictMapSortTypeKey"];
+        [[NSUserDefaults standardUserDefaults] setObject:newDict forKey:kSegmentControlPrefKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [newDict release];
+    }
+    [self reapplyFiltersAndSort];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -242,14 +250,16 @@
     return YES;
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
 	self.searchDisplayController.searchBar.text = @"";
 	[self.dataSource removeFilter];
 	
 	[self.searchDisplayController setActive:NO animated:YES];
 }
 
-- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
+{
 	[self.dataSource setHideTableIndex:YES];	
 	// for some reason, these get zeroed out after we restart searching.
 	self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;

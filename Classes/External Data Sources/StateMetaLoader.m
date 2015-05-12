@@ -137,20 +137,27 @@
 	}
 }
 
-- (NSDictionary *)stateMetadata {
-	NSDictionary *stateMeta = nil;
-	if (NO == IsEmpty(_selectedState)) {
-		stateMeta = [_metadata objectForKey:_selectedState];
+- (NSDictionary *)stateMetadata
+{
+    NSString *stateId = _selectedState;
 
-		if (IsEmpty(stateMeta) || !isFresh || !updated || ([[NSDate date] timeIntervalSinceDate:updated] > (3600*24))) {	// if we're over a day old, let's refresh
-			isFresh = NO;
-			debug_NSLog(@"StateMetadata is stale, need to refresh");
-			
-			if (NO == IsEmpty(_selectedState)) {
-				[self loadMetadataForState:_selectedState];
-			}
-		}
-	}
+    if (IsEmpty(stateId))
+        return nil;
+    NSDictionary *stateMeta = _metadata[stateId];
+
+    if (!stateMeta ||
+        !isFresh ||
+        !updated ||
+        ([[NSDate date] timeIntervalSinceDate:updated] > (3600*24)))
+    {	// if we're over a day old, let's refresh
+        isFresh = NO;
+
+        if (!IsEmpty(stateId) && ![_loadingStates containsObject:stateId])
+        {
+            debug_NSLog(@"StateMetadata is stale, need to refresh");
+            [self loadMetadataForState:stateId];
+        }
+    }
 	return stateMeta;
 }
 
@@ -261,7 +268,7 @@
 				NSLog(@"StateMetadataLoader: error writing cache to file: %@", localPath);
 			isFresh = YES;
 			[[NSNotificationCenter defaultCenter] postNotificationName:kStateMetaNotifyLoaded object:nil];
-			debug_NSLog(@"StateMetadata network download successful, archiving for prosperity.");
+			debug_NSLog(@"StateMetadata network download successful, archiving.");
 		}		
 		else {
 			[self request:request didFailLoadWithError:nil];
