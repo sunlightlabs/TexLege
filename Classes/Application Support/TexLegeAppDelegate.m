@@ -424,7 +424,7 @@ NSInteger kNoSelection = -1;
 			[analyticsOptInController updateOptInFromSettings];
 		
 		if (self.dataUpdater) {
-			[self.dataUpdater performSelector:@selector(performDataUpdatesIfAvailable:) withObject:self afterDelay:10.f];
+			[self.dataUpdater performSelector:@selector(performDataUpdatesIfAvailable:) withObject:self afterDelay:5.f];
 		}
 	}
 	[[LocalyticsSession sharedLocalyticsSession] resume];
@@ -544,15 +544,23 @@ NSInteger kNoSelection = -1;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if (alertView.tag == 23452) {
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kResetSavedDatabaseKey];
-		[[NSUserDefaults standardUserDefaults] synchronize];
+	if (alertView.tag != 23452)
+        return;
 
-		if (buttonIndex == alertView.firstOtherButtonIndex) {
-			[self resetSavedTableSelection:nil];
-			[TexLegeCoreDataUtils resetSavedDatabase:nil]; 
-		}
-	}
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kResetSavedDatabaseKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    if (buttonIndex != alertView.firstOtherButtonIndex)
+        return;
+
+    [self resetSavedTableSelection:nil];
+    [TexLegeCoreDataUtils resetSavedDatabase:nil];
+
+    DataModelUpdateManager *updater = self.dataUpdater;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (updater)
+            [updater performDataUpdatesIfAvailable:nil];
+    });
 }
 
 @end

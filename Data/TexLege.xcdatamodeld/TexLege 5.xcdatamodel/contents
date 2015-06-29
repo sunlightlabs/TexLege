@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.5" iOSVersion="iOS 7.0">
     <entity name="CommitteeObj" representedClassName="CommitteeObj" syncable="YES">
         <attribute name="clerk" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clerk_email" optional="YES" attributeType="String" syncable="YES"/>
@@ -141,12 +141,12 @@
     </entity>
     <elements>
         <element name="CommitteeObj" positionX="331" positionY="6" width="128" height="270"/>
-        <element name="LinkObj" positionX="484" positionY="24" width="128" height="120"/>
-        <element name="LegislatorObj" positionX="16" positionY="-18" width="128" height="675"/>
         <element name="CommitteePositionObj" positionX="502" positionY="288" width="128" height="150"/>
-        <element name="StafferObj" positionX="27" positionY="693" width="128" height="165"/>
-        <element name="DistrictOfficeObj" positionX="549" positionY="486" width="128" height="330"/>
-        <element name="WnomObj" positionX="187" positionY="9" width="128" height="165"/>
         <element name="DistrictMapObj" positionX="286" positionY="402" width="128" height="330"/>
+        <element name="DistrictOfficeObj" positionX="549" positionY="486" width="128" height="330"/>
+        <element name="LegislatorObj" positionX="16" positionY="-18" width="128" height="675"/>
+        <element name="LinkObj" positionX="484" positionY="24" width="128" height="120"/>
+        <element name="StafferObj" positionX="27" positionY="693" width="128" height="165"/>
+        <element name="WnomObj" positionX="187" positionY="9" width="128" height="165"/>
     </elements>
 </model>
