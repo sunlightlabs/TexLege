@@ -93,7 +93,7 @@
 						[foundIDs addObject:distID];
 						success = YES;
 					}
-					[[holeDist managedObjectContext] refreshObject:map mergeChanges:NO];
+					[[map managedObjectContext] refreshObject:map mergeChanges:NO];
 				}
 				else {
 					[foundIDs addObject:distID];

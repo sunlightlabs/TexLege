@@ -78,7 +78,7 @@
 -(void)dataSourceReceivedMemoryWarning:(id)sender {
 	// let's give this a swinging shot....	
 	for (NSManagedObject *object in self.fetchedResultsController.fetchedObjects) {
-		[[LegislatorObj managedObjectContext] refreshObject:object mergeChanges:NO];
+		[object.managedObjectContext refreshObject:object mergeChanges:NO];
 	}
 }
 
@@ -115,7 +115,8 @@
 
 
 // return the legislator at the index in the sorted by symbol array
-- (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {
+- (id) dataObjectForIndexPath:(NSIndexPath *)indexPath
+{
 	LegislatorObj *tempEntry = nil;
 	@try {
 		tempEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -124,7 +125,12 @@
 		// Perhaps we're returning from a search and we've got a wacked out indexPath.  Let's reset the search and see what happens.
 		debug_NSLog(@"DirectoryDataSource.m -- legislatorDataForIndexPath:  indexPath must be out of bounds.  %@", [indexPath description]); 
 		[self removeFilter];
-		tempEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        @try {
+            tempEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        }
+        @catch (NSException *exception) {
+            return nil;
+        }
 	}
 	return tempEntry;	
 }
@@ -145,11 +151,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	LegislatorObj *dataObj = [self dataObjectForIndexPath:indexPath];
-	if (dataObj == nil) {
-		debug_NSLog(@"Busted in DirectoryDataSource.m: cellForRowAtIndexPath -> Couldn't get legislator data for row.");
-		return nil;
-	}
-	static NSString *leg_cell_ID = @"LegislatorQuartz";		
+
+    static NSString *leg_cell_ID = @"LegislatorQuartz";
 		
 	LegislatorMasterCell *cell = (LegislatorMasterCell *)[tableView dequeueReusableCellWithIdentifier:leg_cell_ID];
 	
@@ -158,7 +161,12 @@
 		//cell.frame = CGRectMake(0.0, 0.0, 320.0, 73.0);
 		cell.frame = CGRectMake(0.0, 0.0, 320.0, 73.0);
 	}
-	
+
+    if (dataObj == nil) {
+        debug_NSLog(@"Busted in DirectoryDataSource.m: cellForRowAtIndexPath -> Couldn't get legislator data for row.");
+        return cell;
+    }
+
 	[cell setLegislator:dataObj];
 	cell.cellView.useDarkBackground = (indexPath.row % 2 == 0);
 	cell.accessoryView.hidden = (![self showDisclosureIcon] || tableView == self.searchDisplayController.searchResultsTableView);
@@ -183,15 +191,20 @@
 	return index; // index ..........
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	// eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
-	NSInteger count = [tableView numberOfSections];		
-	if (count > 0) {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-        if (sectionInfo)
-            count = [sectionInfo numberOfObjects];
-	}
-	return count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
+    NSInteger count = [tableView numberOfSections];
+    NSArray *sections = self.fetchedResultsController.sections;
+    if (sections.count <= section ||
+        count == 0)
+    {
+        return 0;
+    }
+    id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+    if (!sectionInfo)
+        return 0;
+    return [sectionInfo numberOfObjects];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -200,9 +213,12 @@
 	// return the letter that represents the requested section
 	
 	NSString *headerTitle = nil;
-	NSInteger count = [tableView numberOfSections];		
-	if (count > 0)  {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+	NSInteger count = [tableView numberOfSections];
+    NSArray *sections = [self.fetchedResultsController sections];
+    if (count > 0 &&
+        sections.count > section)
+    {
+		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
         if (sectionInfo) {
             headerTitle = [sectionInfo indexTitle];
             if (!headerTitle)

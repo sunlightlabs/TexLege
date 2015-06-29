@@ -92,7 +92,7 @@ enum Sections {
 -(void)dataSourceReceivedMemoryWarning:(id)sender {
 	// let's give this a swinging shot....	
 	for (NSManagedObject *object in self.fetchedResultsController.fetchedObjects) {
-		[[LinkObj managedObjectContext] refreshObject:object mergeChanges:NO];
+		[object.managedObjectContext refreshObject:object mergeChanges:NO];
 	}
 }
 
@@ -104,8 +104,18 @@ enum Sections {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:section];
-	return [sectionInfo numberOfObjects];
+    // eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
+    NSInteger count = [tableView numberOfSections];
+    NSArray *sections = self.fetchedResultsController.sections;
+    if (sections.count <= section ||
+        count == 0)
+    {
+        return 0;
+    }
+    id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+    if (!sectionInfo)
+        return 0;
+    return [sectionInfo numberOfObjects];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -116,8 +126,15 @@ enum Sections {
 		return NSLocalizedStringFromTable(@"Web Resources", @"DataTableUI", @"Table section listing resources on the web");		
 }
 
-- (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {		
-	return [self.fetchedResultsController objectAtIndexPath:indexPath];;	
+- (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {
+    id object = nil;
+    @try {
+        object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+	return object;
 }
 
 - (NSIndexPath *)indexPathForDataObject:(id)dataObject {

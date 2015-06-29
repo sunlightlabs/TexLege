@@ -33,9 +33,21 @@
 #endif
 
 #define SEED_DB_NAME @"TexLegeSeed.sqlite"
+//#define SEED_DB_NAME nil
 #define APP_DB_NAME @"TexLege.sqlite"
+//#define APP_DB_NAME @"TexLege-2.8.sqlite"
 
 @implementation TexLegeCoreDataUtils
+
++ (instancetype)sharedInstance
+{
+    static TexLegeCoreDataUtils * instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[TexLegeCoreDataUtils alloc] init];
+    });
+    return instance;
+}
 
 + (id) fetchCalculation:(NSString *)calc ofProperty:(NSString *)prop withType:(NSAttributeType)retType onEntity:(NSString *)entityName {
 	
@@ -280,11 +292,12 @@
     // NOTE: If all of your mapped objects use element -> class registration, you can perform seeding in one line of code:
     // [RKManagedObjectSeeder generateSeedDatabaseWithObjectManager:objectManager fromFiles:@"users.json", nil];
 #endif
-
-	objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:APP_DB_NAME
+    objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:APP_DB_NAME
                                                                        inDirectory:[self applicationCacheDirectory]
-															 usingSeedDatabaseName:SEED_DB_NAME 
-																managedObjectModel:mom];
+                                                             usingSeedDatabaseName:SEED_DB_NAME
+                                                                managedObjectModel:mom
+                                                                          delegate:[self sharedInstance]];
+
 	//objectManager.objectStore.managedObjectCache = [[TexLegeObjectCache new] autorelease];
 	
 #ifdef VERIFYCOMMITTEES
@@ -322,6 +335,61 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil];
 	}
 }
+
+#pragma mark - RKManagedObjectStoreDelegate
+
+- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToCreatePersistentStoreCoordinatorWithError:(NSError *)error
+{
+    NSLog(@"Failed to create persistent store coordinator: %@", error);
+}
+
+- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToDeletePersistentStore:(NSString *)pathToStoreFile error:(NSError *)error
+{
+    NSLog(@"Failed to delete persistent store at '%@': %@", pathToStoreFile, error);
+}
+
+- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToCopySeedDatabase:(NSString *)seedDatabase error:(NSError *)error
+{
+    NSLog(@"Failed to copy seed database '%@': %@", seedDatabase, error);
+}
+
+- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToSaveContext:(NSManagedObjectContext *)context error:(NSError *)error exception:(NSException *)exception
+{
+    NSDictionary *userInfo = [[error userInfo] copy];
+    if (userInfo &&
+        userInfo[NSValidationObjectErrorKey] &&
+        [userInfo[NSValidationObjectErrorKey] isKindOfClass:[LegislatorObj class]])
+    {
+        LegislatorObj *legislator = userInfo[NSValidationObjectErrorKey];
+        NSSet *wnoms = [legislator wnomScores];
+
+        for (WnomObj *wnom in wnoms)
+        {
+            [context deleteObject:wnom];
+        }
+        [context deleteObject:legislator];
+
+        NSError *newError = nil;
+        @try {
+            if ([context save:&newError])
+                return; // successful save
+            NSLog(@"Couldn't save even after deleting corrupt legislator and wnomScores! %@", newError);
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Couldn't save even after deleting corrupt legislator and wnomScores! %@; exception=%@", newError, exception);
+        }
+    }
+
+    NSLog(@"Failed to save context -- error: %@, exception: %@", error, exception);
+    NSString *path = objectStore.pathToStoreFile;
+    if (!path.length)
+        return;
+    if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error])
+    {
+        NSLog(@"Could not delete the persistent store file '%@': %@", path, error);
+    }
+}
+
 @end
 
 /*

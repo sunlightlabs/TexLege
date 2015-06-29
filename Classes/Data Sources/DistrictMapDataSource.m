@@ -89,7 +89,7 @@
 -(void)dataSourceReceivedMemoryWarning:(id)sender {
 	// let's give this a swinging shot....	
 	for (NSManagedObject *object in self.fetchedResultsController.fetchedObjects) {
-		[[DistrictMapObj managedObjectContext] refreshObject:object mergeChanges:NO];
+        [object.managedObjectContext refreshObject:object mergeChanges:NO];
 	}
 }
 
@@ -145,7 +145,12 @@
 		// Perhaps we're returning from a search and we've got a wacked out indexPath.  Let's reset the search and see what happens.
 		debug_NSLog(@"DistrictMapDataSource.m -- dataObjectForIndexPath must be out of bounds.  %@", [indexPath description]); 
 		[self removeFilter];
-		tempEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        @try {
+            tempEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        }
+        @catch (NSException *exception) {
+            return nil;
+        }
 	}
 	return tempEntry;
 }
@@ -195,7 +200,7 @@
 	
 	if (tempEntry == nil) {
 		debug_NSLog(@"Busted in DistrictMapDataSource.m: cellForRowAtIndexPath -> Couldn't get object data for row.");
-		return nil;
+		return cell;
 	}
 	
 	// let's override some of the datasource's settings ... specifically, the background color.
@@ -244,14 +249,20 @@
 	return index; // index ..........
 }
 
-- (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section {
-	// eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
-	NSInteger count = [tableView numberOfSections];		
-	if (count > 0) {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-		count = [sectionInfo numberOfObjects];
-	}
-	return count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // eventually (soon) we'll need to create a new fetchedResultsController to filter for chamber selection
+    NSInteger count = [tableView numberOfSections];
+    NSArray *sections = self.fetchedResultsController.sections;
+    if (sections.count <= section ||
+        count == 0)
+    {
+        return 0;
+    }
+    id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+    if (!sectionInfo)
+        return 0;
+    return [sectionInfo numberOfObjects];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -259,9 +270,14 @@
 	// [A,B,C,D,E,F,G,H,I,K,L,M,N,O,P,R,S,T,U,V,X,Y,Z]
 	// return the letter that represents the requested section
 	
-	NSInteger count = [tableView numberOfSections];		
-	if (count > 0 && !self.hasFilter && !self.byDistrict)  {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+	NSInteger count = [tableView numberOfSections];
+    NSArray *sections = [fetchedResultsController sections];
+    if (count > 0 &&
+        sections.count > section &&
+        !self.hasFilter &&
+        !self.byDistrict)
+    {
+		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
 		return [sectionInfo indexTitle]; // or [sectionInfo name];
 	}
 	return @"";

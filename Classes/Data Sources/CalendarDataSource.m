@@ -100,6 +100,8 @@
 }
 
 - (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {
+    if (self.calendarList.count <= indexPath.row)
+        return nil;
 	return [self.calendarList objectAtIndex:indexPath.row];
 }
 
@@ -151,8 +153,8 @@
 	//	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	ChamberCalendarObj *calendar = [self dataObjectForIndexPath:indexPath];
-	
-	cell.textLabel.text = calendar.title;
+	if (calendar)
+        cell.textLabel.text = calendar.title;
 		
 	return cell;
 }

@@ -79,8 +79,16 @@
 
 // return the map at the index in the array
 - (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {
-	NSMutableDictionary *bill = [[_sections valueForKey:[[self billTypes] objectAtIndex:indexPath.section]] 
-								 objectAtIndex:indexPath.row];
+    NSString *key = [[self billTypes] objectAtIndex:indexPath.section];
+    NSArray *billSection = [_sections valueForKey:key];
+    if (![billSection respondsToSelector:@selector(objectAtIndex:)] ||
+        ![billSection respondsToSelector:@selector(count)])
+    {
+        return nil;
+    }
+    if (billSection.count <= indexPath.row)
+        return nil;
+    NSMutableDictionary *bill = billSection[indexPath.row];
 	return bill;
 }
 
@@ -154,8 +162,10 @@
 {	
 	if (IsEmpty(_sections) || IsEmpty([self billTypes]))
 		return @"";
-	
-	NSString *billType = [[self billTypes] objectAtIndex:section];
+    NSArray *sections = [self billTypes];
+    if (sections.count <= section)
+        return @"";
+	NSString *billType = [sections objectAtIndex:section];
 	return [[[[[BillMetadataLoader sharedBillMetadataLoader] metadata] objectForKey:@"types"] 
 							findWhereKeyPath:@"title" 
 							equals:billType] objectForKey:@"titleLong"];
@@ -168,9 +178,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section 
-{		
+{
+    NSArray *sectionKeys = [self billTypes];
+    if (sectionKeys.count <= section)
+        return 0;
 	if (NO == IsEmpty(_sections))
-		return [[_sections valueForKey:[[self billTypes] objectAtIndex:section]] count];
+		return [[_sections valueForKey:[sectionKeys objectAtIndex:section]] count];
 	else if (useLoadingDataCell && loadingStatus > LOADING_IDLE)
 		return 1;
 	else

@@ -105,15 +105,18 @@
 	[aTableView deselectRowAtIndexPath:newIndexPath animated:YES];	
 	
 	NSDictionary *voter = [self dataObjectForIndexPath:newIndexPath];
+    if (!voter)
+        return;
 
 	LegislatorObj *legislator = [LegislatorObj objectWithPrimaryKeyValue:[voter objectForKey:@"legislatorID"]];
-	if (legislator) {
-		LegislatorDetailViewController *legVC = [[LegislatorDetailViewController alloc] initWithNibName:@"LegislatorDetailViewController" bundle:nil];
-		legVC.legislator = legislator;	
-		if (self.viewController)
-			[self.viewController.navigationController pushViewController:legVC animated:YES];
-		[legVC release];
-	}	
+	if (!legislator)
+        return;
+
+    LegislatorDetailViewController *legVC = [[LegislatorDetailViewController alloc] initWithNibName:@"LegislatorDetailViewController" bundle:nil];
+    legVC.legislator = legislator;	
+    if (self.viewController)
+        [self.viewController.navigationController pushViewController:legVC animated:YES];
+    [legVC release];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,9 +148,12 @@
 			imageView.image = [UIImage imageNamed:@"VotePNV"];
 			break;
 	}
-	cell.textLabel.text = [dataObj objectForKey:@"subtitle"];
-	cell.detailTextLabel.text = [dataObj objectForKey:@"name"];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:[dataObj objectForKey:@"photo_url"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    if (dataObj)
+    {
+        cell.textLabel.text = [dataObj objectForKey:@"subtitle"];
+        cell.detailTextLabel.text = [dataObj objectForKey:@"name"];
+        [cell.imageView setImageWithURL:[NSURL URLWithString:[dataObj objectForKey:@"photo_url"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
 
 	cell.backgroundColor = (indexPath.row % 2 == 0) ? [TexLegeTheme backgroundDark] : [TexLegeTheme backgroundLight];
 	return cell;	

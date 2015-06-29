@@ -361,7 +361,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
                 [bself.mapView addOverlay:district.polygon];
             });
 
-			[[DistrictMapObj managedObjectContext] refreshObject:district mergeChanges:NO];	// re-fault it to free memory
+			[district.managedObjectContext refreshObject:district mergeChanges:NO];	// re-fault it to free memory
 		}
 	}	
 	
@@ -915,7 +915,7 @@ static MKCoordinateSpan kStandardZoomSpan = {2.f, 2.f};
                 [bself.mapView addOverlay:mapPoly];
             });
 
-			[[DistrictMapObj managedObjectContext] refreshObject:(DistrictMapObj*)annotation mergeChanges:NO];
+			[[(DistrictMapObj*)annotation managedObjectContext] refreshObject:(DistrictMapObj*)annotation mergeChanges:NO];
 		}
 		[self.mapView setRegion:region animated:TRUE];
 	}			

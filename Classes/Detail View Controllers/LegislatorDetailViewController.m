@@ -480,7 +480,7 @@
 				[mapViewController release];
 				
 				if (isDistMap) {
-					[[DistrictMapObj managedObjectContext] refreshObject:member.districtMap mergeChanges:NO];
+					[member.districtMap.managedObjectContext refreshObject:member.districtMap mergeChanges:NO];
 				}
 			}
 		}

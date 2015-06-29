@@ -280,7 +280,7 @@
 
 - (void)reapplyFiltersAndSort
 {
-    if (!self.isViewLoaded)
+    if (!self.isViewLoaded || !self.tableView)
         return;
     [self.tableView reloadData];
 }

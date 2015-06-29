@@ -107,7 +107,8 @@
 							   nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 	
@@ -120,7 +121,8 @@
 				 nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 	
@@ -134,7 +136,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 		
 	}
@@ -148,7 +151,8 @@
 				 nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 	
@@ -164,7 +168,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 		
 	}
@@ -178,7 +183,8 @@
 				 nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 		
@@ -192,7 +198,8 @@
 				 nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 	entryDict = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -204,7 +211,8 @@
 				 nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 	tempString = nil;
@@ -225,7 +233,8 @@
 				 nil];
 	cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 	[entryDict release];
-	[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+    if (self.sectionArray.count > sectionIndex)
+        [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 	[cellInfo release], cellInfo = nil;
 	
 	
@@ -241,7 +250,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 	}
 	
@@ -260,7 +270,8 @@
 						 nil];
 			cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 			[entryDict release];
-			[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+            if (self.sectionArray.count > sectionIndex)
+                [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 			[cellInfo release], cellInfo = nil;
 		}
 	}
@@ -274,7 +285,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 	}
 		
@@ -292,7 +304,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 	} 
 	if (self.legislator && self.legislator.cap_phone && [self.legislator.cap_phone length]) {
@@ -305,7 +318,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 	} 
 	if (self.legislator && self.legislator.cap_fax && [self.legislator.cap_fax length]) {
@@ -318,7 +332,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 	}
 	if (self.legislator && self.legislator.cap_phone2 && [self.legislator.cap_phone2 length]) {
@@ -332,7 +347,8 @@
 					 nil];
 		cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 		[entryDict release];
-		[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+        if (self.sectionArray.count > sectionIndex)
+            [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 		[cellInfo release], cellInfo = nil;
 	} 
 	
@@ -351,7 +367,8 @@
 						 nil];
 			cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 			[entryDict release];
-			[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+            if (self.sectionArray.count > sectionIndex)
+                [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 			[cellInfo release], cellInfo = nil;
 		}			
 		if (office.fax && [office.fax length]) {
@@ -364,7 +381,8 @@
 						 nil];
 			cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 			[entryDict release];
-			[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+            if (self.sectionArray.count > sectionIndex)
+                [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 			[cellInfo release], cellInfo = nil;
 		}			
 		if (office.address && [office.address length]) {
@@ -378,7 +396,8 @@
 						 nil];
 			cellInfo = [[TableCellDataObject alloc] initWithDictionary:entryDict];
 			[entryDict release];
-			[[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
+            if (self.sectionArray.count > sectionIndex)
+                [[self.sectionArray objectAtIndex:sectionIndex] addObject:cellInfo];
 			[cellInfo release], cellInfo = nil;
 		} 
 		
@@ -393,7 +412,9 @@
 		return nil;
 	
 	id tempEntry = nil;
-	NSArray *group = [self.sectionArray objectAtIndex:indexPath.section];
+    if (self.sectionArray.count <= indexPath.section)
+        return nil;
+	NSArray *group = self.sectionArray[indexPath.section];
 	if (group && [group count] > indexPath.row)
 		tempEntry = [group objectAtIndex:indexPath.row];
 	return tempEntry;
@@ -435,7 +456,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView  numberOfRowsInSection:(NSInteger)section {
-	NSArray *group = [self.sectionArray objectAtIndex:section];
+    NSArray *sections = self.sectionArray;
+    if (sections.count <= section)
+        return 0;
+	NSArray *group = [sections objectAtIndex:section];
 	if (group)
 		return [group count];
 
@@ -511,13 +535,8 @@
 		
 	TableCellDataObject *cellInfo = [self dataObjectForIndexPath:indexPath];
 		
-	if (cellInfo == nil) {
-		debug_NSLog(@"LegislatorDetailDataSource:cellForRow: error finding table entry for section:%ld row:%ld", (long)indexPath.section, (long)indexPath.row);
-		return nil;
-	}
-	
 	NSString *stdCellID = [TexLegeStandardGroupCell cellIdentifier];
-	if (cellInfo.entryType == DirectoryTypeNotes)
+	if (cellInfo && cellInfo.entryType == DirectoryTypeNotes)
 		stdCellID = @"TexLegeNotesGroupCell";
 		
 	NSString *cellIdentifier = [NSString stringWithFormat:@"%@-%d", stdCellID, cellInfo.isClickable];
@@ -529,7 +548,12 @@
     if (cell == nil) {
 		cell = [[[TexLegeStandardGroupCell alloc] initWithStyle:[TexLegeStandardGroupCell cellStyle] reuseIdentifier:cellIdentifier] autorelease];
     }
-    
+
+    if (cellInfo == nil) {
+        debug_NSLog(@"LegislatorDetailDataSource:cellForRow: error finding table entry for section:%ld row:%ld", (long)indexPath.section, (long)indexPath.row);
+        return cell;
+    }
+
 	if ([cell conformsToProtocol:@protocol(TexLegeGroupCellProtocol)])
 		 [cell performSelector:@selector(setCellInfo:) withObject:cellInfo];
 		

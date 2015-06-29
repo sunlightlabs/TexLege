@@ -108,6 +108,8 @@
 
 - (void)reapplyFiltersAndSort
 {
+    if (!self.isViewLoaded)
+        return;
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text
                                scope:self.chamberControl.selectedSegmentIndex];
 

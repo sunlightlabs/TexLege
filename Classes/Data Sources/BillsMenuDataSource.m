@@ -84,6 +84,8 @@ enum _menuOrder {
 
 // return the map at the index in the array
 - (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {
+    if (self.menuItems.count <= indexPath.row)
+        return nil;
 	return [self.menuItems objectAtIndex:indexPath.row];
 }
 
@@ -128,9 +130,11 @@ enum _menuOrder {
 	cell.backgroundColor = useDark ? [TexLegeTheme backgroundDark] : [TexLegeTheme backgroundLight];
 	
 	NSDictionary *dataObject = [self dataObjectForIndexPath:indexPath];
-	cell.textLabel.text = [dataObject objectForKey:@"title"];
-	cell.imageView.image = [UIImage imageNamed:[dataObject objectForKey:@"icon"]];
-
+    if (dataObject)
+    {
+        cell.textLabel.text = [dataObject objectForKey:@"title"];
+        cell.imageView.image = [UIImage imageNamed:[dataObject objectForKey:@"icon"]];
+    }
 	return cell;
 }
 

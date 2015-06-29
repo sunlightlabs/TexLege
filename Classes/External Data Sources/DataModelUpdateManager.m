@@ -95,20 +95,29 @@ typedef NS_ENUM(NSUInteger, TXL_QueryTypes) {
 
 // Totally cheating my way through this right now.  But it'll pass the app store reviewers!!!
 - (UIView *)appRootView {
-    UITabBarController *tabBarController = (UITabBarController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
-    NSAssert([tabBarController isKindOfClass:[UITabBarController class]], @"Unexpected root view controller for app's key window.");
-    UIViewController *currentVC = nil;
-    if ([UtilityMethods isIPadDevice]) {
-        UISplitViewController *splitView = (UISplitViewController *)tabBarController.selectedViewController;
-        NSAssert([splitView isKindOfClass:[UISplitViewController class]], @"Unexpected view controller expected split view controller: %@", splitView);
-        currentVC = [splitView.viewControllers objectAtIndex:1];
+    @try {
+        UITabBarController *tabBarController = (UITabBarController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+        if (tabBarController && tabBarController.isViewLoaded)
+        {
+            NSAssert([tabBarController isKindOfClass:[UITabBarController class]], @"Unexpected root view controller for app's key window.");
+            UIViewController *currentVC = nil;
+            if ([UtilityMethods isIPadDevice]) {
+                UISplitViewController *splitView = (UISplitViewController *)tabBarController.selectedViewController;
+                NSAssert([splitView isKindOfClass:[UISplitViewController class]], @"Unexpected view controller expected split view controller: %@", splitView);
+                currentVC = [splitView.viewControllers objectAtIndex:1];
+            }
+            else {
+                UINavigationController *navControl = (UINavigationController *)tabBarController.selectedViewController;
+                NSAssert([navControl isKindOfClass:[UINavigationController class]], @"Unexpected view controller expected navigation controller: %@", navControl);
+                currentVC = [navControl topViewController];
+            }
+            return currentVC.view;
+        }
     }
-    else {
-        UINavigationController *navControl = (UINavigationController *)tabBarController.selectedViewController;
-        NSAssert([navControl isKindOfClass:[UINavigationController class]], @"Unexpected view controller expected navigation controller: %@", navControl);
-        currentVC = [navControl topViewController];
+    @catch (NSException *exception) {
+        NSLog(@"Error accessing the root view controller, app may be running from the background: %@", exception);
     }
-    return currentVC.view;
+    return nil;
 }
 
 #pragma mark -
@@ -119,7 +128,9 @@ typedef NS_ENUM(NSUInteger, TXL_QueryTypes) {
 	if ([TexLegeReachability texlegeReachable]) {
 		[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"DATABASE_UPDATE_REQUEST"];
 		NSString *statusString = NSLocalizedStringFromTable(@"Checking for Data Updates", @"DataTableUI", @"Status indicator for updates");
-        self.infoPanel = [MTInfoPanel showPanelInView:self.appRootView type:MTInfoPanelTypeActivity title:NSLocalizedString(@"Data Update", @"") subtitle:statusString];
+        UIView *rootView = [self appRootView];
+        if (rootView)
+            self.infoPanel = [MTInfoPanel showPanelInView:rootView type:MTInfoPanelTypeActivity title:NSLocalizedString(@"Data Update", @"") subtitle:statusString];
 		
 		self.activeUpdates = [NSCountedSet set];
 						
@@ -232,7 +243,9 @@ typedef NS_ENUM(NSUInteger, TXL_QueryTypes) {
             self.infoPanel.subtitle = statusString;
             [self.infoPanel hidePanel];
         }
-        self.infoPanel = [MTInfoPanel showPanelInView:self.appRootView type:MTInfoPanelTypeSuccess title:NSLocalizedString(@"Data Update", @"") subtitle:statusString hideAfter:4];
+        UIView *rootView = [self appRootView];
+        if (rootView)
+            self.infoPanel = [MTInfoPanel showPanelInView:rootView type:MTInfoPanelTypeSuccess title:NSLocalizedString(@"Data Update", @"") subtitle:statusString hideAfter:4];
     }
 }
 
@@ -313,7 +326,9 @@ typedef NS_ENUM(NSUInteger, TXL_QueryTypes) {
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
 	[[LocalyticsSession sharedLocalyticsSession] tagEvent:@"RESTKIT_DATA_ERROR"];
-    self.infoPanel = [MTInfoPanel showPanelInView:self.appRootView type:MTInfoPanelTypeError title:NSLocalizedString(@"Data Update", @"") subtitle:NSLocalizedStringFromTable(@"Error During Update", @"AppAlerts", @"Status indicator for updates") hideAfter:5];
+    UIView *rootView = [self appRootView];
+    if (rootView)
+        self.infoPanel = [MTInfoPanel showPanelInView:rootView type:MTInfoPanelTypeError title:NSLocalizedString(@"Data Update", @"") subtitle:NSLocalizedStringFromTable(@"Error During Update", @"AppAlerts", @"Status indicator for updates") hideAfter:5];
 	NSString *className = NSStringFromClass(objectLoader.objectClass);
 	if (className)
 		[self.activeUpdates removeObject:className];

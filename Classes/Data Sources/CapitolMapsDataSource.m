@@ -94,8 +94,10 @@
 
 // return the map at the index in the array
 - (id) dataObjectForIndexPath:(NSIndexPath *)indexPath {
+    if (self.sectionList.count <= indexPath.section)
+        return nil;
 	NSArray *thisSection = [self.sectionList objectAtIndex:indexPath.section];
-	if (thisSection)
+	if (thisSection && thisSection.count > indexPath.row)
 		return [thisSection objectAtIndex:indexPath.row];
 	
 	return nil;
@@ -107,6 +109,8 @@
 	
 	if (dataObject && [dataObject isKindOfClass:[CapitolMap class]]) {
 		section = [[dataObject valueForKey:@"type"] integerValue];
+        if (self.sectionList.count <= section)
+            return nil;
 		NSArray *thisSection = [self.sectionList objectAtIndex:section];
 		if (thisSection) {
 			row = [thisSection indexOfObject:dataObject];
@@ -136,8 +140,10 @@
 	BOOL useDark = (indexPath.row % 2 == 0);
 
 	cell.backgroundColor = useDark ? [TexLegeTheme backgroundDark] : [TexLegeTheme backgroundLight];
-				
-	cell.textLabel.text = [[self dataObjectForIndexPath:indexPath] name];
+
+    CapitolMap *map = [self dataObjectForIndexPath:indexPath];
+    if (map)
+        cell.textLabel.text = map.name;
 				 
 	return cell;
 }
@@ -148,8 +154,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
-{		
-	return [[self.sectionList objectAtIndex:section] count];
+{
+    NSArray *sections = self.sectionList;
+    if (sections.count <= section)
+        return 0;
+	return [[sections objectAtIndex:section] count];
 }
 
  - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {	

@@ -105,6 +105,8 @@
 
 - (void)reapplyFiltersAndSort
 {
+    if (!self.isViewLoaded)
+        return;
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text
                                scope:self.chamberControl.selectedSegmentIndex];
 
@@ -167,7 +169,7 @@
 			[self.navigationController pushViewController:self.detailViewController animated:YES];
 			self.detailViewController = nil;
 		}
-		[[DistrictMapObj managedObjectContext] refreshObject:map mergeChanges:YES];
+        [map.managedObjectContext refreshObject:map mergeChanges:YES];
 	}
 	
 }
