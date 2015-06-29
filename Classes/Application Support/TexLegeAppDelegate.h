@@ -10,6 +10,8 @@
 //
 //
 
+#import "TexLege.h"
+
 @class LegislatorMasterViewController;
 @class CommitteeMasterViewController;
 @class LinksMasterViewController;

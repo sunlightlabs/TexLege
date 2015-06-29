@@ -10,7 +10,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "TexLege.h"
 #import "CommitteeMemberCellView.h"
 #import "LegislatorCellProtocol.h"
 

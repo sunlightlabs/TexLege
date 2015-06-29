@@ -11,6 +11,9 @@
  * Class used for determining the set of NSFetchRequest objects that
  * map to a given request URL.
  */
+
+@import Foundation;
+
 @protocol RKManagedObjectCache
 @required
 

@@ -6,6 +6,8 @@
 //  Copyright 2008 yFactorial, LLC. All rights reserved.
 //
 
+@import Foundation;
+
 @interface NSString (InflectionSupport)
 
 /**

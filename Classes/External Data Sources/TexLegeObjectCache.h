@@ -10,7 +10,8 @@
 //
 //
 
-#import <RestKit/CoreData/RKManagedObjectCache.h>
+@import Foundation;
+#import <RestKit/RKManagedObjectCache.h>
 
 
 @interface TexLegeObjectCache : NSObject <RKManagedObjectCache>{

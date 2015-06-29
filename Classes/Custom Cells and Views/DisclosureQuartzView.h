@@ -11,7 +11,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "TexLege.h"
 
 extern const CGFloat kDisclosureQuartzViewWidth;
 extern const CGFloat kDisclosureQuartzViewHeight;

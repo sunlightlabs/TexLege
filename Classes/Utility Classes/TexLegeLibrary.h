@@ -10,6 +10,8 @@
 //
 //
 
+#import "TexLege.h"
+
 #define OPENAPIS_DEFAULT_SESSION		@"82"
 #define WNOM_DEFAULT_LATEST_SESSION		82
 

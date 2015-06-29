@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Gregory S. Combs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "TexLege.h"
 
 @protocol TXLDetailProtocol <NSObject>
 

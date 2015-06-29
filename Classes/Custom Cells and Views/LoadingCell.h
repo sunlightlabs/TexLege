@@ -10,7 +10,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "TexLege.h"
 
 typedef NS_ENUM(uint16_t, LoadingStatusCodes) {
 	LOADING_IDLE = 0,

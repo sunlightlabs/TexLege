@@ -12,6 +12,8 @@
 
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TexLege.h"
 #import "TexLegeReachability.h"
 
 BOOL IsEmpty(id thing);

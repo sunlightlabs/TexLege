@@ -10,7 +10,7 @@
 //
 //
 
- 
+#import "TexLege.h"
 #import "CapitolMap.h"
 #import "TXLDetailProtocol.h"
 

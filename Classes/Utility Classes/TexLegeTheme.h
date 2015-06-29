@@ -11,6 +11,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TexLege.h"
 
 @interface TexLegeTheme : NSObject
 

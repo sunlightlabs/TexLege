@@ -74,7 +74,6 @@
 		37678F3A1AFEC8A20016B8E5 /* RKSearchEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 37678EF81AFEC8A20016B8E5 /* RKSearchEngine.m */; };
 		37678F3B1AFEC8A20016B8E5 /* RKURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 37678EF91AFEC8A20016B8E5 /* RKURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37678F3C1AFEC8A20016B8E5 /* RKURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 37678EFA1AFEC8A20016B8E5 /* RKURL.m */; };
-		37678F401AFECA560016B8E5 /* RestKit_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 37678F3F1AFECA560016B8E5 /* RestKit_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		37678F451AFECAC00016B8E5 /* CoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 37678F411AFECAC00016B8E5 /* CoreData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37678F461AFECAC00016B8E5 /* Network.h in Headers */ = {isa = PBXBuildFile; fileRef = 37678F421AFECAC00016B8E5 /* Network.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37678F471AFECAC00016B8E5 /* ObjectMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 37678F431AFECAC00016B8E5 /* ObjectMapping.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -188,7 +187,6 @@
 		37678EF81AFEC8A20016B8E5 /* RKSearchEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKSearchEngine.m; sourceTree = "<group>"; };
 		37678EF91AFEC8A20016B8E5 /* RKURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKURL.h; sourceTree = "<group>"; };
 		37678EFA1AFEC8A20016B8E5 /* RKURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKURL.m; sourceTree = "<group>"; };
-		37678F3F1AFECA560016B8E5 /* RestKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestKit_Prefix.pch; sourceTree = "<group>"; };
 		37678F411AFECAC00016B8E5 /* CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
 		37678F421AFECAC00016B8E5 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		37678F431AFECAC00016B8E5 /* ObjectMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectMapping.h; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				37678E251AFEC2060016B8E5 /* RestKit.h */,
-				37678F3F1AFECA560016B8E5 /* RestKit_Prefix.pch */,
 				37678F411AFECAC00016B8E5 /* CoreData.h */,
 				37678F421AFECAC00016B8E5 /* Network.h */,
 				37678F431AFECAC00016B8E5 /* ObjectMapping.h */,
@@ -419,6 +416,7 @@
 				37678F051AFEC8A20016B8E5 /* RKAlert.h in Headers */,
 				37678F241AFEC8A20016B8E5 /* RKObjectMapper.h in Headers */,
 				37678F3B1AFEC8A20016B8E5 /* RKURL.h in Headers */,
+				37678F161AFEC8A20016B8E5 /* RKManagedObjectStore.h in Headers */,
 				37678F141AFEC8A20016B8E5 /* RKManagedObjectSeeder.h in Headers */,
 				37678F331AFEC8A20016B8E5 /* RKRequestQueue.h in Headers */,
 				37678EFD1AFEC8A20016B8E5 /* NSDictionary+RKAdditions.h in Headers */,
@@ -426,8 +424,6 @@
 				37678F451AFECAC00016B8E5 /* CoreData.h in Headers */,
 				37678F481AFECAC00016B8E5 /* Support.h in Headers */,
 				37678F461AFECAC00016B8E5 /* Network.h in Headers */,
-				37678F401AFECA560016B8E5 /* RestKit_Prefix.pch in Headers */,
-				37678F161AFEC8A20016B8E5 /* RKManagedObjectStore.h in Headers */,
 				37678F311AFEC8A20016B8E5 /* RKRequest.h in Headers */,
 				37678EFF1AFEC8A20016B8E5 /* NSDictionary+RKRequestSerialization.h in Headers */,
 				37678F1C1AFEC8A20016B8E5 /* RKObject.h in Headers */,
@@ -616,7 +612,6 @@
 				BUILD_STYLE = Debug;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = Code/Support/RestKit_Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -632,7 +627,6 @@
 			buildSettings = {
 				BUILD_STYLE = Release;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREFIX_HEADER = Code/Support/RestKit_Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -647,7 +641,6 @@
 			buildSettings = {
 				BUILD_STYLE = Release;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREFIX_HEADER = Code/Support/RestKit_Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -681,7 +674,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = RestKit/RestKit_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -696,6 +688,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRIVATE_HEADERS_FOLDER_PATH = PrivateHeaders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = RestKit/Headers;
@@ -727,7 +720,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = RestKit/RestKit_Prefix.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -737,6 +729,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRIVATE_HEADERS_FOLDER_PATH = PrivateHeaders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = RestKit/Headers;
@@ -769,7 +762,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = RestKit/RestKit_Prefix.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -779,6 +771,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRIVATE_HEADERS_FOLDER_PATH = PrivateHeaders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = RestKit/Headers;

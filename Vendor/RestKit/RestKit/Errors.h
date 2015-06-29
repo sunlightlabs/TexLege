@@ -6,6 +6,8 @@
 //  Copyright 2010 Two Toasters. All rights reserved.
 //
 
+@import Foundation;
+
 // The error domain for RestKit generated errors
 extern NSString* const RKRestKitErrorDomain;
 

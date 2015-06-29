@@ -11,7 +11,7 @@
 //
 //	Fixes a retarded bug in iOS 4.2.x that incorrectly deletes and ignores tintColor after opening in a popover/splitview
 
-#import <Foundation/Foundation.h>
+#import "TexLege.h"
 
 
 @interface TexLegeNavBar : UINavigationBar {

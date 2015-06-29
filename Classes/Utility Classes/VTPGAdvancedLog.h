@@ -34,8 +34,9 @@
 
 */
 
-#import <Foundation/Foundation.h>
-
+@import Foundation;
+@import QuartzCore;
+@import UIKit;
 
 NSString * VTPG_DDToStringFromTypeAndValue(const char * typeCode, void * value);
 

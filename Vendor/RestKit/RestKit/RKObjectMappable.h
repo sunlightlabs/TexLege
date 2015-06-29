@@ -7,6 +7,8 @@
  *
  */
 
+@import Foundation;
+
 @protocol RKRequestSerializable;
 @class RKObjectLoader;
 

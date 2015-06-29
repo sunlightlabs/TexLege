@@ -6,12 +6,9 @@
 //  Copyright 2009 Two Toasters. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#endif
-
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import UIKit;
+@import CoreData;
 
 #ifndef RK_REQUEST_SERIALIZABLE_H
 #import "RKRequestSerializable.h"

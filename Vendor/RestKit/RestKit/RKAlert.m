@@ -6,11 +6,7 @@
 //  Copyright 2011 Two Toasters. All rights reserved.
 //
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#else
-#import <AppKit/AppKit.h>
-#endif
+@import UIKit;
 
 #import "RKAlert.h"
 
@@ -19,7 +15,6 @@ void RKAlert(NSString* message) {
 }
 
 void RKAlertWithTitle(NSString* message, NSString* title) {
-#if TARGET_OS_IPHONE
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:nil
@@ -27,12 +22,4 @@ void RKAlertWithTitle(NSString* message, NSString* title) {
                                               otherButtonTitles:nil];
     [alertView show];
     [alertView release];
-#else
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:message];
-     [alert setInformativeText:message];
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];	
-    [alert runModal];
-    [alert release];
-#endif    
 }

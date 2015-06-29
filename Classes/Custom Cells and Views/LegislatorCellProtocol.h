@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Gregory S. Combs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "TexLege.h"
 
 @class LegislatorObj;
 

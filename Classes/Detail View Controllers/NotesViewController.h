@@ -10,6 +10,7 @@
 //
 //
 
+@import UIKit;
 
 #define kStaticNotes NSLocalizedStringFromTable(@"Notes", @"DataTableUI", @"Default entry for a custom notes field.")
 

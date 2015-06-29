@@ -82,7 +82,7 @@ static NSString* const kRKManagedObjectContextKey = @"RKManagedObjectContext";
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+    self.delegate = nil;
 	[_storeFilename release];
 	_storeFilename = nil;
 	[_pathToStoreFile release];

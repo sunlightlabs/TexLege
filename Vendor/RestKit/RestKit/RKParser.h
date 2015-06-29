@@ -6,6 +6,8 @@
 //  Copyright 2010 Two Toasters. All rights reserved.
 //
 
+@import Foundation;
+
 /**
  * A Parser is responsible for transforming a string
  * of data into a dictionary. This allows the model mapper to

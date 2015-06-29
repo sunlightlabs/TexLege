@@ -10,8 +10,9 @@
 //
 //
 
+#import "TexLege.h"
 #import <RestKit/RestKit.h>
-#import <RestKit/CoreData/CoreData.h>
+#import <RestKit/CoreData.h>
 
 @class CommitteePositionObj;
 @class DistrictMapObj;

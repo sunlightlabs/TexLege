@@ -10,7 +10,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "TexLege.h"
 
 extern const CGFloat kLegislatorMasterCellViewWidth;
 extern const CGFloat kLegislatorMasterCellViewHeight;

@@ -10,13 +10,14 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
+#import "TexLege.h"
+@import MapKit;
+#import <RestKit/CoreData.h>
 
 //@class TexLegeDataMaintenance;
 
 @class LegislatorObj, CommitteeObj, DistrictMapObj;
-@interface TexLegeCoreDataUtils : NSObject
+@interface TexLegeCoreDataUtils : NSObject<RKManagedObjectStoreDelegate>
 
 + (id) fetchCalculation:(NSString *)calc ofProperty:(NSString *)prop withType:(NSAttributeType)retType onEntity:(NSString *)entityName;
 

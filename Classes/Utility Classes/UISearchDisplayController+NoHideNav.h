@@ -14,6 +14,8 @@
 //		This idiotic class serves no purpose but to stop that nonsense. It won't hide the nav title bar when searching.  Retarded, yes?
 //
 
+#import "TexLege.h"
+
 @interface UISearchDisplayControllerNoHideNav : UISearchDisplayController 
 {
 

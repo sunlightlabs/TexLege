@@ -4,6 +4,7 @@
 //	http://atastypixel.com/blog/uiimage-resolution-independence-and-the-iphone-4s-retina-display/
 //
 
+@import UIKit;
 
 @interface UIImage (ResolutionIndependent)
 - (id)initWithContentsOfResolutionIndependentFile:(NSString *)path;

@@ -14,22 +14,19 @@
 // Prefix header for all source files of the 'TexLege' target in the 'TexLege' project
 //
 
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-	#import <CoreData/CoreData.h>
+@import Foundation;
+@import UIKit;
+@import CoreData;
 
-	#import "VTPGAdvancedLog.h"
-	#import "Constants.h"
-	#import "TexLegeLibrary.h"
-	#import "TexLegePrivateStrings.h"
+//#import "VTPGAdvancedLog.h"
+#import "Constants.h"
+#import "TexLegeLibrary.h"
+#import "TexLegePrivateStrings.h"
 
-	#ifdef DEBUG
-		#define debug_NSLog(format, ...) do { NSLog(format, ## __VA_ARGS__); } while(0)
-	#else
-		#define debug_NSLog(format, ...) do {} while(0)
-	#endif
-
-	#define nice_release(var) if (var) [var release], var = nil
-
+#ifdef DEBUG
+#define debug_NSLog(format, ...) do { NSLog(format, ## __VA_ARGS__); } while(0)
+#else
+#define debug_NSLog(format, ...) do {} while(0)
 #endif
+
+#define nice_release(var) if (var) [var release], var = nil
